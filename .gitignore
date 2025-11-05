@@ -1,3 +1,12 @@
+# Model weights
+models/*.pt
+!models/.gitkeep
+
+# Demo videos
+demo/*.mp4
+demo/*.avi
+!demo/.gitkeep
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[codz]
