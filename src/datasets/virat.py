@@ -1,5 +1,3 @@
-"""VIRAT surveillance dataset for activity recognition."""
-
 import os
 import yaml
 import cv2
