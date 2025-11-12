@@ -1,11 +1,17 @@
 """Test RGBVideoTransform integration with VIRATDataset."""
 
 import sys
+from src.utils.logger import get_logger
+
+logger = get_logger(__name__)
 
 sys.path.append("/work3/s225224/perimeter-net")
 
 from src.datasets.virat import VIRATDataset
 from src.datasets.transforms import RGBVideoTransform
+
+logger.info("Starting quick test for VIRATDataset with RGBVideoTransform")
+logger.warning("Ensure that the VIRAT dataset is available at the specified path.")
 
 print("=" * 60)
 print("Testing VIRATDataset with RGBVideoTransform")
