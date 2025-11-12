@@ -43,12 +43,15 @@ class VIRATDataset(Dataset):
         for video_name in video_names:
             annot_path = os.path.join(self.annot_dir, f'{video_name}.activities.yml')
             video_path = os.path.join(self.video_dir, f'{video_name}.mp4')
+
+            if not os.path.exists(video_path):
+                continue
             
             if not os.path.exists(annot_path):
                 continue
             
             with open(annot_path, 'r') as f:
-                data = yaml.safe_load_all(f)
+                data = yaml.safe_load(f)  # Returns the list directly
                 
                 for item in data:
                     if 'act' not in item:
