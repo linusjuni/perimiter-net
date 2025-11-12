@@ -51,7 +51,7 @@ class VIRATDataset(Dataset):
                 continue
             
             with open(annot_path, 'r') as f:
-                data = yaml.safe_load(f)  # Returns the list directly
+                data = yaml.safe_load(f)
                 
                 for item in data:
                     if 'act' not in item:
