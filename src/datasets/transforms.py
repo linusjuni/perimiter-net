@@ -62,7 +62,8 @@ class RGBVideoTransform:
 
     def _normalize(self, clip):
         """Normalize with Kinetics mean/std."""
-        clip = F.normalize(clip, mean=self.mean, std=self.std)
+        for c in range(3):
+            clip[c] = (clip[c] - self.mean[c]) / self.std[c]
         return clip
 
 
