@@ -6,7 +6,7 @@ logger = get_logger(__name__)
 
 
 def save_checkpoint(
-    state, checkpoint_dir, filename="checkpoint.pth", is_best=False, device="cuda"
+    state, checkpoint_dir, filename="checkpoint.pth", is_best=False
 ):
     """Save model checkpoint."""
     checkpoint_dir = Path(checkpoint_dir)
