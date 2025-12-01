@@ -8,11 +8,12 @@ This project uses the **VIRAT Video Dataset** for training an activity classific
 
 - **Dataset**: VIRAT Video Dataset Release 2.0 (Ground Camera)
 - **Annotations**: DIVA program annotations from GitLab
-- **Website**: https://viratdata.org/
-- **Annotation Repo**: https://gitlab.kitware.com/viratdata/viratannotations
+- **Website**: <https://viratdata.org/>
+- **Annotation Repo**: <https://gitlab.kitware.com/viratdata/viratannotations>
 
 ## Directory Structure
-```
+
+```bash
 /work3/s225224/perimeter-net/
 ├── data/
 │   ├── videos/          # 79 video files (.mp4)
@@ -27,12 +28,14 @@ This project uses the **VIRAT Video Dataset** for training an activity classific
 ## Setup Steps
 
 ### 1. Create Directory Structure
+
 ```bash
 mkdir -p /work3/s225224/perimeter-net/data/{videos,annotations,splits,raw}
 mkdir -p /work3/s225224/perimeter-net/{checkpoints,experiments/{logs,results}}
 ```
 
 ### 2. Download Annotations
+
 ```bash
 cd /work3/s225224/perimeter-net/data/raw/
 git clone https://gitlab.kitware.com/viratdata/viratannotations.git
@@ -40,11 +43,13 @@ git clone https://gitlab.kitware.com/viratdata/viratannotations.git
 
 ### 3. Download Videos
 
-**Prerequisites**: 
+**Prerequisites**:
+
 - Sign the [VIRAT Video Dataset Protection Agreement](https://viratdata.org/resources/VIRAT-Video-Data-Set-Protection-Agreement-1-4-11.pdf)
 - Install girder-cli: `pip install girder-client --break-system-packages`
 
 **Download command**:
+
 ```bash
 cd /work3/s225224/perimeter-net/data/videos/
 girder-cli --api-url https://data.kitware.com/api/v1 download 56f581ce8d777f753209ca43 .
@@ -53,6 +58,7 @@ girder-cli --api-url https://data.kitware.com/api/v1 download 56f581ce8d777f7532
 This downloads all videos from the VIRAT Ground Dataset folder on Kitware (~35 GB, ~35 minutes).
 
 ### 4. Copy Annotations
+
 ```bash
 cd /work3/s225224/perimeter-net/data/
 \cp raw/viratannotations/train/*.activities.yml annotations/
@@ -62,6 +68,7 @@ cd /work3/s225224/perimeter-net/data/
 ### 5. Create Data Splits
 
 Run the split creation script:
+
 ```bash
 cd ~/projects/perimiter-net/
 uv run scripts/create_splits.py
@@ -98,6 +105,7 @@ This filters to only include videos that exist and creates train/val/test splits
 ## Verification
 
 Check that everything is set up correctly:
+
 ```bash
 # Check video count
 ls /work3/s225224/perimeter-net/data/videos/*.mp4 | wc -l  # Should be 79
