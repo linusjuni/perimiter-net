@@ -40,9 +40,9 @@ def main():
     num_classes = 2
     batch_size = 128
     num_workers = 4
-    num_epochs = 20
-    lr = 1e-4
-    weight_decay = 1e-2
+    num_epochs = 50
+    lr = 1e-5
+    weight_decay = 1e-1
     patience = 10
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     clip_len = 16
@@ -100,13 +100,13 @@ def main():
     # --- Model ---
     logger.info("Instantiating model...")
     model = create_r3d_classifier(
-        num_classes=num_classes, pretrained=True, freeze_backbone=False, dropout=0.5
+        num_classes=num_classes, pretrained=True, freeze_backbone=False, dropout=0.7
     )
     model = model.to(device)
 
     # --- Optimizer, Scheduler, Loss ---
     optimizer = AdamW(model.parameters(), lr=lr, weight_decay=weight_decay)
-    scheduler = CosineAnnealingLR(optimizer, T_max=num_epochs)
+    scheduler = CosineAnnealingLR(optimizer, T_max=num_epochs, eta_min=1e-6)
 
     # Use Focal Loss with class weights
     alpha = torch.tensor([0.25, 0.75])
