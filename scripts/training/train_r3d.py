@@ -4,28 +4,29 @@ import torch.nn as nn
 from torch.utils.data import DataLoader
 from torch.optim import AdamW
 from torch.optim.lr_scheduler import CosineAnnealingLR
+from torch.amp import GradScaler # <--- 1. IMPORT THIS
 
-from src.datasets.ucf import UCFCrimeDataset  # Changed from VIRATDataset
+from src.datasets.ucf import UCFCrimeDataset 
 from src.datasets.transforms import RGBVideoTransform
 from src.models.r3d import create_r3d_classifier
 from src.utils.training_utils import save_checkpoint, load_checkpoint, EarlyStopping
 from src.utils.training import train_epoch
 from src.utils.evaluation import evaluate
 from src.utils.logger import get_logger
-from src.utils.losses import FocalLoss  # Added import
+from src.utils.losses import FocalLoss 
 
 
 def main():
     # --- Config ---
-    root_dir = "/work3/s225224/ucf-crime/data"  # Changed path
-    checkpoint_dir = "/work3/s225224/ucf-crime/checkpoints"  # Changed path
-    num_classes = 2  # Changed from 7 to 2 (binary: Normal vs Anomaly)
-    batch_size = 16
+    root_dir = "/work3/s225224/ucf-crime/data" 
+    checkpoint_dir = "/work3/s225224/ucf-crime/checkpoints" 
+    num_classes = 2 
+    batch_size = 32
     num_workers = 4
-    num_epochs = 10  # Changed from 30 to 10 for baseline
+    num_epochs = 10 
     lr = 1e-4
     weight_decay = 1e-2
-    patience = 5  # Changed from 7 to 5
+    patience = 5 
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     clip_len = 16
 
@@ -36,11 +37,13 @@ def main():
     train_transform = RGBVideoTransform(mode="train", crop_size=112, resize_size=128)
     val_transform = RGBVideoTransform(mode="val", crop_size=112, resize_size=128)
 
-    train_dataset = UCFCrimeDataset(  # Changed from VIRATDataset
-        root_dir, split="train", clip_len=clip_len, transform=train_transform
+    train_dataset = UCFCrimeDataset(
+        root_dir, split="train", clip_len=clip_len, transform=train_transform,
+        stride=clip_len
     )
-    val_dataset = UCFCrimeDataset(  # Changed from VIRATDataset
-        root_dir, split="val", clip_len=clip_len, transform=val_transform
+    val_dataset = UCFCrimeDataset(
+        root_dir, split="val", clip_len=clip_len, transform=val_transform,
+        stride=clip_len
     )
 
     train_loader = DataLoader(
@@ -71,14 +74,18 @@ def main():
     optimizer = AdamW(model.parameters(), lr=lr, weight_decay=weight_decay)
     scheduler = CosineAnnealingLR(optimizer, T_max=num_epochs)
 
-    # Use Focal Loss with class weights: Normal=0.25, Anomaly=0.75
-    alpha = torch.tensor([0.25, 0.75])  # Weight anomaly class higher
-    criterion = FocalLoss(alpha=alpha, gamma=2.0)  # Changed from CrossEntropyLoss
+    # Use Focal Loss with class weights
+    alpha = torch.tensor([0.25, 0.75]) 
+    criterion = FocalLoss(alpha=alpha, gamma=2.0)
+    criterion = criterion.to(device)
+
+    # --- AMP Scaler ---
+    scaler = GradScaler('cuda')
 
     # --- Early Stopping ---
     early_stopper = EarlyStopping(patience=patience, mode="max")
 
-    # --- Optionally resume from checkpoint ---
+    # --- Resume ---
     start_epoch = 0
     best_acc = 0.0
     resume_path = os.path.join(checkpoint_dir, "checkpoint.pth")
@@ -90,14 +97,19 @@ def main():
     logger.info("Starting training loop...")
     for epoch in range(start_epoch, num_epochs):
         train_loss, train_acc = train_epoch(
-            model, train_loader, criterion, optimizer, device, epoch + 1
+            model, 
+            train_loader, 
+            criterion, 
+            optimizer, 
+            device, 
+            epoch + 1,
+            scaler=scaler,
         )
+        
         val_loss, val_acc = evaluate(model, val_loader, criterion, device, split="val")
 
-        # Scheduler step
         scheduler.step()
 
-        # Save checkpoint
         state = {
             "epoch": epoch + 1,
             "model_state_dict": model.state_dict(),
@@ -108,13 +120,11 @@ def main():
         if val_acc > best_acc:
             best_acc = val_acc
 
-        # Early stopping
         if early_stopper(val_acc):
             logger.warning("Early stopping triggered. Training halted.")
             break
 
     logger.info(f"Training complete. Best val accuracy: {best_acc:.2f}%")
-
 
 if __name__ == "__main__":
     main()
