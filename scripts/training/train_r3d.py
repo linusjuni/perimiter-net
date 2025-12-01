@@ -80,37 +80,6 @@ def main():
         val_ratio=val_ratio,
     )
 
-    # ----------------- DEBUGGING FOR DATA LEAKAGE START -----------------
-    logger.info("=" * 60)
-    logger.info("CHECKING FOR DATA LEAKAGE")
-    logger.info("=" * 60)
-
-    # Extract video IDs from both splits
-    train_videos = set()
-    val_videos = set()
-
-    for sample in train_dataset.samples:
-        video_id = os.path.basename(sample["paths"][0]).rsplit("_", 1)[0]
-        train_videos.add(video_id)
-
-    for sample in val_dataset.samples:
-        video_id = os.path.basename(sample["paths"][0]).rsplit("_", 1)[0]
-        val_videos.add(video_id)
-
-    overlap = train_videos & val_videos
-
-    logger.info(f"Train: {len(train_videos)} videos, {len(train_dataset)} clips")
-    logger.info(f"Val: {len(val_videos)} videos, {len(val_dataset)} clips")
-    logger.info(f"Video overlap: {len(overlap)}")
-
-    if overlap:
-        logger.error(f"OVERLAP DETECTED! Videos: {list(overlap)[:10]}")
-        raise ValueError(f"DATA LEAKAGE! {len(overlap)} videos in both splits")
-
-    logger.info("✓ No video overlap - data split is clean!")
-    logger.info("=" * 60)
-    # ----------------- DEBUGGING FOR DATA LEAKAGE END -----------------
-
     train_loader = DataLoader(
         train_dataset,
         batch_size=batch_size,
