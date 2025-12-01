@@ -132,8 +132,6 @@ class UCFCrimeDataset(Dataset):
 
             # Group by Video ID
             video_groups = {}
-            # Regex to extract Video ID (e.g., "Abuse001_x264" from "Abuse001_x264_100.png")
-            pattern = re.compile(r"(.+?)_\d+\.png")
 
             for file_path in image_files:
                 filename = os.path.basename(file_path)
