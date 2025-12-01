@@ -23,7 +23,7 @@ def save_checkpoint(state, checkpoint_dir, filename="checkpoint.pth", is_best=Fa
 def load_checkpoint(checkpoint_path, model, optimizer=None, device="cuda"):
     """Load model checkpoint and optionally resume optimizer state."""
     logger.info(f"Loading checkpoint from {checkpoint_path}")
-    checkpoint = torch.load(checkpoint_path, map_location=device)
+    checkpoint = torch.load(checkpoint_path, map_location=device, weights_only=False)
 
     model.load_state_dict(checkpoint["model_state_dict"])
 
@@ -31,10 +31,12 @@ def load_checkpoint(checkpoint_path, model, optimizer=None, device="cuda"):
         optimizer.load_state_dict(checkpoint["optimizer_state_dict"])
 
     epoch = checkpoint.get("epoch", 0)
-    best_acc = checkpoint.get("best_acc", 0.0)
 
-    logger.info(f"Resumed from epoch {epoch} with best accuracy {best_acc:.2f}%")
-    return epoch, best_acc
+    # Try to load best_auc
+    best_auc = checkpoint.get("best_auc")
+
+    logger.info(f"Resumed from epoch {epoch} with best AUC {best_auc:.4f}")
+    return checkpoint
 
 
 class AverageMeter:
