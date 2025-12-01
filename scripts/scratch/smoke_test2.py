@@ -27,8 +27,8 @@ def save_sanity_check(output_file="sanity_check.png"):
     print("Searching for an anomaly clip to visualize...")
     for i in range(len(ds)):
         sample = ds.samples[i]
-        if sample["label"] == 1:  # Found an anomaly
-            print(f"Found Anomaly: {sample['video_id']}")
+        if sample["label"] == 0:  # Found a Normal clip
+            print(f"Found Normal: {sample['video_id']}")
             frames, label = ds[i]
             break
 
