@@ -21,13 +21,17 @@ def main():
     checkpoint_path = (
         "/work3/s225224/ucf-crime/checkpoints/r3d_binary_20251201_135422/best_model.pth"
     )
-    plot_dir = "/work3/s225224/ucf-crime/experiments/plots"
+    plot_dir = Path("/work3/s225224/ucf-crime/experiments/plots")
 
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
     logger.info("=== Frame-Level Evaluation ===")
     logger.info(f"Device: {device}")
     logger.info(f"Checkpoint: {checkpoint_path}")
+
+    # Create plot directory
+    plot_dir.mkdir(parents=True, exist_ok=True)
+    logger.info(f"Plot directory: {plot_dir}")
 
     # Load model
     model = create_r3d_classifier(
@@ -63,13 +67,28 @@ def main():
     logger.info(f"\n{metrics}")
 
     # Plot results
-    plot_dir = Path(plot_dir)
+    logger.info("Generating plots...")
     plot_roc_curve(
         metrics.fpr, metrics.tpr, metrics.frame_auc, plot_dir / "roc_curve.png"
     )
-    plot_best_worst_videos(video_results, {}, plot_dir, top_n=5)
+
+    if video_results:
+        plot_best_worst_videos(video_results, {}, plot_dir, top_n=5)
+    else:
+        logger.warning("No video results available for best/worst plots")
 
     logger.info(f"Plots saved to {plot_dir}")
+
+    # Save results to text file
+    results_file = plot_dir / "frame_level_results.txt"
+    with open(results_file, "w") as f:
+        f.write(f"Frame-Level AUC: {metrics.frame_auc:.4f}\n")
+        f.write(f"Total Frames: {metrics.num_frames:,}\n")
+        f.write(f"Total Videos: {metrics.num_videos}\n")
+        f.write(f"Stride: 16\n")
+        f.write(f"Smoothing Sigma: 5\n")
+
+    logger.info(f"Results saved to {results_file}")
 
 
 if __name__ == "__main__":

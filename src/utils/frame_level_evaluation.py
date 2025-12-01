@@ -268,13 +268,17 @@ def evaluate_frame_level(
         if sigma > 0:
             pred_scores = gaussian_filter1d(pred_scores, sigma=sigma)
 
-        # Compute per-video AUC
-        video_auc = compute_auc_safe(gt_mask, pred_scores)
-        video_results.append(
-            (video_id, video_auc, pred_scores, gt_mask, frame_indices, intervals)
-        )
+        # Compute per-video AUC only if both classes are present
+        video_auc = None
+        if len(np.unique(gt_mask)) > 1:
+            video_auc = compute_auc_safe(gt_mask, pred_scores)
+            video_results.append(
+                (video_id, video_auc, pred_scores, gt_mask, frame_indices, intervals)
+            )
+        else:
+            logger.debug(f"Skipping per-video AUC for {video_id} (single class)")
 
-        # Accumulate
+        # Accumulate for global frame-level AUC
         all_scores.extend(pred_scores)
         all_labels.extend(gt_mask)
 
