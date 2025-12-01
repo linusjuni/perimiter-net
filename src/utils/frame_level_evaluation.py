@@ -63,7 +63,6 @@ def parse_temporal_annotations(annotation_path):
                 continue
 
             video_name = parts[0].replace(".mp4", "")
-            class_name = parts[1]
             start1, end1, start2, end2 = map(int, parts[2:6])
 
             intervals = []
