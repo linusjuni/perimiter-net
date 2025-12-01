@@ -4,12 +4,13 @@ import torch
 import numpy as np
 from dataclasses import asdict, dataclass
 from sklearn.metrics import (
-    roc_auc_score,
     precision_recall_fscore_support,
     confusion_matrix,
 )
 from torch.amp import autocast
+
 from src.utils.training_utils import AverageMeter, accuracy
+from src.utils.evaluation_utils import extract_anomaly_scores, compute_auc_safe
 from src.utils.logger import get_logger
 
 logger = get_logger(__name__)
@@ -18,7 +19,7 @@ logger = get_logger(__name__)
 @dataclass
 class EvaluationMetrics:
     """
-    Structured container for evaluation results.
+    Structured container for clip-level evaluation results.
     Stores RAW counts for binary tasks to allow deriving any metric later.
     """
 
@@ -35,8 +36,7 @@ class EvaluationMetrics:
     normal_recall: float
     normal_f1: float
 
-    # Raw Confusion Matrix Counts (Integers)
-    # Default to 0 for multi-class where 2x2 matrix doesn't apply directly
+    # Raw Confusion Matrix Counts (Binary only)
     tp: int = 0
     tn: int = 0
     fp: int = 0
@@ -75,27 +75,25 @@ class EvaluationMetrics:
         )
 
 
-def _extract_anomaly_scores(outputs):
-    """
-    Extracts anomaly probabilities (score 0.0 to 1.0).
-    Assumes Class 0 is ALWAYS 'Normal'.
-    """
-    probs = torch.softmax(outputs, dim=1)
-    if probs.shape[1] == 2:
-        return probs[:, 1]  # Binary
-    else:
-        return 1.0 - probs[:, 0]  # Multi-class
-
-
-def compute_metrics_dataclass(
+def compute_metrics(
     y_true, y_pred, y_probs, avg_loss, avg_acc, num_classes
 ) -> EvaluationMetrics:
+    """
+    Compute comprehensive evaluation metrics from predictions.
+
+    Args:
+        y_true: Ground truth labels
+        y_pred: Predicted class labels
+        y_probs: Predicted anomaly scores
+        avg_loss: Average loss
+        avg_acc: Average accuracy
+        num_classes: Number of classes (2 for binary)
+
+    Returns:
+        EvaluationMetrics dataclass
+    """
     # 1. AUC
-    try:
-        binary_labels = (y_true > 0).astype(int)
-        auc_score = roc_auc_score(binary_labels, y_probs)
-    except ValueError:
-        auc_score = 0.5
+    auc_score = compute_auc_safe(y_true, y_probs)
 
     # 2. Precision/Recall/F1
     prec, rec, f1, _ = precision_recall_fscore_support(
@@ -115,7 +113,6 @@ def compute_metrics_dataclass(
     tp, tn, fp, fn = 0, 0, 0, 0
     if num_classes == 2:
         try:
-            # Note: scikit-learn confusion_matrix returns [[TN, FP], [FN, TP]]
             tn, fp, fn, tp = confusion_matrix(y_true, y_pred).ravel()
         except ValueError:
             pass
@@ -144,12 +141,25 @@ def evaluate(
     device: torch.device,
     split: str = "val",
 ) -> EvaluationMetrics:
+    """
+    Evaluate model on clip-level data.
+
+    Args:
+        model: Trained model
+        data_loader: DataLoader for evaluation
+        criterion: Loss function
+        device: Device to run on
+        split: Split name for logging ('val' or 'test')
+
+    Returns:
+        EvaluationMetrics dataclass
+    """
     model.eval()
 
     losses = AverageMeter()
     accs = AverageMeter()
 
-    # Pre-allocate
+    # Pre-allocate arrays
     num_samples = len(data_loader.dataset)
     all_probs = np.zeros(num_samples, dtype=np.float32)
     all_labels = np.zeros(num_samples, dtype=np.int32)
@@ -160,8 +170,8 @@ def evaluate(
 
     with torch.no_grad():
         for batch_idx, (inputs, targets) in enumerate(data_loader):
-            inputs = inputs.to(device)
-            targets = targets.to(device)
+            inputs = inputs.to(device, non_blocking=True)
+            targets = targets.to(device, non_blocking=True)
 
             with autocast("cuda", enabled=True):
                 outputs = model(inputs)
@@ -171,7 +181,8 @@ def evaluate(
             losses.update(loss.item(), inputs.size(0))
             accs.update(acc.item(), inputs.size(0))
 
-            probs_scores = _extract_anomaly_scores(outputs)
+            # Extract predictions
+            probs_scores = extract_anomaly_scores(outputs)
             _, preds = torch.max(outputs, 1)
 
             # Fill arrays
@@ -190,14 +201,14 @@ def evaluate(
                     f"[{split.upper()}] Batch {batch_idx + 1}/{len(data_loader)} Loss: {losses.avg:.4f}"
                 )
 
-    # Trim
+    # Trim arrays
     all_probs = all_probs[:ptr]
     all_labels = all_labels[:ptr]
     all_preds = all_preds[:ptr]
 
-    # Compute Metrics
+    # Compute metrics
     num_classes = model.fc.out_features if hasattr(model, "fc") else 2
-    metrics = compute_metrics_dataclass(
+    metrics = compute_metrics(
         all_labels, all_preds, all_probs, losses.avg, accs.avg, num_classes
     )
 

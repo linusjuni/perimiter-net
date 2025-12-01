@@ -16,7 +16,7 @@ from src.utils.training_utils import (
     TrainingHistory,
 )
 from src.utils.training import train_epoch
-from src.utils.evaluation import evaluate
+from src.utils.clip_level_evaluation import evaluate
 from src.utils.logger import get_logger
 from src.utils.losses import FocalLoss
 
