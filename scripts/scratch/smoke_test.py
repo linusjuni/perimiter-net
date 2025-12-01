@@ -51,7 +51,7 @@ def test_live_load(root_dir):
     print(f"\n{'=' * 20} LIVE RUN: TENSOR SHAPES {'=' * 20}")
 
     # Import transform
-    from src.transforms import RGBVideoTransform
+    from src.datasets.transforms import RGBVideoTransform
 
     transform = RGBVideoTransform(mode="train", crop_size=112, resize_size=128)
     ds = UCFCrimeDataset(
