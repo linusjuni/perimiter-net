@@ -1,8 +1,113 @@
 import torch
+import csv
 from pathlib import Path
+from datetime import datetime
 from src.utils.logger import get_logger
 
 logger = get_logger(__name__)
+
+
+class TrainingHistory:
+    """Tracks and saves training/validation metrics to CSV."""
+
+    def __init__(self, save_dir: Path):
+        self.save_dir = Path(save_dir)
+        self.save_dir.mkdir(parents=True, exist_ok=True)
+        self.csv_path = self.save_dir / "training_history.csv"
+        self.history = []
+
+        # Initialize CSV with headers
+        self.headers = [
+            "epoch",
+            "train_loss",
+            "train_acc",
+            "val_loss",
+            "val_acc",
+            "val_auc",
+            "val_anomaly_precision",
+            "val_anomaly_recall",
+            "val_anomaly_f1",
+            "val_normal_precision",
+            "val_normal_recall",
+            "val_normal_f1",
+            "val_tp",
+            "val_fn",
+            "val_tn",
+            "val_fp",
+            "val_fpr",
+            "val_fnr",
+            "learning_rate",
+            "timestamp",
+        ]
+
+        # Create CSV if it doesn't exist
+        if not self.csv_path.exists():
+            with open(self.csv_path, "w", newline="") as f:
+                writer = csv.writer(f)
+                writer.writerow(self.headers)
+            logger.info(f"Created training history CSV at {self.csv_path}")
+
+    def update(
+        self,
+        epoch: int,
+        train_loss: float,
+        train_acc: float,
+        val_metrics,
+        learning_rate: float,
+    ):
+        """
+        Add new epoch results to history.
+
+        Args:
+            epoch: Current epoch number
+            train_loss: Training loss
+            train_acc: Training accuracy
+            val_metrics: EvaluationMetrics dataclass from validation
+            learning_rate: Current learning rate
+        """
+        row = {
+            "epoch": epoch,
+            "train_loss": train_loss,
+            "train_acc": train_acc,
+            "val_loss": val_metrics.loss,
+            "val_acc": val_metrics.acc,
+            "val_auc": val_metrics.auc,
+            "val_anomaly_precision": val_metrics.anomaly_precision,
+            "val_anomaly_recall": val_metrics.anomaly_recall,
+            "val_anomaly_f1": val_metrics.anomaly_f1,
+            "val_normal_precision": val_metrics.normal_precision,
+            "val_normal_recall": val_metrics.normal_recall,
+            "val_normal_f1": val_metrics.normal_f1,
+            "val_tp": val_metrics.tp,
+            "val_fn": val_metrics.fn,
+            "val_tn": val_metrics.tn,
+            "val_fp": val_metrics.fp,
+            "val_fpr": val_metrics.fpr,
+            "val_fnr": val_metrics.fnr,
+            "learning_rate": learning_rate,
+            "timestamp": datetime.now().isoformat(),
+        }
+
+        self.history.append(row)
+
+        # Append to CSV
+        with open(self.csv_path, "a", newline="") as f:
+            writer = csv.DictWriter(f, fieldnames=self.headers)
+            writer.writerow(row)
+
+        logger.debug(f"Saved epoch {epoch} to training history")
+
+    def get_best_epoch(self, metric: str = "val_auc") -> dict:
+        """Return the epoch with the best value for the given metric."""
+        if not self.history:
+            return None
+
+        if metric.startswith("val_loss"):
+            best = min(self.history, key=lambda x: x[metric])
+        else:
+            best = max(self.history, key=lambda x: x[metric])
+
+        return best
 
 
 def save_checkpoint(state, checkpoint_dir, filename="checkpoint.pth", is_best=False):

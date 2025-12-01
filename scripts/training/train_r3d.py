@@ -1,14 +1,20 @@
-import os
+from datetime import datetime
+from pathlib import Path
 import torch
 from torch.utils.data import DataLoader
 from torch.optim import AdamW
 from torch.optim.lr_scheduler import CosineAnnealingLR
-from torch.amp import GradScaler  # <--- 1. IMPORT THIS
+from torch.amp import GradScaler
 
 from src.datasets.ucf import UCFCrimeDataset
 from src.datasets.transforms import RGBVideoTransform
 from src.models.r3d import create_r3d_classifier
-from src.utils.training_utils import save_checkpoint, load_checkpoint, EarlyStopping
+from src.utils.training_utils import (
+    save_checkpoint,
+    load_checkpoint,
+    EarlyStopping,
+    TrainingHistory,
+)
 from src.utils.training import train_epoch
 from src.utils.evaluation import evaluate
 from src.utils.logger import get_logger
@@ -18,7 +24,15 @@ from src.utils.losses import FocalLoss
 def main():
     # --- Config ---
     root_dir = "/work3/s225224/ucf-crime/data"
-    checkpoint_dir = "/work3/s225224/ucf-crime/checkpoints"
+    base_checkpoint_dir = "/work3/s225224/ucf-crime/checkpoints"
+
+    # Create model-specific directory with timestamp
+    model_name = "r3d_binary"
+    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+    run_name = f"{model_name}_{timestamp}"
+    checkpoint_dir = Path(base_checkpoint_dir) / run_name
+    checkpoint_dir.mkdir(parents=True, exist_ok=True)
+
     num_classes = 2
     batch_size = 32
     num_workers = 4
@@ -30,6 +44,11 @@ def main():
     clip_len = 16
 
     logger = get_logger(__name__)
+    logger.info(f"Starting training run: {run_name}")
+    logger.info(f"Checkpoints will be saved to: {checkpoint_dir}")
+
+    # --- Training History Tracker ---
+    history = TrainingHistory(checkpoint_dir)
 
     # --- Data ---
     logger.info("Setting up datasets and dataloaders...")
@@ -92,9 +111,9 @@ def main():
 
     # --- Resume ---
     start_epoch = 0
-    best_auc = 0.0  # Changed from best_acc
-    resume_path = os.path.join(checkpoint_dir, "checkpoint.pth")
-    if os.path.exists(resume_path):
+    best_auc = 0.0
+    resume_path = checkpoint_dir / "checkpoint.pth"
+    if resume_path.exists():
         logger.info("Resuming from checkpoint...")
         checkpoint = load_checkpoint(resume_path, model, optimizer, device)
         start_epoch = checkpoint.get("epoch", 0)
@@ -123,6 +142,18 @@ def main():
         val_loss = val_metrics.loss
         val_acc = val_metrics.acc
         val_auc = val_metrics.auc
+
+        # Get current learning rate
+        current_lr = optimizer.param_groups[0]["lr"]
+
+        # Update training history
+        history.update(
+            epoch=epoch + 1,
+            train_loss=train_loss,
+            train_acc=train_acc,
+            val_metrics=val_metrics,
+            learning_rate=current_lr,
+        )
 
         # Log validation results
         logger.info(
@@ -165,7 +196,12 @@ def main():
             logger.warning("Early stopping triggered. Training halted.")
             break
 
-    logger.info(f"Training complete. Best val AUC: {best_auc:.4f}")
+    # Final summary
+    best_epoch_info = history.get_best_epoch("val_auc")
+    logger.info(
+        f"Training complete. Best val AUC: {best_auc:.4f} at epoch {best_epoch_info['epoch']}"
+    )
+    logger.info(f"Training history saved to: {history.csv_path}")
 
 
 if __name__ == "__main__":
