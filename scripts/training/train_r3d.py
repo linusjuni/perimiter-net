@@ -179,6 +179,10 @@ def main():
 
         is_best = val_auc > best_auc
 
+        if is_best:
+            best_auc = val_auc
+            logger.info(f"New best AUC: {val_auc:.4f}")
+
         state = {
             "epoch": epoch + 1,
             "model_state_dict": model.state_dict(),
@@ -187,10 +191,6 @@ def main():
             "val_metrics": val_metrics.to_dict(),
         }
         save_checkpoint(state, checkpoint_dir, is_best=is_best)
-
-        if is_best:
-            best_auc = val_auc
-            logger.info(f"New best AUC: {val_auc:.4f}")
 
         if early_stopper(val_auc):
             logger.warning("Early stopping triggered. Training halted.")
