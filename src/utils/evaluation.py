@@ -137,7 +137,13 @@ def compute_metrics_dataclass(
     )
 
 
-def evaluate(model, data_loader, criterion, device, split="val") -> EvaluationMetrics:
+def evaluate(
+    model: torch.nn.Module,
+    data_loader: torch.utils.data.DataLoader,
+    criterion: torch.nn.Module,
+    device: torch.device,
+    split: str = "val",
+) -> EvaluationMetrics:
     model.eval()
 
     losses = AverageMeter()

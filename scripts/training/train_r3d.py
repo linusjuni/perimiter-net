@@ -92,11 +92,16 @@ def main():
 
     # --- Resume ---
     start_epoch = 0
-    best_acc = 0.0
+    best_auc = 0.0  # Changed from best_acc
     resume_path = os.path.join(checkpoint_dir, "checkpoint.pth")
     if os.path.exists(resume_path):
         logger.info("Resuming from checkpoint...")
-        start_epoch, best_acc = load_checkpoint(resume_path, model, optimizer, device)
+        checkpoint = load_checkpoint(resume_path, model, optimizer, device)
+        start_epoch = checkpoint.get("epoch", 0)
+        best_auc = checkpoint.get("best_auc", 0.0)
+
+    # --- Log Device ---
+    logger.info(f"Training on device: {device}")
 
     # --- Training Loop ---
     logger.info("Starting training loop...")
@@ -111,25 +116,56 @@ def main():
             scaler=scaler,
         )
 
-        val_loss, val_acc = evaluate(model, val_loader, criterion, device, split="val")
+        # Evaluate and get metrics dataclass
+        val_metrics = evaluate(model, val_loader, criterion, device, split="val")
+
+        # Extract metrics
+        val_loss = val_metrics.loss
+        val_acc = val_metrics.acc
+        val_auc = val_metrics.auc
+
+        # Log validation results
+        logger.info(
+            f"Epoch [{epoch + 1}] Validation Summary - "
+            f"Loss: {val_loss:.4f} | Acc: {val_acc:.2f}% | AUC: {val_auc:.4f}"
+        )
+        logger.info(
+            f"  Anomaly Detection: Precision={val_metrics.anomaly_precision:.3f} "
+            f"Recall={val_metrics.anomaly_recall:.3f} F1={val_metrics.anomaly_f1:.3f}"
+        )
+
+        # Log confusion matrix if binary
+        if val_metrics.tp > 0:
+            logger.info(
+                f"  Confusion Matrix: TP={val_metrics.tp} FN={val_metrics.fn} "
+                f"TN={val_metrics.tn} FP={val_metrics.fp}"
+            )
+            logger.info(
+                f"  Error Rates: FPR={val_metrics.fpr:.4f} FNR={val_metrics.fnr:.4f}"
+            )
 
         scheduler.step()
+
+        is_best = val_auc > best_auc
 
         state = {
             "epoch": epoch + 1,
             "model_state_dict": model.state_dict(),
             "optimizer_state_dict": optimizer.state_dict(),
-            "best_acc": best_acc,
+            "best_auc": best_auc,
+            "val_metrics": val_metrics.to_dict(),
         }
-        save_checkpoint(state, checkpoint_dir, is_best=val_acc > best_acc)
-        if val_acc > best_acc:
-            best_acc = val_acc
+        save_checkpoint(state, checkpoint_dir, is_best=is_best)
 
-        if early_stopper(val_acc):
+        if is_best:
+            best_auc = val_auc
+            logger.info(f"New best AUC: {val_auc:.4f}")
+
+        if early_stopper(val_auc):
             logger.warning("Early stopping triggered. Training halted.")
             break
 
-    logger.info(f"Training complete. Best val accuracy: {best_acc:.2f}%")
+    logger.info(f"Training complete. Best val AUC: {best_auc:.4f}")
 
 
 if __name__ == "__main__":
