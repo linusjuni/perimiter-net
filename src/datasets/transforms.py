@@ -1,5 +1,5 @@
 import torch
-import torchvision.transforms as T
+import torchvision.transforms as transforms
 import torchvision.transforms.functional as F
 
 
@@ -36,7 +36,7 @@ class RGBVideoTransform:
         first_frame = clip[:, 0, :, :]  # (C, H, W)
 
         # RandomResizedCrop: apply same crop to all frames
-        i, j, h, w = T.RandomResizedCrop.get_params(
+        i, j, h, w = transforms.RandomResizedCrop.get_params(
             first_frame,
             scale=(0.08, 1.0),
             ratio=(0.9, 1.1),  # More aggressive for grainy images
@@ -54,7 +54,7 @@ class RGBVideoTransform:
             brightness = 0.3
             contrast = 0.3
             saturation = 0.2
-            jitter = T.ColorJitter(
+            jitter = transforms.ColorJitter(
                 brightness=brightness, contrast=contrast, saturation=saturation
             )
             # Apply frame-by-frame (ColorJitter doesn't support 4D)
