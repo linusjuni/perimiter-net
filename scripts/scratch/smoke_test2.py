@@ -1,55 +1,110 @@
+import unittest
 import torch
-import matplotlib.pyplot as plt
-import torchvision
-from src.datasets.ucf import UCFCrimeDataset  # Ensure this matches your filename
+import torch.nn.functional as F
+
+from src.utils.losses import FocalLoss
+
+# Import your class here (assuming it's in the same file or imported)
+# from your_file import FocalLoss
 
 
-def save_sanity_check(output_file="sanity_check.png"):
-    # 1. Init Dataset (Force 224x224 for visibility)
-    # We define a simple transform here to ensure we aren't seeing 64x64
-    transform = torchvision.transforms.Compose(
-        [
-            torchvision.transforms.ToPILImage(),
-            torchvision.transforms.Resize((224, 224)),
-            torchvision.transforms.ToTensor(),
-        ]
-    )
+class TestFocalLoss(unittest.TestCase):
+    def setUp(self):
+        # Create some dummy data
+        # Batch size = 2, Classes = 3
+        self.inputs = torch.tensor(
+            [[1.5, -0.5, 0.2], [0.1, 0.2, 1.8]], requires_grad=True
+        )
+        self.targets = torch.tensor([0, 2])  # True classes
 
-    ds = UCFCrimeDataset(
-        root_dir="/work3/s225224/ucf-crime/data",
-        split="train",
-        clip_len=16,
-        stride=16,  # Use high stride to load faster for this test
-        transform=None,  # We will handle transform manually below for control
-    )
+    def manual_focal_loss(self, logits, targets, alpha, gamma):
+        """
+        A slow, manual implementation to verify the math
+        of the optimized version.
+        """
+        probs = F.softmax(logits, dim=1)
 
-    # 2. Get a sample (Try to find an Anomaly, not Normal)
-    print("Searching for an anomaly clip to visualize...")
-    for i in range(len(ds)):
-        sample = ds.samples[i]
-        if sample["label"] == 0:  # Found a Normal clip
-            print(f"Found Normal: {sample['video_id']}")
-            frames, label = ds[i]
-            break
+        loss_sum = 0
+        for i in range(len(targets)):
+            target = targets[i]
+            p_t = probs[i, target]
 
-    # frames is (C, T, H, W) -> e.g. (3, 16, 224, 224)
-    # 3. Create a Grid
-    # We need to rearrange to (T, C, H, W) for make_grid
-    if isinstance(frames, torch.Tensor):
-        frames = frames.permute(1, 0, 2, 3)
+            # Standard CE part: -log(p_t)
+            ce = -torch.log(p_t)
 
-    # Create grid of 16 frames (4 rows of 4)
-    grid_img = torchvision.utils.make_grid(frames, nrow=4, padding=2)
+            # Focal part: (1 - p_t)^gamma
+            modulating_factor = (1 - p_t) ** gamma
 
-    # 4. Save
-    plt.figure(figsize=(12, 12))
-    # Permute (C, H, W) -> (H, W, C) for Matplotlib
-    plt.imshow(grid_img.permute(1, 2, 0))
-    plt.axis("off")
-    plt.title(f"Label: {label} (Anomaly) - Video: {sample['video_id']}")
-    plt.savefig(output_file)
-    print(f"✅ Saved sanity check to {output_file}")
+            loss = modulating_factor * ce
+
+            # Alpha part
+            if alpha is not None:
+                w = alpha[target]
+                loss = w * loss
+
+            loss_sum += loss
+
+        return loss_sum / len(targets)  # Mean reduction
+
+    def test_forward_pass_no_alpha(self):
+        """Test standard focal loss without alpha balancing."""
+        gamma = 2.0
+        criterion = FocalLoss(gamma=gamma, alpha=None, reduction="mean")
+
+        # Optimized implementation
+        output = criterion(self.inputs, self.targets)
+
+        # Manual verification
+        expected = self.manual_focal_loss(self.inputs, self.targets, None, gamma)
+
+        self.assertTrue(
+            torch.allclose(output, expected),
+            f"Mismatch: Got {output}, expected {expected}",
+        )
+
+    def test_forward_pass_with_alpha(self):
+        """Test focal loss WITH alpha balancing."""
+        gamma = 2.0
+        # Give class 0 low weight, class 2 high weight
+        alpha = [0.1, 0.5, 0.9]
+        criterion = FocalLoss(gamma=gamma, alpha=alpha, reduction="mean")
+
+        output = criterion(self.inputs, self.targets)
+        expected = self.manual_focal_loss(self.inputs, self.targets, alpha, gamma)
+
+        self.assertTrue(
+            torch.allclose(output, expected),
+            f"Mismatch with alpha: Got {output}, expected {expected}",
+        )
+
+    def test_gradients(self):
+        """Ensure backward pass works (gradients are generated)."""
+        criterion = FocalLoss(gamma=2.0, reduction="mean")
+        output = criterion(self.inputs, self.targets)
+
+        output.backward()
+
+        self.assertIsNotNone(self.inputs.grad, "Gradients were not computed!")
+        self.assertNotEqual(self.inputs.grad.sum().item(), 0, "Gradients are zero!")
+
+    def test_buffer_registration(self):
+        """Test if alpha moves with the model (e.g. to double precision)."""
+        alpha = [0.1, 0.2, 0.7]
+        criterion = FocalLoss(alpha=alpha)
+
+        # Default is float32
+        self.assertEqual(criterion.alpha.dtype, torch.float32)
+
+        # Move model to double (float64)
+        # In a real scenario, this would be .cuda() or .to(device)
+        criterion = criterion.double()
+
+        self.assertEqual(
+            criterion.alpha.dtype,
+            torch.float64,
+            "Alpha did not move/cast with the model!",
+        )
 
 
 if __name__ == "__main__":
-    save_sanity_check()
+    unittest.main(argv=["first-arg-is-ignored"], exit=False)

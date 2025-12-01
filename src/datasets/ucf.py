@@ -3,7 +3,6 @@ import glob
 import re
 import cv2
 import numpy as np
-import torch
 from torch.utils.data import Dataset
 from src.datasets.transforms import RGBVideoTransform
 
