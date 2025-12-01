@@ -142,7 +142,7 @@ def create_ground_truth_mask(frame_indices, annotation_intervals):
 
 def sliding_window_inference(model, video_frames, clip_len, stride, transform, device):
     """
-    Run model on video using sliding window.
+    Run model on video using sliding window with optimized memory usage.
 
     Args:
         model: Trained model
@@ -164,25 +164,24 @@ def sliding_window_inference(model, video_frames, clip_len, stride, transform, d
 
     frame_paths = [path for _, path in video_frames]
 
+    # Pre-allocate clip buffer (reuse across iterations)
+    clip_buffer = np.zeros((clip_len, 64, 64, 3), dtype=np.uint8)
+
     with torch.no_grad():
         for start_idx in range(0, num_frames - clip_len + 1, stride):
             end_idx = start_idx + clip_len
 
-            # Load clip
-            clip_frames = []
-            for path in frame_paths[start_idx:end_idx]:
+            # Load clip into pre-allocated buffer
+            for i, path in enumerate(frame_paths[start_idx:end_idx]):
                 frame = cv2.imread(path)
                 if frame is None:
-                    frame = np.zeros((64, 64, 3), dtype=np.uint8)
+                    clip_buffer[i] = 0  # Black frame
                 else:
-                    frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
-                clip_frames.append(frame)
+                    clip_buffer[i] = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
 
-            clip_frames = np.array(clip_frames)
-
-            # Transform
-            clip_tensor = transform(clip_frames)
-            clip_tensor = clip_tensor.unsqueeze(0).to(device)
+            # Transform (creates new tensor, but we reuse clip_buffer)
+            clip_tensor = transform(clip_buffer)
+            clip_tensor = clip_tensor.unsqueeze(0).to(device, non_blocking=True)
 
             # Inference
             with autocast("cuda", enabled=True):
@@ -191,9 +190,8 @@ def sliding_window_inference(model, video_frames, clip_len, stride, transform, d
             anomaly_score = extract_anomaly_scores(outputs)[0].cpu().item()
 
             # Assign score to all frames in clip
-            for i in range(start_idx, end_idx):
-                frame_scores[i] += anomaly_score
-                frame_counts[i] += 1
+            frame_scores[start_idx:end_idx] += anomaly_score
+            frame_counts[start_idx:end_idx] += 1
 
     # Average overlapping predictions
     frame_counts = np.maximum(frame_counts, 1)
@@ -226,7 +224,7 @@ def evaluate_frame_level(
         sigma: Gaussian smoothing parameter
 
     Returns:
-        FrameLevelMetrics dataclass
+        FrameLevelMetrics dataclass and video_results list
     """
     from sklearn.metrics import roc_curve
 
@@ -236,9 +234,15 @@ def evaluate_frame_level(
     annotations = parse_temporal_annotations(annotation_path)
     videos = get_test_videos(test_dir)
 
-    # Filter videos with annotations
-    valid_videos = {k: v for k, v in videos.items() if k in annotations}
-    logger.info(f"Processing {len(valid_videos)} videos with annotations")
+    # Handle videos not in annotation file (treat as normal)
+    for video_id in videos:
+        if video_id not in annotations:
+            logger.warning(f"Video {video_id} not in annotations - treating as Normal")
+            annotations[video_id] = []  # Empty intervals = all normal
+
+    # Now all videos are valid
+    valid_videos = videos
+    logger.info(f"Processing {len(valid_videos)} videos (with annotations or defaults)")
 
     # Storage
     all_scores = []
@@ -250,7 +254,7 @@ def evaluate_frame_level(
         frames = video_data["frames"]
         frame_indices = [idx for idx, _ in frames]
 
-        # Ground truth
+        # Ground truth (will be all zeros if intervals is empty)
         intervals = annotations[video_id]
         gt_mask = create_ground_truth_mask(frame_indices, intervals)
 
@@ -268,16 +272,18 @@ def evaluate_frame_level(
             pred_scores = gaussian_filter1d(pred_scores, sigma=sigma)
 
         # Compute per-video AUC only if both classes are present
-        video_auc = None
         if len(np.unique(gt_mask)) > 1:
             video_auc = compute_auc_safe(gt_mask, pred_scores)
             video_results.append(
                 (video_id, video_auc, pred_scores, gt_mask, frame_indices, intervals)
             )
         else:
-            logger.debug(f"Skipping per-video AUC for {video_id} (single class)")
+            # Still keep normal-only videos for visualization purposes
+            logger.debug(
+                f"Skipping per-video AUC for {video_id} (single class: {'Normal' if gt_mask.sum() == 0 else 'Anomaly'})"
+            )
 
-        # Accumulate for global frame-level AUC
+        # Accumulate for global frame-level AUC (includes normal-only videos)
         all_scores.extend(pred_scores)
         all_labels.extend(gt_mask)
 
