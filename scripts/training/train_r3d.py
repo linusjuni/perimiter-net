@@ -1,10 +1,13 @@
 from datetime import datetime
 from pathlib import Path
+import sys
 import torch
 from torch.utils.data import DataLoader
 from torch.optim import AdamW
 from torch.optim.lr_scheduler import CosineAnnealingLR
 from torch.amp import GradScaler
+
+sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 
 from src.datasets.ucf import UCFCrimeDataset
 from src.datasets.transforms import RGBVideoTransform
