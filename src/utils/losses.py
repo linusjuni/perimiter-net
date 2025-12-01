@@ -39,8 +39,10 @@ class FocalLoss(nn.Module):
 
         # Apply alpha (class balancing) if provided
         if self.alpha is not None:
+            # Move alpha to the same device as targets if needed
+            alpha = self.alpha.to(targets.device)
             # Gather alpha values for the specific targets in the batch
-            alpha_t = self.alpha.gather(0, targets)
+            alpha_t = alpha.gather(0, targets)
             focal_loss = alpha_t * focal_loss
 
         # Apply reduction
