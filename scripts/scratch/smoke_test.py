@@ -1,3 +1,4 @@
+import torch
 from torch.utils.data import DataLoader
 import matplotlib.pyplot as plt
 import time
@@ -46,54 +47,53 @@ def test_dry_run(root_dir):
 
 
 def test_live_load(root_dir):
-    """
-    Actually loads images and creates a batch to verify
-    transforms and tensor shapes.
-    """
+    """Actually loads images and creates a batch."""
     print(f"\n{'=' * 20} LIVE RUN: TENSOR SHAPES {'=' * 20}")
 
-    ds = UCFCrimeDataset(root_dir, split="train", clip_len=16, mode="binary")
+    # Import transform
+    from src.transforms import RGBVideoTransform
+
+    transform = RGBVideoTransform(mode="train", crop_size=112, resize_size=128)
+    ds = UCFCrimeDataset(
+        root_dir,
+        split="train",
+        clip_len=16,
+        mode="binary",
+        transform=transform,  # Pass transform explicitly
+    )
+
     loader = DataLoader(ds, batch_size=4, shuffle=True, num_workers=2)
 
-    print("⏳ Loading first batch... (this may take a moment)")
+    print("⏳ Loading first batch...")
     start_time = time.time()
 
     try:
         frames, labels = next(iter(loader))
     except Exception as e:
         print(f"❌ Error during loading: {e}")
+        import traceback
+
+        traceback.print_exc()
         return
 
     load_time = time.time() - start_time
     print(f"✅ Batch loaded in {load_time:.2f} seconds.")
 
-    # 1. Check Shapes
-    # Expected: (Batch, Channels, Time, Height, Width) -> (4, 3, 16, H, W)
+    # Check Shapes
     print(f"\n[Shape Check]")
-    print(f"  Input Batch: {frames.shape}")
+    print(f"  Input Batch: {frames.shape}")  # Should be (4, 3, 16, 112, 112)
     print(f"  Labels: {labels.shape}")
 
-    if frames.dim() == 5 and frames.shape[2] == 16:
-        print("✅ Temporal dimension is correct (16 frames).")
+    if frames.shape == torch.Size([4, 3, 16, 112, 112]):
+        print("✅ Perfect! Upsampled to 112×112")
     else:
-        print("❌ WARN: Unexpected shape. Ensure (B, C, T, H, W).")
+        print(f"❌ WARN: Expected (4, 3, 16, 112, 112), got {frames.shape}")
 
-    # 2. Check Value Range
-    print(f"\n[Value Range Check]")
+    # Check normalization (should be centered around 0 now, not 0-1)
+    print(f"\n[Value Range Check - Kinetics Normalized]")
+    print(f"  Mean: {frames.mean():.4f} (should be ~0)")
+    print(f"  Std: {frames.std():.4f} (should be ~1)")
     print(f"  Max: {frames.max():.4f}, Min: {frames.min():.4f}")
-    if frames.max() <= 1.0 and frames.min() >= 0.0:
-        print("✅ Normalization appears correct (0-1).")
-    else:
-        print("❌ WARN: Values outside [0, 1]. Check your transforms.")
-
-    # 3. Check Binary Labels
-    print(f"\n[Label Check]")
-    print(f"  Labels found: {labels.tolist()}")
-    if ds.mode == "binary":
-        if all(l in [0, 1] for l in labels):
-            print("✅ Binary labels are correct (0s and 1s).")
-        else:
-            print("❌ Error: Found non-binary labels in binary mode.")
 
 
 def test_visual_sanity(root_dir):

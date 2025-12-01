@@ -5,6 +5,7 @@ import cv2
 import numpy as np
 import torch
 from torch.utils.data import Dataset
+from src.datasets.transforms import RGBVideoTransform
 
 
 class UCFCrimeDataset(Dataset):
@@ -58,6 +59,16 @@ class UCFCrimeDataset(Dataset):
 
         # Replaces _load_annotations
         self.samples = self._load_samples()
+
+        # Default Transform if none provided
+        if transform is None:
+            self.transform = RGBVideoTransform(
+                mode="train" if split == "train" else "val",
+                crop_size=112,
+                resize_size=128,
+            )
+        else:
+            self.transform = transform
 
     def _load_samples(self):
         """
@@ -175,11 +186,7 @@ class UCFCrimeDataset(Dataset):
         # Load actual pixel data
         frames = self._load_video_clip(frame_paths)
 
-        # Apply transforms
-        if self.transform:
-            frames = self.transform(frames)
-        else:
-            # Default transform if none provided: (T, H, W, C) -> (C, T, H, W)
-            frames = torch.from_numpy(frames).permute(3, 0, 1, 2).float() / 255.0
+        # Apply transforms if any
+        frames = self.transform(frames)
 
         return frames, label

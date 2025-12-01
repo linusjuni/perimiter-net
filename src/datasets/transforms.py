@@ -32,10 +32,17 @@ class RGBVideoTransform:
 
     def _train_transform(self, clip):
         """Apply training augmentations."""
+        C, T, H, W = clip.shape
+        first_frame = clip[:, 0, :, :]  # (C, H, W)
+
         # RandomResizedCrop: apply same crop to all frames
         i, j, h, w = T.RandomResizedCrop.get_params(
-            clip, scale=(0.9, 1.0), ratio=(1.0, 1.0)
+            first_frame,
+            scale=(0.08, 1.0),
+            ratio=(0.9, 1.1),  # More aggressive for grainy images
         )
+
+        # Apply crop and resize to entire clip
         clip = F.resized_crop(clip, i, j, h, w, [self.crop_size, self.crop_size])
 
         # RandomHorizontalFlip: flip entire clip
@@ -44,18 +51,20 @@ class RGBVideoTransform:
 
         # ColorJitter: apply same jitter to all frames
         if torch.rand(1) < 0.8:
-            brightness = 0.2
-            contrast = 0.2
-            jitter = T.ColorJitter(brightness=brightness, contrast=contrast)
-            # Apply frame-by-frame (ColorJitter doesn't support 4D)
-            clip = torch.stack(
-                [jitter(clip[:, i]) for i in range(clip.shape[1])], dim=1
+            brightness = 0.3
+            contrast = 0.3
+            saturation = 0.2
+            jitter = T.ColorJitter(
+                brightness=brightness, contrast=contrast, saturation=saturation
             )
+            # Apply frame-by-frame (ColorJitter doesn't support 4D)
+            clip = torch.stack([jitter(clip[:, i]) for i in range(T)], dim=1)
 
         return clip
 
     def _val_transform(self, clip):
         """Apply validation/test transforms."""
+        # This already upsamples: 64×64 → 128×128 → center crop to 112×112
         clip = F.resize(clip, [self.resize_size, self.resize_size])
         clip = F.center_crop(clip, [self.crop_size, self.crop_size])
         return clip
