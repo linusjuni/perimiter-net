@@ -1,4 +1,5 @@
 from datetime import datetime
+import os
 from pathlib import Path
 import sys
 import torch
@@ -37,12 +38,12 @@ def main():
     checkpoint_dir.mkdir(parents=True, exist_ok=True)
 
     num_classes = 2
-    batch_size = 32
+    batch_size = 128
     num_workers = 4
     num_epochs = 20
     lr = 1e-4
     weight_decay = 1e-2
-    patience = 5
+    patience = 10
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     clip_len = 16
 
@@ -99,7 +100,7 @@ def main():
     # --- Model ---
     logger.info("Instantiating model...")
     model = create_r3d_classifier(
-        num_classes=num_classes, pretrained=True, freeze_backbone=True, dropout=0.5
+        num_classes=num_classes, pretrained=True, freeze_backbone=False, dropout=0.5
     )
     model = model.to(device)
 
@@ -138,6 +139,31 @@ def main():
         logger.info(f"cuDNN Version: {torch.backends.cudnn.version()}")
         logger.info(f"PyTorch Version: {torch.__version__}")
 
+
+    # ----------------- DEBUGGGING FOR DATA LEAKAG START -----------------
+    
+    train_dataset = UCFCrimeDataset(root_dir, split="train", clip_len=clip_len, transform=train_transform, stride=clip_len, val_ratio=val_ratio)
+    val_dataset = UCFCrimeDataset(root_dir, split="val", clip_len=clip_len, transform=val_transform, stride=clip_len, val_ratio=val_ratio)
+
+    # Extract video IDs from both splits
+    train_videos = set()
+    val_videos = set()
+
+    for sample in train_dataset.samples:
+        video_id = os.path.basename(sample["paths"][0]).rsplit("_", 1)[0]
+        train_videos.add(video_id)
+
+    for sample in val_dataset.samples:
+        video_id = os.path.basename(sample["paths"][0]).rsplit("_", 1)[0]
+        val_videos.add(video_id)
+
+    overlap = train_videos & val_videos
+    print(f"Train videos: {len(train_videos)}")
+    print(f"Val videos: {len(val_videos)}")
+    print(f"Overlap: {len(overlap)}")  # Should be 0!
+    assert len(overlap) == 0, "DATA LEAKAGE DETECTED!"
+
+    # ----------------- DEBUGGGING FOR DATA LEAKAG END -----------------
 
     # --- Training Loop ---
     logger.info("Starting training loop...")
