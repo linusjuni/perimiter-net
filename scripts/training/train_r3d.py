@@ -128,8 +128,16 @@ def main():
         start_epoch = checkpoint.get("epoch", 0)
         best_auc = checkpoint.get("best_auc", 0.0)
 
-    # --- Log Device ---
+    # --- Log Device and Environment ---
     logger.info(f"Training on device: {device}")
+    if torch.cuda.is_available():
+        logger.info(f"GPU Name: {torch.cuda.get_device_name(0)}")
+        logger.info(f"GPU Memory: {torch.cuda.get_device_properties(0).total_memory / 1e9:.2f} GB")
+        logger.info(f"Number of GPUs: {torch.cuda.device_count()}")
+        logger.info(f"CUDA Version: {torch.version.cuda}")
+        logger.info(f"cuDNN Version: {torch.backends.cudnn.version()}")
+        logger.info(f"PyTorch Version: {torch.__version__}")
+
 
     # --- Training Loop ---
     logger.info("Starting training loop...")
