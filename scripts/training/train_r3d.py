@@ -55,19 +55,25 @@ def main():
     train_transform = RGBVideoTransform(mode="train", crop_size=112, resize_size=128)
     val_transform = RGBVideoTransform(mode="val", crop_size=112, resize_size=128)
 
+    # Use 20% of the Training folder for Validation
+    val_ratio = 0.20
+
     train_dataset = UCFCrimeDataset(
         root_dir,
         split="train",
         clip_len=clip_len,
         transform=train_transform,
         stride=clip_len,
+        val_ratio=val_ratio,
     )
+
     val_dataset = UCFCrimeDataset(
         root_dir,
         split="val",
         clip_len=clip_len,
         transform=val_transform,
         stride=clip_len,
+        val_ratio=val_ratio,
     )
 
     train_loader = DataLoader(
