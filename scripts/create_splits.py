@@ -1,4 +1,5 @@
 """Create train/val/test splits for VIRAT dataset using only available videos."""
+
 from pathlib import Path
 import random
 
@@ -14,12 +15,16 @@ existing_videos = set(f.stem for f in video_dir.glob("*.mp4"))
 print(f"Found {len(existing_videos)} videos in {video_dir}")
 
 # Get annotated videos from train folder
-train_videos = [f.stem.replace('.activities', '') 
-                for f in (annot_dir / 'train').glob('*.activities.yml')]
+train_videos = [
+    f.stem.replace(".activities", "")
+    for f in (annot_dir / "train").glob("*.activities.yml")
+]
 
 # Get annotated videos from validate folder
-validate_videos = [f.stem.replace('.activities', '') 
-                   for f in (annot_dir / 'validate').glob('*.activities.yml')]
+validate_videos = [
+    f.stem.replace(".activities", "")
+    for f in (annot_dir / "validate").glob("*.activities.yml")
+]
 
 # Filter to only videos that exist
 train_videos = [v for v in train_videos if v in existing_videos]
@@ -46,7 +51,7 @@ with open(split_dir / "val.txt", "w") as f:
 with open(split_dir / "test.txt", "w") as f:
     f.write("\n".join(sorted(test_videos)) + "\n")
 
-print(f"\n✓ Created splits:")
+print("\n✓ Created splits:")
 print(f"  Train: {len(train_videos)} videos")
 print(f"  Val:   {len(val_videos)} videos")
 print(f"  Test:  {len(test_videos)} videos")

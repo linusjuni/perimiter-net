@@ -23,7 +23,7 @@ def train_epoch(model, train_loader, criterion, optimizer, device, epoch, scaler
 
         # --- 2. Forward pass with AMP ---
         # 'enabled' checks if scaler was passed. If None, it runs in standard float32.
-        with autocast('cuda', enabled=(scaler is not None)):
+        with autocast("cuda", enabled=(scaler is not None)):
             outputs = model(inputs)
             loss = criterion(outputs, targets)
 

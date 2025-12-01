@@ -32,7 +32,7 @@ def test_dry_run(root_dir):
 
     # Check first sample metadata
     sample = ds.samples[0]
-    print(f"Sample 0 Metadata:")
+    print("Sample 0 Metadata:")
     print(f"  - Video ID: {sample.get('video_id', 'N/A')}")
     print(f"  - Label: {sample['label']}")
     print(f"  - Frames: {len(sample['paths'])} (Expected: {ds.clip_len})")
@@ -80,7 +80,7 @@ def test_live_load(root_dir):
     print(f"✅ Batch loaded in {load_time:.2f} seconds.")
 
     # Check Shapes
-    print(f"\n[Shape Check]")
+    print("\n[Shape Check]")
     print(f"  Input Batch: {frames.shape}")  # Should be (4, 3, 16, 112, 112)
     print(f"  Labels: {labels.shape}")
 
@@ -90,7 +90,7 @@ def test_live_load(root_dir):
         print(f"❌ WARN: Expected (4, 3, 16, 112, 112), got {frames.shape}")
 
     # Check normalization (should be centered around 0 now, not 0-1)
-    print(f"\n[Value Range Check - Kinetics Normalized]")
+    print("\n[Value Range Check - Kinetics Normalized]")
     print(f"  Mean: {frames.mean():.4f} (should be ~0)")
     print(f"  Std: {frames.std():.4f} (should be ~1)")
     print(f"  Max: {frames.max():.4f}, Min: {frames.min():.4f}")

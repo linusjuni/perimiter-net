@@ -1,13 +1,12 @@
 """Test that VIRATDataset loads correctly."""
+
 from src.datasets.virat import VIRATDataset
 
 print("Loading VIRATDataset...")
 
 # Test loading train split
 dataset = VIRATDataset(
-    root_dir="/work3/s225224/perimeter-net/data",
-    split="train",
-    clip_len=16
+    root_dir="/work3/s225224/perimeter-net/data", split="train", clip_len=16
 )
 
 print(f"Dataset loaded: {len(dataset)} samples")
