@@ -13,7 +13,7 @@ logger = get_logger(__name__)
 
 def main():
     if len(sys.argv) < 2:
-        print("Usage: python plot_frame_level.py <results_dir>")
+        print("Usage: python plot_r3d_results.py <results_dir>")
         sys.exit(1)
 
     results_dir = Path(sys.argv[1])
