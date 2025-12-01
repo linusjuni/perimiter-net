@@ -5,26 +5,27 @@ from torch.utils.data import DataLoader
 from torch.optim import AdamW
 from torch.optim.lr_scheduler import CosineAnnealingLR
 
-from src.datasets.virat import VIRATDataset
+from src.datasets.ucf import UCFCrimeDataset  # Changed from VIRATDataset
 from src.datasets.transforms import RGBVideoTransform
 from src.models.r3d import create_r3d_classifier
 from src.utils.training_utils import save_checkpoint, load_checkpoint, EarlyStopping
 from src.utils.training import train_epoch
 from src.utils.evaluation import evaluate
 from src.utils.logger import get_logger
+from src.utils.losses import FocalLoss  # Added import
 
 
 def main():
     # --- Config ---
-    root_dir = "/work3/s225224/perimeter-net/data"
-    checkpoint_dir = "/work3/s225224/perimeter-net/checkpoints"
-    num_classes = 7
+    root_dir = "/work3/s225224/ucf-crime/data"  # Changed path
+    checkpoint_dir = "/work3/s225224/ucf-crime/checkpoints"  # Changed path
+    num_classes = 2  # Changed from 7 to 2 (binary: Normal vs Anomaly)
     batch_size = 16
     num_workers = 4
-    num_epochs = 30
+    num_epochs = 10  # Changed from 30 to 10 for baseline
     lr = 1e-4
     weight_decay = 1e-2
-    patience = 7
+    patience = 5  # Changed from 7 to 5
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     clip_len = 16
 
@@ -35,10 +36,10 @@ def main():
     train_transform = RGBVideoTransform(mode="train", crop_size=112, resize_size=128)
     val_transform = RGBVideoTransform(mode="val", crop_size=112, resize_size=128)
 
-    train_dataset = VIRATDataset(
+    train_dataset = UCFCrimeDataset(  # Changed from VIRATDataset
         root_dir, split="train", clip_len=clip_len, transform=train_transform
     )
-    val_dataset = VIRATDataset(
+    val_dataset = UCFCrimeDataset(  # Changed from VIRATDataset
         root_dir, split="val", clip_len=clip_len, transform=val_transform
     )
 
@@ -69,7 +70,10 @@ def main():
     # --- Optimizer, Scheduler, Loss ---
     optimizer = AdamW(model.parameters(), lr=lr, weight_decay=weight_decay)
     scheduler = CosineAnnealingLR(optimizer, T_max=num_epochs)
-    criterion = nn.CrossEntropyLoss()
+
+    # Use Focal Loss with class weights: Normal=0.25, Anomaly=0.75
+    alpha = torch.tensor([0.25, 0.75])  # Weight anomaly class higher
+    criterion = FocalLoss(alpha=alpha, gamma=2.0)  # Changed from CrossEntropyLoss
 
     # --- Early Stopping ---
     early_stopper = EarlyStopping(patience=patience, mode="max")
