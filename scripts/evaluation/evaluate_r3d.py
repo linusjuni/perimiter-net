@@ -2,14 +2,15 @@ import sys
 import torch
 from pathlib import Path
 from datetime import datetime
-import numpy as np
-import pickle
 
 sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 
 from src.models.r3d import create_r3d_classifier
 from src.datasets.transforms import RGBVideoTransform
-from src.utils.frame_level_evaluation import evaluate_frame_level
+from src.utils.frame_level_evaluation import (
+    evaluate_frame_level,
+    save_frame_level_results,
+)
 from src.utils.training_utils import load_checkpoint
 from src.utils.logger import get_logger
 
@@ -97,7 +98,7 @@ def main():
     transform = RGBVideoTransform(mode="val", crop_size=112, resize_size=128)
 
     # Run evaluation
-    metrics, video_results = evaluate_frame_level(
+    metrics, curves, video_results, all_scores, all_labels = evaluate_frame_level(
         model,
         test_dir,
         annotation_path,
@@ -114,30 +115,21 @@ def main():
     logger.info(f"{metrics}")
     logger.info("=" * 60)
 
-    # Save results
-    results_file = results_dir / "metrics.txt"
-    with open(results_file, "w") as f:
-        f.write(f"Run: {run_name}\n")
-        f.write(f"Checkpoint: {checkpoint_path}\n")
-        f.write(f"Timestamp: {timestamp}\n")
-        f.write(f"\nFrame-Level AUC: {metrics.frame_auc:.4f}\n")
-        f.write(f"Total Frames: {metrics.num_frames:,}\n")
-        f.write(f"Total Videos: {metrics.num_videos}\n")
-
-    np.savez(
-        results_dir / "raw_data.npz",
-        fpr=metrics.fpr,
-        tpr=metrics.tpr,
-        thresholds=metrics.thresholds,
-        frame_auc=metrics.frame_auc,
+    save_frame_level_results(
+        results_dir=results_dir,
+        run_name=run_name,
+        checkpoint_path=checkpoint_path,
+        timestamp=timestamp,
+        metrics=metrics,
+        curves=curves,
+        scores=all_scores,
+        labels=all_labels,
+        video_results=video_results,
     )
-
-    with open(results_dir / "video_results.pkl", "wb") as f:
-        pickle.dump(video_results, f)
 
     logger.info(f"Results saved to: {results_dir}")
     logger.info(f"Run plotting script to generate visualizations:")
-    logger.info(f"  python scripts/plotting/plot_frame_level.py {results_dir}")
+    logger.info(f"  python scripts/plotting/plot_r3d_results.py {results_dir}")
 
 
 if __name__ == "__main__":

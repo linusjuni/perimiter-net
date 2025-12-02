@@ -3,6 +3,7 @@ import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 import seaborn as sns
+import numpy as np
 from pathlib import Path
 
 from src.utils.logger import get_logger
@@ -90,6 +91,65 @@ def plot_roc_curve(fpr, tpr, auc_score, save_path):
     plt.savefig(save_path, dpi=150, bbox_inches="tight")
     plt.close()
     logger.info(f"Saved ROC curve: {save_path}")
+
+
+def plot_precision_recall_curve(precision, recall, save_path):
+    """Plot Precision-Recall curve."""
+    fig, ax = plt.subplots(figsize=(8, 8))
+
+    sns.lineplot(
+        x=recall,
+        y=precision,
+        ax=ax,
+        linewidth=2.5,
+        label="Precision-Recall",
+        color=sns.color_palette("muted")[1],
+    )
+
+    ax.set_xlabel("Recall", fontsize=12)
+    ax.set_ylabel("Precision", fontsize=12)
+    ax.set_title("Frame-Level Precision-Recall Curve", fontsize=14, fontweight="bold")
+    ax.legend(loc="lower left", fontsize=12, frameon=True)
+
+    plt.tight_layout()
+    plt.savefig(save_path, dpi=150, bbox_inches="tight")
+    plt.close()
+    logger.info(f"Saved PR curve: {save_path}")
+
+
+def plot_confusion_matrix(cm, class_names, save_path, normalize=False):
+    """Plot confusion matrix as heatmap."""
+    cm = np.array(cm, dtype=np.float32)
+    display_cm = cm.copy()
+
+    if normalize:
+        row_sums = display_cm.sum(axis=1, keepdims=True)
+        display_cm = np.divide(
+            display_cm, row_sums, out=np.zeros_like(display_cm), where=row_sums != 0
+        )
+
+    fmt = ".2f" if normalize else "d"
+    fig, ax = plt.subplots(figsize=(6, 5))
+    sns.heatmap(
+        display_cm,
+        annot=True,
+        fmt=fmt,
+        cmap="Blues",
+        xticklabels=class_names,
+        yticklabels=class_names,
+        cbar=False,
+        ax=ax,
+    )
+
+    ax.set_xlabel("Predicted label", fontsize=12)
+    ax.set_ylabel("True label", fontsize=12)
+    title = "Normalized Confusion Matrix" if normalize else "Confusion Matrix"
+    ax.set_title(title, fontsize=14, fontweight="bold")
+
+    plt.tight_layout()
+    plt.savefig(save_path, dpi=150, bbox_inches="tight")
+    plt.close()
+    logger.info(f"Saved confusion matrix: {save_path}")
 
 
 def plot_best_worst_videos(video_results, annotations, plot_dir, top_n=5):

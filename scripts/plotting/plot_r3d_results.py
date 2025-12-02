@@ -5,7 +5,12 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 
-from src.visualization.plots import plot_roc_curve, plot_best_worst_videos
+from src.visualization.plots import (
+    plot_roc_curve,
+    plot_precision_recall_curve,
+    plot_confusion_matrix,
+    plot_best_worst_videos,
+)
 from src.utils.logger import get_logger
 
 logger = get_logger(__name__)
@@ -33,6 +38,9 @@ def main():
     fpr = data["fpr"]
     tpr = data["tpr"]
     frame_auc = float(data["frame_auc"])
+    precision = data["precision"]
+    recall = data["recall"]
+    confusion = data["confusion"]
 
     # Load video results
     with open(results_dir / "video_results.pkl", "rb") as f:
@@ -41,6 +49,16 @@ def main():
     # Generate ROC curve
     logger.info("Plotting ROC curve...")
     plot_roc_curve(fpr, tpr, frame_auc, plot_dir / "roc_curve.png")
+
+    # Generate Precision-Recall curve
+    logger.info("Plotting Precision-Recall curve...")
+    plot_precision_recall_curve(precision, recall, plot_dir / "precision_recall.png")
+
+    # Generate confusion matrix
+    logger.info("Plotting confusion matrix...")
+    plot_confusion_matrix(
+        confusion, ["Normal", "Anomaly"], plot_dir / "confusion_matrix.png"
+    )
 
     # Generate best/worst videos
     if video_results:
