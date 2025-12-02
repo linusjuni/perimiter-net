@@ -30,7 +30,8 @@ def main():
     logger.info(f"Generating plots for: {results_dir}")
 
     # Create plots subdirectory
-    plot_dir = results_dir / "plots"
+    #plot_dir = Path("plots") # choose this
+    plot_dir = Path("plots") # or this
     plot_dir.mkdir(exist_ok=True)
 
     # Load raw data
