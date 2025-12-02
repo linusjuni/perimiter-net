@@ -30,7 +30,7 @@ def main():
     # --- Config ---
     # IMPORTANT: Ensure this points to the folder containing your frames
     # (e.g. /dtu/blackhole/.../Frames or /work3/.../data if you moved them)
-    root_dir = "/dtu/blackhole/10/187952/ucf-crime-blackhole/Frames"
+    root_dir = "/work3/s225224/ucf-crime/data"
     base_checkpoint_dir = "/work3/s225224/ucf-crime/checkpoints"
 
     # Create model-specific directory with timestamp
