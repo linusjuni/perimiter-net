@@ -15,28 +15,17 @@ sns.set_style("whitegrid")
 sns.set_palette("muted")
 
 
-def _downsample_xy(x, y, max_points=5000):
-    """Return a thinned (x, y) pair if arrays are very long to speed up plotting."""
-    x = np.asarray(x)
-    y = np.asarray(y)
-    if len(x) <= max_points:
-        return x, y
-    idx = np.linspace(0, len(x) - 1, max_points, dtype=int)
-    return x[idx], y[idx]
-
-
 def plot_video_timeline(
     video_id, frame_indices, pred_scores, gt_mask, intervals, save_path
 ):
     """Plot anomaly score timeline for a single video."""
     fig, ax = plt.subplots(figsize=(15, 5))
 
-    x, y = _downsample_xy(frame_indices, pred_scores, max_points=8000)
-
     # Plot anomaly scores with seaborn color
-    ax.plot(
-        x,
-        y,
+    sns.lineplot(
+        x=frame_indices,
+        y=pred_scores,
+        ax=ax,
         linewidth=2,
         label="Anomaly Score",
         color=sns.color_palette("muted")[0],
@@ -72,21 +61,21 @@ def plot_roc_curve(fpr, tpr, auc_score, save_path):
     """Plot ROC curve."""
     fig, ax = plt.subplots(figsize=(8, 8))
 
-    x, y = _downsample_xy(fpr, tpr, max_points=10000)
-
     # ROC curve
-    ax.plot(
-        x,
-        y,
+    sns.lineplot(
+        x=fpr,
+        y=tpr,
+        ax=ax,
         linewidth=2.5,
         label=f"ROC (AUC = {auc_score:.4f})",
         color=sns.color_palette("muted")[0],
     )
 
     # Random classifier baseline
-    ax.plot(
-        [0, 1],
-        [0, 1],
+    sns.lineplot(
+        x=[0, 1],
+        y=[0, 1],
+        ax=ax,
         linewidth=2,
         linestyle="--",
         label="Random Classifier",
@@ -108,11 +97,10 @@ def plot_precision_recall_curve(precision, recall, save_path):
     """Plot Precision-Recall curve."""
     fig, ax = plt.subplots(figsize=(8, 8))
 
-    x, y = _downsample_xy(recall, precision, max_points=10000)
-
-    ax.plot(
-        x,
-        y,
+    sns.lineplot(
+        x=recall,
+        y=precision,
+        ax=ax,
         linewidth=2.5,
         label="Precision-Recall",
         color=sns.color_palette("muted")[1],
