@@ -117,7 +117,7 @@ class SobelMotionTransform:
             if torch.rand(1) < 0.5:
                 gray = F.hflip(gray)
         else:
-            gray = F.interpolate(
+            gray = FN.interpolate(
                 gray,
                 size=(self.resize_size, self.resize_size),
                 mode="bilinear",
