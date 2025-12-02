@@ -119,16 +119,18 @@ def plot_precision_recall_curve(precision, recall, save_path):
 
 def plot_confusion_matrix(cm, class_names, save_path, normalize=False):
     """Plot confusion matrix as heatmap."""
-    cm = np.array(cm, dtype=np.float32)
+    cm = np.array(cm)
     display_cm = cm.copy()
 
     if normalize:
         row_sums = display_cm.sum(axis=1, keepdims=True)
         display_cm = np.divide(
-            display_cm, row_sums, out=np.zeros_like(display_cm), where=row_sums != 0
+            display_cm, row_sums, out=np.zeros_like(display_cm, dtype=float), where=row_sums != 0
         )
-
-    fmt = ".2f" if normalize else "d"
+        fmt = ".2f"
+    else:
+        display_cm = display_cm.astype(np.int64)
+        fmt = "d"
     fig, ax = plt.subplots(figsize=(6, 5))
     sns.heatmap(
         display_cm,
