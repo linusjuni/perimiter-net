@@ -440,7 +440,6 @@ def save_frame_level_results(
         fpr=curves.fpr,
         tpr=curves.tpr,
         roc_thresholds=curves.roc_thresholds,
-        thresholds=curves.roc_thresholds,  # backwards-compat key
         precision=curves.precision,
         recall=curves.recall,
         pr_thresholds=curves.pr_thresholds,
