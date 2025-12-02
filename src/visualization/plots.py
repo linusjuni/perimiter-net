@@ -130,7 +130,7 @@ def plot_precision_recall_curve(precision, recall, save_path, positive_rate=None
     ax.set_xlabel("Recall", fontsize=12)
     ax.set_ylabel("Precision", fontsize=12)
     ax.set_title("Frame-Level Precision-Recall Curve", fontsize=14, fontweight="bold")
-    ax.legend(loc="lower left", fontsize=12, frameon=True)
+    ax.legend(loc="best", fontsize=12, frameon=True)
 
     plt.tight_layout()
     plt.savefig(save_path, dpi=150, bbox_inches="tight")
