@@ -43,6 +43,7 @@ def main():
     recall = data["recall"]
     confusion = data["confusion"]
     positive_rate = float(np.mean(data["labels"])) if "labels" in data.files else None
+    run_label = str(data["run_name"]) if "run_name" in data.files else results_dir.name
 
     # Load video results
     with open(results_dir / "video_results.pkl", "rb") as f:
@@ -50,21 +51,23 @@ def main():
 
     # Generate ROC curve
     logger.info("Plotting ROC curve...")
-    plot_roc_curve(fpr, tpr, frame_auc, plot_dir / "roc_curve.png")
+    plot_roc_curve(fpr, tpr, frame_auc, plot_dir / f"roc_curve_{run_label}.png")
 
     # Generate Precision-Recall curve
     logger.info("Plotting Precision-Recall curve...")
     plot_precision_recall_curve(
         precision,
         recall,
-        plot_dir / "precision_recall.png",
+        plot_dir / f"precision_recall_{run_label}.png",
         positive_rate=positive_rate,
     )
 
     # Generate confusion matrix
     logger.info("Plotting confusion matrix...")
     plot_confusion_matrix(
-        confusion, ["Normal", "Anomaly"], plot_dir / "confusion_matrix.png"
+        confusion,
+        ["Normal", "Anomaly"],
+        plot_dir / f"confusion_matrix_{run_label}.png",
     )
 
     # Generate best/worst videos

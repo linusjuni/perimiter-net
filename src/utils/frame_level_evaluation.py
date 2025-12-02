@@ -255,7 +255,7 @@ def evaluate_frame_level(
     transform,
     device,
     clip_len=16,
-    stride=16,
+    stride=8,
     sigma=5,
     decision_threshold=0.5,
 ) -> Tuple[FrameLevelMetrics, FrameLevelCurves, list, np.ndarray, np.ndarray]:
@@ -435,8 +435,9 @@ def save_frame_level_results(
 
     # Raw arrays for plotting/analysis
     confusion = np.array([[metrics.tn, metrics.fp], [metrics.fn, metrics.tp]])
+    raw_npz = results_dir / "raw_data.npz"
     np.savez(
-        results_dir / "raw_data.npz",
+        raw_npz,
         fpr=curves.fpr,
         tpr=curves.tpr,
         roc_thresholds=curves.roc_thresholds,
@@ -448,6 +449,8 @@ def save_frame_level_results(
         labels=labels,
         confusion=confusion,
         decision_threshold=metrics.decision_threshold,
+        run_name=run_name,
+        timestamp=timestamp,
     )
 
     # Video-level artifacts
