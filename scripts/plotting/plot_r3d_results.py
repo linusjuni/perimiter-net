@@ -41,6 +41,7 @@ def main():
     precision = data["precision"]
     recall = data["recall"]
     confusion = data["confusion"]
+    positive_rate = float(np.mean(data["labels"])) if "labels" in data.files else None
 
     # Load video results
     with open(results_dir / "video_results.pkl", "rb") as f:
@@ -52,7 +53,12 @@ def main():
 
     # Generate Precision-Recall curve
     logger.info("Plotting Precision-Recall curve...")
-    plot_precision_recall_curve(precision, recall, plot_dir / "precision_recall.png")
+    plot_precision_recall_curve(
+        precision,
+        recall,
+        plot_dir / "precision_recall.png",
+        positive_rate=positive_rate,
+    )
 
     # Generate confusion matrix
     logger.info("Plotting confusion matrix...")
