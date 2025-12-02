@@ -72,7 +72,7 @@ def main():
     run_name = checkpoint_path.parent.name
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
     #results_dir = results_base_dir / f"{run_name}_{timestamp}" # choose this
-    plot_dir = Path("results") # or this
+    results_dir = Path("results") # or this
     results_dir.mkdir(parents=True, exist_ok=True)
 
     logger.info("=" * 60)
