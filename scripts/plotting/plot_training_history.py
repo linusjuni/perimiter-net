@@ -35,10 +35,23 @@ def ensure_out_dir(run_dir: Path, run_name: str) -> Path:
 
 
 def plot_loss(df: pd.DataFrame, out_dir: Path):
+    if "epoch" not in df.columns:
+        return
+    data = df[["epoch", "train_loss"]].copy() if "train_loss" in df.columns else None
+    val_data = df[["epoch", "val_loss"]].copy() if "val_loss" in df.columns else None
+    if data is not None:
+        data = data.apply(pd.to_numeric, errors="coerce").dropna()
+    if val_data is not None:
+        val_data = val_data.apply(pd.to_numeric, errors="coerce").dropna()
+    if (data is None or data.empty) and (val_data is None or val_data.empty):
+        logger.warning("Skipping loss plot: no loss data found.")
+        return
+
     fig, ax = plt.subplots(figsize=(8, 5))
-    sns.lineplot(data=df, x="epoch", y="train_loss", label="Train Loss", ax=ax)
-    if "val_loss" in df.columns:
-        sns.lineplot(data=df, x="epoch", y="val_loss", label="Val Loss", ax=ax)
+    if data is not None and not data.empty:
+        sns.lineplot(data=data, x="epoch", y="train_loss", label="Train Loss", ax=ax)
+    if val_data is not None and not val_data.empty:
+        sns.lineplot(data=val_data, x="epoch", y="val_loss", label="Val Loss", ax=ax)
     ax.set_title("Loss vs Epoch")
     ax.set_xlabel("Epoch")
     ax.set_ylabel("Loss")
@@ -49,13 +62,23 @@ def plot_loss(df: pd.DataFrame, out_dir: Path):
 
 
 def plot_accuracy(df: pd.DataFrame, out_dir: Path):
-    if "train_acc" not in df.columns and "val_acc" not in df.columns:
+    if "epoch" not in df.columns:
         return
+    train_data = df[["epoch", "train_acc"]].copy() if "train_acc" in df.columns else None
+    val_data = df[["epoch", "val_acc"]].copy() if "val_acc" in df.columns else None
+    if train_data is not None:
+        train_data = train_data.apply(pd.to_numeric, errors="coerce").dropna()
+    if val_data is not None:
+        val_data = val_data.apply(pd.to_numeric, errors="coerce").dropna()
+    if (train_data is None or train_data.empty) and (val_data is None or val_data.empty):
+        logger.warning("Skipping accuracy plot: no accuracy data found.")
+        return
+
     fig, ax = plt.subplots(figsize=(8, 5))
-    if "train_acc" in df.columns:
-        sns.lineplot(data=df, x="epoch", y="train_acc", label="Train Acc", ax=ax)
-    if "val_acc" in df.columns:
-        sns.lineplot(data=df, x="epoch", y="val_acc", label="Val Acc", ax=ax)
+    if train_data is not None and not train_data.empty:
+        sns.lineplot(data=train_data, x="epoch", y="train_acc", label="Train Acc", ax=ax)
+    if val_data is not None and not val_data.empty:
+        sns.lineplot(data=val_data, x="epoch", y="val_acc", label="Val Acc", ax=ax)
     ax.set_title("Accuracy vs Epoch")
     ax.set_xlabel("Epoch")
     ax.set_ylabel("Accuracy (%)")
@@ -66,10 +89,15 @@ def plot_accuracy(df: pd.DataFrame, out_dir: Path):
 
 
 def plot_auc(df: pd.DataFrame, out_dir: Path):
-    if "val_auc" not in df.columns:
+    if "epoch" not in df.columns or "val_auc" not in df.columns:
+        return
+    data = df[["epoch", "val_auc"]].copy()
+    data = data.apply(pd.to_numeric, errors="coerce").dropna()
+    if data.empty:
+        logger.warning("Skipping AUC plot: no val_auc data found.")
         return
     fig, ax = plt.subplots(figsize=(8, 5))
-    sns.lineplot(data=df, x="epoch", y="val_auc", label="Val AUC", ax=ax)
+    sns.lineplot(data=data, x="epoch", y="val_auc", label="Val AUC", ax=ax)
     ax.set_title("Validation AUC vs Epoch")
     ax.set_xlabel("Epoch")
     ax.set_ylabel("AUC")
@@ -80,10 +108,15 @@ def plot_auc(df: pd.DataFrame, out_dir: Path):
 
 
 def plot_learning_rate(df: pd.DataFrame, out_dir: Path):
-    if "learning_rate" not in df.columns:
+    if "epoch" not in df.columns or "learning_rate" not in df.columns:
+        return
+    data = df[["epoch", "learning_rate"]].copy()
+    data = data.apply(pd.to_numeric, errors="coerce").dropna()
+    if data.empty:
+        logger.warning("Skipping learning rate plot: no learning_rate data found.")
         return
     fig, ax = plt.subplots(figsize=(8, 4))
-    sns.lineplot(data=df, x="epoch", y="learning_rate", label="Learning Rate", ax=ax)
+    sns.lineplot(data=data, x="epoch", y="learning_rate", label="Learning Rate", ax=ax)
     ax.set_title("Learning Rate Schedule")
     ax.set_xlabel("Epoch")
     ax.set_ylabel("LR")
