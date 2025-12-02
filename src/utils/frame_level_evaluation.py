@@ -255,7 +255,7 @@ def evaluate_frame_level(
     transform,
     device,
     clip_len=16,
-    stride=16,
+    stride=8,
     sigma=5,
     decision_threshold=0.5,
 ) -> Tuple[FrameLevelMetrics, FrameLevelCurves, list, np.ndarray, np.ndarray]:
