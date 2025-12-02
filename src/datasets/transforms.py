@@ -79,62 +79,65 @@ class RGBVideoTransform:
 
 class SobelMotionTransform:
     """
-    Computes Temporal and Spatial derivatives of motion on-the-fly.
-    
-    Logic:
-    1. Grayscale & Resize
-    2. Temporal Derivative (dt)
-    3. Spatial Derivatives of dt (dx, dy)
-    4. Stack [dx, dy, dt] -> (3, T, H, W)
+    Computes Smoothed Motion Gradients.
+    Guarantees 'Background Blindness' while suppressing compression noise.
+
+    Pipeline: Grayscale -> Blur -> Diff -> Sobel -> Stack
     """
+
     def __init__(self, mode="train", crop_size=112, resize_size=128):
         self.mode = mode
         self.crop_size = crop_size
         self.resize_size = resize_size
-        
+
         # Sobel Kernels (3x3)
-        self.sobel_x = torch.tensor([[-1., 0., 1.], [-2., 0., 2.], [-1., 0., 1.]]).view(1, 1, 3, 3)
-        self.sobel_y = torch.tensor([[-1., -2., -1.], [0., 0., 0.], [1., 2., 1.]]).view(1, 1, 3, 3)
+        self.sobel_x = torch.tensor(
+            [[-1.0, 0.0, 1.0], [-2.0, 0.0, 2.0], [-1.0, 0.0, 1.0]]
+        ).view(1, 1, 3, 3)
+        self.sobel_y = torch.tensor(
+            [[-1.0, -2.0, -1.0], [0.0, 0.0, 0.0], [1.0, 2.0, 1.0]]
+        ).view(1, 1, 3, 3)
+
+        # Gaussian Blur for noise reduction (suppresses compression artifacts)
+        self.blur = transforms.GaussianBlur(kernel_size=5, sigma=1.0)
 
     def __call__(self, frames):
         # 1. Convert to Tensor (T, H, W, C) -> (T, C, H, W)
         clip = torch.from_numpy(frames).float().permute(0, 3, 1, 2) / 255.0
-        
+
         # 2. Convert to Grayscale (Weighted method)
         gray = 0.299 * clip[:, 0:1] + 0.587 * clip[:, 1:2] + 0.114 * clip[:, 2:3]
 
         # 3. Spatial Resizing & Cropping (Internal)
-        # We do this BEFORE Sobel to save computation
         if self.mode == "train":
-            # Random Crop
             i, j, h, w = transforms.RandomResizedCrop.get_params(
                 gray[0], scale=(0.6, 1.0), ratio=(0.9, 1.1)
             )
             gray = F.resized_crop(gray, i, j, h, w, [self.crop_size, self.crop_size])
-            # Random Flip
-            if torch.rand(1) < 0.5: 
+            if torch.rand(1) < 0.5:
                 gray = F.hflip(gray)
         else:
-            # Deterministic Crop
-            gray = F.interpolate(gray, size=(self.resize_size, self.resize_size), mode='bilinear', align_corners=False)
+            gray = F.interpolate(
+                gray,
+                size=(self.resize_size, self.resize_size),
+                mode="bilinear",
+                align_corners=False,
+            )
             gray = F.center_crop(gray, [self.crop_size, self.crop_size])
 
-        # 4. Temporal Derivative (dt)
-        # Center zero-motion at 0.0 (Differences range -1 to 1)
-        # We perform [t] - [t-1]
-        dt = torch.zeros_like(gray)
-        dt[1:] = gray[1:] - gray[:-1]
-        
-        # 5. Spatial Derivatives (dx, dy)
-        # We apply Sobel to the *Difference* frame
-        # This highlights the EDGES of the moving object
+        # 4. Apply Gaussian Blur (reduces compression noise)
+        gray_smooth = self.blur(gray)
+
+        # 5. Temporal Derivative (dt) - computed on smoothed frames
+        dt = torch.zeros_like(gray_smooth)
+        dt[1:] = gray_smooth[1:] - gray_smooth[:-1]
+
+        # 6. Spatial Derivatives (dx, dy) - now operating on cleaner motion signal
         dx = FN.conv2d(dt, self.sobel_x, padding=1)
         dy = FN.conv2d(dt, self.sobel_y, padding=1)
 
-        # 6. Stack Channels: [dx, dy, dt]
-        # We take absolute value because R3D filters usually expect positive activation features
-        # and "moving left" vs "moving right" (negative vs positive) are both "motion".
-        motion_clip = torch.cat([torch.abs(dx), torch.abs(dy), torch.abs(dt)], dim=1) 
+        # 7. Stack Channels: [dx, dy, dt]
+        motion_clip = torch.cat([torch.abs(dx), torch.abs(dy), torch.abs(dt)], dim=1)
 
         # Output: (T, 3, H, W) -> Permute to (C, T, H, W) for R3D
         return motion_clip.permute(1, 0, 2, 3)
