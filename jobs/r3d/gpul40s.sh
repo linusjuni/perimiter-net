@@ -9,9 +9,10 @@
 #BSUB -o outputs/output_r3d_l40s_%J.out
 #BSUB -e outputs/output_r3d_l40s_%J.err
 
+cd ~/projects/perimiter-net
 mkdir -p outputs
 
-cd ~/projects/perimiter-net
 uv sync
 
 uv run python scripts/training/train_r3d.py
+# IMPORTANT: Update batch_size=128 in train_r3d.py before submitting

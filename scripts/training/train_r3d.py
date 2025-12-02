@@ -40,7 +40,7 @@ def main():
     num_classes = 2
     batch_size = 128
     num_workers = 4
-    num_epochs = 50
+    num_epochs = 20
     lr = 1e-5
     weight_decay = 1e-1
     patience = 10

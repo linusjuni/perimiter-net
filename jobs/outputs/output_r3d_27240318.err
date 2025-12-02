@@ -1,0 +1,15 @@
+Resolved 91 packages in 2ms
+Audited 86 packages in 20ms
+OSError: [Errno 122] Disk quota exceeded
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/zhome/77/2/187952/projects/perimiter-net/scripts/training/train_r3d.py", line 225, in <module>
+    main()
+  File "/zhome/77/2/187952/projects/perimiter-net/scripts/training/train_r3d.py", line 167, in main
+    history.update(
+  File "/zhome/77/2/187952/projects/perimiter-net/src/utils/training_utils.py", line 94, in update
+    with open(self.csv_path, "a", newline="") as f:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+OSError: [Errno 122] Disk quota exceeded
