@@ -1,0 +1,64 @@
+cpu_count: 32
+Found 1399 videos. Starting parallel extraction...
+Spawning 24 workers.
+Done!
+
+------------------------------------------------------------
+Sender: LSF System <lsfadmin@hpc.dtu.dk>
+Subject: Job 27246310: <extract_ucf_parallel> in cluster <dcc> Done
+
+Job <extract_ucf_parallel> was submitted from host <n-62-11-12> by user <s225224> in cluster <dcc> at Tue Dec  2 09:27:24 2025
+Job was executed on host(s) <24*n-62-12-1>, in queue <hpc>, as user <s225224> in cluster <dcc> at Tue Dec  2 09:27:25 2025
+</zhome/77/2/187952> was used as the home directory.
+</zhome/77/2/187952/projects/perimiter-net/jobs> was used as the working directory.
+Started at Tue Dec  2 09:27:25 2025
+Terminated at Tue Dec  2 10:06:18 2025
+Results reported at Tue Dec  2 10:06:18 2025
+
+Your job looked like:
+
+------------------------------------------------------------
+# LSBATCH: User input
+#!/bin/sh
+#BSUB -q hpc
+#BSUB -J extract_ucf_parallel
+#BSUB -n 24
+#BSUB -R "span[hosts=1]"
+#BSUB -R "rusage[mem=2GB]"
+#BSUB -W 04:00
+#BSUB -o outputs/extract_par_%J.out
+#BSUB -e outputs/extract_par_%J.err
+
+cd ~/projects/perimiter-net
+mkdir -p outputs
+
+# Load environment
+uv sync
+
+# Run the PARALLEL script
+uv run python scripts/scratch/ucf/create_splits.py
+------------------------------------------------------------
+
+Successfully completed.
+
+Resource usage summary:
+
+    CPU time :                                   38608.02 sec.
+    Max Memory :                                 5803 MB
+    Average Memory :                             4514.39 MB
+    Total Requested Memory :                     49152.00 MB
+    Delta Memory :                               43349.00 MB
+    Max Swap :                                   -
+    Max Processes :                              29
+    Max Threads :                                418
+    Run time :                                   2378 sec.
+    Turnaround time :                            2334 sec.
+
+The output (if any) is above this job summary.
+
+
+
+PS:
+
+Read file <outputs/extract_par_27246310.err> for stderr output of this job.
+

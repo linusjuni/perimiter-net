@@ -1,10 +1,14 @@
 from datetime import datetime
+import os
 from pathlib import Path
+import sys
 import torch
 from torch.utils.data import DataLoader
 from torch.optim import AdamW
 from torch.optim.lr_scheduler import CosineAnnealingLR
 from torch.amp import GradScaler
+
+sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 
 from src.datasets.ucf import UCFCrimeDataset
 from src.datasets.transforms import RGBVideoTransform
@@ -34,12 +38,12 @@ def main():
     checkpoint_dir.mkdir(parents=True, exist_ok=True)
 
     num_classes = 2
-    batch_size = 32
+    batch_size = 128
     num_workers = 4
-    num_epochs = 50
-    lr = 1e-4
-    weight_decay = 1e-2
-    patience = 5
+    num_epochs = 20
+    lr = 1e-5
+    weight_decay = 1e-1
+    patience = 10
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     clip_len = 16
 
@@ -96,13 +100,13 @@ def main():
     # --- Model ---
     logger.info("Instantiating model...")
     model = create_r3d_classifier(
-        num_classes=num_classes, pretrained=True, freeze_backbone=True, dropout=0.5
+        num_classes=num_classes, pretrained=True, freeze_backbone=False, dropout=0.7
     )
     model = model.to(device)
 
     # --- Optimizer, Scheduler, Loss ---
     optimizer = AdamW(model.parameters(), lr=lr, weight_decay=weight_decay)
-    scheduler = CosineAnnealingLR(optimizer, T_max=num_epochs)
+    scheduler = CosineAnnealingLR(optimizer, T_max=num_epochs, eta_min=1e-6)
 
     # Use Focal Loss with class weights
     alpha = torch.tensor([0.25, 0.75])
@@ -125,8 +129,15 @@ def main():
         start_epoch = checkpoint.get("epoch", 0)
         best_auc = checkpoint.get("best_auc", 0.0)
 
-    # --- Log Device ---
+    # --- Log Device and Environment ---
     logger.info(f"Training on device: {device}")
+    if torch.cuda.is_available():
+        logger.info(f"GPU Name: {torch.cuda.get_device_name(0)}")
+        logger.info(f"GPU Memory: {torch.cuda.get_device_properties(0).total_memory / 1e9:.2f} GB")
+        logger.info(f"Number of GPUs: {torch.cuda.device_count()}")
+        logger.info(f"CUDA Version: {torch.version.cuda}")
+        logger.info(f"cuDNN Version: {torch.backends.cudnn.version()}")
+        logger.info(f"PyTorch Version: {torch.__version__}")
 
     # --- Training Loop ---
     logger.info("Starting training loop...")
