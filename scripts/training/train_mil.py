@@ -17,7 +17,7 @@ from src.utils.logger import get_logger
 def parse_args():
     parser = argparse.ArgumentParser(description="Train MIL Detective")
     parser.add_argument("--feature_dir", type=str, required=True)
-    parser.add_argument("--output_dir", type=str, default="checkpoints/mil_run")
+    parser.add_argument("--output_dir", type=str, default="checkpoints/mil")
     parser.add_argument("--lr", type=float, default=1e-3)
     parser.add_argument("--weight_decay", type=float, default=0.005)
     parser.add_argument("--epochs", type=int, default=2000)
