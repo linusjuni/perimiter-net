@@ -6,3 +6,16 @@
 
 ### 🎯 Objective
 Achieve high-accuracy, real-time activity classification to enable context-aware threat alerting.
+
+## Train the 3D activity model (once data is present)
+
+Open `scripts/train_activity_classifier.py` and press “Run Python File” in your IDE. Adjust the constants at the top (data root, epochs, batch size, resize) if needed.
+
+Expected data layout under `--data-root`:
+```
+videos/*.mp4
+annotations/*.activities.yml
+splits/train.txt
+splits/val.txt
+splits/test.txt
+```
