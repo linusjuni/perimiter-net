@@ -76,38 +76,74 @@ class RGBVideoTransform:
         return clip
 
 
-class SpatialStreamTransform:
-    """Transforms for Two-Stream spatial pathway (RGB frames)."""
+class SobelMotionTransform:
+    """
+    Computes Temporal and Spatial derivatives of motion on-the-fly.
 
-    def __init__(self, mode="train", crop_size=224):
-        """
-        TODO: Implement for Two-Stream network.
-        - Similar to RGBVideoTransform but may use single frame or sparse sampling
-        - Standard 2D image augmentations
-        """
+    Logic:
+    1. Grayscale & Resize
+    2. Temporal Derivative (dt)
+    3. Spatial Derivatives of dt (dx, dy)
+    4. Stack [dx, dy, dt] -> (3, T, H, W)
+    """
+
+    def __init__(self, mode="train", crop_size=112, resize_size=128):
         self.mode = mode
         self.crop_size = crop_size
-        raise NotImplementedError("SpatialStreamTransform not yet implemented")
+        self.resize_size = resize_size
+
+        # Sobel Kernels (3x3)
+        self.sobel_x = torch.tensor(
+            [[-1.0, 0.0, 1.0], [-2.0, 0.0, 2.0], [-1.0, 0.0, 1.0]]
+        ).view(1, 1, 3, 3)
+        self.sobel_y = torch.tensor(
+            [[-1.0, -2.0, -1.0], [0.0, 0.0, 0.0], [1.0, 2.0, 1.0]]
+        ).view(1, 1, 3, 3)
 
     def __call__(self, frames):
-        raise NotImplementedError
+        # 1. Convert to Tensor (T, H, W, C) -> (T, C, H, W)
+        clip = torch.from_numpy(frames).float().permute(0, 3, 1, 2) / 255.0
 
+        # 2. Convert to Grayscale (Weighted method)
+        gray = 0.299 * clip[:, 0:1] + 0.587 * clip[:, 1:2] + 0.114 * clip[:, 2:3]
 
-class TemporalStreamTransform:
-    """Transforms for Two-Stream temporal pathway (optical flow)."""
+        # 3. Spatial Resizing & Cropping (Internal)
+        # We do this BEFORE Sobel to save computation
+        if self.mode == "train":
+            # Random Crop
+            i, j, h, w = transforms.RandomResizedCrop.get_params(
+                gray[0], scale=(0.6, 1.0), ratio=(0.9, 1.1)
+            )
+            gray = transforms.resized_crop(gray, i, j, h, w, [self.crop_size, self.crop_size])
+            # Random Flip
+            if torch.rand(1) < 0.5:
+                gray = transforms.hflip(gray)
+        else:
+            # Deterministic Crop
+            gray = F.interpolate(
+                gray,
+                size=(self.resize_size, self.resize_size),
+                mode="bilinear",
+                align_corners=False,
+            )
+            gray = transforms.center_crop(gray, [self.crop_size, self.crop_size])
 
-    def __init__(self, mode="train", crop_size=224, flow_frames=10):
-        """
-        TODO: Implement for Two-Stream network.
-        - Input: Optical flow computed from consecutive RGB frames
-        - Output: (2*flow_frames, H, W) stacked flow (x and y components)
-        - No ColorJitter (flow isn't RGB)
-        - Custom normalization for flow values (typically [-20, 20])
-        """
-        self.mode = mode
-        self.crop_size = crop_size
-        self.flow_frames = flow_frames
-        raise NotImplementedError("TemporalStreamTransform not yet implemented")
+        # 4. Temporal Derivative (dt)
+        # Center zero-motion at 0.0 (Differences range -1 to 1)
+        # We perform [t] - [t-1]
+        dt = torch.zeros_like(gray)
+        dt[1:] = gray[1:] - gray[:-1]
 
-    def __call__(self, flow_frames):
-        raise NotImplementedError
+        # 5. Spatial Derivatives (dx, dy)
+        # We apply Sobel to the *Difference* frame
+        # This highlights the EDGES of the moving object
+        dx = F.conv2d(dt, self.sobel_x, padding=1)
+        dy = F.conv2d(dt, self.sobel_y, padding=1)
+
+        # 6. Stack Channels: [dx, dy, dt]
+        # We take absolute value because R3D filters usually expect positive activation features
+        # and "moving left" vs "moving right" (negative vs positive) are both "motion".
+        motion_clip = torch.cat([torch.abs(dx), torch.abs(dy), torch.abs(dt)], dim=1)
+
+        # Output: (T, 3, H, W) -> Permute to (C, T, H, W) for R3D
+        return motion_clip.permute(1, 0, 2, 3)
