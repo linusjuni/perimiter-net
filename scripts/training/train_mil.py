@@ -16,7 +16,7 @@ from src.utils.mil_evaluation import evaluate_mil
 from src.utils.training_utils import (
     save_checkpoint,
     EarlyStopping,
-    TrainingHistory,
+    MILTrainingHistory,
 )
 from src.utils.logger import get_logger
 
@@ -82,7 +82,7 @@ def main():
 
     # Training utilities
     early_stopping = EarlyStopping(patience=patience, mode="max")
-    history = TrainingHistory(save_dir=checkpoint_dir)
+    history = MILTrainingHistory(save_dir=checkpoint_dir)
 
     logger.info(f"Model Parameters: {sum(p.numel() for p in model.parameters()):,}")
     logger.info(

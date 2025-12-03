@@ -110,6 +110,91 @@ class TrainingHistory:
         return best
 
 
+class MILTrainingHistory:
+    """Tracks and saves MIL training/validation metrics to CSV."""
+
+    def __init__(self, save_dir: Path):
+        self.save_dir = Path(save_dir)
+        self.save_dir.mkdir(parents=True, exist_ok=True)
+        self.csv_path = self.save_dir / "training_history.csv"
+        self.history = []
+
+        # MIL-specific headers
+        self.headers = [
+            "epoch",
+            "train_loss",
+            "train_rank_loss",
+            "train_sparsity_loss",
+            "train_smoothness_loss",
+            "val_loss",
+            "val_rank_loss",
+            "val_sparsity_loss",
+            "val_smoothness_loss",
+            "val_auc",
+            "learning_rate",
+            "timestamp",
+        ]
+
+        # Create CSV if it doesn't exist
+        if not self.csv_path.exists():
+            with open(self.csv_path, "w", newline="") as f:
+                writer = csv.writer(f)
+                writer.writerow(self.headers)
+            logger.info(f"Created MIL training history CSV at {self.csv_path}")
+
+    def update(
+        self,
+        epoch: int,
+        train_metrics: dict,
+        val_metrics,  # MILMetrics dataclass
+        learning_rate: float,
+    ):
+        """
+        Add new epoch results to history.
+
+        Args:
+            epoch: Current epoch number
+            train_metrics: Dict with keys: loss, rank_loss, sparsity_loss, smoothness_loss
+            val_metrics: MILMetrics dataclass from validation
+            learning_rate: Current learning rate
+        """
+        row = {
+            "epoch": epoch,
+            "train_loss": train_metrics["loss"],
+            "train_rank_loss": train_metrics["rank_loss"],
+            "train_sparsity_loss": train_metrics["sparsity_loss"],
+            "train_smoothness_loss": train_metrics["smoothness_loss"],
+            "val_loss": val_metrics.loss,
+            "val_rank_loss": val_metrics.rank_loss,
+            "val_sparsity_loss": val_metrics.sparsity_loss,
+            "val_smoothness_loss": val_metrics.smoothness_loss,
+            "val_auc": val_metrics.auc,
+            "learning_rate": learning_rate,
+            "timestamp": datetime.now().isoformat(),
+        }
+
+        self.history.append(row)
+
+        # Append to CSV
+        with open(self.csv_path, "a", newline="") as f:
+            writer = csv.DictWriter(f, fieldnames=self.headers)
+            writer.writerow(row)
+
+        logger.debug(f"Saved epoch {epoch} to MIL training history")
+
+    def get_best_epoch(self, metric: str = "val_auc") -> dict:
+        """Return the epoch with the best value for the given metric."""
+        if not self.history:
+            return None
+
+        if metric.startswith("val_loss"):
+            best = min(self.history, key=lambda x: x[metric])
+        else:
+            best = max(self.history, key=lambda x: x[metric])
+
+        return best
+
+
 def save_checkpoint(state, checkpoint_dir, filename="checkpoint.pth", is_best=False):
     """Save model checkpoint."""
     checkpoint_dir = Path(checkpoint_dir)
