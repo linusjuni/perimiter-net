@@ -22,7 +22,7 @@ sns.set_style("whitegrid")
 sns.set_palette("muted")
 
 BEST_LINE_COLOR = "gray"
-MAX_EPOCH = 300
+MAX_EPOCH = 180
 
 
 def _friendly_run_label(run_name: str) -> str:
@@ -140,21 +140,7 @@ def plot_comparison(histories: List[Tuple[str, pd.DataFrame]], out_dir: Path, ta
         x_min, x_max = ax.get_xlim()
         x_span = max(x_max - x_min, 1e-6)
         x_offset = 0.01 * x_span
-        for run, epoch in best_epochs.items():
-            ax.axvline(epoch, color=BEST_LINE_COLOR, linestyle="-", linewidth=1.1, alpha=0.9)
-            label = f"Best {_friendly_run_label(run)}"
-            ax.text(
-                epoch - x_offset,
-                y_pos,
-                label,
-                rotation=0,
-                va="top",
-                ha="right",
-                fontsize=10,
-                color=BEST_LINE_COLOR,
-                bbox=dict(facecolor="white", edgecolor="none", alpha=1, pad=0.2),
-                zorder=5,
-            )
+
 
     fig.tight_layout()
     out_path = out_dir / f"{tag}_comparison.png"
