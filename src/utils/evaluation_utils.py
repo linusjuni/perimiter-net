@@ -1,3 +1,4 @@
+import numpy as np
 import torch
 from sklearn.metrics import roc_auc_score
 
@@ -38,3 +39,28 @@ def compute_auc_safe(y_true, y_scores):
     except ValueError:
         # Only one class present
         return 0.5
+
+
+def compute_youdens_j(fpr, tpr, thresholds):
+    """
+    Compute Youden's J statistic (TPR - FPR) and return the best threshold.
+
+    Args:
+        fpr (array-like): False positive rates from roc_curve.
+        tpr (array-like): True positive rates from roc_curve.
+        thresholds (array-like): Thresholds corresponding to fpr/tpr.
+
+    Returns:
+        tuple: (best_threshold, best_j_score)
+    """
+    fpr = np.asarray(fpr)
+    tpr = np.asarray(tpr)
+    thresholds = np.asarray(thresholds)
+
+    if fpr.size == 0 or tpr.size == 0 or thresholds.size == 0:
+        return float("nan"), float("nan")
+
+    j_scores = tpr - fpr  # Youden's J
+    best_idx = int(np.argmax(j_scores))
+
+    return float(thresholds[best_idx]), float(j_scores[best_idx])
