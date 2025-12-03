@@ -238,25 +238,8 @@ def evaluate_segment_level(
             else:
                 video_auc = float("nan")
 
-            # Approximate frame positions for segments (even spacing across total frames)
-            total_frames = frame_start_idx + (num_clips - 1) * stride + clip_len
-            segment_frame_centers = np.linspace(
-                frame_start_idx,
-                total_frames,
-                num=segments,
-                endpoint=False,
-                dtype=np.float32,
-            )
-
             video_results.append(
-                (
-                    video_id,
-                    video_auc,
-                    seg_scores,
-                    segment_labels,
-                    segment_frame_centers,
-                    intervals,
-                )
+                (video_id, video_auc, seg_scores, segment_labels, intervals)
             )
 
             all_scores.extend(seg_scores.tolist())
@@ -413,13 +396,13 @@ def save_segment_level_results(
                     "video_auc": auc,
                     "intervals": intervals,
                 }
-                for vid, auc, _, _, _, intervals in video_results
+                for vid, auc, _, _, intervals in video_results
             ],
             f,
             indent=2,
         )
 
-    # Full per-video scores/labels/positions (for analysis/plots)
+    # Full per-video scores/labels (for analysis)
     np.save(results_dir / "video_results.npy", np.array(video_results, dtype=object))
 
     logger.info(f"Saved segment-level results to {results_dir}")

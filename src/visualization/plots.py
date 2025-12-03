@@ -26,18 +26,12 @@ def _downsample_xy(x, y, max_points=5000):
 
 
 def plot_video_timeline(
-    video_id,
-    x_values,
-    pred_scores,
-    gt_mask,
-    intervals,
-    save_path,
-    x_label="Frame Index",
+    video_id, frame_indices, pred_scores, gt_mask, intervals, save_path
 ):
-    """Plot anomaly/segment score timeline for a single video."""
+    """Plot anomaly score timeline for a single video."""
     fig, ax = plt.subplots(figsize=(15, 5))
 
-    x, y = _downsample_xy(x_values, pred_scores, max_points=8000)
+    x, y = _downsample_xy(frame_indices, pred_scores, max_points=8000)
 
     # Plot anomaly scores with seaborn color
     ax.plot(
@@ -48,28 +42,17 @@ def plot_video_timeline(
         color=sns.color_palette("muted")[0],
     )
 
-    # Highlight anomaly regions (intervals or binary mask)
-    if intervals:
-        for start, end in intervals:
-            ax.axvspan(
-                start,
-                end,
-                alpha=0.25,
-                color=sns.color_palette("muted")[3],
-                label="Ground Truth Anomaly",
-            )
-    elif gt_mask is not None and len(gt_mask) == len(x_values):
-        for i, val in enumerate(gt_mask):
-            if val == 1:
-                ax.axvspan(
-                    x_values[i],
-                    x_values[i] + 1,
-                    alpha=0.15,
-                    color=sns.color_palette("muted")[3],
-                    label="Anomalous Segment",
-                )
+    # Highlight anomaly regions
+    for start, end in intervals:
+        ax.axvspan(
+            start,
+            end,
+            alpha=0.25,
+            color=sns.color_palette("muted")[3],
+            label="Ground Truth Anomaly",
+        )
 
-    ax.set_xlabel(x_label, fontsize=12)
+    ax.set_xlabel("Frame Index", fontsize=12)
     ax.set_ylabel("Anomaly Score", fontsize=12)
     ax.set_title(f"{video_id}", fontsize=14, fontweight="bold")
     ax.set_ylim([0, 1])
@@ -85,8 +68,8 @@ def plot_video_timeline(
     logger.debug(f"Saved timeline: {save_path.name}")
 
 
-def plot_roc_curve(fpr, tpr, auc_score, save_path, title="Frame-Level ROC Curve"):
-    """Plot ROC or Segment ROC curve."""
+def plot_roc_curve(fpr, tpr, auc_score, save_path):
+    """Plot ROC curve."""
     fig, ax = plt.subplots(figsize=(8, 8))
 
     x, y = _downsample_xy(fpr, tpr, max_points=20000)
@@ -112,7 +95,7 @@ def plot_roc_curve(fpr, tpr, auc_score, save_path, title="Frame-Level ROC Curve"
 
     ax.set_xlabel("False Positive Rate", fontsize=12)
     ax.set_ylabel("True Positive Rate", fontsize=12)
-    ax.set_title(title, fontsize=14, fontweight="bold")
+    ax.set_title("Frame-Level ROC Curve", fontsize=14, fontweight="bold")
     ax.legend(loc="lower right", fontsize=12, frameon=True)
 
     plt.tight_layout()
@@ -121,9 +104,7 @@ def plot_roc_curve(fpr, tpr, auc_score, save_path, title="Frame-Level ROC Curve"
     logger.info(f"Saved ROC curve: {save_path}")
 
 
-def plot_precision_recall_curve(
-    precision, recall, save_path, positive_rate=None, title="Frame-Level Precision-Recall Curve"
-):
+def plot_precision_recall_curve(precision, recall, save_path, positive_rate=None):
     """Plot Precision-Recall curve."""
     fig, ax = plt.subplots(figsize=(8, 8))
 
@@ -196,7 +177,7 @@ def plot_confusion_matrix(cm, class_names, save_path, normalize=False, threshold
     logger.info(f"Saved confusion matrix: {save_path}")
 
 
-def plot_best_worst_videos(video_results, annotations, plot_dir, top_n=5, x_label="Frame Index"):
+def plot_best_worst_videos(video_results, annotations, plot_dir, top_n=5):
     """Plot timelines for best and worst performing videos."""
     plot_dir = Path(plot_dir)
 
@@ -213,7 +194,6 @@ def plot_best_worst_videos(video_results, annotations, plot_dir, top_n=5, x_labe
             labels,
             intervals,
             save_path=plot_dir / f"best_{i + 1}_{vid_id}.png",
-            x_label=x_label,
         )
 
     # Worst
@@ -227,7 +207,6 @@ def plot_best_worst_videos(video_results, annotations, plot_dir, top_n=5, x_labe
             labels,
             intervals,
             save_path=plot_dir / f"worst_{i + 1}_{vid_id}.png",
-            x_label=x_label,
         )
 
     logger.info(f"Saved {top_n * 2} video timelines")
