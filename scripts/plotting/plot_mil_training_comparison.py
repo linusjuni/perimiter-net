@@ -139,7 +139,7 @@ def plot_comparison(histories: List[Tuple[str, pd.DataFrame]], out_dir: Path, ta
                 )
 
         ax.grid(True, color="#e5e5e5", linewidth=0.8, alpha=0.8)
-        ax.legend(frameon=True, fontsize=9)
+        ax.legend(frameon=False, fontsize=9)
 
         y_min, y_top = ax.get_ylim()
         y_span = max(y_top - y_min, 1e-6)
