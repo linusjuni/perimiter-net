@@ -73,6 +73,26 @@ def main():
         val_split=val_split,
     )
 
+    # CHECKING FOR DATA LEAKAGE
+    # After creating train_loader and val_loader
+    train_normal_ids = set([Path(v).stem for v in train_loader.normal_videos])
+    train_anomaly_ids = set([Path(v).stem for v in train_loader.anomaly_videos])
+    val_normal_ids = set([Path(v).stem for v in val_loader.normal_videos])
+    val_anomaly_ids = set([Path(v).stem for v in val_loader.anomaly_videos])
+
+    # Check for overlaps
+    overlap_normal = train_normal_ids.intersection(val_normal_ids)
+    overlap_anomaly = train_anomaly_ids.intersection(val_anomaly_ids)
+
+    logger.warning(f"Overlapping Normal videos: {len(overlap_normal)}")
+    logger.warning(f"Overlapping Anomaly videos: {len(overlap_anomaly)}")
+    if overlap_normal or overlap_anomaly:
+        logger.error(f"DATA LEAKAGE DETECTED!")
+        logger.error(f"Normal overlap: {list(overlap_normal)[:5]}")
+        logger.error(f"Anomaly overlap: {list(overlap_anomaly)[:5]}")
+    # CHECKING END
+
+
     # Number of videos
     num_train_videos = len(train_loader.normal_videos) + len(
         train_loader.anomaly_videos
@@ -160,7 +180,7 @@ def main():
                     "val_metrics": val_metrics.to_dict(),
                 },
                 checkpoint_dir=checkpoint_dir,
-                filename=f"checkpoint_epoch_{epoch}.pth",
+                filename="checkpoint_epoch",
                 is_best=is_best,
             )
 
