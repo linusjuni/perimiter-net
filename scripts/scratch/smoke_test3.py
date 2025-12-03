@@ -7,7 +7,6 @@ import sys
 from pathlib import Path
 import numpy as np
 import matplotlib.pyplot as plt
-import torch
 import cv2
 
 sys.path.insert(0, str(Path(__file__).parent.parent.parent))
@@ -43,25 +42,29 @@ def visualize_motion_clip(clip_tensor, frame_paths, sample_idx=0, class_name="Un
     # Combined magnitude
     magnitude = np.sqrt(dx**2 + dy**2 + dt**2)
     # Normalize magnitude to [0, 1] for visualization
-    magnitude_norm = (magnitude - magnitude.min()) / (magnitude.max() - magnitude.min() + 1e-8)
+    magnitude_norm = (magnitude - magnitude.min()) / (
+        magnitude.max() - magnitude.min() + 1e-8
+    )
 
     # Resize motion magnitude to match original frame resolution
-    magnitude_fullres = cv2.resize(magnitude_norm, (orig_w, orig_h), interpolation=cv2.INTER_LINEAR)
+    magnitude_fullres = cv2.resize(
+        magnitude_norm, (orig_w, orig_h), interpolation=cv2.INTER_LINEAR
+    )
 
     # Brighten the original frame slightly
     brightened_frame = np.clip(orig_frame * 1.2, 0, 255).astype(np.uint8)
-    
+
     # Create figure with exact size of image (DPI = 100 for 1:1 pixel mapping)
     dpi = 100
     fig = plt.figure(figsize=(orig_w / dpi, orig_h / dpi), dpi=dpi)
-    ax = plt.Axes(fig, [0., 0., 1., 1.])
+    ax = plt.Axes(fig, [0.0, 0.0, 1.0, 1.0])
     ax.set_axis_off()
     fig.add_axes(ax)
-    
+
     # Plot overlay
     ax.imshow(brightened_frame)
     ax.imshow(magnitude_fullres, cmap="jet", alpha=0.6)
-    
+
     return fig
 
 
@@ -124,7 +127,7 @@ def main():
     test_indices = []
     anomaly_step = max(1, len(anomaly_indices) // (num_samples // 2 + 1))
     normal_step = max(1, len(normal_indices) // (num_samples // 2 + 1))
-    
+
     for i in range(num_samples):
         if i % 2 == 0 and len(anomaly_indices) > 0:
             # Add anomaly sample
@@ -148,19 +151,21 @@ def main():
 
         # Get class name from the frame path
         class_folder = Path(frame_paths[0]).parent.name
-        
+
         # Print statistics
         print_statistics(clip, label, class_folder)
 
         # Visualize
-        fig = visualize_motion_clip(clip, frame_paths, sample_idx=sample_num + 1, class_name=class_folder)
+        fig = visualize_motion_clip(
+            clip, frame_paths, sample_idx=sample_num + 1, class_name=class_folder
+        )
 
         # Save figure
         output_path = (
             Path(__file__).parent.parent.parent
             / f"motion_test_sample_{sample_num + 1}.png"
         )
-        fig.savefig(output_path, dpi=100, bbox_inches='tight', pad_inches=0)
+        fig.savefig(output_path, dpi=100, bbox_inches="tight", pad_inches=0)
         plt.close(fig)
         print(f"\nSaved visualization to: {output_path}")
 

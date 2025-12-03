@@ -136,7 +136,7 @@ def main():
         pickle.dump(video_results, f)
 
     logger.info(f"Results saved to: {results_dir}")
-    logger.info(f"Run plotting script to generate visualizations:")
+    logger.info("Run plotting script to generate visualizations:")
     logger.info(f"  python scripts/plotting/plot_frame_level.py {results_dir}")
 
 

@@ -1,208 +1,184 @@
-import os
-import torch
-import numpy as np
-from pathlib import Path
 import sys
+import torch
+from pathlib import Path
 from datetime import datetime
-from torch.optim import Adam
-from sklearn.metrics import roc_auc_score
-import random
+from torch.optim import AdamW
+from torch.optim.lr_scheduler import CosineAnnealingLR
 
 # Ensure src is in path
 sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 
 from src.models.mil import MILModel
+from src.datasets.mil import MILDataLoader
 from src.utils.losses import MILRankingLoss
+from src.utils.training import train_epoch_mil
+from src.utils.mil_evaluation import evaluate_mil
+from src.utils.training_utils import (
+    save_checkpoint,
+    EarlyStopping,
+    TrainingHistory,
+)
 from src.utils.logger import get_logger
+
+logger = get_logger(__name__)
+
 
 def main():
     # --- Configuration ---
-    # ONLY look at the Training folder. We will split this internally.
-    feature_dir_train_source = "/work3/s225224/ucf-crime/features/rgb/Train"
-    
+    feature_dir_train = "/work3/s225224/ucf-crime/features/rgb/Train"
+    feature_dir_val = "/work3/s225224/ucf-crime/features/rgb/Val"
     base_checkpoint_dir = "/work3/s225224/ucf-crime/checkpoints/mil"
-    
-    # Hyperparameters
-    input_dim = 512       
-    lr = 1e-3             
-    weight_decay = 0.005  
-    epochs = 2000         
-    batch_size = 60       
-    segments = 32         
-    val_split = 0.20      # 20% of training data used for validation
-    
-    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-    # ---------------------
 
-    logger = get_logger(__name__)
+    # Hyperparameters
+    input_dim = 512
+    lr = 1e-3
+    weight_decay = 0.005
+    epochs = 2000
+    batch_size = 30  # Videos per class (total batch = 60)
+    segments = 32
+    patience = 50  # Early stopping patience
+
+    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+
+    # --- Setup ---
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
     run_name = f"mil_rgb_{timestamp}"
-    save_dir = Path(base_checkpoint_dir) / run_name
-    save_dir.mkdir(parents=True, exist_ok=True)
+    checkpoint_dir = Path(base_checkpoint_dir) / run_name
+    checkpoint_dir.mkdir(parents=True, exist_ok=True)
 
-    logger.info(f"Starting MIL Training: {run_name}")
+    logger.info("=" * 80)
+    logger.info(f"MIL Training Run: {run_name}")
+    logger.info("=" * 80)
+    logger.info(f"Device: {device}")
+    if torch.cuda.is_available():
+        logger.info(f"GPU: {torch.cuda.get_device_name(0)}")
+        logger.info(f"CUDA Version: {torch.version.cuda}")
 
-    # --- 1. Data Preparation (Split Train/Val) ---
-    logger.info(f"Scanning features from: {feature_dir_train_source}")
-    
-    # Gather all files
-    all_files = list(Path(feature_dir_train_source).glob("*.npy"))
-    
-    # Separate Normal and Anomaly to stratify the split
-    normal_files = [f for f in all_files if "Normal" in f.name]
-    anomaly_files = [f for f in all_files if "Normal" not in f.name]
-    
-    # Shuffle
-    random.shuffle(normal_files)
-    random.shuffle(anomaly_files)
-    
-    # Split Normal
-    n_split = int(len(normal_files) * (1 - val_split))
-    train_norm_files = normal_files[:n_split]
-    val_norm_files = normal_files[n_split:]
-    
-    # Split Anomaly
-    a_split = int(len(anomaly_files) * (1 - val_split))
-    train_anom_files = anomaly_files[:a_split]
-    val_anom_files = anomaly_files[a_split:]
-    
-    logger.info(f"Data Split:")
-    logger.info(f"  Train: {len(train_norm_files)} Normal, {len(train_anom_files)} Anomaly")
-    logger.info(f"  Val:   {len(val_norm_files)} Normal, {len(val_anom_files)} Anomaly")
+    # --- Data Loading ---
+    logger.info("Loading datasets...")
+    train_loader = MILDataLoader(
+        feature_dir=feature_dir_train,
+        segments=segments,
+        shuffle=True,
+    )
+    val_loader = MILDataLoader(
+        feature_dir=feature_dir_val,
+        segments=segments,
+        shuffle=False,
+    )
 
-    # Initialize Loaders with specific file lists
-    train_loader = MILDataLoader(train_norm_files + train_anom_files, segments=segments)
-    val_loader = MILDataLoader(val_norm_files + val_anom_files, segments=segments)
-
-    # --- 2. Model & Loss ---
+    # --- Model Setup ---
+    logger.info("Initializing model...")
     model = MILModel(input_dim=input_dim).to(device)
-    optimizer = Adam(model.parameters(), lr=lr, weight_decay=weight_decay)
-    criterion = MILRankingLoss() 
+    criterion = MILRankingLoss()
 
-    # --- 3. Training Loop ---
-    best_val_auc = 0.0
-    
-    for epoch in range(epochs):
-        model.train()
-        
-        # Get Batch
-        norm_in, anom_in = train_loader.get_batch(batch_size)
-        norm_in, anom_in = norm_in.to(device), anom_in.to(device)
-        
-        # Forward
-        preds_norm = model(norm_in) 
-        preds_anom = model(anom_in) 
-        
-        # Loss
-        loss, loss_dict = criterion(preds_norm, preds_anom)
-        
-        # Backward
-        optimizer.zero_grad()
-        loss.backward()
-        optimizer.step()
-        
-        # Validation (every 50 epochs)
-        if (epoch + 1) % 50 == 0:
-            # Validate on Held-Out Training Data (Video-Level AUC)
-            val_auc = evaluate(model, val_loader, device)
-            
-            log_str = f"Epoch {epoch+1}: Loss {loss.item():.4f} (Rank {loss_dict['rank']:.4f}) | Val AUC: {val_auc:.4f}"
-            
-            # Save Best Model based on Validation AUC
-            if val_auc > best_val_auc:
-                best_val_auc = val_auc
-                torch.save(model.state_dict(), save_dir / "best_model.pth")
-                log_str += " [New Best]"
-            
-            logger.info(log_str)
-            
-            # Always save latest
-            torch.save(model.state_dict(), save_dir / "latest_model.pth")
+    # Optimizer and Scheduler (consistent with R3D)
+    optimizer = AdamW(
+        model.parameters(),
+        lr=lr,
+        weight_decay=weight_decay,
+    )
+    scheduler = CosineAnnealingLR(optimizer, T_max=epochs, eta_min=1e-6)
 
-    logger.info(f"MIL Training Complete. Best Val AUC: {best_val_auc:.4f}")
+    # Training utilities
+    early_stopping = EarlyStopping(patience=patience, mode="max")
+    history = TrainingHistory(save_dir=checkpoint_dir)
 
+    logger.info(f"Model Parameters: {sum(p.numel() for p in model.parameters()):,}")
+    logger.info(
+        f"Trainable Parameters: {sum(p.numel() for p in model.parameters() if p.requires_grad):,}"
+    )
 
-class MILDataLoader:
-    """
-    Custom loader that manages 'Bags' of videos.
-    Loads list of file paths into RAM.
-    """
-    def __init__(self, file_list, segments=32):
-        self.file_list = file_list
-        self.segments = segments
-        self.normal_videos = [] 
-        self.anomaly_videos = []
-        self._load_data()
-        
-    def _load_data(self):
-        # print(f"   Loading {len(self.file_list)} features into RAM...")
-        for f in self.file_list:
-            try:
-                feats = np.load(f)
-                if feats.shape[0] == 0: continue
-                
-                is_normal = "Normal" in f.name
-                
-                if is_normal:
-                    self.normal_videos.append(feats)
-                else:
-                    self.anomaly_videos.append(feats)
-            except Exception as e:
-                print(f"Error loading {f.name}: {e}")
+    # --- Training Loop ---
+    logger.info("=" * 80)
+    logger.info("Starting Training")
+    logger.info("=" * 80)
 
-    def interpolate(self, features):
-        """Compress T clips -> 32 segments."""
-        T = features.shape[0]
-        dim = features.shape[1]
-        
-        if T == self.segments: return features
-        
-        chunks = np.array_split(features, self.segments, axis=0)
-        interpolated = np.zeros((self.segments, dim), dtype=np.float32)
-        
-        for i, chunk in enumerate(chunks):
-            if chunk.shape[0] > 0:
-                interpolated[i] = np.mean(chunk, axis=0)
-            else:
-                interpolated[i] = np.zeros(dim)
-        return interpolated
+    best_auc = 0.0
+    start_epoch = 1
 
-    def get_batch(self, batch_size=60):
-        """Returns separate batches for Normal and Anomaly bags."""
-        half = batch_size // 2
-        
-        # Random Sampling with Replacement
-        idx_norm = np.random.randint(0, len(self.normal_videos), half)
-        idx_anom = np.random.randint(0, len(self.anomaly_videos), half)
-        
-        norm_batch = [self.interpolate(self.normal_videos[i]) for i in idx_norm]
-        anom_batch = [self.interpolate(self.anomaly_videos[i]) for i in idx_anom]
-        
-        return torch.tensor(np.array(norm_batch), dtype=torch.float32), \
-               torch.tensor(np.array(anom_batch), dtype=torch.float32)
+    for epoch in range(start_epoch, epochs + 1):
+        current_lr = optimizer.param_groups[0]["lr"]
 
-def evaluate(model, loader, device):
-    """Evaluate Video-Level AUC on the provided loader."""
-    model.eval()
-    preds, labels = [], []
-    with torch.no_grad():
-        # Evaluate Anomaly Videos (Label 1)
-        for feats in loader.anomaly_videos:
-            inp = torch.tensor(loader.interpolate(feats)).unsqueeze(0).to(device)
-            # Video Score = Max score of any segment in the video
-            score = torch.max(model(inp)).item()
-            preds.append(score)
-            labels.append(1)
-            
-        # Evaluate Normal Videos (Label 0)
-        for feats in loader.normal_videos:
-            inp = torch.tensor(loader.interpolate(feats)).unsqueeze(0).to(device)
-            score = torch.max(model(inp)).item()
-            preds.append(score)
-            labels.append(0)
-            
-    if len(labels) == 0: return 0.5
-    return roc_auc_score(labels, preds)
+        # Train
+        train_metrics = train_epoch_mil(
+            model=model,
+            loader=train_loader,
+            criterion=criterion,
+            optimizer=optimizer,
+            device=device,
+            epoch=epoch,
+            batch_size=batch_size,
+        )
+
+        # Validate (every 10 epochs to save time)
+        if epoch % 10 == 0 or epoch == 1:
+            val_metrics = evaluate_mil(
+                model=model,
+                loader=val_loader,
+                criterion=criterion,
+                device=device,
+                split="val",
+            )
+
+            # Update history (convert MILMetrics to dict-like structure)
+            history.update(
+                epoch=epoch,
+                train_loss=train_metrics["loss"],
+                train_acc=0.0,  # MIL doesn't use accuracy
+                val_metrics={
+                    "val_loss": val_metrics.loss,
+                    "val_auc": val_metrics.auc,
+                    "val_rank_loss": val_metrics.rank_loss,
+                    "val_sparsity_loss": val_metrics.sparsity_loss,
+                    "val_smoothness_loss": val_metrics.smoothness_loss,
+                },
+                learning_rate=current_lr,
+            )
+
+            # Save checkpoint
+            is_best = val_metrics.auc > best_auc
+            if is_best:
+                best_auc = val_metrics.auc
+                logger.info(f"🎯 New Best AUC: {best_auc:.4f}")
+
+            save_checkpoint(
+                state={
+                    "epoch": epoch,
+                    "model_state_dict": model.state_dict(),
+                    "optimizer_state_dict": optimizer.state_dict(),
+                    "scheduler_state_dict": scheduler.state_dict(),
+                    "best_auc": best_auc,
+                    "train_metrics": train_metrics,
+                    "val_metrics": val_metrics.to_dict(),
+                },
+                checkpoint_dir=checkpoint_dir,
+                filename=f"checkpoint_epoch_{epoch}.pth",
+                is_best=is_best,
+            )
+
+            # Early stopping
+            early_stopping(val_metrics.auc)
+            if early_stopping.early_stop:
+                logger.info(f"Early stopping triggered at epoch {epoch}")
+                break
+
+        # Step scheduler
+        scheduler.step()
+
+    # --- Training Complete ---
+    logger.info("=" * 80)
+    logger.info("Training Complete")
+    logger.info("=" * 80)
+    logger.info(f"Best Validation AUC: {best_auc:.4f}")
+    logger.info(f"Checkpoints saved to: {checkpoint_dir}")
+
+    # Get best epoch info
+    best_epoch_info = history.get_best_epoch(metric="val_auc")
+    if best_epoch_info:
+        logger.info(f"Best epoch: {best_epoch_info['epoch']}")
+        logger.info(f"Best metrics: {best_epoch_info}")
+
 
 if __name__ == "__main__":
     main()

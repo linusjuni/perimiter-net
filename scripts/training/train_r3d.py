@@ -1,5 +1,4 @@
 from datetime import datetime
-import os
 from pathlib import Path
 import sys
 import torch
@@ -133,7 +132,9 @@ def main():
     logger.info(f"Training on device: {device}")
     if torch.cuda.is_available():
         logger.info(f"GPU Name: {torch.cuda.get_device_name(0)}")
-        logger.info(f"GPU Memory: {torch.cuda.get_device_properties(0).total_memory / 1e9:.2f} GB")
+        logger.info(
+            f"GPU Memory: {torch.cuda.get_device_properties(0).total_memory / 1e9:.2f} GB"
+        )
         logger.info(f"Number of GPUs: {torch.cuda.device_count()}")
         logger.info(f"CUDA Version: {torch.version.cuda}")
         logger.info(f"cuDNN Version: {torch.backends.cudnn.version()}")

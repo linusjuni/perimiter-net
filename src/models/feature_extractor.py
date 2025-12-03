@@ -1,31 +1,32 @@
 import torch
-import torch.nn as nn
 from src.models.r3d import create_r3d_classifier
+
 
 class FeatureExtractor:
     """
     Wraps an R3D model to extract 512D features from the backbone.
     Removes the classification head to extract pre-logit features.
     """
-    def __init__(self, checkpoint_path, num_classes=2, device='cuda'):
+
+    def __init__(self, checkpoint_path, num_classes=2, device="cuda"):
         self.device = device
-        
+
         # Load trained R3D model
         print(f"Loading model from {checkpoint_path}...")
         self.wrapper = create_r3d_classifier(num_classes=num_classes, pretrained=False)
-        
+
         # Load checkpoint weights
-        checkpoint = torch.load(checkpoint_path, map_location='cpu')
-        state_dict = checkpoint.get('model_state_dict', checkpoint)
-        
+        checkpoint = torch.load(checkpoint_path, map_location="cpu")
+        state_dict = checkpoint.get("model_state_dict", checkpoint)
+
         # Handle DataParallel 'module.' prefix
-        clean_state_dict = {k.replace('module.', ''): v for k, v in state_dict.items()}
+        clean_state_dict = {k.replace("module.", ""): v for k, v in state_dict.items()}
         self.wrapper.load_state_dict(clean_state_dict, strict=True)
-        
+
         # Access the actual R3D model and remove FC layer
         self.model = self.wrapper.model
         self.model.fc = None
-        
+
         self.wrapper.to(self.device)
         self.wrapper.eval()
         print("✓ Model loaded successfully")
@@ -45,10 +46,10 @@ class FeatureExtractor:
     def extract(self, clip_tensor):
         """
         Extract features from video clips.
-        
+
         Args:
             clip_tensor (torch.Tensor): Shape (B, 3, 16, H, W)
-        
+
         Returns:
             numpy.ndarray: Shape (B, 512)
         """

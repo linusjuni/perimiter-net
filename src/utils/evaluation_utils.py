@@ -35,6 +35,6 @@ def compute_auc_safe(y_true, y_scores):
         # Convert to binary if needed
         binary_labels = (y_true > 0).astype(int) if y_true.max() > 1 else y_true
         return roc_auc_score(binary_labels, y_scores)
-    except ValueError as e:
+    except ValueError:
         # Only one class present
         return 0.5
