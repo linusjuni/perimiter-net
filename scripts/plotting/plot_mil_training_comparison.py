@@ -98,13 +98,13 @@ def plot_comparison(histories: List[Tuple[str, pd.DataFrame]], out_dir: Path, ta
     y_min, y_max = ax.get_ylim()
     for best_epoch, color, label in best_epochs:
         ax.axvline(best_epoch, color=color, linestyle=":", linewidth=2, alpha=0.8)
-        ax.text(best_epoch + 0.5, y_max * 0.95, f"Best {label}",
+        ax.text(best_epoch + 1, y_max * 0.95, f"Best {label}",
                 rotation=90, va="top", ha="left", fontsize=12, color=color)
 
     ax.set_title("Training vs Validation Loss", fontsize=14)
     ax.set_xlabel("Epoch", fontsize=12)
     ax.set_ylabel("Loss", fontsize=12)
-    ax.legend(loc="upper right", framealpha=0.9)
+    ax.legend(loc="upper right", framealpha=0.9, fontsize=12)
 
     fig.tight_layout()
     out_path = out_dir / f"{tag}_comparison.png"
