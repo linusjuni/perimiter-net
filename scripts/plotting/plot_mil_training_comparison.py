@@ -21,6 +21,8 @@ logger = get_logger(__name__)
 sns.set_style("whitegrid")
 sns.set_palette("muted")
 
+BEST_LINE_COLOR = "red"
+
 
 def load_history(run_dir: Path) -> pd.DataFrame:
     csv_path = run_dir / "training_history.csv"
@@ -108,9 +110,19 @@ def plot_comparison(histories: List[Tuple[str, pd.DataFrame]], out_dir: Path, ta
         axes[0].set_xlabel("Epoch")
         axes[0].set_ylabel("Loss")
         axes[0].xaxis.set_major_locator(MaxNLocator(integer=True))
+        y_top = axes[0].get_ylim()[1]
         for run, epoch in best_epochs.items():
-            color = palette.get(run, "gray")
-            axes[0].axvline(epoch, color=color, linestyle="--", linewidth=1.1, alpha=0.8)
+            axes[0].axvline(epoch, color=BEST_LINE_COLOR, linestyle="--", linewidth=1.1, alpha=0.9)
+            axes[0].text(
+                epoch,
+                y_top,
+                f"best {run}",
+                rotation=90,
+                va="top",
+                ha="right",
+                fontsize=8.5,
+                color=BEST_LINE_COLOR,
+            )
     else:
         axes[0].set_visible(False)
 
