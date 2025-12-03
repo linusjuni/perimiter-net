@@ -1,14 +1,12 @@
 import argparse
 from pathlib import Path
-from typing import Dict, List, Tuple
+from typing import List, Tuple
 
 import matplotlib
 
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 import pandas as pd
-import seaborn as sns
-from matplotlib.ticker import MaxNLocator
 
 import sys
 
@@ -17,21 +15,6 @@ sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 from src.utils.logger import get_logger
 
 logger = get_logger(__name__)
-
-sns.set_style("white")
-sns.set_palette("muted")
-
-BEST_LINE_COLOR = "gray"
-MAX_EPOCH = 300
-
-
-def _friendly_run_label(run_name: str) -> str:
-    lower = run_name.lower()
-    if "rgb" in lower:
-        return "MIL RGB"
-    if "motion" in lower:
-        return "MIL Motion"
-    return run_name
 
 
 def load_history(run_dir: Path) -> pd.DataFrame:
@@ -51,120 +34,44 @@ def ensure_out_dir(tag: str) -> Path:
     return out_dir
 
 
-def build_loss_frame(histories: List[Tuple[str, pd.DataFrame]]) -> pd.DataFrame:
-    rows = []
-    for run_name, df in histories:
-        if "epoch" not in df.columns:
-            continue
-        run_label = _friendly_run_label(run_name)
-        for split, col in (("Train", "train_loss"), ("Val", "val_loss")):
-            if col not in df.columns:
-                continue
-            data = df[["epoch", col]].apply(pd.to_numeric, errors="coerce").dropna()
-            data = data[data["epoch"] <= MAX_EPOCH]
-            data = data.rename(columns={col: "value"})
-            data["split"] = split
-            data["run"] = run_name
-            data["run_label"] = run_label
-            rows.append(data)
-    if not rows:
-        return pd.DataFrame()
-    return pd.concat(rows, ignore_index=True)
-
-
-def build_auc_frame(histories: List[Tuple[str, pd.DataFrame]]) -> pd.DataFrame:
-    rows = []
-    for run_name, df in histories:
-        if "epoch" not in df.columns or "val_auc" not in df.columns:
-            continue
-        data = df[["epoch", "val_auc"]].apply(pd.to_numeric, errors="coerce").dropna()
-        data = data[data["epoch"] <= MAX_EPOCH]
-        data = data.rename(columns={"val_auc": "value"})
-        data["run"] = run_name
-        rows.append(data)
-    if not rows:
-        return pd.DataFrame()
-    return pd.concat(rows, ignore_index=True)
-
-
-def best_val_loss_epochs(histories: List[Tuple[str, pd.DataFrame]]) -> Dict[str, float]:
-    best_epochs: Dict[str, float] = {}
-    for run_name, df in histories:
-        if "epoch" not in df.columns or "val_loss" not in df.columns:
-            continue
-        val_df = df[["epoch", "val_loss"]].apply(pd.to_numeric, errors="coerce").dropna()
-        if val_df.empty:
-            continue
-        min_idx = val_df["val_loss"].idxmin()
-        best_epochs[run_name] = float(val_df.loc[min_idx, "epoch"])
-    return best_epochs
-
-
 def plot_comparison(histories: List[Tuple[str, pd.DataFrame]], out_dir: Path, tag: str):
-    loss_df = build_loss_frame(histories)
-    best_epochs = best_val_loss_epochs(histories)
-
-    if loss_df.empty:
-        logger.error("No comparable metrics found across runs.")
+    if not histories:
+        logger.error("No histories to plot.")
         return
 
-    run_names = [name for name, _ in histories]
-    run_labels = sorted({_friendly_run_label(name) for name in run_names})
-    palette_colors = sns.color_palette("muted", n_colors=len(run_labels))
-    run_palette = {label: color for label, color in zip(run_labels, palette_colors)}
+    # Use a clean color palette
+    colors = plt.cm.tab10.colors
+    
+    fig, ax = plt.subplots(figsize=(10, 6))
 
-    fig, ax = plt.subplots(figsize=(8, 5))
+    for i, (run_name, df) in enumerate(histories):
+        if "epoch" not in df.columns:
+            continue
+        
+        color = colors[i % len(colors)]
+        epochs = df["epoch"].values
+        
+        # Plot train loss (dashed)
+        if "train_loss" in df.columns:
+            ax.plot(epochs, df["train_loss"].values, 
+                    linestyle="--", color=color, linewidth=2,
+                    label=f"{run_name} (train)")
+        
+        # Plot val loss (solid)
+        if "val_loss" in df.columns:
+            ax.plot(epochs, df["val_loss"].values, 
+                    linestyle="-", color=color, linewidth=2,
+                    label=f"{run_name} (val)")
 
-    # Loss subplot
-    if not loss_df.empty:
-        ax.set_title("Training vs Validation Loss")
-        ax.set_xlabel("Epoch")
-        ax.set_ylabel("Loss")
-        ax.xaxis.set_major_locator(MaxNLocator(integer=True))
-        ax.set_xlim(0, MAX_EPOCH)
-
-        for run_label in run_labels:
-            color = run_palette.get(run_label)
-            for split, style in (("Train", "-"), ("Val", "--")):
-                data = loss_df[(loss_df["run_label"] == run_label) & (loss_df["split"] == split)]
-                if data.empty:
-                    continue
-                ax.plot(
-                    data["epoch"],
-                    data["value"],
-                    label=f"{run_label} ({split.lower()})",
-                    color=color,
-                    linestyle=style,
-                    linewidth=1.6,
-                )
-
-        ax.grid(True, color="#e5e5e5", linewidth=0.8, alpha=0.8)
-        ax.legend(frameon=False, fontsize=9)
-        for spine in ax.spines.values():
-            spine.set_visible(False)
-
-        y_min, y_top = ax.get_ylim()
-        y_span = max(y_top - y_min, 1e-6)
-        y_pos = y_top - 0.02 * y_span
-        x_min, x_max = ax.get_xlim()
-        x_span = max(x_max - x_min, 1e-6)
-        x_offset = 0.01 * x_span
-        for run, epoch in best_epochs.items():
-            ax.axvline(epoch, color=BEST_LINE_COLOR, linestyle="-", linewidth=1.1, alpha=0.9)
-            label = f"Best {_friendly_run_label(run)}"
-            ax.text(
-                epoch - x_offset,
-                y_pos,
-                label,
-                rotation=0,
-                va="top",
-                ha="right",
-                fontsize=8.5,
-                color=BEST_LINE_COLOR,
-                bbox=dict(facecolor="white", edgecolor="none", alpha=0.8, pad=0.2),
-                zorder=5,
-            )
-
+    ax.set_title("Training vs Validation Loss", fontsize=14)
+    ax.set_xlabel("Epoch", fontsize=12)
+    ax.set_ylabel("Loss", fontsize=12)
+    ax.legend(loc="upper right", framealpha=0.9)
+    ax.grid(False)
+    
+    # Clean up spines
+    ax.spines["top"].set_visible(False)
+    ax.spines["right"].set_visible(False)
 
     fig.tight_layout()
     out_path = out_dir / f"{tag}_comparison.png"
@@ -175,45 +82,40 @@ def plot_comparison(histories: List[Tuple[str, pd.DataFrame]], out_dir: Path, ta
 
 def parse_args():
     parser = argparse.ArgumentParser(
-        description="Compare MIL training histories from multiple run directories in a single plot."
+        description="Compare training histories from multiple run directories."
     )
     parser.add_argument(
-        "run_dirs", nargs="+", type=Path, help="Paths to run directories containing training_history.csv"
+        "run_dirs", nargs="+", type=Path, 
+        help="Paths to run directories containing training_history.csv"
     )
     parser.add_argument(
-        "--tag",
-        type=str,
-        default=None,
-        help="Optional tag for output folder/file name (defaults to run names joined).",
+        "--tag", type=str, default=None,
+        help="Optional tag for output folder/file name."
+    )
+    parser.add_argument(
+        "--title", type=str, default="Training vs Validation Loss",
+        help="Plot title."
     )
     return parser.parse_args()
 
 
 def main():
     args = parse_args()
-    run_dirs: List[Path] = args.run_dirs
-    tag = args.tag
 
     histories: List[Tuple[str, pd.DataFrame]] = []
-    missing = []
-    for run_dir in run_dirs:
+    for run_dir in args.run_dirs:
         try:
             df = load_history(run_dir)
             histories.append((run_dir.name, df))
         except FileNotFoundError:
-            missing.append(str(run_dir))
+            logger.warning(f"Skipped: {run_dir}")
 
-    if missing:
-        logger.warning(f"Skipped missing histories: {missing}")
     if not histories:
         logger.error("No valid training histories to plot.")
         sys.exit(1)
 
-    if tag is None:
-        tag = "__".join([name for name, _ in histories])
-
+    tag = args.tag or "__".join([name for name, _ in histories])
     out_dir = ensure_out_dir(tag)
-    logger.info(f"Saving comparison plots to: {out_dir}")
     plot_comparison(histories, out_dir, tag)
 
 
