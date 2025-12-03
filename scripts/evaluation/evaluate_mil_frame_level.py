@@ -1,6 +1,6 @@
 import sys
 from pathlib import Path
-from typing import Dict, List, Tuple
+from typing import Dict, List, Optional, Tuple
 
 import numpy as np
 import torch
@@ -15,6 +15,30 @@ from src.utils.training_utils import load_checkpoint
 from src.utils.logger import get_logger
 
 logger = get_logger(__name__)
+
+
+def resolve_checkpoint(path: Path) -> Optional[Path]:
+    """
+    Resolve a checkpoint path that may be a file or a run directory.
+
+    Checks, in order:
+    1) path itself if it is a file
+    2) path / best_model.pth
+    3) latest checkpoint_epoch_*.pth inside the directory
+    """
+    if path.is_file():
+        return path
+
+    if path.is_dir():
+        best = path / "best_model.pth"
+        if best.exists():
+            return best
+
+        epoch_ckpts = sorted(path.glob("checkpoint_epoch_*.pth"))
+        if epoch_ckpts:
+            return epoch_ckpts[-1]
+
+    return None
 
 
 def load_temporal_annotations(annotation_path: Path) -> Dict[str, List[Tuple[int, int]]]:
@@ -95,7 +119,10 @@ def run_inference(
 def main():
     # ---------------- Configuration ---------------- #
     feature_dir = Path("/work3/s225224/ucf-crime/features/rgb/Test")
-    checkpoint_path = Path("/work3/s225224/ucf-crime/checkpoints/mil")
+    # Points either to a specific .pth file or to a run directory containing best_model.pth
+    checkpoint_path = Path(
+        "/work3/s225224/ucf-crime/checkpoints/mil/mil_rgb_20251203_162251"
+    )
     annotation_file = Path(
         "/work3/s225224/ucf-crime/data/Temporal_Anomaly_Annotation_for_Testing_Videos.txt"
     )
@@ -120,9 +147,14 @@ def main():
         logger.error(f"Feature directory not found: {feature_dir}")
         return
 
-    if not checkpoint_path.exists():
-        logger.error(f"Checkpoint not found: {checkpoint_path}")
+    resolved_checkpoint = resolve_checkpoint(checkpoint_path)
+    if resolved_checkpoint is None:
+        logger.error(
+            f"No checkpoint file found at {checkpoint_path} "
+            "(tried path, best_model.pth, checkpoint_epoch_*.pth)"
+        )
         return
+    logger.info(f"Using checkpoint file: {resolved_checkpoint}")
 
     feature_paths = sorted(feature_dir.glob("*.npy"))
     if not feature_paths:
@@ -134,7 +166,7 @@ def main():
 
     # Load model + checkpoint
     model = MILModel(input_dim=input_dim).to(device)
-    load_checkpoint(checkpoint_path, model, device=device)
+    load_checkpoint(resolved_checkpoint, model, device=device)
 
     all_scores: List[np.ndarray] = []
     all_labels: List[np.ndarray] = []
