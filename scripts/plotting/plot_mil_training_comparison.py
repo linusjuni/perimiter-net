@@ -27,6 +27,18 @@ def clean_run_name(run_name: str) -> str:
     return cleaned
 
 
+def friendly_label(run_name: str) -> str:
+    """Convert run name to friendly label like 'MIL RGB' or 'MIL Motion'."""
+    cleaned = clean_run_name(run_name).lower()
+    if "rgb" in cleaned:
+        return "MIL RGB"
+    if "motion" in cleaned:
+        return "MIL Motion"
+    # Fallback: capitalize words
+    return " ".join(word.upper() if word in ("mil", "rgb") else word.capitalize() 
+                    for word in cleaned.replace("_", " ").split())
+
+
 def load_history(run_dir: Path) -> pd.DataFrame:
     csv_path = run_dir / "training_history.csv"
     if not csv_path.exists():
@@ -53,6 +65,8 @@ def plot_comparison(histories: List[Tuple[str, pd.DataFrame]], out_dir: Path, ta
     colors = plt.cm.tab10.colors
     
     fig, ax = plt.subplots(figsize=(10, 6))
+    
+    best_epochs = []  # Store (epoch, color, label) for vertical lines
 
     for i, (run_name, df) in enumerate(histories):
         if "epoch" not in df.columns:
@@ -60,19 +74,32 @@ def plot_comparison(histories: List[Tuple[str, pd.DataFrame]], out_dir: Path, ta
         
         color = colors[i % len(colors)]
         epochs = df["epoch"].values
-        label = clean_run_name(run_name)
+        label = friendly_label(run_name)
         
         # Plot train loss (dashed)
         if "train_loss" in df.columns:
             ax.plot(epochs, df["train_loss"].values, 
                     linestyle="--", color=color, linewidth=2,
-                    label=f"{label} (train)")
+                    label=f"{label} (Train)")
         
         # Plot val loss (solid)
         if "val_loss" in df.columns:
-            ax.plot(epochs, df["val_loss"].values, 
+            val_loss = df["val_loss"].values
+            ax.plot(epochs, val_loss, 
                     linestyle="-", color=color, linewidth=2,
-                    label=f"{label} (val)")
+                    label=f"{label} (Val)")
+            
+            # Find best epoch (lowest val loss)
+            best_idx = val_loss.argmin()
+            best_epoch = epochs[best_idx]
+            best_epochs.append((best_epoch, color, label))
+    
+    # Add vertical lines for best epochs
+    y_min, y_max = ax.get_ylim()
+    for best_epoch, color, label in best_epochs:
+        ax.axvline(best_epoch, color=color, linestyle=":", linewidth=1.5, alpha=0.8)
+        ax.text(best_epoch + 0.5, y_max * 0.95, f"Best {label}",
+                rotation=90, va="top", ha="left", fontsize=9, color=color)
 
     ax.set_title("Training vs Validation Loss", fontsize=14)
     ax.set_xlabel("Epoch", fontsize=12)
