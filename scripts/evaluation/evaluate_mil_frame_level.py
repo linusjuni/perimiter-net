@@ -95,7 +95,7 @@ def run_inference(
 def main():
     # ---------------- Configuration ---------------- #
     feature_dir = Path("/work3/s225224/ucf-crime/features/rgb/Test")
-    checkpoint_path = Path("/work3/s225224/ucf-crime/checkpoints/mil/mil_model.pth")
+    checkpoint_path = Path("/work3/s225224/ucf-crime/checkpoints/mil")
     annotation_file = Path(
         "/work3/s225224/ucf-crime/data/Temporal_Anomaly_Annotation_for_Testing_Videos.txt"
     )
@@ -118,6 +118,10 @@ def main():
 
     if not feature_dir.exists():
         logger.error(f"Feature directory not found: {feature_dir}")
+        return
+
+    if not checkpoint_path.exists():
+        logger.error(f"Checkpoint not found: {checkpoint_path}")
         return
 
     feature_paths = sorted(feature_dir.glob("*.npy"))
