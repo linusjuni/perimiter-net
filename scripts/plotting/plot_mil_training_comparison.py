@@ -22,7 +22,7 @@ sns.set_style("whitegrid")
 sns.set_palette("muted")
 
 BEST_LINE_COLOR = "gray"
-MAX_EPOCH = 180
+MAX_EPOCH = 100
 
 
 def _friendly_run_label(run_name: str) -> str:
@@ -65,7 +65,7 @@ def build_loss_frame(histories: List[Tuple[str, pd.DataFrame]]) -> pd.DataFrame:
             data = data.rename(columns={col: "value"})
             data["split"] = split
             data["run"] = run_name
-            data["line_label"] = f"{run_label} {split}"
+            data["run_label"] = run_label
             rows.append(data)
     if not rows:
         return pd.DataFrame()
@@ -109,12 +109,9 @@ def plot_comparison(histories: List[Tuple[str, pd.DataFrame]], out_dir: Path, ta
         return
 
     run_names = [name for name, _ in histories]
-    palette_colors = sns.color_palette("muted", n_colors=len(run_names))
-    run_palette = {run: color for run, color in zip(run_names, palette_colors)}
-    label_palette = {}
-    if not loss_df.empty and "line_label" in loss_df.columns:
-        for _, row in loss_df[["run", "line_label"]].drop_duplicates().iterrows():
-            label_palette[row["line_label"]] = run_palette.get(row["run"], None)
+    run_labels = sorted({_friendly_run_label(name) for name in run_names})
+    palette_colors = sns.color_palette("muted", n_colors=len(run_labels))
+    run_palette = {label: color for label, color in zip(run_labels, palette_colors)}
 
     fig, ax = plt.subplots(figsize=(8, 5))
 
@@ -124,9 +121,9 @@ def plot_comparison(histories: List[Tuple[str, pd.DataFrame]], out_dir: Path, ta
             data=loss_df,
             x="epoch",
             y="value",
-            hue="line_label",
-            style="line_label",
-            palette=label_palette if label_palette else None,
+            hue="run_label",
+            style="split",
+            palette=run_palette,
             ax=ax,
         )
         ax.set_title("Train/Val Loss Comparison")
