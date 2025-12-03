@@ -28,7 +28,7 @@ def main():
 
     logger.info(f"Generating MIL plots for: {results_dir}")
 
-    plot_dir = results_dir / "plots"
+    plot_dir = Path("plots") / results_dir.name
     plot_dir.mkdir(parents=True, exist_ok=True)
 
     # Load raw data
@@ -50,28 +50,30 @@ def main():
     video_results = []
     if video_results_path.exists():
         vr = np.load(video_results_path, allow_pickle=True)
-        # Each entry: (video_id, video_auc, seg_scores, seg_labels, intervals)
+        # Each entry: (video_id, video_auc, seg_scores, seg_labels, segment_frame_centers, intervals)
         for item in vr:
-            video_id, video_auc, seg_scores, seg_labels, intervals = item
-            indices = np.arange(len(seg_scores))
+            video_id, video_auc, seg_scores, seg_labels, frame_centers, intervals = item
             video_results.append(
-                (video_id, video_auc, seg_scores, seg_labels, indices, [])
-            )  # intervals omitted for segments
+                (video_id, video_auc, seg_scores, seg_labels, frame_centers, intervals)
+            )
     else:
         logger.warning("video_results.npy not found; skipping best/worst plots.")
 
     # ROC curve
     logger.info("Plotting ROC curve...")
-    plot_roc_curve(fpr, tpr, segment_auc, plot_dir / f"roc_curve_{run_label}.png")
+    plot_roc_curve(
+        fpr, tpr, segment_auc, plot_dir / f"roc_curve_{run_label}.png", title="Segment-Level ROC Curve"
+    )
 
     # Precision-Recall curve
     logger.info("Plotting Precision-Recall curve...")
-    plot_precision_recall_curve(
-        precision,
-        recall,
-        plot_dir / f"precision_recall_{run_label}.png",
-        positive_rate=positive_rate,
-    )
+        plot_precision_recall_curve(
+            precision,
+            recall,
+            plot_dir / f"precision_recall_{run_label}.png",
+            positive_rate=positive_rate,
+            title="Segment-Level Precision-Recall Curve",
+        )
 
     # Confusion matrix
     logger.info("Plotting confusion matrix...")
@@ -88,7 +90,9 @@ def main():
         video_results = [vr for vr in video_results if not np.isnan(vr[1])]
         if video_results:
             logger.info("Plotting best/worst videos...")
-            plot_best_worst_videos(video_results, {}, plot_dir, top_n=5)
+            plot_best_worst_videos(
+                video_results, {}, plot_dir, top_n=5, x_label="Frame Index"
+            )
         else:
             logger.info("All video AUCs are NaN; skipping best/worst plots.")
 
