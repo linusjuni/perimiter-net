@@ -102,10 +102,9 @@ def best_val_loss_epochs(histories: List[Tuple[str, pd.DataFrame]]) -> Dict[str,
 
 def plot_comparison(histories: List[Tuple[str, pd.DataFrame]], out_dir: Path, tag: str):
     loss_df = build_loss_frame(histories)
-    auc_df = build_auc_frame(histories)
     best_epochs = best_val_loss_epochs(histories)
 
-    if loss_df.empty and auc_df.empty:
+    if loss_df.empty:
         logger.error("No comparable metrics found across runs.")
         return
 
@@ -117,7 +116,7 @@ def plot_comparison(histories: List[Tuple[str, pd.DataFrame]], out_dir: Path, ta
         for _, row in loss_df[["run", "line_label"]].drop_duplicates().iterrows():
             label_palette[row["line_label"]] = run_palette.get(row["run"], None)
 
-    fig, axes = plt.subplots(1, 2, figsize=(14, 5))
+    fig, ax = plt.subplots(figsize=(8, 5))
 
     # Loss subplot
     if not loss_df.empty:
@@ -128,48 +127,34 @@ def plot_comparison(histories: List[Tuple[str, pd.DataFrame]], out_dir: Path, ta
             hue="line_label",
             style="line_label",
             palette=label_palette if label_palette else None,
-            ax=axes[0],
+            ax=ax,
         )
-        axes[0].set_title("Train/Val Loss Comparison")
-        axes[0].set_xlabel("Epoch")
-        axes[0].set_ylabel("Loss")
-        axes[0].xaxis.set_major_locator(MaxNLocator(integer=True))
-        axes[0].set_xlim(0, MAX_EPOCH)
-        y_min, y_top = axes[0].get_ylim()
+        ax.set_title("Train/Val Loss Comparison")
+        ax.set_xlabel("Epoch")
+        ax.set_ylabel("Loss")
+        ax.xaxis.set_major_locator(MaxNLocator(integer=True))
+        ax.set_xlim(0, MAX_EPOCH)
+        y_min, y_top = ax.get_ylim()
         y_span = max(y_top - y_min, 1e-6)
         y_pos = y_top - 0.02 * y_span
-        x_min, x_max = axes[0].get_xlim()
+        x_min, x_max = ax.get_xlim()
         x_span = max(x_max - x_min, 1e-6)
-        x_mid = x_min + x_span / 2
         x_offset = 0.01 * x_span
         for run, epoch in best_epochs.items():
-            axes[0].axvline(epoch, color=BEST_LINE_COLOR, linestyle="-", linewidth=1.1, alpha=0.9)
+            ax.axvline(epoch, color=BEST_LINE_COLOR, linestyle="-", linewidth=1.1, alpha=0.9)
             label = f"Best {_friendly_run_label(run)}"
-            axes[0].text(
-                epoch + (-x_offset if epoch > x_mid else x_offset),
+            ax.text(
+                epoch - x_offset,
                 y_pos,
                 label,
                 rotation=0,
                 va="top",
-                ha="right" if epoch > x_mid else "left",
+                ha="right",
                 fontsize=8.5,
                 color=BEST_LINE_COLOR,
                 bbox=dict(facecolor="white", edgecolor="none", alpha=0.8, pad=0.2),
                 zorder=5,
             )
-    else:
-        axes[0].set_visible(False)
-
-    # AUC subplot
-    if not auc_df.empty:
-        sns.lineplot(data=auc_df, x="epoch", y="value", hue="run", palette=run_palette, ax=axes[1])
-        axes[1].set_title("Validation AUC Comparison")
-        axes[1].set_xlabel("Epoch")
-        axes[1].set_ylabel("AUC")
-        axes[1].xaxis.set_major_locator(MaxNLocator(integer=True))
-        axes[1].set_xlim(0, MAX_EPOCH)
-    else:
-        axes[1].set_visible(False)
 
     fig.tight_layout()
     out_path = out_dir / f"{tag}_comparison.png"
