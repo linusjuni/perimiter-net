@@ -7,6 +7,7 @@ import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 import pandas as pd
+import seaborn as sns
 
 import sys
 
@@ -15,6 +16,15 @@ sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 from src.utils.logger import get_logger
 
 logger = get_logger(__name__)
+
+sns.set_style("whitegrid")
+
+def clean_run_name(run_name: str) -> str:
+    """Extract a clean label from run name by removing timestamp suffix."""
+    import re
+    # Remove timestamp pattern like _20251203_234217
+    cleaned = re.sub(r"_\d{8}_\d{6}$", "", run_name)
+    return cleaned
 
 
 def load_history(run_dir: Path) -> pd.DataFrame:
@@ -50,28 +60,24 @@ def plot_comparison(histories: List[Tuple[str, pd.DataFrame]], out_dir: Path, ta
         
         color = colors[i % len(colors)]
         epochs = df["epoch"].values
+        label = clean_run_name(run_name)
         
         # Plot train loss (dashed)
         if "train_loss" in df.columns:
             ax.plot(epochs, df["train_loss"].values, 
                     linestyle="--", color=color, linewidth=2,
-                    label=f"{run_name} (train)")
+                    label=f"{label} (train)")
         
         # Plot val loss (solid)
         if "val_loss" in df.columns:
             ax.plot(epochs, df["val_loss"].values, 
                     linestyle="-", color=color, linewidth=2,
-                    label=f"{run_name} (val)")
+                    label=f"{label} (val)")
 
     ax.set_title("Training vs Validation Loss", fontsize=14)
     ax.set_xlabel("Epoch", fontsize=12)
     ax.set_ylabel("Loss", fontsize=12)
     ax.legend(loc="upper right", framealpha=0.9)
-    ax.grid(False)
-    
-    # Clean up spines
-    ax.spines["top"].set_visible(False)
-    ax.spines["right"].set_visible(False)
 
     fig.tight_layout()
     out_path = out_dir / f"{tag}_comparison.png"
