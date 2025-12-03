@@ -25,7 +25,7 @@ logger = get_logger(__name__)
 
 def main():
     # --- Configuration ---
-    feature_dir = "/work3/s225224/ucf-crime/features/rgb/Train"  # Single directory
+    feature_dir = "/work3/s225224/ucf-crime/features/motion/Train"  # Single directory
     base_checkpoint_dir = "/work3/s225224/ucf-crime/checkpoints/mil"
 
     # Train/Val split ratio
