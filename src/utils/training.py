@@ -18,18 +18,6 @@ def train_epoch(
 ) -> tuple[float, float]:
     """
     Train model for one epoch.
-
-    Args:
-        model: Neural network to train
-        train_loader: DataLoader for training data
-        criterion: Loss function
-        optimizer: Optimizer
-        device: Device to train on
-        epoch: Current epoch number (for logging)
-        scaler: Optional GradScaler for mixed precision training
-
-    Returns:
-        tuple: (average_loss, average_accuracy)
     """
     model.train()
 
@@ -83,3 +71,77 @@ def train_epoch(
     )
 
     return losses.avg, accs.avg
+
+
+def train_epoch_mil(
+    model: torch.nn.Module,
+    loader,  # MILDataLoader
+    criterion,  # MILRankingLoss
+    optimizer: torch.optim.Optimizer,
+    device: torch.device,
+    epoch: int,
+    batch_size: int,
+) -> dict:
+    """
+    Train MIL model for one epoch.
+    """
+    model.train()
+
+    # Meters for each loss component
+    loss_meter = AverageMeter()
+    rank_meter = AverageMeter()
+    sparsity_meter = AverageMeter()
+    smoothness_meter = AverageMeter()
+
+    start_time = time.time()
+
+    # Calculate number of batches
+    num_batches = loader.get_num_batches(batch_size)
+    log_interval = max(10, num_batches // 10)
+
+    for batch_idx in range(num_batches):
+        # Get balanced batch
+        norm_batch, anom_batch = loader.get_batch(batch_size)
+        norm_batch = norm_batch.to(device, non_blocking=True)
+        anom_batch = anom_batch.to(device, non_blocking=True)
+
+        optimizer.zero_grad()
+
+        # Forward pass
+        norm_preds = model(norm_batch)  # (batch_size, 32, 1)
+        anom_preds = model(anom_batch)  # (batch_size, 32, 1)
+
+        # Compute loss
+        total_loss, loss_components = criterion(norm_preds, anom_preds)
+
+        # Backward pass
+        total_loss.backward()
+        optimizer.step()
+
+        # Update meters
+        loss_meter.update(total_loss.item(), batch_size)
+        rank_meter.update(loss_components["rank"], batch_size)
+        sparsity_meter.update(loss_components["sparse"], batch_size)
+        smoothness_meter.update(loss_components["smooth"], batch_size)
+
+        # Logging
+        if (batch_idx + 1) % log_interval == 0:
+            logger.info(
+                f"Epoch [{epoch}] Batch [{batch_idx + 1}/{num_batches}] "
+                f"Loss: {loss_meter.avg:.4f} (Rank: {rank_meter.avg:.4f}, "
+                f"Sparse: {sparsity_meter.avg:.6f}, Smooth: {smoothness_meter.avg:.6f})"
+            )
+
+    duration = time.time() - start_time
+    logger.info(
+        f"Epoch [{epoch}] Training Completed in {duration:.0f}s - "
+        f"Loss: {loss_meter.avg:.4f} (Rank: {rank_meter.avg:.4f}, "
+        f"Sparse: {sparsity_meter.avg:.6f}, Smooth: {smoothness_meter.avg:.6f})"
+    )
+
+    return {
+        "loss": loss_meter.avg,
+        "rank_loss": rank_meter.avg,
+        "sparsity_loss": sparsity_meter.avg,
+        "smoothness_loss": smoothness_meter.avg,
+    }
