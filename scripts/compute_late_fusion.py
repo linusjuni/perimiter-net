@@ -36,12 +36,27 @@ def main():
     # 1. Load Models
     print(f"Loading RGB Model from: {rgb_checkpoint}")
     model_rgb = MILModel(input_dim=input_dim).to(device)
-    model_rgb.load_state_dict(torch.load(rgb_checkpoint, map_location=device))
+    
+    # Load the file first
+    ckpt_rgb = torch.load(rgb_checkpoint, map_location=device)
+    # Extract the weights dictionary using the key 'model_state_dict'
+    if 'model_state_dict' in ckpt_rgb:
+        model_rgb.load_state_dict(ckpt_rgb['model_state_dict'])
+    else:
+        # Fallback if you saved it differently
+        model_rgb.load_state_dict(ckpt_rgb)
+    
     model_rgb.eval()
 
     print(f"Loading Motion Model from: {motion_checkpoint}")
     model_motion = MILModel(input_dim=input_dim).to(device)
-    model_motion.load_state_dict(torch.load(motion_checkpoint, map_location=device))
+    
+    ckpt_motion = torch.load(motion_checkpoint, map_location=device)
+    if 'model_state_dict' in ckpt_motion:
+        model_motion.load_state_dict(ckpt_motion['model_state_dict'])
+    else:
+        model_motion.load_state_dict(ckpt_motion)
+    
     model_motion.eval()
 
     # 2. Find Test Videos (Intersect both folders)
