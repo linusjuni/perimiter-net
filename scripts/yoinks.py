@@ -56,39 +56,6 @@ def create_gt_mask(total_frames, intervals):
             mask[s:e] = 1
     return mask
 
-def interpolate_features(features: np.ndarray, segments: int = 32) -> np.ndarray:
-    """Compress variable length video features into fixed segments (same as training)."""
-    T, D = features.shape
-    if T == segments:
-        return features
-
-    chunks = np.array_split(features, segments, axis=0)
-    interpolated = np.zeros((segments, D), dtype=np.float32)
-
-    for i, chunk in enumerate(chunks):
-        if chunk.shape[0] > 0:
-            interpolated[i] = np.max(chunk, axis=0)
-        else:
-            interpolated[i] = np.zeros(D)
-
-    return interpolated
-
-
-def expand_segment_scores_to_frames(
-    segment_scores: np.ndarray, total_frames: int
-) -> np.ndarray:
-    """Expand 32 segment scores back to frame-level."""
-    num_segments = len(segment_scores)
-    frames_per_segment = total_frames / num_segments
-    frame_scores = np.zeros(total_frames, dtype=np.float32)
-
-    for i, score in enumerate(segment_scores):
-        start = int(i * frames_per_segment)
-        end = int((i + 1) * frames_per_segment)
-        frame_scores[start:end] = score
-
-    return frame_scores
-
 
 def main():
     # --- CONFIGURATION ---
@@ -148,41 +115,43 @@ def main():
             # Load features
             feat_rgb = np.load(rgb_files[vid_name])
             feat_motion = np.load(motion_files[vid_name])
-            
-            # Store original clip counts for frame expansion
-            num_clips_rgb = feat_rgb.shape[0]
-            num_clips_motion = feat_motion.shape[0]
-            
-            # Interpolate to 32 segments (SAME AS TRAINING!)
-            feat_rgb = interpolate_features(feat_rgb, segments=32)
-            feat_motion = interpolate_features(feat_motion, segments=32)
-            
-            # Inference - model expects (1, 32, 512)
+
+            # Sync lengths
+            min_len = min(feat_rgb.shape[0], feat_motion.shape[0])
+            if min_len == 0:
+                continue
+
+            feat_rgb = feat_rgb[:min_len]
+            feat_motion = feat_motion[:min_len]
+
+            # Inference
             with torch.no_grad():
-                tensor_rgb = torch.from_numpy(feat_rgb).float().unsqueeze(0).to(device)
-                tensor_motion = torch.from_numpy(feat_motion).float().unsqueeze(0).to(device)
-                
-                scores_rgb = model_rgb(tensor_rgb).squeeze().cpu().numpy()      # (32,)
-                scores_motion = model_motion(tensor_motion).squeeze().cpu().numpy()  # (32,)
-            
-            # Expand 32 segment scores to frame-level
-            # Use the number of clips * stride to get total frames
-            total_frames_rgb = num_clips_rgb * stride
-            total_frames_motion = num_clips_motion * stride
-            total_frames = min(total_frames_rgb, total_frames_motion)
-            
-            frame_scores_rgb = expand_segment_scores_to_frames(scores_rgb, total_frames)
-            frame_scores_motion = expand_segment_scores_to_frames(scores_motion, total_frames)
-            
+                inp_rgb = (
+                    torch.tensor(feat_rgb, dtype=torch.float32).unsqueeze(0).to(device)
+                )
+                scores_rgb = model_rgb(inp_rgb).squeeze().cpu().numpy()
+
+                inp_motion = (
+                    torch.tensor(feat_motion, dtype=torch.float32)
+                    .unsqueeze(0)
+                    .to(device)
+                )
+                scores_motion = model_motion(inp_motion).squeeze().cpu().numpy()
+
+            # Expand to frame-level
+            frame_scores_rgb = np.repeat(scores_rgb, stride)
+            frame_scores_motion = np.repeat(scores_motion, stride)
+
             # Create GT mask
+            total_frames = len(frame_scores_rgb)
             gt_mask = create_gt_mask(total_frames, gt_map[vid_name])
-            
+
             video_data[vid_name] = {
                 "rgb": frame_scores_rgb,
                 "motion": frame_scores_motion,
                 "gt": gt_mask,
             }
-            
+
         except Exception as e:
             print(f"Error processing {vid_name}: {e}")
 
