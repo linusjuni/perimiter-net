@@ -1,5 +1,6 @@
 import sys
 from pathlib import Path
+from typing import Optional
 
 import matplotlib
 
@@ -70,6 +71,17 @@ def plot_total_loss(df: pd.DataFrame, out_dir: Path):
         logger.warning("Skipping total loss plot: 'epoch' column missing.")
         return
 
+    def _best_val_loss_epoch() -> Optional[float]:
+        if "val_loss" not in df.columns:
+            return None
+        val_df = df[["epoch", "val_loss"]].apply(pd.to_numeric, errors="coerce").dropna()
+        if val_df.empty:
+            return None
+        min_idx = val_df["val_loss"].idxmin()
+        return float(val_df.loc[min_idx, "epoch"])
+
+    best_epoch = _best_val_loss_epoch()
+
     train_data = None
     val_data = None
     if "train_loss" in df.columns:
@@ -93,6 +105,19 @@ def plot_total_loss(df: pd.DataFrame, out_dir: Path):
     ax.set_ylabel("Loss")
     ax.legend()
     ax.xaxis.set_major_locator(MaxNLocator(integer=True))
+    if best_epoch is not None:
+        mark_color = sns.color_palette("muted")[3]
+        ax.axvline(best_epoch, color=mark_color, linestyle="--", linewidth=1.2, alpha=0.8)
+        ax.text(
+            best_epoch,
+            ax.get_ylim()[1],
+            f" best val loss @ {best_epoch:g}",
+            rotation=90,
+            va="top",
+            ha="right",
+            fontsize=9,
+            color=mark_color,
+        )
     fig.tight_layout()
     fig.savefig(out_dir / "loss.png", dpi=150)
     plt.close(fig)

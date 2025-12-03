@@ -1,6 +1,6 @@
 import argparse
 from pathlib import Path
-from typing import List, Tuple
+from typing import Dict, List, Tuple
 
 import matplotlib
 
@@ -71,29 +71,52 @@ def build_auc_frame(histories: List[Tuple[str, pd.DataFrame]]) -> pd.DataFrame:
     return pd.concat(rows, ignore_index=True)
 
 
+def best_val_loss_epochs(histories: List[Tuple[str, pd.DataFrame]]) -> Dict[str, float]:
+    best_epochs: Dict[str, float] = {}
+    for run_name, df in histories:
+        if "epoch" not in df.columns or "val_loss" not in df.columns:
+            continue
+        val_df = df[["epoch", "val_loss"]].apply(pd.to_numeric, errors="coerce").dropna()
+        if val_df.empty:
+            continue
+        min_idx = val_df["val_loss"].idxmin()
+        best_epochs[run_name] = float(val_df.loc[min_idx, "epoch"])
+    return best_epochs
+
+
 def plot_comparison(histories: List[Tuple[str, pd.DataFrame]], out_dir: Path, tag: str):
     loss_df = build_loss_frame(histories)
     auc_df = build_auc_frame(histories)
+    best_epochs = best_val_loss_epochs(histories)
 
     if loss_df.empty and auc_df.empty:
         logger.error("No comparable metrics found across runs.")
         return
 
+    run_names = [name for name, _ in histories]
+    palette_colors = sns.color_palette("muted", n_colors=len(run_names))
+    palette = {run: color for run, color in zip(run_names, palette_colors)}
+
     fig, axes = plt.subplots(1, 2, figsize=(14, 5))
 
     # Loss subplot
     if not loss_df.empty:
-        sns.lineplot(data=loss_df, x="epoch", y="value", hue="run", style="split", ax=axes[0])
+        sns.lineplot(
+            data=loss_df, x="epoch", y="value", hue="run", style="split", palette=palette, ax=axes[0]
+        )
         axes[0].set_title("Train/Val Loss Comparison")
         axes[0].set_xlabel("Epoch")
         axes[0].set_ylabel("Loss")
         axes[0].xaxis.set_major_locator(MaxNLocator(integer=True))
+        for run, epoch in best_epochs.items():
+            color = palette.get(run, "gray")
+            axes[0].axvline(epoch, color=color, linestyle="--", linewidth=1.1, alpha=0.8)
     else:
         axes[0].set_visible(False)
 
     # AUC subplot
     if not auc_df.empty:
-        sns.lineplot(data=auc_df, x="epoch", y="value", hue="run", ax=axes[1])
+        sns.lineplot(data=auc_df, x="epoch", y="value", hue="run", palette=palette, ax=axes[1])
         axes[1].set_title("Validation AUC Comparison")
         axes[1].set_xlabel("Epoch")
         axes[1].set_ylabel("AUC")
