@@ -42,6 +42,9 @@ def main():
     precision = data["precision"]
     recall = data["recall"]
     confusion = data["confusion"]
+    decision_threshold = (
+        float(data["decision_threshold"]) if "decision_threshold" in data.files else None
+    )
     positive_rate = float(np.mean(data["labels"])) if "labels" in data.files else None
     run_label = str(data["run_name"]) if "run_name" in data.files else results_dir.name
 
@@ -68,6 +71,7 @@ def main():
         confusion,
         ["Normal", "Anomaly"],
         plot_dir / f"confusion_matrix_{run_label}.png",
+        threshold=decision_threshold,
     )
 
     # Generate best/worst videos

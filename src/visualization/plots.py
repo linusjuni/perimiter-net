@@ -138,7 +138,7 @@ def plot_precision_recall_curve(precision, recall, save_path, positive_rate=None
     logger.info(f"Saved PR curve: {save_path}")
 
 
-def plot_confusion_matrix(cm, class_names, save_path, normalize=False):
+def plot_confusion_matrix(cm, class_names, save_path, normalize=False, threshold=None):
     """Plot confusion matrix as heatmap."""
     cm = np.array(cm)
     display_cm = cm.copy()
@@ -167,6 +167,8 @@ def plot_confusion_matrix(cm, class_names, save_path, normalize=False):
     ax.set_xlabel("Predicted label", fontsize=12)
     ax.set_ylabel("True label", fontsize=12)
     title = "Normalized Confusion Matrix" if normalize else "Confusion Matrix"
+    if threshold is not None:
+        title = f"{title} (thr={threshold:.3f})"
     ax.set_title(title, fontsize=14, fontweight="bold")
 
     plt.tight_layout()
