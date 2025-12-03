@@ -97,7 +97,6 @@ def train_epoch_mil(
 
     # Calculate number of batches
     num_batches = loader.get_num_batches(batch_size)
-    log_interval = max(10, num_batches // 10)
 
     for batch_idx in range(num_batches):
         # Get balanced batch
@@ -123,21 +122,6 @@ def train_epoch_mil(
         rank_meter.update(loss_components["rank"], batch_size)
         sparsity_meter.update(loss_components["sparse"], batch_size)
         smoothness_meter.update(loss_components["smooth"], batch_size)
-
-        # Logging
-        if (batch_idx + 1) % log_interval == 0:
-            logger.info(
-                f"Epoch [{epoch}] Batch [{batch_idx + 1}/{num_batches}] "
-                f"Loss: {loss_meter.avg:.4f} (Rank: {rank_meter.avg:.4f}, "
-                f"Sparse: {sparsity_meter.avg:.6f}, Smooth: {smoothness_meter.avg:.6f})"
-            )
-
-    duration = time.time() - start_time
-    logger.info(
-        f"Epoch [{epoch}] Training Completed in {duration:.0f}s - "
-        f"Loss: {loss_meter.avg:.4f} (Rank: {rank_meter.avg:.4f}, "
-        f"Sparse: {sparsity_meter.avg:.6f}, Smooth: {smoothness_meter.avg:.6f})"
-    )
 
     return {
         "loss": loss_meter.avg,

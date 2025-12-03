@@ -125,8 +125,8 @@ def main():
             batch_size=batch_size,
         )
 
-        # Validate (every 10 epochs to save time)
-        if epoch % 10 == 0 or epoch == 1:
+        # Validate (every 50 epochs to save time)
+        if epoch % 50 == 0 or epoch == 1:
             val_metrics = evaluate_mil(
                 model=model,
                 loader=val_loader,
