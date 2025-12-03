@@ -24,8 +24,10 @@ logger = get_logger(__name__)
 
 
 def main():
+
+    mode = "rgb"  # "rgb" or "motion"
     # --- Configuration ---
-    feature_dir = "/work3/s225224/ucf-crime/features/motion/Train"  # Single directory
+    feature_dir = f"/work3/s225224/ucf-crime/features/{mode}/Train"  # Single directory
     base_checkpoint_dir = "/work3/s225224/ucf-crime/checkpoints/mil"
 
     # Train/Val split ratio
@@ -44,7 +46,7 @@ def main():
 
     # --- Setup ---
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-    run_name = f"mil_rgb_{timestamp}"
+    run_name = f"mil_{mode}_{timestamp}"
     checkpoint_dir = Path(base_checkpoint_dir) / run_name
     checkpoint_dir.mkdir(parents=True, exist_ok=True)
 
