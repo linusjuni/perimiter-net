@@ -29,10 +29,16 @@ def main():
 
     logger.info(f"Generating plots for: {results_dir}")
 
-    # Create plots subdirectory
+    # Create plots subdirectory lazily (only if we actually write a plot)
     #plot_dir = results_dir / "plots" # choose this
     plot_dir = Path("plots") # or this
-    plot_dir.mkdir(exist_ok=True)
+    plot_dir_created = False
+
+    def ensure_plot_dir():
+        nonlocal plot_dir_created
+        if not plot_dir_created:
+            plot_dir.mkdir(exist_ok=True)
+            plot_dir_created = True
 
     # Load raw data
     data = np.load(results_dir / "raw_data.npz")
@@ -54,10 +60,12 @@ def main():
 
     # Generate ROC curve
     logger.info("Plotting ROC curve...")
+    ensure_plot_dir()
     plot_roc_curve(fpr, tpr, frame_auc, plot_dir / f"roc_curve_{run_label}.png")
 
     # Generate Precision-Recall curve
     logger.info("Plotting Precision-Recall curve...")
+    ensure_plot_dir()
     plot_precision_recall_curve(
         precision,
         recall,
@@ -67,6 +75,7 @@ def main():
 
     # Generate confusion matrix
     logger.info("Plotting confusion matrix...")
+    ensure_plot_dir()
     plot_confusion_matrix(
         confusion,
         ["Normal", "Anomaly"],
@@ -77,6 +86,7 @@ def main():
     # Generate best/worst videos
     if video_results:
         logger.info("Plotting best/worst videos...")
+        ensure_plot_dir()
         plot_best_worst_videos(video_results, {}, plot_dir, top_n=5)
 
     logger.info(f"Plots saved to: {plot_dir}")

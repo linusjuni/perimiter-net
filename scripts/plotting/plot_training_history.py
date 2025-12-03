@@ -35,7 +35,6 @@ def ensure_out_dir(run_dir: Path, run_name: str) -> Path:
     """
     repo_root = Path(__file__).parent.parent.parent
     out_dir = repo_root / "plots" / run_name
-    out_dir.mkdir(parents=True, exist_ok=True)
     return out_dir
 
 
@@ -52,6 +51,7 @@ def plot_loss(df: pd.DataFrame, out_dir: Path):
         logger.warning("Skipping loss plot: no loss data found.")
         return
 
+    out_dir.mkdir(parents=True, exist_ok=True)
     fig, ax = plt.subplots(figsize=(8, 5))
     if data is not None and not data.empty:
         sns.lineplot(data=data, x="epoch", y="train_loss", label="Train Loss", ax=ax)
@@ -80,6 +80,7 @@ def plot_accuracy(df: pd.DataFrame, out_dir: Path):
         logger.warning("Skipping accuracy plot: no accuracy data found.")
         return
 
+    out_dir.mkdir(parents=True, exist_ok=True)
     fig, ax = plt.subplots(figsize=(8, 5))
     if train_data is not None and not train_data.empty:
         sns.lineplot(data=train_data, x="epoch", y="train_acc", label="Train Acc", ax=ax)
@@ -103,6 +104,7 @@ def plot_auc(df: pd.DataFrame, out_dir: Path):
     if data.empty:
         logger.warning("Skipping AUC plot: no val_auc data found.")
         return
+    out_dir.mkdir(parents=True, exist_ok=True)
     fig, ax = plt.subplots(figsize=(8, 5))
     sns.lineplot(data=data, x="epoch", y="val_auc", label="Val AUC", ax=ax)
     ax.set_title("Video-Level Validation AUC vs Epoch")
@@ -123,6 +125,7 @@ def plot_learning_rate(df: pd.DataFrame, out_dir: Path):
     if data.empty:
         logger.warning("Skipping learning rate plot: no learning_rate data found.")
         return
+    out_dir.mkdir(parents=True, exist_ok=True)
     fig, ax = plt.subplots(figsize=(8, 4))
     sns.lineplot(data=data, x="epoch", y="learning_rate", label="Learning Rate", ax=ax)
     ax.set_title("Learning Rate Schedule")
