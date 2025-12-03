@@ -25,9 +25,11 @@ logger = get_logger(__name__)
 
 def main():
     # --- Configuration ---
-    feature_dir_train = "/work3/s225224/ucf-crime/features/rgb/Train"
-    feature_dir_val = "/work3/s225224/ucf-crime/features/rgb/Val"
+    feature_dir = "/work3/s225224/ucf-crime/features/rgb/Train"  # Single directory
     base_checkpoint_dir = "/work3/s225224/ucf-crime/checkpoints/mil"
+
+    # Train/Val split ratio
+    val_split = 0.2  # 20% for validation
 
     # Hyperparameters
     input_dim = 512
@@ -57,15 +59,27 @@ def main():
     # --- Data Loading ---
     logger.info("Loading datasets...")
     train_loader = MILDataLoader(
-        feature_dir=feature_dir_train,
+        feature_dir=feature_dir,
         segments=segments,
         shuffle=True,
+        split="train",
+        val_split=val_split,
     )
     val_loader = MILDataLoader(
-        feature_dir=feature_dir_val,
+        feature_dir=feature_dir,
         segments=segments,
         shuffle=False,
+        split="val",
+        val_split=val_split,
     )
+
+    # Number of videos
+    num_train_videos = len(train_loader.normal_videos) + len(
+        train_loader.anomaly_videos
+    )
+    num_val_videos = len(val_loader.normal_videos) + len(val_loader.anomaly_videos)
+    logger.info(f"Number of training videos: {num_train_videos}")
+    logger.info(f"Number of validation videos: {num_val_videos}")
 
     # --- Model Setup ---
     logger.info("Initializing model...")
@@ -121,18 +135,11 @@ def main():
                 split="val",
             )
 
-            # Update history (convert MILMetrics to dict-like structure)
+            # Update history
             history.update(
                 epoch=epoch,
-                train_loss=train_metrics["loss"],
-                train_acc=0.0,  # MIL doesn't use accuracy
-                val_metrics={
-                    "val_loss": val_metrics.loss,
-                    "val_auc": val_metrics.auc,
-                    "val_rank_loss": val_metrics.rank_loss,
-                    "val_sparsity_loss": val_metrics.sparsity_loss,
-                    "val_smoothness_loss": val_metrics.smoothness_loss,
-                },
+                train_metrics=train_metrics,
+                val_metrics=val_metrics,
                 learning_rate=current_lr,
             )
 
