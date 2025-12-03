@@ -15,6 +15,10 @@ from src.utils.logger import get_logger
 
 logger = get_logger(__name__)
 
+# Global seaborn style
+sns.set_style("whitegrid")
+sns.set_palette("muted")
+
 
 def load_history(csv_path: Path) -> pd.DataFrame:
     if not csv_path.exists():
