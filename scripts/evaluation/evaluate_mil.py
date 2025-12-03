@@ -1,0 +1,135 @@
+import sys
+import torch
+from pathlib import Path
+from datetime import datetime
+
+sys.path.insert(0, str(Path(__file__).parent.parent.parent))
+
+from src.models.mil import MILModel
+from src.utils.segment_level_evaluation import (
+    evaluate_segment_level,
+    save_segment_level_results,
+)
+from src.utils.training_utils import load_checkpoint
+from src.utils.logger import get_logger
+
+logger = get_logger(__name__)
+
+
+def find_available_checkpoints(base_dir="/work3/s225224/ucf-crime/checkpoints/mil"):
+    """Find all available MIL checkpoints."""
+    base_path = Path(base_dir)
+    checkpoints = []
+
+    for run_dir in sorted(base_path.glob("mil_*")):
+        if run_dir.is_dir():
+            best_model = run_dir / "best_model.pth"
+            if best_model.exists():
+                checkpoints.append(best_model)
+
+    return checkpoints
+
+
+def select_checkpoint(checkpoints):
+    """Interactive checkpoint selection."""
+    if not checkpoints:
+        logger.error("No checkpoints found!")
+        sys.exit(1)
+
+    print("\n" + "=" * 60)
+    print("Available MIL Checkpoints:")
+    print("=" * 60)
+    for i, ckpt in enumerate(checkpoints, 1):
+        run_name = ckpt.parent.name
+        print(f"  [{i}] {run_name}")
+    print("=" * 60)
+
+    while True:
+        try:
+            choice = input(f"\nSelect checkpoint (1-{len(checkpoints)}): ").strip()
+            idx = int(choice) - 1
+            if 0 <= idx < len(checkpoints):
+                return checkpoints[idx]
+        except (ValueError, KeyboardInterrupt):
+            print("\nInvalid selection. Exiting.")
+            sys.exit(0)
+
+
+def main():
+    # Fixed paths (update as needed)
+    test_feature_dir = "/work3/s225224/ucf-crime/features/rgb/Test"
+    annotation_path = "/work3/s225224/ucf-crime/data/Temporal_Anomaly_Annotation_for_Testing_Videos.txt"
+    results_base_dir = Path("results")
+
+    segments = 32
+    clip_len = 16
+    stride = 16
+
+    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+
+    # Interactive checkpoint selection
+    checkpoints = find_available_checkpoints()
+    checkpoint_path = select_checkpoint(checkpoints)
+
+    # Create experiment-specific results directory
+    run_name = checkpoint_path.parent.name
+    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+    results_dir = results_base_dir / f"{run_name}_segment"
+    results_dir.mkdir(parents=True, exist_ok=True)
+
+    logger.info("=" * 60)
+    logger.info("Segment-Level Evaluation (MIL)")
+    logger.info("=" * 60)
+    logger.info(f"Device: {device}")
+    logger.info(f"Checkpoint: {checkpoint_path}")
+    logger.info(f"Results dir: {results_dir}")
+    logger.info(f"Features: {test_feature_dir}")
+    logger.info(f"Annotations: {annotation_path}")
+    logger.info("=" * 60)
+
+    # Load model
+    model = MILModel(input_dim=512).to(device)
+    checkpoint = load_checkpoint(checkpoint_path, model, device=device)
+    model.eval()
+
+    if checkpoint:
+        epoch = checkpoint.get("epoch", "unknown")
+        best_auc = checkpoint.get("best_auc", 0.0)
+        logger.info(f"Loaded epoch {epoch} | Training AUC: {best_auc:.4f}")
+
+    # Run evaluation
+    metrics, curves, video_results, all_scores, all_labels = evaluate_segment_level(
+        model=model,
+        feature_dir=test_feature_dir,
+        annotation_path=annotation_path,
+        device=device,
+        segments=segments,
+        clip_len=clip_len,
+        stride=stride,
+        decision_threshold=None,
+    )
+
+    logger.info("=" * 60)
+    logger.info("RESULTS")
+    logger.info("=" * 60)
+    logger.info(f"{metrics}")
+    logger.info("=" * 60)
+
+    save_segment_level_results(
+        results_dir=results_dir,
+        run_name=run_name,
+        checkpoint_path=checkpoint_path,
+        timestamp=timestamp,
+        metrics=metrics,
+        curves=curves,
+        scores=all_scores,
+        labels=all_labels,
+        video_results=video_results,
+    )
+
+    logger.info(f"Results saved to: {results_dir}")
+    logger.info("Run plotting script to generate visualizations (if implemented).")
+
+
+if __name__ == "__main__":
+    main()
