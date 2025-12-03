@@ -150,9 +150,9 @@ def plot_comparison(histories: List[Tuple[str, pd.DataFrame]], out_dir: Path, ta
                 rotation=0,
                 va="top",
                 ha="right",
-                fontsize=8.5,
+                fontsize=10,
                 color=BEST_LINE_COLOR,
-                bbox=dict(facecolor="white", edgecolor="none", alpha=0.8, pad=0.2),
+                bbox=dict(facecolor="white", edgecolor="none", alpha=1, pad=0.2),
                 zorder=5,
             )
 
