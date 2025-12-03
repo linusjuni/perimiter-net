@@ -1,4 +1,6 @@
+import json
 import sys
+from datetime import datetime
 from pathlib import Path
 from typing import Dict, List, Optional, Tuple
 
@@ -177,6 +179,7 @@ def main():
     annotation_file = Path(
         "/work3/s225224/ucf-crime/data/Temporal_Anomaly_Annotation_for_Testing_Videos.txt"
     )
+    results_base_dir = Path("/work3/s225224/ucf-crime/experiments/mil_frame_level")
     stride = 16  # Frames represented by each clip score
     sigma = 16  # Gaussian smoothing sigma for the expanded frame scores
     input_dim = 512
@@ -190,6 +193,7 @@ def main():
     logger.info(f"Feature dir     : {feature_dir}")
     logger.info(f"Checkpoint root : {base_checkpoint_dir}")
     logger.info(f"Annotation file : {annotation_file}")
+    logger.info(f"Results dir     : {results_base_dir}")
     logger.info(f"Stride / Sigma  : {stride} / {sigma}")
     logger.info(f"Device          : {device}")
     logger.info("=" * 80)
@@ -218,6 +222,7 @@ def main():
 
     all_scores: List[np.ndarray] = []
     all_labels: List[np.ndarray] = []
+    per_video: List[Dict[str, object]] = []
 
     for feature_path in feature_paths:
         video_id = feature_path.stem
@@ -257,12 +262,23 @@ def main():
         # Ground truth mask for this video
         gt_mask = build_ground_truth_mask(len(smoothed_scores), intervals)
 
+        video_auc = None
+        if len(np.unique(gt_mask)) > 1:
+            video_auc = compute_auc_safe(gt_mask, smoothed_scores)
+
         # Accumulate
         all_scores.append(smoothed_scores.astype(np.float32))
         all_labels.append(gt_mask.astype(np.int32))
+        per_video.append(
+            {
+                "video_id": video_id,
+                "num_clips": int(len(clip_scores)),
+                "num_frames": int(len(smoothed_scores)),
+                "video_auc": float(video_auc) if video_auc is not None else None,
+            }
+        )
 
-        if len(np.unique(gt_mask)) > 1:
-            video_auc = compute_auc_safe(gt_mask, smoothed_scores)
+        if video_auc is not None:
             logger.info(
                 f"{video_id}: clips={len(clip_scores):3d} frames={len(smoothed_scores):5d} AUC={video_auc:.4f}"
             )
@@ -284,6 +300,33 @@ def main():
     logger.info(f"Frame-Level AUC: {frame_auc:.4f}")
     logger.info(f"Total frames aggregated: {len(y_true):,}")
     logger.info("=" * 80)
+
+    # Persist results
+    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+    run_name = resolved_checkpoint.parent.name
+    results_dir = results_base_dir / f"{run_name}_{timestamp}"
+    results_dir.mkdir(parents=True, exist_ok=True)
+
+    metrics_path = results_dir / "metrics.txt"
+    with open(metrics_path, "w") as f:
+        f.write(f"Run: {run_name}\n")
+        f.write(f"Checkpoint: {resolved_checkpoint}\n")
+        f.write(f"Timestamp: {timestamp}\n")
+        f.write(f"Frame-Level AUC: {frame_auc:.6f}\n")
+        f.write(f"Total Frames: {len(y_true)}\n")
+        f.write(f"Total Videos: {len(per_video)}\n")
+
+    np.savez(
+        results_dir / "raw_data.npz",
+        scores=y_scores,
+        labels=y_true,
+        frame_auc=frame_auc,
+    )
+
+    with open(results_dir / "per_video.json", "w") as f:
+        json.dump(per_video, f, indent=2)
+
+    logger.info(f"Saved results to: {results_dir}")
 
 
 if __name__ == "__main__":
