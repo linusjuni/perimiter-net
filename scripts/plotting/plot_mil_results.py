@@ -50,18 +50,11 @@ def main():
     video_results = []
     if video_results_path.exists():
         vr = np.load(video_results_path, allow_pickle=True)
-        # Expected: (video_id, video_auc, seg_scores, seg_labels, seg_centers, seg_ranges, intervals)
+        # Each entry: (video_id, video_auc, seg_scores, seg_labels, segment_frame_centers, intervals)
         for item in vr:
-            if len(item) != 7:
-                logger.warning(
-                    "video_results.npy is from an older run (missing frame positions). "
-                    "Please re-run evaluate_mil.py to regenerate with frame positions."
-                )
-                video_results = []
-                break
-            video_id, video_auc, seg_scores, seg_labels, seg_centers, seg_ranges, intervals = item
+            video_id, video_auc, seg_scores, seg_labels, frame_centers, intervals = item
             video_results.append(
-                (video_id, video_auc, seg_scores, seg_labels, seg_centers, seg_ranges, intervals)
+                (video_id, video_auc, seg_scores, seg_labels, frame_centers, intervals)
             )
     else:
         logger.warning("video_results.npy not found; skipping best/worst plots.")

@@ -203,12 +203,12 @@ def plot_best_worst_videos(video_results, annotations, plot_dir, top_n=5, x_labe
     video_results.sort(key=lambda x: x[1], reverse=True)
 
     # Best
-    for i, (vid_id, auc, scores, labels, x_vals, _, intervals) in enumerate(
+    for i, (vid_id, auc, scores, labels, indices, intervals) in enumerate(
         video_results[:top_n]
     ):
         plot_video_timeline(
             f"{vid_id} (AUC={auc:.3f})",
-            x_vals,
+            indices,
             scores,
             labels,
             intervals,
@@ -217,12 +217,12 @@ def plot_best_worst_videos(video_results, annotations, plot_dir, top_n=5, x_labe
         )
 
     # Worst
-    for i, (vid_id, auc, scores, labels, x_vals, _, intervals) in enumerate(
+    for i, (vid_id, auc, scores, labels, indices, intervals) in enumerate(
         video_results[-top_n:]
     ):
         plot_video_timeline(
             f"{vid_id} (AUC={auc:.3f})",
-            x_vals,
+            indices,
             scores,
             labels,
             intervals,
