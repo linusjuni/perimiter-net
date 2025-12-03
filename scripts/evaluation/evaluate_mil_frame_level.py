@@ -41,6 +41,60 @@ def resolve_checkpoint(path: Path) -> Optional[Path]:
     return None
 
 
+def find_available_checkpoints(base_dir: Path) -> List[Tuple[str, Path]]:
+    """
+    Find available MIL checkpoints under a base directory.
+
+    Returns a list of (run_name, checkpoint_file).
+    """
+    checkpoints: List[Tuple[str, Path]] = []
+    if not base_dir.exists():
+        return checkpoints
+
+    for run_dir in sorted(base_dir.iterdir()):
+        if not run_dir.is_dir():
+            continue
+
+        ckpt = resolve_checkpoint(run_dir)
+        if ckpt is not None:
+            checkpoints.append((run_dir.name, ckpt))
+
+    return checkpoints
+
+
+def select_checkpoint(checkpoints: List[Tuple[str, Path]]) -> Optional[Path]:
+    """
+    Interactive selection of a checkpoint.
+
+    Args:
+        checkpoints: list of (run_name, checkpoint_path)
+
+    Returns:
+        Path to the selected checkpoint, or None if selection is aborted/invalid.
+    """
+    if not checkpoints:
+        logger.error("No checkpoints found to select from.")
+        return None
+
+    print("\n" + "=" * 60)
+    print("Available MIL Checkpoints:")
+    print("=" * 60)
+    for idx, (run_name, ckpt_path) in enumerate(checkpoints, start=1):
+        print(f"[{idx:02d}] {run_name} -> {ckpt_path.name}")
+    print("=" * 60)
+
+    try:
+        choice = input(f"Select checkpoint (1-{len(checkpoints)}): ").strip()
+        sel_idx = int(choice) - 1
+        if sel_idx < 0 or sel_idx >= len(checkpoints):
+            raise ValueError
+    except (ValueError, KeyboardInterrupt):
+        logger.error("Invalid selection; aborting.")
+        return None
+
+    return checkpoints[sel_idx][1]
+
+
 def load_temporal_annotations(annotation_path: Path) -> Dict[str, List[Tuple[int, int]]]:
     """
     Parse UCF-Crime temporal annotations.
@@ -119,10 +173,7 @@ def run_inference(
 def main():
     # ---------------- Configuration ---------------- #
     feature_dir = Path("/work3/s225224/ucf-crime/features/rgb/Test")
-    # Points either to a specific .pth file or to a run directory containing best_model.pth
-    checkpoint_path = Path(
-        "/work3/s225224/ucf-crime/checkpoints/mil/mil_rgb_20251203_162251"
-    )
+    base_checkpoint_dir = Path("/work3/s225224/ucf-crime/checkpoints/mil")
     annotation_file = Path(
         "/work3/s225224/ucf-crime/data/Temporal_Anomaly_Annotation_for_Testing_Videos.txt"
     )
@@ -137,7 +188,7 @@ def main():
     logger.info("MIL Frame-Level Evaluation")
     logger.info("=" * 80)
     logger.info(f"Feature dir     : {feature_dir}")
-    logger.info(f"Checkpoint      : {checkpoint_path}")
+    logger.info(f"Checkpoint root : {base_checkpoint_dir}")
     logger.info(f"Annotation file : {annotation_file}")
     logger.info(f"Stride / Sigma  : {stride} / {sigma}")
     logger.info(f"Device          : {device}")
@@ -147,12 +198,9 @@ def main():
         logger.error(f"Feature directory not found: {feature_dir}")
         return
 
-    resolved_checkpoint = resolve_checkpoint(checkpoint_path)
+    checkpoints = find_available_checkpoints(base_checkpoint_dir)
+    resolved_checkpoint = select_checkpoint(checkpoints)
     if resolved_checkpoint is None:
-        logger.error(
-            f"No checkpoint file found at {checkpoint_path} "
-            "(tried path, best_model.pth, checkpoint_epoch_*.pth)"
-        )
         return
     logger.info(f"Using checkpoint file: {resolved_checkpoint}")
 
