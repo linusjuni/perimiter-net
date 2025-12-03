@@ -6,6 +6,7 @@ from tqdm import tqdm
 from datetime import datetime
 from sklearn.metrics import roc_auc_score
 import matplotlib.pyplot as plt
+from scipy.ndimage import uniform_filter1d
 
 # Ensure src is in path
 sys.path.insert(0, str(Path(__file__).parent.parent))
@@ -61,11 +62,11 @@ def main():
     # --- CONFIGURATION ---
     # RGB Config
     rgb_features_dir = "/work3/s225224/ucf-crime/features/rgb/Test"
-    rgb_checkpoint = "/work3/s225224/ucf-crime/checkpoints/mil/mil_rgb_20251203_162251/best_model.pth"
+    rgb_checkpoint = "/work3/s225224/ucf-crime/checkpoints/mil/mil_rgb_20251203_220227/best_model.pth"
 
     # Motion Config
     motion_features_dir = "/work3/s225224/ucf-crime/features/motion/Test"
-    motion_checkpoint = "/work3/s225224/ucf-crime/checkpoints/mil/mil_motion_20251203_162137/best_model.pth"
+    motion_checkpoint = "/work3/s225224/ucf-crime/checkpoints/mil/mil_motion_20251203_220103/best_model.pth"
 
     # Ground Truth
     annotation_file = "/dtu/blackhole/10/187952/ucf-crime-blackhole/Temporal_Anomaly_Annotation_for_Testing_Videos.txt"
@@ -171,6 +172,7 @@ def main():
         for vid_name, data in video_data.items():
             # Fused scores: alpha * RGB + (1 - alpha) * Motion
             fused = alpha * data["rgb"] + (1 - alpha) * data["motion"]
+            fused = uniform_filter1d(fused, size=8, mode='nearest')
             global_preds.extend(fused)
             global_gt.extend(data["gt"])
 
