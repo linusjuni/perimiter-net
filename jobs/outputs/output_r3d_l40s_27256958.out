@@ -1,0 +1,1155 @@
+[2025-12-02 23:46:05] __main__ - [32mINFO[0m - Starting training run: r3d_binary_20251202_234604
+[2025-12-02 23:46:05] __main__ - [32mINFO[0m - Checkpoints will be saved to: /work3/s225224/ucf-crime/checkpoints/r3d_binary_20251202_234604
+[2025-12-02 23:46:05] src.utils.training_utils - [32mINFO[0m - Created training history CSV at /work3/s225224/ucf-crime/checkpoints/r3d_binary_20251202_234604/training_history.csv
+[2025-12-02 23:46:05] __main__ - [32mINFO[0m - Setting up datasets and dataloaders...
+Loading cached dataset index from /dtu/blackhole/10/187952/ucf-crime-blackhole/Frames/ucf_index_train_len16_stride16_modebinary_rat0.2.pkl...
+Loading cached dataset index from /dtu/blackhole/10/187952/ucf-crime-blackhole/Frames/ucf_index_val_len16_stride16_modebinary_rat0.2.pkl...
+[2025-12-02 23:46:06] __main__ - [32mINFO[0m - Train samples: 230483, Val samples: 60934
+[2025-12-02 23:46:06] __main__ - [32mINFO[0m - Instantiating model...
+[2025-12-02 23:46:07] src.utils.training_utils - [32mINFO[0m - Early stopping initialized with patience=10, mode=max
+[2025-12-02 23:46:07] __main__ - [32mINFO[0m - Training on device: cuda
+[2025-12-02 23:46:07] __main__ - [32mINFO[0m - GPU Name: NVIDIA L40S
+[2025-12-02 23:46:07] __main__ - [32mINFO[0m - GPU Memory: 47.67 GB
+[2025-12-02 23:46:07] __main__ - [32mINFO[0m - Number of GPUs: 1
+[2025-12-02 23:46:07] __main__ - [32mINFO[0m - CUDA Version: 12.8
+[2025-12-02 23:46:07] __main__ - [32mINFO[0m - cuDNN Version: 91002
+[2025-12-02 23:46:07] __main__ - [32mINFO[0m - PyTorch Version: 2.9.0+cu128
+[2025-12-02 23:46:07] __main__ - [32mINFO[0m - Starting training loop...
+[2025-12-02 23:46:53] src.utils.training - [32mINFO[0m - Epoch [1] Batch [18/1801] Loss: 0.0498 Acc: 89.19%
+[2025-12-02 23:47:29] src.utils.training - [32mINFO[0m - Epoch [1] Batch [36/1801] Loss: 0.0452 Acc: 90.15%
+[2025-12-02 23:48:13] src.utils.training - [32mINFO[0m - Epoch [1] Batch [54/1801] Loss: 0.0419 Acc: 91.04%
+[2025-12-02 23:48:49] src.utils.training - [32mINFO[0m - Epoch [1] Batch [72/1801] Loss: 0.0399 Acc: 91.53%
+[2025-12-02 23:49:32] src.utils.training - [32mINFO[0m - Epoch [1] Batch [90/1801] Loss: 0.0380 Acc: 91.99%
+[2025-12-02 23:50:08] src.utils.training - [32mINFO[0m - Epoch [1] Batch [108/1801] Loss: 0.0367 Acc: 92.33%
+[2025-12-02 23:50:52] src.utils.training - [32mINFO[0m - Epoch [1] Batch [126/1801] Loss: 0.0357 Acc: 92.73%
+[2025-12-02 23:51:28] src.utils.training - [32mINFO[0m - Epoch [1] Batch [144/1801] Loss: 0.0345 Acc: 93.03%
+[2025-12-02 23:52:11] src.utils.training - [32mINFO[0m - Epoch [1] Batch [162/1801] Loss: 0.0334 Acc: 93.30%
+[2025-12-02 23:52:48] src.utils.training - [32mINFO[0m - Epoch [1] Batch [180/1801] Loss: 0.0326 Acc: 93.52%
+[2025-12-02 23:53:31] src.utils.training - [32mINFO[0m - Epoch [1] Batch [198/1801] Loss: 0.0321 Acc: 93.71%
+[2025-12-02 23:54:07] src.utils.training - [32mINFO[0m - Epoch [1] Batch [216/1801] Loss: 0.0315 Acc: 93.89%
+[2025-12-02 23:54:52] src.utils.training - [32mINFO[0m - Epoch [1] Batch [234/1801] Loss: 0.0308 Acc: 94.07%
+[2025-12-02 23:55:29] src.utils.training - [32mINFO[0m - Epoch [1] Batch [252/1801] Loss: 0.0303 Acc: 94.22%
+[2025-12-02 23:56:12] src.utils.training - [32mINFO[0m - Epoch [1] Batch [270/1801] Loss: 0.0299 Acc: 94.33%
+[2025-12-02 23:56:49] src.utils.training - [32mINFO[0m - Epoch [1] Batch [288/1801] Loss: 0.0297 Acc: 94.40%
+[2025-12-02 23:57:32] src.utils.training - [32mINFO[0m - Epoch [1] Batch [306/1801] Loss: 0.0293 Acc: 94.52%
+[2025-12-02 23:58:08] src.utils.training - [32mINFO[0m - Epoch [1] Batch [324/1801] Loss: 0.0290 Acc: 94.59%
+[2025-12-02 23:58:51] src.utils.training - [32mINFO[0m - Epoch [1] Batch [342/1801] Loss: 0.0286 Acc: 94.69%
+[2025-12-02 23:59:27] src.utils.training - [32mINFO[0m - Epoch [1] Batch [360/1801] Loss: 0.0282 Acc: 94.80%
+[2025-12-03 00:00:11] src.utils.training - [32mINFO[0m - Epoch [1] Batch [378/1801] Loss: 0.0278 Acc: 94.89%
+[2025-12-03 00:00:47] src.utils.training - [32mINFO[0m - Epoch [1] Batch [396/1801] Loss: 0.0277 Acc: 94.93%
+[2025-12-03 00:01:30] src.utils.training - [32mINFO[0m - Epoch [1] Batch [414/1801] Loss: 0.0276 Acc: 94.99%
+[2025-12-03 00:02:07] src.utils.training - [32mINFO[0m - Epoch [1] Batch [432/1801] Loss: 0.0273 Acc: 95.05%
+[2025-12-03 00:02:50] src.utils.training - [32mINFO[0m - Epoch [1] Batch [450/1801] Loss: 0.0271 Acc: 95.11%
+[2025-12-03 00:03:27] src.utils.training - [32mINFO[0m - Epoch [1] Batch [468/1801] Loss: 0.0268 Acc: 95.16%
+[2025-12-03 00:04:10] src.utils.training - [32mINFO[0m - Epoch [1] Batch [486/1801] Loss: 0.0266 Acc: 95.22%
+[2025-12-03 00:04:46] src.utils.training - [32mINFO[0m - Epoch [1] Batch [504/1801] Loss: 0.0264 Acc: 95.27%
+[2025-12-03 00:05:29] src.utils.training - [32mINFO[0m - Epoch [1] Batch [522/1801] Loss: 0.0261 Acc: 95.34%
+[2025-12-03 00:06:05] src.utils.training - [32mINFO[0m - Epoch [1] Batch [540/1801] Loss: 0.0260 Acc: 95.37%
+[2025-12-03 00:06:48] src.utils.training - [32mINFO[0m - Epoch [1] Batch [558/1801] Loss: 0.0260 Acc: 95.38%
+[2025-12-03 00:07:24] src.utils.training - [32mINFO[0m - Epoch [1] Batch [576/1801] Loss: 0.0260 Acc: 95.40%
+[2025-12-03 00:08:08] src.utils.training - [32mINFO[0m - Epoch [1] Batch [594/1801] Loss: 0.0258 Acc: 95.45%
+[2025-12-03 00:08:45] src.utils.training - [32mINFO[0m - Epoch [1] Batch [612/1801] Loss: 0.0257 Acc: 95.46%
+[2025-12-03 00:09:30] src.utils.training - [32mINFO[0m - Epoch [1] Batch [630/1801] Loss: 0.0256 Acc: 95.49%
+[2025-12-03 00:10:08] src.utils.training - [32mINFO[0m - Epoch [1] Batch [648/1801] Loss: 0.0256 Acc: 95.51%
+[2025-12-03 00:10:51] src.utils.training - [32mINFO[0m - Epoch [1] Batch [666/1801] Loss: 0.0255 Acc: 95.54%
+[2025-12-03 00:11:27] src.utils.training - [32mINFO[0m - Epoch [1] Batch [684/1801] Loss: 0.0253 Acc: 95.58%
+[2025-12-03 00:12:11] src.utils.training - [32mINFO[0m - Epoch [1] Batch [702/1801] Loss: 0.0252 Acc: 95.61%
+[2025-12-03 00:12:48] src.utils.training - [32mINFO[0m - Epoch [1] Batch [720/1801] Loss: 0.0252 Acc: 95.62%
+[2025-12-03 00:13:32] src.utils.training - [32mINFO[0m - Epoch [1] Batch [738/1801] Loss: 0.0251 Acc: 95.64%
+[2025-12-03 00:14:09] src.utils.training - [32mINFO[0m - Epoch [1] Batch [756/1801] Loss: 0.0250 Acc: 95.66%
+[2025-12-03 00:14:53] src.utils.training - [32mINFO[0m - Epoch [1] Batch [774/1801] Loss: 0.0250 Acc: 95.68%
+[2025-12-03 00:15:29] src.utils.training - [32mINFO[0m - Epoch [1] Batch [792/1801] Loss: 0.0249 Acc: 95.70%
+[2025-12-03 00:16:13] src.utils.training - [32mINFO[0m - Epoch [1] Batch [810/1801] Loss: 0.0248 Acc: 95.72%
+[2025-12-03 00:16:49] src.utils.training - [32mINFO[0m - Epoch [1] Batch [828/1801] Loss: 0.0248 Acc: 95.73%
+[2025-12-03 00:17:32] src.utils.training - [32mINFO[0m - Epoch [1] Batch [846/1801] Loss: 0.0248 Acc: 95.72%
+[2025-12-03 00:18:10] src.utils.training - [32mINFO[0m - Epoch [1] Batch [864/1801] Loss: 0.0247 Acc: 95.74%
+[2025-12-03 00:18:52] src.utils.training - [32mINFO[0m - Epoch [1] Batch [882/1801] Loss: 0.0247 Acc: 95.75%
+[2025-12-03 00:19:31] src.utils.training - [32mINFO[0m - Epoch [1] Batch [900/1801] Loss: 0.0246 Acc: 95.77%
+[2025-12-03 00:20:12] src.utils.training - [32mINFO[0m - Epoch [1] Batch [918/1801] Loss: 0.0245 Acc: 95.78%
+[2025-12-03 00:20:51] src.utils.training - [32mINFO[0m - Epoch [1] Batch [936/1801] Loss: 0.0244 Acc: 95.80%
+[2025-12-03 00:21:32] src.utils.training - [32mINFO[0m - Epoch [1] Batch [954/1801] Loss: 0.0244 Acc: 95.81%
+[2025-12-03 00:22:11] src.utils.training - [32mINFO[0m - Epoch [1] Batch [972/1801] Loss: 0.0244 Acc: 95.82%
+[2025-12-03 00:22:52] src.utils.training - [32mINFO[0m - Epoch [1] Batch [990/1801] Loss: 0.0244 Acc: 95.83%
+[2025-12-03 00:23:30] src.utils.training - [32mINFO[0m - Epoch [1] Batch [1008/1801] Loss: 0.0242 Acc: 95.85%
+[2025-12-03 00:24:12] src.utils.training - [32mINFO[0m - Epoch [1] Batch [1026/1801] Loss: 0.0242 Acc: 95.86%
+[2025-12-03 00:24:50] src.utils.training - [32mINFO[0m - Epoch [1] Batch [1044/1801] Loss: 0.0241 Acc: 95.87%
+[2025-12-03 00:25:33] src.utils.training - [32mINFO[0m - Epoch [1] Batch [1062/1801] Loss: 0.0241 Acc: 95.89%
+[2025-12-03 00:26:11] src.utils.training - [32mINFO[0m - Epoch [1] Batch [1080/1801] Loss: 0.0241 Acc: 95.90%
+[2025-12-03 00:26:53] src.utils.training - [32mINFO[0m - Epoch [1] Batch [1098/1801] Loss: 0.0240 Acc: 95.91%
+[2025-12-03 00:27:30] src.utils.training - [32mINFO[0m - Epoch [1] Batch [1116/1801] Loss: 0.0240 Acc: 95.91%
+[2025-12-03 00:28:13] src.utils.training - [32mINFO[0m - Epoch [1] Batch [1134/1801] Loss: 0.0239 Acc: 95.93%
+[2025-12-03 00:28:50] src.utils.training - [32mINFO[0m - Epoch [1] Batch [1152/1801] Loss: 0.0239 Acc: 95.94%
+[2025-12-03 00:29:33] src.utils.training - [32mINFO[0m - Epoch [1] Batch [1170/1801] Loss: 0.0239 Acc: 95.94%
+[2025-12-03 00:30:10] src.utils.training - [32mINFO[0m - Epoch [1] Batch [1188/1801] Loss: 0.0238 Acc: 95.95%
+[2025-12-03 00:30:54] src.utils.training - [32mINFO[0m - Epoch [1] Batch [1206/1801] Loss: 0.0238 Acc: 95.95%
+[2025-12-03 00:31:31] src.utils.training - [32mINFO[0m - Epoch [1] Batch [1224/1801] Loss: 0.0237 Acc: 95.97%
+[2025-12-03 00:32:14] src.utils.training - [32mINFO[0m - Epoch [1] Batch [1242/1801] Loss: 0.0237 Acc: 95.97%
+[2025-12-03 00:32:51] src.utils.training - [32mINFO[0m - Epoch [1] Batch [1260/1801] Loss: 0.0237 Acc: 95.98%
+[2025-12-03 00:33:34] src.utils.training - [32mINFO[0m - Epoch [1] Batch [1278/1801] Loss: 0.0236 Acc: 95.99%
+[2025-12-03 00:34:11] src.utils.training - [32mINFO[0m - Epoch [1] Batch [1296/1801] Loss: 0.0236 Acc: 95.99%
+[2025-12-03 00:34:55] src.utils.training - [32mINFO[0m - Epoch [1] Batch [1314/1801] Loss: 0.0236 Acc: 96.00%
+[2025-12-03 00:35:32] src.utils.training - [32mINFO[0m - Epoch [1] Batch [1332/1801] Loss: 0.0236 Acc: 96.00%
+[2025-12-03 00:36:15] src.utils.training - [32mINFO[0m - Epoch [1] Batch [1350/1801] Loss: 0.0236 Acc: 96.01%
+[2025-12-03 00:36:52] src.utils.training - [32mINFO[0m - Epoch [1] Batch [1368/1801] Loss: 0.0236 Acc: 96.01%
+[2025-12-03 00:37:36] src.utils.training - [32mINFO[0m - Epoch [1] Batch [1386/1801] Loss: 0.0235 Acc: 96.02%
+[2025-12-03 00:38:12] src.utils.training - [32mINFO[0m - Epoch [1] Batch [1404/1801] Loss: 0.0234 Acc: 96.04%
+[2025-12-03 00:38:56] src.utils.training - [32mINFO[0m - Epoch [1] Batch [1422/1801] Loss: 0.0234 Acc: 96.04%
+[2025-12-03 00:39:32] src.utils.training - [32mINFO[0m - Epoch [1] Batch [1440/1801] Loss: 0.0234 Acc: 96.05%
+[2025-12-03 00:40:16] src.utils.training - [32mINFO[0m - Epoch [1] Batch [1458/1801] Loss: 0.0233 Acc: 96.06%
+[2025-12-03 00:40:52] src.utils.training - [32mINFO[0m - Epoch [1] Batch [1476/1801] Loss: 0.0233 Acc: 96.06%
+[2025-12-03 00:41:36] src.utils.training - [32mINFO[0m - Epoch [1] Batch [1494/1801] Loss: 0.0232 Acc: 96.07%
+[2025-12-03 00:42:13] src.utils.training - [32mINFO[0m - Epoch [1] Batch [1512/1801] Loss: 0.0232 Acc: 96.07%
+[2025-12-03 00:42:56] src.utils.training - [32mINFO[0m - Epoch [1] Batch [1530/1801] Loss: 0.0232 Acc: 96.08%
+[2025-12-03 00:43:33] src.utils.training - [32mINFO[0m - Epoch [1] Batch [1548/1801] Loss: 0.0232 Acc: 96.08%
+[2025-12-03 00:44:17] src.utils.training - [32mINFO[0m - Epoch [1] Batch [1566/1801] Loss: 0.0232 Acc: 96.08%
+[2025-12-03 00:44:53] src.utils.training - [32mINFO[0m - Epoch [1] Batch [1584/1801] Loss: 0.0232 Acc: 96.08%
+[2025-12-03 00:45:37] src.utils.training - [32mINFO[0m - Epoch [1] Batch [1602/1801] Loss: 0.0231 Acc: 96.09%
+[2025-12-03 00:46:14] src.utils.training - [32mINFO[0m - Epoch [1] Batch [1620/1801] Loss: 0.0231 Acc: 96.09%
+[2025-12-03 00:46:57] src.utils.training - [32mINFO[0m - Epoch [1] Batch [1638/1801] Loss: 0.0231 Acc: 96.09%
+[2025-12-03 00:47:34] src.utils.training - [32mINFO[0m - Epoch [1] Batch [1656/1801] Loss: 0.0231 Acc: 96.10%
+[2025-12-03 00:48:18] src.utils.training - [32mINFO[0m - Epoch [1] Batch [1674/1801] Loss: 0.0231 Acc: 96.09%
+[2025-12-03 00:48:54] src.utils.training - [32mINFO[0m - Epoch [1] Batch [1692/1801] Loss: 0.0231 Acc: 96.10%
+[2025-12-03 00:49:38] src.utils.training - [32mINFO[0m - Epoch [1] Batch [1710/1801] Loss: 0.0230 Acc: 96.10%
+[2025-12-03 00:50:15] src.utils.training - [32mINFO[0m - Epoch [1] Batch [1728/1801] Loss: 0.0230 Acc: 96.11%
+[2025-12-03 00:50:59] src.utils.training - [32mINFO[0m - Epoch [1] Batch [1746/1801] Loss: 0.0230 Acc: 96.10%
+[2025-12-03 00:51:36] src.utils.training - [32mINFO[0m - Epoch [1] Batch [1764/1801] Loss: 0.0230 Acc: 96.11%
+[2025-12-03 00:52:19] src.utils.training - [32mINFO[0m - Epoch [1] Batch [1782/1801] Loss: 0.0229 Acc: 96.12%
+[2025-12-03 00:52:56] src.utils.training - [32mINFO[0m - Epoch [1] Batch [1800/1801] Loss: 0.0229 Acc: 96.13%
+[2025-12-03 00:53:01] src.utils.training - [32mINFO[0m - Epoch [1] Training Completed in 4013s - Loss: 0.0229 Acc: 96.13%
+[2025-12-03 00:54:51] src.utils.clip_level_evaluation - [32mINFO[0m - [VAL] Batch 50/477 Loss: 0.1093
+[2025-12-03 00:56:43] src.utils.clip_level_evaluation - [32mINFO[0m - [VAL] Batch 100/477 Loss: 0.0554
+[2025-12-03 00:58:26] src.utils.clip_level_evaluation - [32mINFO[0m - [VAL] Batch 150/477 Loss: 0.0374
+[2025-12-03 01:00:17] src.utils.clip_level_evaluation - [32mINFO[0m - [VAL] Batch 200/477 Loss: 0.0283
+[2025-12-03 01:01:56] src.utils.clip_level_evaluation - [32mINFO[0m - [VAL] Batch 250/477 Loss: 0.0227
+[2025-12-03 01:03:50] src.utils.clip_level_evaluation - [32mINFO[0m - [VAL] Batch 300/477 Loss: 0.0191
+[2025-12-03 01:05:45] src.utils.clip_level_evaluation - [32mINFO[0m - [VAL] Batch 350/477 Loss: 0.0166
+[2025-12-03 01:07:38] src.utils.clip_level_evaluation - [32mINFO[0m - [VAL] Batch 400/477 Loss: 0.0147
+[2025-12-03 01:09:23] src.utils.clip_level_evaluation - [32mINFO[0m - [VAL] Batch 450/477 Loss: 0.0132
+[2025-12-03 01:10:23] src.utils.clip_level_evaluation - [32mINFO[0m - [VAL] Finished in 1042s
+[2025-12-03 01:10:23] src.utils.clip_level_evaluation - [32mINFO[0m - Results:
+Loss: 0.0125 | Acc: 97.56% | AUC: 0.6042
+   >> Anomaly: P=0.976 R=1.000 F1=0.988
+   >> Normal:  P=0.000 R=0.000
+   >> Counts:  TP=59446 FN=0 (Missed) | TN=0 FP=1488 (False Alarm)
+   >> Rates:   FPR=1.0000 | FNR=0.0000
+[2025-12-03 01:10:23] __main__ - [32mINFO[0m - Epoch [1] Validation Summary - Loss: 0.0125 | Acc: 97.56% | AUC: 0.6042
+[2025-12-03 01:10:23] __main__ - [32mINFO[0m -   Anomaly Detection: Precision=0.976 Recall=1.000 F1=0.988
+[2025-12-03 01:10:23] __main__ - [32mINFO[0m -   Confusion Matrix: TP=59446 FN=0 TN=0 FP=1488
+[2025-12-03 01:10:23] __main__ - [32mINFO[0m -   Error Rates: FPR=1.0000 FNR=0.0000
+[2025-12-03 01:10:23] __main__ - [32mINFO[0m - New best AUC: 0.6042
+[2025-12-03 01:10:23] src.utils.training_utils - [32mINFO[0m - Saved best model to /work3/s225224/ucf-crime/checkpoints/r3d_binary_20251202_234604/best_model.pth
+[2025-12-03 01:11:08] src.utils.training - [32mINFO[0m - Epoch [2] Batch [18/1801] Loss: 0.0217 Acc: 96.22%
+[2025-12-03 01:11:43] src.utils.training - [32mINFO[0m - Epoch [2] Batch [36/1801] Loss: 0.0209 Acc: 96.31%
+[2025-12-03 01:12:26] src.utils.training - [32mINFO[0m - Epoch [2] Batch [54/1801] Loss: 0.0214 Acc: 96.21%
+[2025-12-03 01:13:02] src.utils.training - [32mINFO[0m - Epoch [2] Batch [72/1801] Loss: 0.0205 Acc: 96.40%
+[2025-12-03 01:13:44] src.utils.training - [32mINFO[0m - Epoch [2] Batch [90/1801] Loss: 0.0204 Acc: 96.48%
+[2025-12-03 01:14:21] src.utils.training - [32mINFO[0m - Epoch [2] Batch [108/1801] Loss: 0.0205 Acc: 96.43%
+[2025-12-03 01:15:04] src.utils.training - [32mINFO[0m - Epoch [2] Batch [126/1801] Loss: 0.0208 Acc: 96.37%
+[2025-12-03 01:15:40] src.utils.training - [32mINFO[0m - Epoch [2] Batch [144/1801] Loss: 0.0203 Acc: 96.45%
+[2025-12-03 01:16:22] src.utils.training - [32mINFO[0m - Epoch [2] Batch [162/1801] Loss: 0.0205 Acc: 96.41%
+[2025-12-03 01:16:58] src.utils.training - [32mINFO[0m - Epoch [2] Batch [180/1801] Loss: 0.0201 Acc: 96.46%
+[2025-12-03 01:17:41] src.utils.training - [32mINFO[0m - Epoch [2] Batch [198/1801] Loss: 0.0202 Acc: 96.43%
+[2025-12-03 01:18:16] src.utils.training - [32mINFO[0m - Epoch [2] Batch [216/1801] Loss: 0.0200 Acc: 96.47%
+[2025-12-03 01:18:59] src.utils.training - [32mINFO[0m - Epoch [2] Batch [234/1801] Loss: 0.0201 Acc: 96.43%
+[2025-12-03 01:19:35] src.utils.training - [32mINFO[0m - Epoch [2] Batch [252/1801] Loss: 0.0204 Acc: 96.40%
+[2025-12-03 01:20:18] src.utils.training - [32mINFO[0m - Epoch [2] Batch [270/1801] Loss: 0.0202 Acc: 96.45%
+[2025-12-03 01:20:54] src.utils.training - [32mINFO[0m - Epoch [2] Batch [288/1801] Loss: 0.0203 Acc: 96.42%
+[2025-12-03 01:21:36] src.utils.training - [32mINFO[0m - Epoch [2] Batch [306/1801] Loss: 0.0203 Acc: 96.43%
+[2025-12-03 01:22:12] src.utils.training - [32mINFO[0m - Epoch [2] Batch [324/1801] Loss: 0.0204 Acc: 96.42%
+[2025-12-03 01:22:55] src.utils.training - [32mINFO[0m - Epoch [2] Batch [342/1801] Loss: 0.0202 Acc: 96.45%
+[2025-12-03 01:23:30] src.utils.training - [32mINFO[0m - Epoch [2] Batch [360/1801] Loss: 0.0202 Acc: 96.44%
+[2025-12-03 01:24:13] src.utils.training - [32mINFO[0m - Epoch [2] Batch [378/1801] Loss: 0.0201 Acc: 96.46%
+[2025-12-03 01:24:49] src.utils.training - [32mINFO[0m - Epoch [2] Batch [396/1801] Loss: 0.0201 Acc: 96.44%
+[2025-12-03 01:25:32] src.utils.training - [32mINFO[0m - Epoch [2] Batch [414/1801] Loss: 0.0201 Acc: 96.45%
+[2025-12-03 01:26:08] src.utils.training - [32mINFO[0m - Epoch [2] Batch [432/1801] Loss: 0.0203 Acc: 96.42%
+[2025-12-03 01:26:51] src.utils.training - [32mINFO[0m - Epoch [2] Batch [450/1801] Loss: 0.0203 Acc: 96.41%
+[2025-12-03 01:27:26] src.utils.training - [32mINFO[0m - Epoch [2] Batch [468/1801] Loss: 0.0203 Acc: 96.41%
+[2025-12-03 01:28:08] src.utils.training - [32mINFO[0m - Epoch [2] Batch [486/1801] Loss: 0.0202 Acc: 96.42%
+[2025-12-03 01:28:44] src.utils.training - [32mINFO[0m - Epoch [2] Batch [504/1801] Loss: 0.0201 Acc: 96.43%
+[2025-12-03 01:29:26] src.utils.training - [32mINFO[0m - Epoch [2] Batch [522/1801] Loss: 0.0200 Acc: 96.44%
+[2025-12-03 01:30:02] src.utils.training - [32mINFO[0m - Epoch [2] Batch [540/1801] Loss: 0.0201 Acc: 96.43%
+[2025-12-03 01:30:44] src.utils.training - [32mINFO[0m - Epoch [2] Batch [558/1801] Loss: 0.0201 Acc: 96.42%
+[2025-12-03 01:31:20] src.utils.training - [32mINFO[0m - Epoch [2] Batch [576/1801] Loss: 0.0200 Acc: 96.42%
+[2025-12-03 01:32:03] src.utils.training - [32mINFO[0m - Epoch [2] Batch [594/1801] Loss: 0.0201 Acc: 96.42%
+[2025-12-03 01:32:39] src.utils.training - [32mINFO[0m - Epoch [2] Batch [612/1801] Loss: 0.0201 Acc: 96.41%
+[2025-12-03 01:33:21] src.utils.training - [32mINFO[0m - Epoch [2] Batch [630/1801] Loss: 0.0202 Acc: 96.39%
+[2025-12-03 01:33:58] src.utils.training - [32mINFO[0m - Epoch [2] Batch [648/1801] Loss: 0.0201 Acc: 96.40%
+[2025-12-03 01:34:41] src.utils.training - [32mINFO[0m - Epoch [2] Batch [666/1801] Loss: 0.0201 Acc: 96.40%
+[2025-12-03 01:35:17] src.utils.training - [32mINFO[0m - Epoch [2] Batch [684/1801] Loss: 0.0201 Acc: 96.41%
+[2025-12-03 01:35:59] src.utils.training - [32mINFO[0m - Epoch [2] Batch [702/1801] Loss: 0.0201 Acc: 96.41%
+[2025-12-03 01:36:36] src.utils.training - [32mINFO[0m - Epoch [2] Batch [720/1801] Loss: 0.0200 Acc: 96.41%
+[2025-12-03 01:37:18] src.utils.training - [32mINFO[0m - Epoch [2] Batch [738/1801] Loss: 0.0200 Acc: 96.42%
+[2025-12-03 01:37:54] src.utils.training - [32mINFO[0m - Epoch [2] Batch [756/1801] Loss: 0.0200 Acc: 96.43%
+[2025-12-03 01:38:37] src.utils.training - [32mINFO[0m - Epoch [2] Batch [774/1801] Loss: 0.0200 Acc: 96.42%
+[2025-12-03 01:39:13] src.utils.training - [32mINFO[0m - Epoch [2] Batch [792/1801] Loss: 0.0199 Acc: 96.43%
+[2025-12-03 01:39:56] src.utils.training - [32mINFO[0m - Epoch [2] Batch [810/1801] Loss: 0.0199 Acc: 96.43%
+[2025-12-03 01:40:32] src.utils.training - [32mINFO[0m - Epoch [2] Batch [828/1801] Loss: 0.0198 Acc: 96.45%
+[2025-12-03 01:41:15] src.utils.training - [32mINFO[0m - Epoch [2] Batch [846/1801] Loss: 0.0198 Acc: 96.44%
+[2025-12-03 01:41:51] src.utils.training - [32mINFO[0m - Epoch [2] Batch [864/1801] Loss: 0.0197 Acc: 96.46%
+[2025-12-03 01:42:34] src.utils.training - [32mINFO[0m - Epoch [2] Batch [882/1801] Loss: 0.0197 Acc: 96.46%
+[2025-12-03 01:43:10] src.utils.training - [32mINFO[0m - Epoch [2] Batch [900/1801] Loss: 0.0197 Acc: 96.47%
+[2025-12-03 01:43:54] src.utils.training - [32mINFO[0m - Epoch [2] Batch [918/1801] Loss: 0.0196 Acc: 96.48%
+[2025-12-03 01:44:29] src.utils.training - [32mINFO[0m - Epoch [2] Batch [936/1801] Loss: 0.0196 Acc: 96.48%
+[2025-12-03 01:45:13] src.utils.training - [32mINFO[0m - Epoch [2] Batch [954/1801] Loss: 0.0196 Acc: 96.48%
+[2025-12-03 01:45:49] src.utils.training - [32mINFO[0m - Epoch [2] Batch [972/1801] Loss: 0.0196 Acc: 96.47%
+[2025-12-03 01:46:32] src.utils.training - [32mINFO[0m - Epoch [2] Batch [990/1801] Loss: 0.0196 Acc: 96.47%
+[2025-12-03 01:47:07] src.utils.training - [32mINFO[0m - Epoch [2] Batch [1008/1801] Loss: 0.0195 Acc: 96.48%
+[2025-12-03 01:47:51] src.utils.training - [32mINFO[0m - Epoch [2] Batch [1026/1801] Loss: 0.0195 Acc: 96.48%
+[2025-12-03 01:48:27] src.utils.training - [32mINFO[0m - Epoch [2] Batch [1044/1801] Loss: 0.0195 Acc: 96.48%
+[2025-12-03 01:49:09] src.utils.training - [32mINFO[0m - Epoch [2] Batch [1062/1801] Loss: 0.0195 Acc: 96.49%
+[2025-12-03 01:49:46] src.utils.training - [32mINFO[0m - Epoch [2] Batch [1080/1801] Loss: 0.0195 Acc: 96.49%
+[2025-12-03 01:50:29] src.utils.training - [32mINFO[0m - Epoch [2] Batch [1098/1801] Loss: 0.0195 Acc: 96.49%
+[2025-12-03 01:51:05] src.utils.training - [32mINFO[0m - Epoch [2] Batch [1116/1801] Loss: 0.0194 Acc: 96.50%
+[2025-12-03 01:51:48] src.utils.training - [32mINFO[0m - Epoch [2] Batch [1134/1801] Loss: 0.0194 Acc: 96.50%
+[2025-12-03 01:52:24] src.utils.training - [32mINFO[0m - Epoch [2] Batch [1152/1801] Loss: 0.0194 Acc: 96.50%
+[2025-12-03 01:53:07] src.utils.training - [32mINFO[0m - Epoch [2] Batch [1170/1801] Loss: 0.0194 Acc: 96.48%
+[2025-12-03 01:53:43] src.utils.training - [32mINFO[0m - Epoch [2] Batch [1188/1801] Loss: 0.0194 Acc: 96.49%
+[2025-12-03 01:54:26] src.utils.training - [32mINFO[0m - Epoch [2] Batch [1206/1801] Loss: 0.0194 Acc: 96.49%
+[2025-12-03 01:55:02] src.utils.training - [32mINFO[0m - Epoch [2] Batch [1224/1801] Loss: 0.0194 Acc: 96.49%
+[2025-12-03 01:55:46] src.utils.training - [32mINFO[0m - Epoch [2] Batch [1242/1801] Loss: 0.0194 Acc: 96.49%
+[2025-12-03 01:56:22] src.utils.training - [32mINFO[0m - Epoch [2] Batch [1260/1801] Loss: 0.0193 Acc: 96.48%
+[2025-12-03 01:57:05] src.utils.training - [32mINFO[0m - Epoch [2] Batch [1278/1801] Loss: 0.0193 Acc: 96.49%
+[2025-12-03 01:57:41] src.utils.training - [32mINFO[0m - Epoch [2] Batch [1296/1801] Loss: 0.0193 Acc: 96.49%
+[2025-12-03 01:58:24] src.utils.training - [32mINFO[0m - Epoch [2] Batch [1314/1801] Loss: 0.0193 Acc: 96.49%
+[2025-12-03 01:59:00] src.utils.training - [32mINFO[0m - Epoch [2] Batch [1332/1801] Loss: 0.0192 Acc: 96.50%
+[2025-12-03 01:59:43] src.utils.training - [32mINFO[0m - Epoch [2] Batch [1350/1801] Loss: 0.0192 Acc: 96.50%
+[2025-12-03 02:00:19] src.utils.training - [32mINFO[0m - Epoch [2] Batch [1368/1801] Loss: 0.0192 Acc: 96.51%
+[2025-12-03 02:01:03] src.utils.training - [32mINFO[0m - Epoch [2] Batch [1386/1801] Loss: 0.0192 Acc: 96.51%
+[2025-12-03 02:01:38] src.utils.training - [32mINFO[0m - Epoch [2] Batch [1404/1801] Loss: 0.0191 Acc: 96.52%
+[2025-12-03 02:02:21] src.utils.training - [32mINFO[0m - Epoch [2] Batch [1422/1801] Loss: 0.0191 Acc: 96.52%
+[2025-12-03 02:02:57] src.utils.training - [32mINFO[0m - Epoch [2] Batch [1440/1801] Loss: 0.0191 Acc: 96.52%
+[2025-12-03 02:03:39] src.utils.training - [32mINFO[0m - Epoch [2] Batch [1458/1801] Loss: 0.0191 Acc: 96.52%
+[2025-12-03 02:04:17] src.utils.training - [32mINFO[0m - Epoch [2] Batch [1476/1801] Loss: 0.0190 Acc: 96.53%
+[2025-12-03 02:05:00] src.utils.training - [32mINFO[0m - Epoch [2] Batch [1494/1801] Loss: 0.0190 Acc: 96.54%
+[2025-12-03 02:05:37] src.utils.training - [32mINFO[0m - Epoch [2] Batch [1512/1801] Loss: 0.0189 Acc: 96.54%
+[2025-12-03 02:06:20] src.utils.training - [32mINFO[0m - Epoch [2] Batch [1530/1801] Loss: 0.0189 Acc: 96.54%
+[2025-12-03 02:06:57] src.utils.training - [32mINFO[0m - Epoch [2] Batch [1548/1801] Loss: 0.0189 Acc: 96.55%
+[2025-12-03 02:07:40] src.utils.training - [32mINFO[0m - Epoch [2] Batch [1566/1801] Loss: 0.0189 Acc: 96.55%
+[2025-12-03 02:08:16] src.utils.training - [32mINFO[0m - Epoch [2] Batch [1584/1801] Loss: 0.0188 Acc: 96.55%
+[2025-12-03 02:09:00] src.utils.training - [32mINFO[0m - Epoch [2] Batch [1602/1801] Loss: 0.0188 Acc: 96.55%
+[2025-12-03 02:09:36] src.utils.training - [32mINFO[0m - Epoch [2] Batch [1620/1801] Loss: 0.0188 Acc: 96.55%
+[2025-12-03 02:10:19] src.utils.training - [32mINFO[0m - Epoch [2] Batch [1638/1801] Loss: 0.0188 Acc: 96.55%
+[2025-12-03 02:10:55] src.utils.training - [32mINFO[0m - Epoch [2] Batch [1656/1801] Loss: 0.0187 Acc: 96.56%
+[2025-12-03 02:11:38] src.utils.training - [32mINFO[0m - Epoch [2] Batch [1674/1801] Loss: 0.0187 Acc: 96.56%
+[2025-12-03 02:12:15] src.utils.training - [32mINFO[0m - Epoch [2] Batch [1692/1801] Loss: 0.0187 Acc: 96.56%
+[2025-12-03 02:12:58] src.utils.training - [32mINFO[0m - Epoch [2] Batch [1710/1801] Loss: 0.0187 Acc: 96.56%
+[2025-12-03 02:13:34] src.utils.training - [32mINFO[0m - Epoch [2] Batch [1728/1801] Loss: 0.0187 Acc: 96.56%
+[2025-12-03 02:14:18] src.utils.training - [32mINFO[0m - Epoch [2] Batch [1746/1801] Loss: 0.0187 Acc: 96.56%
+[2025-12-03 02:14:54] src.utils.training - [32mINFO[0m - Epoch [2] Batch [1764/1801] Loss: 0.0186 Acc: 96.58%
+[2025-12-03 02:15:38] src.utils.training - [32mINFO[0m - Epoch [2] Batch [1782/1801] Loss: 0.0186 Acc: 96.58%
+[2025-12-03 02:16:14] src.utils.training - [32mINFO[0m - Epoch [2] Batch [1800/1801] Loss: 0.0186 Acc: 96.58%
+[2025-12-03 02:16:18] src.utils.training - [32mINFO[0m - Epoch [2] Training Completed in 3955s - Loss: 0.0186 Acc: 96.58%
+[2025-12-03 02:18:06] src.utils.clip_level_evaluation - [32mINFO[0m - [VAL] Batch 50/477 Loss: 0.0925
+[2025-12-03 02:19:56] src.utils.clip_level_evaluation - [32mINFO[0m - [VAL] Batch 100/477 Loss: 0.0470
+[2025-12-03 02:21:36] src.utils.clip_level_evaluation - [32mINFO[0m - [VAL] Batch 150/477 Loss: 0.0319
+[2025-12-03 02:23:25] src.utils.clip_level_evaluation - [32mINFO[0m - [VAL] Batch 200/477 Loss: 0.0241
+[2025-12-03 02:25:02] src.utils.clip_level_evaluation - [32mINFO[0m - [VAL] Batch 250/477 Loss: 0.0195
+[2025-12-03 02:26:57] src.utils.clip_level_evaluation - [32mINFO[0m - [VAL] Batch 300/477 Loss: 0.0164
+[2025-12-03 02:28:48] src.utils.clip_level_evaluation - [32mINFO[0m - [VAL] Batch 350/477 Loss: 0.0143
+[2025-12-03 02:30:43] src.utils.clip_level_evaluation - [32mINFO[0m - [VAL] Batch 400/477 Loss: 0.0127
+[2025-12-03 02:32:27] src.utils.clip_level_evaluation - [32mINFO[0m - [VAL] Batch 450/477 Loss: 0.0115
+[2025-12-03 02:33:25] src.utils.clip_level_evaluation - [32mINFO[0m - [VAL] Finished in 1027s
+[2025-12-03 02:33:25] src.utils.clip_level_evaluation - [32mINFO[0m - Results:
+Loss: 0.0109 | Acc: 97.56% | AUC: 0.7416
+   >> Anomaly: P=0.976 R=1.000 F1=0.988
+   >> Normal:  P=0.000 R=0.000
+   >> Counts:  TP=59446 FN=0 (Missed) | TN=0 FP=1488 (False Alarm)
+   >> Rates:   FPR=1.0000 | FNR=0.0000
+[2025-12-03 02:33:25] __main__ - [32mINFO[0m - Epoch [2] Validation Summary - Loss: 0.0109 | Acc: 97.56% | AUC: 0.7416
+[2025-12-03 02:33:25] __main__ - [32mINFO[0m -   Anomaly Detection: Precision=0.976 Recall=1.000 F1=0.988
+[2025-12-03 02:33:25] __main__ - [32mINFO[0m -   Confusion Matrix: TP=59446 FN=0 TN=0 FP=1488
+[2025-12-03 02:33:25] __main__ - [32mINFO[0m -   Error Rates: FPR=1.0000 FNR=0.0000
+[2025-12-03 02:33:25] __main__ - [32mINFO[0m - New best AUC: 0.7416
+[2025-12-03 02:33:26] src.utils.training_utils - [32mINFO[0m - Saved best model to /work3/s225224/ucf-crime/checkpoints/r3d_binary_20251202_234604/best_model.pth
+[2025-12-03 02:34:10] src.utils.training - [32mINFO[0m - Epoch [3] Batch [18/1801] Loss: 0.0191 Acc: 96.22%
+[2025-12-03 02:34:45] src.utils.training - [32mINFO[0m - Epoch [3] Batch [36/1801] Loss: 0.0179 Acc: 96.48%
+[2025-12-03 02:35:28] src.utils.training - [32mINFO[0m - Epoch [3] Batch [54/1801] Loss: 0.0174 Acc: 96.53%
+[2025-12-03 02:36:03] src.utils.training - [32mINFO[0m - Epoch [3] Batch [72/1801] Loss: 0.0174 Acc: 96.58%
+[2025-12-03 02:36:46] src.utils.training - [32mINFO[0m - Epoch [3] Batch [90/1801] Loss: 0.0177 Acc: 96.55%
+[2025-12-03 02:37:21] src.utils.training - [32mINFO[0m - Epoch [3] Batch [108/1801] Loss: 0.0179 Acc: 96.48%
+[2025-12-03 02:38:04] src.utils.training - [32mINFO[0m - Epoch [3] Batch [126/1801] Loss: 0.0181 Acc: 96.40%
+[2025-12-03 02:38:39] src.utils.training - [32mINFO[0m - Epoch [3] Batch [144/1801] Loss: 0.0178 Acc: 96.48%
+[2025-12-03 02:39:22] src.utils.training - [32mINFO[0m - Epoch [3] Batch [162/1801] Loss: 0.0176 Acc: 96.49%
+[2025-12-03 02:39:57] src.utils.training - [32mINFO[0m - Epoch [3] Batch [180/1801] Loss: 0.0176 Acc: 96.44%
+[2025-12-03 02:40:39] src.utils.training - [32mINFO[0m - Epoch [3] Batch [198/1801] Loss: 0.0176 Acc: 96.46%
+[2025-12-03 02:41:15] src.utils.training - [32mINFO[0m - Epoch [3] Batch [216/1801] Loss: 0.0175 Acc: 96.49%
+[2025-12-03 02:41:58] src.utils.training - [32mINFO[0m - Epoch [3] Batch [234/1801] Loss: 0.0173 Acc: 96.51%
+[2025-12-03 02:42:33] src.utils.training - [32mINFO[0m - Epoch [3] Batch [252/1801] Loss: 0.0172 Acc: 96.53%
+[2025-12-03 02:43:16] src.utils.training - [32mINFO[0m - Epoch [3] Batch [270/1801] Loss: 0.0172 Acc: 96.56%
+[2025-12-03 02:43:51] src.utils.training - [32mINFO[0m - Epoch [3] Batch [288/1801] Loss: 0.0171 Acc: 96.55%
+[2025-12-03 02:44:34] src.utils.training - [32mINFO[0m - Epoch [3] Batch [306/1801] Loss: 0.0170 Acc: 96.57%
+[2025-12-03 02:45:10] src.utils.training - [32mINFO[0m - Epoch [3] Batch [324/1801] Loss: 0.0170 Acc: 96.58%
+[2025-12-03 02:45:52] src.utils.training - [32mINFO[0m - Epoch [3] Batch [342/1801] Loss: 0.0168 Acc: 96.62%
+[2025-12-03 02:46:27] src.utils.training - [32mINFO[0m - Epoch [3] Batch [360/1801] Loss: 0.0167 Acc: 96.63%
+[2025-12-03 02:47:09] src.utils.training - [32mINFO[0m - Epoch [3] Batch [378/1801] Loss: 0.0166 Acc: 96.64%
+[2025-12-03 02:47:45] src.utils.training - [32mINFO[0m - Epoch [3] Batch [396/1801] Loss: 0.0166 Acc: 96.65%
+[2025-12-03 02:48:28] src.utils.training - [32mINFO[0m - Epoch [3] Batch [414/1801] Loss: 0.0166 Acc: 96.65%
+[2025-12-03 02:49:03] src.utils.training - [32mINFO[0m - Epoch [3] Batch [432/1801] Loss: 0.0165 Acc: 96.68%
+[2025-12-03 02:49:45] src.utils.training - [32mINFO[0m - Epoch [3] Batch [450/1801] Loss: 0.0166 Acc: 96.66%
+[2025-12-03 02:50:20] src.utils.training - [32mINFO[0m - Epoch [3] Batch [468/1801] Loss: 0.0166 Acc: 96.66%
+[2025-12-03 02:51:03] src.utils.training - [32mINFO[0m - Epoch [3] Batch [486/1801] Loss: 0.0167 Acc: 96.62%
+[2025-12-03 02:51:38] src.utils.training - [32mINFO[0m - Epoch [3] Batch [504/1801] Loss: 0.0166 Acc: 96.64%
+[2025-12-03 02:52:21] src.utils.training - [32mINFO[0m - Epoch [3] Batch [522/1801] Loss: 0.0165 Acc: 96.67%
+[2025-12-03 02:52:56] src.utils.training - [32mINFO[0m - Epoch [3] Batch [540/1801] Loss: 0.0165 Acc: 96.68%
+[2025-12-03 02:53:38] src.utils.training - [32mINFO[0m - Epoch [3] Batch [558/1801] Loss: 0.0165 Acc: 96.68%
+[2025-12-03 02:54:14] src.utils.training - [32mINFO[0m - Epoch [3] Batch [576/1801] Loss: 0.0165 Acc: 96.68%
+[2025-12-03 02:54:56] src.utils.training - [32mINFO[0m - Epoch [3] Batch [594/1801] Loss: 0.0165 Acc: 96.69%
+[2025-12-03 02:55:32] src.utils.training - [32mINFO[0m - Epoch [3] Batch [612/1801] Loss: 0.0164 Acc: 96.69%
+[2025-12-03 02:56:14] src.utils.training - [32mINFO[0m - Epoch [3] Batch [630/1801] Loss: 0.0165 Acc: 96.68%
+[2025-12-03 02:56:49] src.utils.training - [32mINFO[0m - Epoch [3] Batch [648/1801] Loss: 0.0165 Acc: 96.67%
+[2025-12-03 02:57:32] src.utils.training - [32mINFO[0m - Epoch [3] Batch [666/1801] Loss: 0.0165 Acc: 96.67%
+[2025-12-03 02:58:07] src.utils.training - [32mINFO[0m - Epoch [3] Batch [684/1801] Loss: 0.0165 Acc: 96.66%
+[2025-12-03 02:58:49] src.utils.training - [32mINFO[0m - Epoch [3] Batch [702/1801] Loss: 0.0165 Acc: 96.66%
+[2025-12-03 02:59:25] src.utils.training - [32mINFO[0m - Epoch [3] Batch [720/1801] Loss: 0.0165 Acc: 96.68%
+[2025-12-03 03:00:07] src.utils.training - [32mINFO[0m - Epoch [3] Batch [738/1801] Loss: 0.0165 Acc: 96.67%
+[2025-12-03 03:00:43] src.utils.training - [32mINFO[0m - Epoch [3] Batch [756/1801] Loss: 0.0165 Acc: 96.68%
+[2025-12-03 03:01:24] src.utils.training - [32mINFO[0m - Epoch [3] Batch [774/1801] Loss: 0.0165 Acc: 96.67%
+[2025-12-03 03:02:00] src.utils.training - [32mINFO[0m - Epoch [3] Batch [792/1801] Loss: 0.0165 Acc: 96.67%
+[2025-12-03 03:02:42] src.utils.training - [32mINFO[0m - Epoch [3] Batch [810/1801] Loss: 0.0164 Acc: 96.68%
+[2025-12-03 03:03:17] src.utils.training - [32mINFO[0m - Epoch [3] Batch [828/1801] Loss: 0.0164 Acc: 96.67%
+[2025-12-03 03:04:00] src.utils.training - [32mINFO[0m - Epoch [3] Batch [846/1801] Loss: 0.0164 Acc: 96.67%
+[2025-12-03 03:04:35] src.utils.training - [32mINFO[0m - Epoch [3] Batch [864/1801] Loss: 0.0164 Acc: 96.68%
+[2025-12-03 03:05:18] src.utils.training - [32mINFO[0m - Epoch [3] Batch [882/1801] Loss: 0.0164 Acc: 96.67%
+[2025-12-03 03:05:54] src.utils.training - [32mINFO[0m - Epoch [3] Batch [900/1801] Loss: 0.0163 Acc: 96.68%
+[2025-12-03 03:06:36] src.utils.training - [32mINFO[0m - Epoch [3] Batch [918/1801] Loss: 0.0164 Acc: 96.68%
+[2025-12-03 03:07:12] src.utils.training - [32mINFO[0m - Epoch [3] Batch [936/1801] Loss: 0.0164 Acc: 96.67%
+[2025-12-03 03:07:54] src.utils.training - [32mINFO[0m - Epoch [3] Batch [954/1801] Loss: 0.0164 Acc: 96.66%
+[2025-12-03 03:08:30] src.utils.training - [32mINFO[0m - Epoch [3] Batch [972/1801] Loss: 0.0164 Acc: 96.66%
+[2025-12-03 03:09:12] src.utils.training - [32mINFO[0m - Epoch [3] Batch [990/1801] Loss: 0.0164 Acc: 96.65%
+[2025-12-03 03:09:48] src.utils.training - [32mINFO[0m - Epoch [3] Batch [1008/1801] Loss: 0.0165 Acc: 96.64%
+[2025-12-03 03:10:31] src.utils.training - [32mINFO[0m - Epoch [3] Batch [1026/1801] Loss: 0.0164 Acc: 96.65%
+[2025-12-03 03:11:06] src.utils.training - [32mINFO[0m - Epoch [3] Batch [1044/1801] Loss: 0.0164 Acc: 96.65%
+[2025-12-03 03:11:49] src.utils.training - [32mINFO[0m - Epoch [3] Batch [1062/1801] Loss: 0.0164 Acc: 96.64%
+[2025-12-03 03:12:24] src.utils.training - [32mINFO[0m - Epoch [3] Batch [1080/1801] Loss: 0.0164 Acc: 96.64%
+[2025-12-03 03:13:07] src.utils.training - [32mINFO[0m - Epoch [3] Batch [1098/1801] Loss: 0.0164 Acc: 96.65%
+[2025-12-03 03:13:42] src.utils.training - [32mINFO[0m - Epoch [3] Batch [1116/1801] Loss: 0.0163 Acc: 96.66%
+[2025-12-03 03:14:25] src.utils.training - [32mINFO[0m - Epoch [3] Batch [1134/1801] Loss: 0.0164 Acc: 96.65%
+[2025-12-03 03:15:01] src.utils.training - [32mINFO[0m - Epoch [3] Batch [1152/1801] Loss: 0.0164 Acc: 96.64%
+[2025-12-03 03:15:43] src.utils.training - [32mINFO[0m - Epoch [3] Batch [1170/1801] Loss: 0.0163 Acc: 96.65%
+[2025-12-03 03:16:19] src.utils.training - [32mINFO[0m - Epoch [3] Batch [1188/1801] Loss: 0.0163 Acc: 96.65%
+[2025-12-03 03:17:01] src.utils.training - [32mINFO[0m - Epoch [3] Batch [1206/1801] Loss: 0.0163 Acc: 96.65%
+[2025-12-03 03:17:38] src.utils.training - [32mINFO[0m - Epoch [3] Batch [1224/1801] Loss: 0.0163 Acc: 96.65%
+[2025-12-03 03:18:18] src.utils.training - [32mINFO[0m - Epoch [3] Batch [1242/1801] Loss: 0.0163 Acc: 96.64%
+[2025-12-03 03:18:56] src.utils.training - [32mINFO[0m - Epoch [3] Batch [1260/1801] Loss: 0.0163 Acc: 96.65%
+[2025-12-03 03:19:36] src.utils.training - [32mINFO[0m - Epoch [3] Batch [1278/1801] Loss: 0.0163 Acc: 96.65%
+[2025-12-03 03:20:13] src.utils.training - [32mINFO[0m - Epoch [3] Batch [1296/1801] Loss: 0.0163 Acc: 96.66%
+[2025-12-03 03:20:54] src.utils.training - [32mINFO[0m - Epoch [3] Batch [1314/1801] Loss: 0.0163 Acc: 96.66%
+[2025-12-03 03:21:31] src.utils.training - [32mINFO[0m - Epoch [3] Batch [1332/1801] Loss: 0.0163 Acc: 96.66%
+[2025-12-03 03:22:12] src.utils.training - [32mINFO[0m - Epoch [3] Batch [1350/1801] Loss: 0.0163 Acc: 96.66%
+[2025-12-03 03:22:49] src.utils.training - [32mINFO[0m - Epoch [3] Batch [1368/1801] Loss: 0.0163 Acc: 96.66%
+[2025-12-03 03:23:30] src.utils.training - [32mINFO[0m - Epoch [3] Batch [1386/1801] Loss: 0.0163 Acc: 96.66%
+[2025-12-03 03:24:07] src.utils.training - [32mINFO[0m - Epoch [3] Batch [1404/1801] Loss: 0.0163 Acc: 96.65%
+[2025-12-03 03:24:49] src.utils.training - [32mINFO[0m - Epoch [3] Batch [1422/1801] Loss: 0.0163 Acc: 96.65%
+[2025-12-03 03:25:24] src.utils.training - [32mINFO[0m - Epoch [3] Batch [1440/1801] Loss: 0.0163 Acc: 96.65%
+[2025-12-03 03:26:06] src.utils.training - [32mINFO[0m - Epoch [3] Batch [1458/1801] Loss: 0.0163 Acc: 96.65%
+[2025-12-03 03:26:42] src.utils.training - [32mINFO[0m - Epoch [3] Batch [1476/1801] Loss: 0.0163 Acc: 96.63%
+[2025-12-03 03:27:24] src.utils.training - [32mINFO[0m - Epoch [3] Batch [1494/1801] Loss: 0.0163 Acc: 96.63%
+[2025-12-03 03:27:59] src.utils.training - [32mINFO[0m - Epoch [3] Batch [1512/1801] Loss: 0.0163 Acc: 96.63%
+[2025-12-03 03:28:42] src.utils.training - [32mINFO[0m - Epoch [3] Batch [1530/1801] Loss: 0.0163 Acc: 96.63%
+[2025-12-03 03:29:17] src.utils.training - [32mINFO[0m - Epoch [3] Batch [1548/1801] Loss: 0.0163 Acc: 96.64%
+[2025-12-03 03:29:59] src.utils.training - [32mINFO[0m - Epoch [3] Batch [1566/1801] Loss: 0.0162 Acc: 96.63%
+[2025-12-03 03:30:34] src.utils.training - [32mINFO[0m - Epoch [3] Batch [1584/1801] Loss: 0.0162 Acc: 96.64%
+[2025-12-03 03:31:17] src.utils.training - [32mINFO[0m - Epoch [3] Batch [1602/1801] Loss: 0.0162 Acc: 96.64%
+[2025-12-03 03:31:53] src.utils.training - [32mINFO[0m - Epoch [3] Batch [1620/1801] Loss: 0.0162 Acc: 96.64%
+[2025-12-03 03:32:34] src.utils.training - [32mINFO[0m - Epoch [3] Batch [1638/1801] Loss: 0.0162 Acc: 96.64%
+[2025-12-03 03:33:10] src.utils.training - [32mINFO[0m - Epoch [3] Batch [1656/1801] Loss: 0.0162 Acc: 96.64%
+[2025-12-03 03:33:52] src.utils.training - [32mINFO[0m - Epoch [3] Batch [1674/1801] Loss: 0.0162 Acc: 96.65%
+[2025-12-03 03:34:28] src.utils.training - [32mINFO[0m - Epoch [3] Batch [1692/1801] Loss: 0.0161 Acc: 96.65%
+[2025-12-03 03:35:10] src.utils.training - [32mINFO[0m - Epoch [3] Batch [1710/1801] Loss: 0.0161 Acc: 96.65%
+[2025-12-03 03:35:46] src.utils.training - [32mINFO[0m - Epoch [3] Batch [1728/1801] Loss: 0.0161 Acc: 96.66%
+[2025-12-03 03:36:28] src.utils.training - [32mINFO[0m - Epoch [3] Batch [1746/1801] Loss: 0.0161 Acc: 96.66%
+[2025-12-03 03:37:04] src.utils.training - [32mINFO[0m - Epoch [3] Batch [1764/1801] Loss: 0.0160 Acc: 96.66%
+[2025-12-03 03:37:46] src.utils.training - [32mINFO[0m - Epoch [3] Batch [1782/1801] Loss: 0.0160 Acc: 96.66%
+[2025-12-03 03:38:21] src.utils.training - [32mINFO[0m - Epoch [3] Batch [1800/1801] Loss: 0.0160 Acc: 96.66%
+[2025-12-03 03:38:22] src.utils.training - [32mINFO[0m - Epoch [3] Training Completed in 3896s - Loss: 0.0160 Acc: 96.66%
+[2025-12-03 03:40:07] src.utils.clip_level_evaluation - [32mINFO[0m - [VAL] Batch 50/477 Loss: 0.0785
+[2025-12-03 03:41:54] src.utils.clip_level_evaluation - [32mINFO[0m - [VAL] Batch 100/477 Loss: 0.0401
+[2025-12-03 03:43:33] src.utils.clip_level_evaluation - [32mINFO[0m - [VAL] Batch 150/477 Loss: 0.0273
+[2025-12-03 03:45:19] src.utils.clip_level_evaluation - [32mINFO[0m - [VAL] Batch 200/477 Loss: 0.0208
+[2025-12-03 03:46:53] src.utils.clip_level_evaluation - [32mINFO[0m - [VAL] Batch 250/477 Loss: 0.0168
+[2025-12-03 03:48:46] src.utils.clip_level_evaluation - [32mINFO[0m - [VAL] Batch 300/477 Loss: 0.0143
+[2025-12-03 03:50:33] src.utils.clip_level_evaluation - [32mINFO[0m - [VAL] Batch 350/477 Loss: 0.0125
+[2025-12-03 03:52:26] src.utils.clip_level_evaluation - [32mINFO[0m - [VAL] Batch 400/477 Loss: 0.0112
+[2025-12-03 03:54:07] src.utils.clip_level_evaluation - [32mINFO[0m - [VAL] Batch 450/477 Loss: 0.0102
+[2025-12-03 03:55:04] src.utils.clip_level_evaluation - [32mINFO[0m - [VAL] Finished in 1002s
+[2025-12-03 03:55:04] src.utils.clip_level_evaluation - [32mINFO[0m - Results:
+Loss: 0.0097 | Acc: 97.56% | AUC: 0.8251
+   >> Anomaly: P=0.976 R=1.000 F1=0.988
+   >> Normal:  P=0.000 R=0.000
+   >> Counts:  TP=59446 FN=0 (Missed) | TN=0 FP=1488 (False Alarm)
+   >> Rates:   FPR=1.0000 | FNR=0.0000
+[2025-12-03 03:55:04] __main__ - [32mINFO[0m - Epoch [3] Validation Summary - Loss: 0.0097 | Acc: 97.56% | AUC: 0.8251
+[2025-12-03 03:55:04] __main__ - [32mINFO[0m -   Anomaly Detection: Precision=0.976 Recall=1.000 F1=0.988
+[2025-12-03 03:55:04] __main__ - [32mINFO[0m -   Confusion Matrix: TP=59446 FN=0 TN=0 FP=1488
+[2025-12-03 03:55:04] __main__ - [32mINFO[0m -   Error Rates: FPR=1.0000 FNR=0.0000
+[2025-12-03 03:55:04] __main__ - [32mINFO[0m - New best AUC: 0.8251
+[2025-12-03 03:55:04] src.utils.training_utils - [32mINFO[0m - Saved best model to /work3/s225224/ucf-crime/checkpoints/r3d_binary_20251202_234604/best_model.pth
+[2025-12-03 03:55:48] src.utils.training - [32mINFO[0m - Epoch [4] Batch [18/1801] Loss: 0.0138 Acc: 96.79%
+[2025-12-03 03:56:24] src.utils.training - [32mINFO[0m - Epoch [4] Batch [36/1801] Loss: 0.0127 Acc: 97.16%
+[2025-12-03 03:57:06] src.utils.training - [32mINFO[0m - Epoch [4] Batch [54/1801] Loss: 0.0129 Acc: 97.11%
+[2025-12-03 03:57:41] src.utils.training - [32mINFO[0m - Epoch [4] Batch [72/1801] Loss: 0.0128 Acc: 97.14%
+[2025-12-03 03:58:23] src.utils.training - [32mINFO[0m - Epoch [4] Batch [90/1801] Loss: 0.0129 Acc: 97.10%
+[2025-12-03 03:59:00] src.utils.training - [32mINFO[0m - Epoch [4] Batch [108/1801] Loss: 0.0136 Acc: 96.98%
+[2025-12-03 03:59:41] src.utils.training - [32mINFO[0m - Epoch [4] Batch [126/1801] Loss: 0.0138 Acc: 96.94%
+[2025-12-03 04:00:18] src.utils.training - [32mINFO[0m - Epoch [4] Batch [144/1801] Loss: 0.0142 Acc: 96.82%
+[2025-12-03 04:00:59] src.utils.training - [32mINFO[0m - Epoch [4] Batch [162/1801] Loss: 0.0144 Acc: 96.75%
+[2025-12-03 04:01:36] src.utils.training - [32mINFO[0m - Epoch [4] Batch [180/1801] Loss: 0.0146 Acc: 96.71%
+[2025-12-03 04:02:16] src.utils.training - [32mINFO[0m - Epoch [4] Batch [198/1801] Loss: 0.0145 Acc: 96.73%
+[2025-12-03 04:02:55] src.utils.training - [32mINFO[0m - Epoch [4] Batch [216/1801] Loss: 0.0144 Acc: 96.75%
+[2025-12-03 04:03:34] src.utils.training - [32mINFO[0m - Epoch [4] Batch [234/1801] Loss: 0.0144 Acc: 96.73%
+[2025-12-03 04:04:14] src.utils.training - [32mINFO[0m - Epoch [4] Batch [252/1801] Loss: 0.0145 Acc: 96.75%
+[2025-12-03 04:04:52] src.utils.training - [32mINFO[0m - Epoch [4] Batch [270/1801] Loss: 0.0145 Acc: 96.74%
+[2025-12-03 04:05:35] src.utils.training - [32mINFO[0m - Epoch [4] Batch [288/1801] Loss: 0.0146 Acc: 96.73%
+[2025-12-03 04:06:11] src.utils.training - [32mINFO[0m - Epoch [4] Batch [306/1801] Loss: 0.0145 Acc: 96.74%
+[2025-12-03 04:06:54] src.utils.training - [32mINFO[0m - Epoch [4] Batch [324/1801] Loss: 0.0144 Acc: 96.77%
+[2025-12-03 04:07:30] src.utils.training - [32mINFO[0m - Epoch [4] Batch [342/1801] Loss: 0.0145 Acc: 96.77%
+[2025-12-03 04:08:12] src.utils.training - [32mINFO[0m - Epoch [4] Batch [360/1801] Loss: 0.0145 Acc: 96.76%
+[2025-12-03 04:08:48] src.utils.training - [32mINFO[0m - Epoch [4] Batch [378/1801] Loss: 0.0146 Acc: 96.73%
+[2025-12-03 04:09:31] src.utils.training - [32mINFO[0m - Epoch [4] Batch [396/1801] Loss: 0.0145 Acc: 96.73%
+[2025-12-03 04:10:07] src.utils.training - [32mINFO[0m - Epoch [4] Batch [414/1801] Loss: 0.0146 Acc: 96.71%
+[2025-12-03 04:10:51] src.utils.training - [32mINFO[0m - Epoch [4] Batch [432/1801] Loss: 0.0146 Acc: 96.71%
+[2025-12-03 04:11:28] src.utils.training - [32mINFO[0m - Epoch [4] Batch [450/1801] Loss: 0.0146 Acc: 96.72%
+[2025-12-03 04:12:11] src.utils.training - [32mINFO[0m - Epoch [4] Batch [468/1801] Loss: 0.0145 Acc: 96.73%
+[2025-12-03 04:12:48] src.utils.training - [32mINFO[0m - Epoch [4] Batch [486/1801] Loss: 0.0146 Acc: 96.73%
+[2025-12-03 04:13:32] src.utils.training - [32mINFO[0m - Epoch [4] Batch [504/1801] Loss: 0.0147 Acc: 96.71%
+[2025-12-03 04:14:08] src.utils.training - [32mINFO[0m - Epoch [4] Batch [522/1801] Loss: 0.0147 Acc: 96.70%
+[2025-12-03 04:14:52] src.utils.training - [32mINFO[0m - Epoch [4] Batch [540/1801] Loss: 0.0147 Acc: 96.70%
+[2025-12-03 04:15:28] src.utils.training - [32mINFO[0m - Epoch [4] Batch [558/1801] Loss: 0.0147 Acc: 96.71%
+[2025-12-03 04:16:12] src.utils.training - [32mINFO[0m - Epoch [4] Batch [576/1801] Loss: 0.0147 Acc: 96.69%
+[2025-12-03 04:16:48] src.utils.training - [32mINFO[0m - Epoch [4] Batch [594/1801] Loss: 0.0146 Acc: 96.71%
+[2025-12-03 04:17:32] src.utils.training - [32mINFO[0m - Epoch [4] Batch [612/1801] Loss: 0.0146 Acc: 96.70%
+[2025-12-03 04:18:08] src.utils.training - [32mINFO[0m - Epoch [4] Batch [630/1801] Loss: 0.0147 Acc: 96.69%
+[2025-12-03 04:18:52] src.utils.training - [32mINFO[0m - Epoch [4] Batch [648/1801] Loss: 0.0146 Acc: 96.71%
+[2025-12-03 04:19:29] src.utils.training - [32mINFO[0m - Epoch [4] Batch [666/1801] Loss: 0.0146 Acc: 96.71%
+[2025-12-03 04:20:12] src.utils.training - [32mINFO[0m - Epoch [4] Batch [684/1801] Loss: 0.0146 Acc: 96.70%
+[2025-12-03 04:20:49] src.utils.training - [32mINFO[0m - Epoch [4] Batch [702/1801] Loss: 0.0146 Acc: 96.71%
+[2025-12-03 04:21:33] src.utils.training - [32mINFO[0m - Epoch [4] Batch [720/1801] Loss: 0.0147 Acc: 96.69%
+[2025-12-03 04:22:09] src.utils.training - [32mINFO[0m - Epoch [4] Batch [738/1801] Loss: 0.0147 Acc: 96.69%
+[2025-12-03 04:22:52] src.utils.training - [32mINFO[0m - Epoch [4] Batch [756/1801] Loss: 0.0146 Acc: 96.69%
+[2025-12-03 04:23:28] src.utils.training - [32mINFO[0m - Epoch [4] Batch [774/1801] Loss: 0.0146 Acc: 96.70%
+[2025-12-03 04:24:12] src.utils.training - [32mINFO[0m - Epoch [4] Batch [792/1801] Loss: 0.0146 Acc: 96.69%
+[2025-12-03 04:24:48] src.utils.training - [32mINFO[0m - Epoch [4] Batch [810/1801] Loss: 0.0146 Acc: 96.68%
+[2025-12-03 04:25:32] src.utils.training - [32mINFO[0m - Epoch [4] Batch [828/1801] Loss: 0.0146 Acc: 96.69%
+[2025-12-03 04:26:08] src.utils.training - [32mINFO[0m - Epoch [4] Batch [846/1801] Loss: 0.0146 Acc: 96.70%
+[2025-12-03 04:26:53] src.utils.training - [32mINFO[0m - Epoch [4] Batch [864/1801] Loss: 0.0145 Acc: 96.70%
+[2025-12-03 04:27:29] src.utils.training - [32mINFO[0m - Epoch [4] Batch [882/1801] Loss: 0.0145 Acc: 96.70%
+[2025-12-03 04:28:13] src.utils.training - [32mINFO[0m - Epoch [4] Batch [900/1801] Loss: 0.0145 Acc: 96.71%
+[2025-12-03 04:28:49] src.utils.training - [32mINFO[0m - Epoch [4] Batch [918/1801] Loss: 0.0145 Acc: 96.72%
+[2025-12-03 04:29:33] src.utils.training - [32mINFO[0m - Epoch [4] Batch [936/1801] Loss: 0.0144 Acc: 96.72%
+[2025-12-03 04:30:10] src.utils.training - [32mINFO[0m - Epoch [4] Batch [954/1801] Loss: 0.0144 Acc: 96.73%
+[2025-12-03 04:30:54] src.utils.training - [32mINFO[0m - Epoch [4] Batch [972/1801] Loss: 0.0144 Acc: 96.73%
+[2025-12-03 04:31:30] src.utils.training - [32mINFO[0m - Epoch [4] Batch [990/1801] Loss: 0.0144 Acc: 96.72%
+[2025-12-03 04:32:14] src.utils.training - [32mINFO[0m - Epoch [4] Batch [1008/1801] Loss: 0.0144 Acc: 96.72%
+[2025-12-03 04:32:50] src.utils.training - [32mINFO[0m - Epoch [4] Batch [1026/1801] Loss: 0.0144 Acc: 96.73%
+[2025-12-03 04:33:34] src.utils.training - [32mINFO[0m - Epoch [4] Batch [1044/1801] Loss: 0.0144 Acc: 96.73%
+[2025-12-03 04:34:10] src.utils.training - [32mINFO[0m - Epoch [4] Batch [1062/1801] Loss: 0.0144 Acc: 96.73%
+[2025-12-03 04:34:54] src.utils.training - [32mINFO[0m - Epoch [4] Batch [1080/1801] Loss: 0.0144 Acc: 96.73%
+[2025-12-03 04:35:31] src.utils.training - [32mINFO[0m - Epoch [4] Batch [1098/1801] Loss: 0.0144 Acc: 96.73%
+[2025-12-03 04:36:14] src.utils.training - [32mINFO[0m - Epoch [4] Batch [1116/1801] Loss: 0.0144 Acc: 96.73%
+[2025-12-03 04:36:51] src.utils.training - [32mINFO[0m - Epoch [4] Batch [1134/1801] Loss: 0.0144 Acc: 96.72%
+[2025-12-03 04:37:34] src.utils.training - [32mINFO[0m - Epoch [4] Batch [1152/1801] Loss: 0.0144 Acc: 96.73%
+[2025-12-03 04:38:11] src.utils.training - [32mINFO[0m - Epoch [4] Batch [1170/1801] Loss: 0.0144 Acc: 96.72%
+[2025-12-03 04:38:54] src.utils.training - [32mINFO[0m - Epoch [4] Batch [1188/1801] Loss: 0.0144 Acc: 96.71%
+[2025-12-03 04:39:31] src.utils.training - [32mINFO[0m - Epoch [4] Batch [1206/1801] Loss: 0.0144 Acc: 96.71%
+[2025-12-03 04:40:14] src.utils.training - [32mINFO[0m - Epoch [4] Batch [1224/1801] Loss: 0.0144 Acc: 96.71%
+[2025-12-03 04:40:51] src.utils.training - [32mINFO[0m - Epoch [4] Batch [1242/1801] Loss: 0.0144 Acc: 96.71%
+[2025-12-03 04:41:35] src.utils.training - [32mINFO[0m - Epoch [4] Batch [1260/1801] Loss: 0.0144 Acc: 96.71%
+[2025-12-03 04:42:12] src.utils.training - [32mINFO[0m - Epoch [4] Batch [1278/1801] Loss: 0.0144 Acc: 96.72%
+[2025-12-03 04:42:56] src.utils.training - [32mINFO[0m - Epoch [4] Batch [1296/1801] Loss: 0.0143 Acc: 96.73%
+[2025-12-03 04:43:32] src.utils.training - [32mINFO[0m - Epoch [4] Batch [1314/1801] Loss: 0.0143 Acc: 96.72%
+[2025-12-03 04:44:15] src.utils.training - [32mINFO[0m - Epoch [4] Batch [1332/1801] Loss: 0.0144 Acc: 96.72%
+[2025-12-03 04:44:52] src.utils.training - [32mINFO[0m - Epoch [4] Batch [1350/1801] Loss: 0.0144 Acc: 96.71%
+[2025-12-03 04:45:36] src.utils.training - [32mINFO[0m - Epoch [4] Batch [1368/1801] Loss: 0.0144 Acc: 96.70%
+[2025-12-03 04:46:13] src.utils.training - [32mINFO[0m - Epoch [4] Batch [1386/1801] Loss: 0.0144 Acc: 96.71%
+[2025-12-03 04:46:56] src.utils.training - [32mINFO[0m - Epoch [4] Batch [1404/1801] Loss: 0.0144 Acc: 96.71%
+[2025-12-03 04:47:33] src.utils.training - [32mINFO[0m - Epoch [4] Batch [1422/1801] Loss: 0.0143 Acc: 96.71%
+[2025-12-03 04:48:16] src.utils.training - [32mINFO[0m - Epoch [4] Batch [1440/1801] Loss: 0.0144 Acc: 96.71%
+[2025-12-03 04:48:52] src.utils.training - [32mINFO[0m - Epoch [4] Batch [1458/1801] Loss: 0.0143 Acc: 96.71%
+[2025-12-03 04:49:36] src.utils.training - [32mINFO[0m - Epoch [4] Batch [1476/1801] Loss: 0.0143 Acc: 96.72%
+[2025-12-03 04:50:13] src.utils.training - [32mINFO[0m - Epoch [4] Batch [1494/1801] Loss: 0.0143 Acc: 96.72%
+[2025-12-03 04:50:57] src.utils.training - [32mINFO[0m - Epoch [4] Batch [1512/1801] Loss: 0.0143 Acc: 96.73%
+[2025-12-03 04:51:33] src.utils.training - [32mINFO[0m - Epoch [4] Batch [1530/1801] Loss: 0.0143 Acc: 96.72%
+[2025-12-03 04:52:17] src.utils.training - [32mINFO[0m - Epoch [4] Batch [1548/1801] Loss: 0.0143 Acc: 96.72%
+[2025-12-03 04:52:53] src.utils.training - [32mINFO[0m - Epoch [4] Batch [1566/1801] Loss: 0.0143 Acc: 96.72%
+[2025-12-03 04:53:37] src.utils.training - [32mINFO[0m - Epoch [4] Batch [1584/1801] Loss: 0.0142 Acc: 96.72%
+[2025-12-03 04:54:14] src.utils.training - [32mINFO[0m - Epoch [4] Batch [1602/1801] Loss: 0.0142 Acc: 96.73%
+[2025-12-03 04:54:58] src.utils.training - [32mINFO[0m - Epoch [4] Batch [1620/1801] Loss: 0.0142 Acc: 96.72%
+[2025-12-03 04:55:34] src.utils.training - [32mINFO[0m - Epoch [4] Batch [1638/1801] Loss: 0.0142 Acc: 96.72%
+[2025-12-03 04:56:19] src.utils.training - [32mINFO[0m - Epoch [4] Batch [1656/1801] Loss: 0.0142 Acc: 96.72%
+[2025-12-03 04:56:55] src.utils.training - [32mINFO[0m - Epoch [4] Batch [1674/1801] Loss: 0.0142 Acc: 96.71%
+[2025-12-03 04:57:39] src.utils.training - [32mINFO[0m - Epoch [4] Batch [1692/1801] Loss: 0.0142 Acc: 96.72%
+[2025-12-03 04:58:15] src.utils.training - [32mINFO[0m - Epoch [4] Batch [1710/1801] Loss: 0.0142 Acc: 96.71%
+[2025-12-03 04:58:59] src.utils.training - [32mINFO[0m - Epoch [4] Batch [1728/1801] Loss: 0.0142 Acc: 96.71%
+[2025-12-03 04:59:35] src.utils.training - [32mINFO[0m - Epoch [4] Batch [1746/1801] Loss: 0.0142 Acc: 96.72%
+[2025-12-03 05:00:19] src.utils.training - [32mINFO[0m - Epoch [4] Batch [1764/1801] Loss: 0.0142 Acc: 96.72%
+[2025-12-03 05:00:56] src.utils.training - [32mINFO[0m - Epoch [4] Batch [1782/1801] Loss: 0.0142 Acc: 96.72%
+[2025-12-03 05:01:39] src.utils.training - [32mINFO[0m - Epoch [4] Batch [1800/1801] Loss: 0.0142 Acc: 96.71%
+[2025-12-03 05:01:39] src.utils.training - [32mINFO[0m - Epoch [4] Training Completed in 3995s - Loss: 0.0142 Acc: 96.71%
+[2025-12-03 05:03:24] src.utils.clip_level_evaluation - [32mINFO[0m - [VAL] Batch 50/477 Loss: 0.0717
+[2025-12-03 05:05:12] src.utils.clip_level_evaluation - [32mINFO[0m - [VAL] Batch 100/477 Loss: 0.0368
+[2025-12-03 05:06:50] src.utils.clip_level_evaluation - [32mINFO[0m - [VAL] Batch 150/477 Loss: 0.0252
+[2025-12-03 05:08:36] src.utils.clip_level_evaluation - [32mINFO[0m - [VAL] Batch 200/477 Loss: 0.0192
+[2025-12-03 05:10:11] src.utils.clip_level_evaluation - [32mINFO[0m - [VAL] Batch 250/477 Loss: 0.0155
+[2025-12-03 05:12:03] src.utils.clip_level_evaluation - [32mINFO[0m - [VAL] Batch 300/477 Loss: 0.0132
+[2025-12-03 05:13:51] src.utils.clip_level_evaluation - [32mINFO[0m - [VAL] Batch 350/477 Loss: 0.0117
+[2025-12-03 05:15:42] src.utils.clip_level_evaluation - [32mINFO[0m - [VAL] Batch 400/477 Loss: 0.0105
+[2025-12-03 05:17:24] src.utils.clip_level_evaluation - [32mINFO[0m - [VAL] Batch 450/477 Loss: 0.0096
+[2025-12-03 05:18:20] src.utils.clip_level_evaluation - [32mINFO[0m - [VAL] Finished in 1001s
+[2025-12-03 05:18:20] src.utils.clip_level_evaluation - [32mINFO[0m - Results:
+Loss: 0.0092 | Acc: 97.56% | AUC: 0.8581
+   >> Anomaly: P=0.976 R=1.000 F1=0.988
+   >> Normal:  P=0.000 R=0.000
+   >> Counts:  TP=59446 FN=0 (Missed) | TN=0 FP=1488 (False Alarm)
+   >> Rates:   FPR=1.0000 | FNR=0.0000
+[2025-12-03 05:18:20] __main__ - [32mINFO[0m - Epoch [4] Validation Summary - Loss: 0.0092 | Acc: 97.56% | AUC: 0.8581
+[2025-12-03 05:18:20] __main__ - [32mINFO[0m -   Anomaly Detection: Precision=0.976 Recall=1.000 F1=0.988
+[2025-12-03 05:18:20] __main__ - [32mINFO[0m -   Confusion Matrix: TP=59446 FN=0 TN=0 FP=1488
+[2025-12-03 05:18:20] __main__ - [32mINFO[0m -   Error Rates: FPR=1.0000 FNR=0.0000
+[2025-12-03 05:18:20] __main__ - [32mINFO[0m - New best AUC: 0.8581
+[2025-12-03 05:18:21] src.utils.training_utils - [32mINFO[0m - Saved best model to /work3/s225224/ucf-crime/checkpoints/r3d_binary_20251202_234604/best_model.pth
+[2025-12-03 05:19:05] src.utils.training - [32mINFO[0m - Epoch [5] Batch [18/1801] Loss: 0.0128 Acc: 97.05%
+[2025-12-03 05:19:40] src.utils.training - [32mINFO[0m - Epoch [5] Batch [36/1801] Loss: 0.0135 Acc: 96.81%
+[2025-12-03 05:20:23] src.utils.training - [32mINFO[0m - Epoch [5] Batch [54/1801] Loss: 0.0132 Acc: 96.67%
+[2025-12-03 05:20:58] src.utils.training - [32mINFO[0m - Epoch [5] Batch [72/1801] Loss: 0.0137 Acc: 96.58%
+[2025-12-03 05:21:40] src.utils.training - [32mINFO[0m - Epoch [5] Batch [90/1801] Loss: 0.0131 Acc: 96.76%
+[2025-12-03 05:22:16] src.utils.training - [32mINFO[0m - Epoch [5] Batch [108/1801] Loss: 0.0132 Acc: 96.72%
+[2025-12-03 05:22:58] src.utils.training - [32mINFO[0m - Epoch [5] Batch [126/1801] Loss: 0.0135 Acc: 96.70%
+[2025-12-03 05:23:34] src.utils.training - [32mINFO[0m - Epoch [5] Batch [144/1801] Loss: 0.0135 Acc: 96.71%
+[2025-12-03 05:24:16] src.utils.training - [32mINFO[0m - Epoch [5] Batch [162/1801] Loss: 0.0133 Acc: 96.72%
+[2025-12-03 05:24:51] src.utils.training - [32mINFO[0m - Epoch [5] Batch [180/1801] Loss: 0.0131 Acc: 96.81%
+[2025-12-03 05:25:34] src.utils.training - [32mINFO[0m - Epoch [5] Batch [198/1801] Loss: 0.0132 Acc: 96.78%
+[2025-12-03 05:26:08] src.utils.training - [32mINFO[0m - Epoch [5] Batch [216/1801] Loss: 0.0132 Acc: 96.77%
+[2025-12-03 05:26:51] src.utils.training - [32mINFO[0m - Epoch [5] Batch [234/1801] Loss: 0.0133 Acc: 96.73%
+[2025-12-03 05:27:26] src.utils.training - [32mINFO[0m - Epoch [5] Batch [252/1801] Loss: 0.0134 Acc: 96.71%
+[2025-12-03 05:28:08] src.utils.training - [32mINFO[0m - Epoch [5] Batch [270/1801] Loss: 0.0136 Acc: 96.66%
+[2025-12-03 05:28:43] src.utils.training - [32mINFO[0m - Epoch [5] Batch [288/1801] Loss: 0.0135 Acc: 96.66%
+[2025-12-03 05:29:25] src.utils.training - [32mINFO[0m - Epoch [5] Batch [306/1801] Loss: 0.0135 Acc: 96.66%
+[2025-12-03 05:30:01] src.utils.training - [32mINFO[0m - Epoch [5] Batch [324/1801] Loss: 0.0136 Acc: 96.64%
+[2025-12-03 05:30:43] src.utils.training - [32mINFO[0m - Epoch [5] Batch [342/1801] Loss: 0.0135 Acc: 96.66%
+[2025-12-03 05:31:18] src.utils.training - [32mINFO[0m - Epoch [5] Batch [360/1801] Loss: 0.0135 Acc: 96.66%
+[2025-12-03 05:32:01] src.utils.training - [32mINFO[0m - Epoch [5] Batch [378/1801] Loss: 0.0135 Acc: 96.64%
+[2025-12-03 05:32:36] src.utils.training - [32mINFO[0m - Epoch [5] Batch [396/1801] Loss: 0.0135 Acc: 96.63%
+[2025-12-03 05:33:18] src.utils.training - [32mINFO[0m - Epoch [5] Batch [414/1801] Loss: 0.0135 Acc: 96.64%
+[2025-12-03 05:33:53] src.utils.training - [32mINFO[0m - Epoch [5] Batch [432/1801] Loss: 0.0135 Acc: 96.65%
+[2025-12-03 05:34:35] src.utils.training - [32mINFO[0m - Epoch [5] Batch [450/1801] Loss: 0.0135 Acc: 96.66%
+[2025-12-03 05:35:11] src.utils.training - [32mINFO[0m - Epoch [5] Batch [468/1801] Loss: 0.0134 Acc: 96.67%
+[2025-12-03 05:35:52] src.utils.training - [32mINFO[0m - Epoch [5] Batch [486/1801] Loss: 0.0133 Acc: 96.69%
+[2025-12-03 05:36:28] src.utils.training - [32mINFO[0m - Epoch [5] Batch [504/1801] Loss: 0.0134 Acc: 96.68%
+[2025-12-03 05:37:10] src.utils.training - [32mINFO[0m - Epoch [5] Batch [522/1801] Loss: 0.0133 Acc: 96.70%
+[2025-12-03 05:37:45] src.utils.training - [32mINFO[0m - Epoch [5] Batch [540/1801] Loss: 0.0134 Acc: 96.68%
+[2025-12-03 05:38:28] src.utils.training - [32mINFO[0m - Epoch [5] Batch [558/1801] Loss: 0.0134 Acc: 96.68%
+[2025-12-03 05:39:03] src.utils.training - [32mINFO[0m - Epoch [5] Batch [576/1801] Loss: 0.0134 Acc: 96.69%
+[2025-12-03 05:39:45] src.utils.training - [32mINFO[0m - Epoch [5] Batch [594/1801] Loss: 0.0133 Acc: 96.70%
+[2025-12-03 05:40:20] src.utils.training - [32mINFO[0m - Epoch [5] Batch [612/1801] Loss: 0.0133 Acc: 96.70%
+[2025-12-03 05:41:03] src.utils.training - [32mINFO[0m - Epoch [5] Batch [630/1801] Loss: 0.0133 Acc: 96.69%
+[2025-12-03 05:41:38] src.utils.training - [32mINFO[0m - Epoch [5] Batch [648/1801] Loss: 0.0134 Acc: 96.68%
+[2025-12-03 05:42:20] src.utils.training - [32mINFO[0m - Epoch [5] Batch [666/1801] Loss: 0.0133 Acc: 96.70%
+[2025-12-03 05:42:56] src.utils.training - [32mINFO[0m - Epoch [5] Batch [684/1801] Loss: 0.0134 Acc: 96.69%
+[2025-12-03 05:43:38] src.utils.training - [32mINFO[0m - Epoch [5] Batch [702/1801] Loss: 0.0133 Acc: 96.70%
+[2025-12-03 05:44:14] src.utils.training - [32mINFO[0m - Epoch [5] Batch [720/1801] Loss: 0.0134 Acc: 96.69%
+[2025-12-03 05:44:56] src.utils.training - [32mINFO[0m - Epoch [5] Batch [738/1801] Loss: 0.0133 Acc: 96.70%
+[2025-12-03 05:45:32] src.utils.training - [32mINFO[0m - Epoch [5] Batch [756/1801] Loss: 0.0133 Acc: 96.70%
+[2025-12-03 05:46:14] src.utils.training - [32mINFO[0m - Epoch [5] Batch [774/1801] Loss: 0.0133 Acc: 96.71%
+[2025-12-03 05:46:48] src.utils.training - [32mINFO[0m - Epoch [5] Batch [792/1801] Loss: 0.0132 Acc: 96.72%
+[2025-12-03 05:47:31] src.utils.training - [32mINFO[0m - Epoch [5] Batch [810/1801] Loss: 0.0132 Acc: 96.73%
+[2025-12-03 05:48:06] src.utils.training - [32mINFO[0m - Epoch [5] Batch [828/1801] Loss: 0.0132 Acc: 96.74%
+[2025-12-03 05:48:48] src.utils.training - [32mINFO[0m - Epoch [5] Batch [846/1801] Loss: 0.0131 Acc: 96.74%
+[2025-12-03 05:49:24] src.utils.training - [32mINFO[0m - Epoch [5] Batch [864/1801] Loss: 0.0131 Acc: 96.75%
+[2025-12-03 05:50:06] src.utils.training - [32mINFO[0m - Epoch [5] Batch [882/1801] Loss: 0.0131 Acc: 96.74%
+[2025-12-03 05:50:41] src.utils.training - [32mINFO[0m - Epoch [5] Batch [900/1801] Loss: 0.0132 Acc: 96.73%
+[2025-12-03 05:51:23] src.utils.training - [32mINFO[0m - Epoch [5] Batch [918/1801] Loss: 0.0132 Acc: 96.72%
+[2025-12-03 05:51:58] src.utils.training - [32mINFO[0m - Epoch [5] Batch [936/1801] Loss: 0.0132 Acc: 96.71%
+[2025-12-03 05:52:41] src.utils.training - [32mINFO[0m - Epoch [5] Batch [954/1801] Loss: 0.0132 Acc: 96.71%
+[2025-12-03 05:53:16] src.utils.training - [32mINFO[0m - Epoch [5] Batch [972/1801] Loss: 0.0132 Acc: 96.71%
+[2025-12-03 05:53:58] src.utils.training - [32mINFO[0m - Epoch [5] Batch [990/1801] Loss: 0.0132 Acc: 96.70%
+[2025-12-03 05:54:33] src.utils.training - [32mINFO[0m - Epoch [5] Batch [1008/1801] Loss: 0.0132 Acc: 96.70%
+[2025-12-03 05:55:15] src.utils.training - [32mINFO[0m - Epoch [5] Batch [1026/1801] Loss: 0.0132 Acc: 96.71%
+[2025-12-03 05:55:51] src.utils.training - [32mINFO[0m - Epoch [5] Batch [1044/1801] Loss: 0.0132 Acc: 96.71%
+[2025-12-03 05:56:33] src.utils.training - [32mINFO[0m - Epoch [5] Batch [1062/1801] Loss: 0.0132 Acc: 96.71%
+[2025-12-03 05:57:08] src.utils.training - [32mINFO[0m - Epoch [5] Batch [1080/1801] Loss: 0.0132 Acc: 96.71%
+[2025-12-03 05:57:50] src.utils.training - [32mINFO[0m - Epoch [5] Batch [1098/1801] Loss: 0.0131 Acc: 96.72%
+[2025-12-03 05:58:26] src.utils.training - [32mINFO[0m - Epoch [5] Batch [1116/1801] Loss: 0.0131 Acc: 96.72%
+[2025-12-03 05:59:08] src.utils.training - [32mINFO[0m - Epoch [5] Batch [1134/1801] Loss: 0.0132 Acc: 96.71%
+[2025-12-03 05:59:43] src.utils.training - [32mINFO[0m - Epoch [5] Batch [1152/1801] Loss: 0.0131 Acc: 96.72%
+[2025-12-03 06:00:25] src.utils.training - [32mINFO[0m - Epoch [5] Batch [1170/1801] Loss: 0.0131 Acc: 96.72%
+[2025-12-03 06:01:01] src.utils.training - [32mINFO[0m - Epoch [5] Batch [1188/1801] Loss: 0.0132 Acc: 96.72%
+[2025-12-03 06:01:43] src.utils.training - [32mINFO[0m - Epoch [5] Batch [1206/1801] Loss: 0.0132 Acc: 96.71%
+[2025-12-03 06:02:18] src.utils.training - [32mINFO[0m - Epoch [5] Batch [1224/1801] Loss: 0.0132 Acc: 96.72%
+[2025-12-03 06:03:01] src.utils.training - [32mINFO[0m - Epoch [5] Batch [1242/1801] Loss: 0.0131 Acc: 96.73%
+[2025-12-03 06:03:35] src.utils.training - [32mINFO[0m - Epoch [5] Batch [1260/1801] Loss: 0.0131 Acc: 96.73%
+[2025-12-03 06:04:17] src.utils.training - [32mINFO[0m - Epoch [5] Batch [1278/1801] Loss: 0.0131 Acc: 96.73%
+[2025-12-03 06:04:53] src.utils.training - [32mINFO[0m - Epoch [5] Batch [1296/1801] Loss: 0.0131 Acc: 96.73%
+[2025-12-03 06:05:35] src.utils.training - [32mINFO[0m - Epoch [5] Batch [1314/1801] Loss: 0.0131 Acc: 96.72%
+[2025-12-03 06:06:10] src.utils.training - [32mINFO[0m - Epoch [5] Batch [1332/1801] Loss: 0.0131 Acc: 96.73%
+[2025-12-03 06:06:53] src.utils.training - [32mINFO[0m - Epoch [5] Batch [1350/1801] Loss: 0.0131 Acc: 96.73%
+[2025-12-03 06:07:27] src.utils.training - [32mINFO[0m - Epoch [5] Batch [1368/1801] Loss: 0.0131 Acc: 96.73%
+[2025-12-03 06:08:10] src.utils.training - [32mINFO[0m - Epoch [5] Batch [1386/1801] Loss: 0.0131 Acc: 96.73%
+[2025-12-03 06:08:45] src.utils.training - [32mINFO[0m - Epoch [5] Batch [1404/1801] Loss: 0.0131 Acc: 96.74%
+[2025-12-03 06:09:27] src.utils.training - [32mINFO[0m - Epoch [5] Batch [1422/1801] Loss: 0.0131 Acc: 96.74%
+[2025-12-03 06:10:02] src.utils.training - [32mINFO[0m - Epoch [5] Batch [1440/1801] Loss: 0.0131 Acc: 96.74%
+[2025-12-03 06:10:44] src.utils.training - [32mINFO[0m - Epoch [5] Batch [1458/1801] Loss: 0.0130 Acc: 96.74%
+[2025-12-03 06:11:19] src.utils.training - [32mINFO[0m - Epoch [5] Batch [1476/1801] Loss: 0.0130 Acc: 96.74%
+[2025-12-03 06:12:01] src.utils.training - [32mINFO[0m - Epoch [5] Batch [1494/1801] Loss: 0.0130 Acc: 96.75%
+[2025-12-03 06:12:37] src.utils.training - [32mINFO[0m - Epoch [5] Batch [1512/1801] Loss: 0.0130 Acc: 96.75%
+[2025-12-03 06:13:19] src.utils.training - [32mINFO[0m - Epoch [5] Batch [1530/1801] Loss: 0.0130 Acc: 96.74%
+[2025-12-03 06:13:54] src.utils.training - [32mINFO[0m - Epoch [5] Batch [1548/1801] Loss: 0.0130 Acc: 96.74%
+[2025-12-03 06:14:37] src.utils.training - [32mINFO[0m - Epoch [5] Batch [1566/1801] Loss: 0.0130 Acc: 96.74%
+[2025-12-03 06:15:12] src.utils.training - [32mINFO[0m - Epoch [5] Batch [1584/1801] Loss: 0.0130 Acc: 96.74%
+[2025-12-03 06:15:54] src.utils.training - [32mINFO[0m - Epoch [5] Batch [1602/1801] Loss: 0.0130 Acc: 96.73%
+[2025-12-03 06:16:29] src.utils.training - [32mINFO[0m - Epoch [5] Batch [1620/1801] Loss: 0.0131 Acc: 96.73%
+[2025-12-03 06:17:12] src.utils.training - [32mINFO[0m - Epoch [5] Batch [1638/1801] Loss: 0.0130 Acc: 96.73%
+[2025-12-03 06:17:47] src.utils.training - [32mINFO[0m - Epoch [5] Batch [1656/1801] Loss: 0.0130 Acc: 96.73%
+[2025-12-03 06:18:29] src.utils.training - [32mINFO[0m - Epoch [5] Batch [1674/1801] Loss: 0.0130 Acc: 96.73%
+[2025-12-03 06:19:04] src.utils.training - [32mINFO[0m - Epoch [5] Batch [1692/1801] Loss: 0.0130 Acc: 96.73%
+[2025-12-03 06:19:46] src.utils.training - [32mINFO[0m - Epoch [5] Batch [1710/1801] Loss: 0.0130 Acc: 96.72%
+[2025-12-03 06:20:21] src.utils.training - [32mINFO[0m - Epoch [5] Batch [1728/1801] Loss: 0.0130 Acc: 96.72%
+[2025-12-03 06:21:04] src.utils.training - [32mINFO[0m - Epoch [5] Batch [1746/1801] Loss: 0.0130 Acc: 96.72%
+[2025-12-03 06:21:39] src.utils.training - [32mINFO[0m - Epoch [5] Batch [1764/1801] Loss: 0.0130 Acc: 96.73%
+[2025-12-03 06:22:21] src.utils.training - [32mINFO[0m - Epoch [5] Batch [1782/1801] Loss: 0.0130 Acc: 96.73%
+[2025-12-03 06:22:56] src.utils.training - [32mINFO[0m - Epoch [5] Batch [1800/1801] Loss: 0.0130 Acc: 96.73%
+[2025-12-03 06:23:00] src.utils.training - [32mINFO[0m - Epoch [5] Training Completed in 3880s - Loss: 0.0130 Acc: 96.73%
+[2025-12-03 06:24:45] src.utils.clip_level_evaluation - [32mINFO[0m - [VAL] Batch 50/477 Loss: 0.0659
+[2025-12-03 06:26:34] src.utils.clip_level_evaluation - [32mINFO[0m - [VAL] Batch 100/477 Loss: 0.0340
+[2025-12-03 06:28:12] src.utils.clip_level_evaluation - [32mINFO[0m - [VAL] Batch 150/477 Loss: 0.0233
+[2025-12-03 06:29:58] src.utils.clip_level_evaluation - [32mINFO[0m - [VAL] Batch 200/477 Loss: 0.0179
+[2025-12-03 06:31:33] src.utils.clip_level_evaluation - [32mINFO[0m - [VAL] Batch 250/477 Loss: 0.0145
+[2025-12-03 06:33:24] src.utils.clip_level_evaluation - [32mINFO[0m - [VAL] Batch 300/477 Loss: 0.0124
+[2025-12-03 06:35:14] src.utils.clip_level_evaluation - [32mINFO[0m - [VAL] Batch 350/477 Loss: 0.0110
+[2025-12-03 06:37:04] src.utils.clip_level_evaluation - [32mINFO[0m - [VAL] Batch 400/477 Loss: 0.0099
+[2025-12-03 06:38:45] src.utils.clip_level_evaluation - [32mINFO[0m - [VAL] Batch 450/477 Loss: 0.0091
+[2025-12-03 06:39:42] src.utils.clip_level_evaluation - [32mINFO[0m - [VAL] Finished in 1001s
+[2025-12-03 06:39:42] src.utils.clip_level_evaluation - [32mINFO[0m - Results:
+Loss: 0.0087 | Acc: 97.56% | AUC: 0.8795
+   >> Anomaly: P=0.976 R=1.000 F1=0.988
+   >> Normal:  P=0.000 R=0.000
+   >> Counts:  TP=59446 FN=0 (Missed) | TN=0 FP=1488 (False Alarm)
+   >> Rates:   FPR=1.0000 | FNR=0.0000
+[2025-12-03 06:39:42] __main__ - [32mINFO[0m - Epoch [5] Validation Summary - Loss: 0.0087 | Acc: 97.56% | AUC: 0.8795
+[2025-12-03 06:39:42] __main__ - [32mINFO[0m -   Anomaly Detection: Precision=0.976 Recall=1.000 F1=0.988
+[2025-12-03 06:39:42] __main__ - [32mINFO[0m -   Confusion Matrix: TP=59446 FN=0 TN=0 FP=1488
+[2025-12-03 06:39:42] __main__ - [32mINFO[0m -   Error Rates: FPR=1.0000 FNR=0.0000
+[2025-12-03 06:39:42] __main__ - [32mINFO[0m - New best AUC: 0.8795
+[2025-12-03 06:39:42] src.utils.training_utils - [32mINFO[0m - Saved best model to /work3/s225224/ucf-crime/checkpoints/r3d_binary_20251202_234604/best_model.pth
+[2025-12-03 06:40:27] src.utils.training - [32mINFO[0m - Epoch [6] Batch [18/1801] Loss: 0.0118 Acc: 97.09%
+[2025-12-03 06:41:02] src.utils.training - [32mINFO[0m - Epoch [6] Batch [36/1801] Loss: 0.0125 Acc: 96.85%
+[2025-12-03 06:41:45] src.utils.training - [32mINFO[0m - Epoch [6] Batch [54/1801] Loss: 0.0131 Acc: 96.77%
+[2025-12-03 06:42:20] src.utils.training - [32mINFO[0m - Epoch [6] Batch [72/1801] Loss: 0.0127 Acc: 96.91%
+[2025-12-03 06:43:02] src.utils.training - [32mINFO[0m - Epoch [6] Batch [90/1801] Loss: 0.0127 Acc: 96.86%
+[2025-12-03 06:43:38] src.utils.training - [32mINFO[0m - Epoch [6] Batch [108/1801] Loss: 0.0130 Acc: 96.77%
+[2025-12-03 06:44:21] src.utils.training - [32mINFO[0m - Epoch [6] Batch [126/1801] Loss: 0.0131 Acc: 96.71%
+[2025-12-03 06:44:56] src.utils.training - [32mINFO[0m - Epoch [6] Batch [144/1801] Loss: 0.0128 Acc: 96.83%
+[2025-12-03 06:45:38] src.utils.training - [32mINFO[0m - Epoch [6] Batch [162/1801] Loss: 0.0129 Acc: 96.81%
+[2025-12-03 06:46:13] src.utils.training - [32mINFO[0m - Epoch [6] Batch [180/1801] Loss: 0.0131 Acc: 96.77%
+[2025-12-03 06:46:55] src.utils.training - [32mINFO[0m - Epoch [6] Batch [198/1801] Loss: 0.0130 Acc: 96.81%
+[2025-12-03 06:47:31] src.utils.training - [32mINFO[0m - Epoch [6] Batch [216/1801] Loss: 0.0128 Acc: 96.85%
+[2025-12-03 06:48:13] src.utils.training - [32mINFO[0m - Epoch [6] Batch [234/1801] Loss: 0.0129 Acc: 96.82%
+[2025-12-03 06:48:49] src.utils.training - [32mINFO[0m - Epoch [6] Batch [252/1801] Loss: 0.0130 Acc: 96.80%
+[2025-12-03 06:49:31] src.utils.training - [32mINFO[0m - Epoch [6] Batch [270/1801] Loss: 0.0129 Acc: 96.79%
+[2025-12-03 06:50:07] src.utils.training - [32mINFO[0m - Epoch [6] Batch [288/1801] Loss: 0.0130 Acc: 96.75%
+[2025-12-03 06:50:50] src.utils.training - [32mINFO[0m - Epoch [6] Batch [306/1801] Loss: 0.0129 Acc: 96.76%
+[2025-12-03 06:51:25] src.utils.training - [32mINFO[0m - Epoch [6] Batch [324/1801] Loss: 0.0129 Acc: 96.76%
+[2025-12-03 06:52:08] src.utils.training - [32mINFO[0m - Epoch [6] Batch [342/1801] Loss: 0.0129 Acc: 96.75%
+[2025-12-03 06:52:43] src.utils.training - [32mINFO[0m - Epoch [6] Batch [360/1801] Loss: 0.0128 Acc: 96.76%
+[2025-12-03 06:53:26] src.utils.training - [32mINFO[0m - Epoch [6] Batch [378/1801] Loss: 0.0128 Acc: 96.75%
+[2025-12-03 06:54:01] src.utils.training - [32mINFO[0m - Epoch [6] Batch [396/1801] Loss: 0.0127 Acc: 96.77%
+[2025-12-03 06:54:43] src.utils.training - [32mINFO[0m - Epoch [6] Batch [414/1801] Loss: 0.0127 Acc: 96.75%
+[2025-12-03 06:55:18] src.utils.training - [32mINFO[0m - Epoch [6] Batch [432/1801] Loss: 0.0127 Acc: 96.77%
+[2025-12-03 06:56:01] src.utils.training - [32mINFO[0m - Epoch [6] Batch [450/1801] Loss: 0.0127 Acc: 96.76%
+[2025-12-03 06:56:36] src.utils.training - [32mINFO[0m - Epoch [6] Batch [468/1801] Loss: 0.0127 Acc: 96.76%
+[2025-12-03 06:57:18] src.utils.training - [32mINFO[0m - Epoch [6] Batch [486/1801] Loss: 0.0127 Acc: 96.75%
+[2025-12-03 06:57:54] src.utils.training - [32mINFO[0m - Epoch [6] Batch [504/1801] Loss: 0.0127 Acc: 96.75%
+[2025-12-03 06:58:37] src.utils.training - [32mINFO[0m - Epoch [6] Batch [522/1801] Loss: 0.0127 Acc: 96.74%
+[2025-12-03 06:59:12] src.utils.training - [32mINFO[0m - Epoch [6] Batch [540/1801] Loss: 0.0127 Acc: 96.73%
+[2025-12-03 06:59:55] src.utils.training - [32mINFO[0m - Epoch [6] Batch [558/1801] Loss: 0.0128 Acc: 96.73%
+[2025-12-03 07:00:30] src.utils.training - [32mINFO[0m - Epoch [6] Batch [576/1801] Loss: 0.0128 Acc: 96.72%
+[2025-12-03 07:01:12] src.utils.training - [32mINFO[0m - Epoch [6] Batch [594/1801] Loss: 0.0127 Acc: 96.73%
+[2025-12-03 07:01:48] src.utils.training - [32mINFO[0m - Epoch [6] Batch [612/1801] Loss: 0.0127 Acc: 96.73%
+[2025-12-03 07:02:30] src.utils.training - [32mINFO[0m - Epoch [6] Batch [630/1801] Loss: 0.0127 Acc: 96.73%
+[2025-12-03 07:03:05] src.utils.training - [32mINFO[0m - Epoch [6] Batch [648/1801] Loss: 0.0127 Acc: 96.73%
+[2025-12-03 07:03:47] src.utils.training - [32mINFO[0m - Epoch [6] Batch [666/1801] Loss: 0.0127 Acc: 96.73%
+[2025-12-03 07:04:23] src.utils.training - [32mINFO[0m - Epoch [6] Batch [684/1801] Loss: 0.0127 Acc: 96.73%
+[2025-12-03 07:05:05] src.utils.training - [32mINFO[0m - Epoch [6] Batch [702/1801] Loss: 0.0128 Acc: 96.71%
+[2025-12-03 07:05:40] src.utils.training - [32mINFO[0m - Epoch [6] Batch [720/1801] Loss: 0.0128 Acc: 96.71%
+[2025-12-03 07:06:23] src.utils.training - [32mINFO[0m - Epoch [6] Batch [738/1801] Loss: 0.0127 Acc: 96.73%
+[2025-12-03 07:06:58] src.utils.training - [32mINFO[0m - Epoch [6] Batch [756/1801] Loss: 0.0127 Acc: 96.73%
+[2025-12-03 07:07:40] src.utils.training - [32mINFO[0m - Epoch [6] Batch [774/1801] Loss: 0.0127 Acc: 96.72%
+[2025-12-03 07:08:15] src.utils.training - [32mINFO[0m - Epoch [6] Batch [792/1801] Loss: 0.0127 Acc: 96.73%
+[2025-12-03 07:08:57] src.utils.training - [32mINFO[0m - Epoch [6] Batch [810/1801] Loss: 0.0126 Acc: 96.74%
+[2025-12-03 07:09:32] src.utils.training - [32mINFO[0m - Epoch [6] Batch [828/1801] Loss: 0.0127 Acc: 96.73%
+[2025-12-03 07:10:14] src.utils.training - [32mINFO[0m - Epoch [6] Batch [846/1801] Loss: 0.0126 Acc: 96.74%
+[2025-12-03 07:10:50] src.utils.training - [32mINFO[0m - Epoch [6] Batch [864/1801] Loss: 0.0126 Acc: 96.74%
+[2025-12-03 07:11:32] src.utils.training - [32mINFO[0m - Epoch [6] Batch [882/1801] Loss: 0.0126 Acc: 96.74%
+[2025-12-03 07:12:08] src.utils.training - [32mINFO[0m - Epoch [6] Batch [900/1801] Loss: 0.0126 Acc: 96.75%
+[2025-12-03 07:12:50] src.utils.training - [32mINFO[0m - Epoch [6] Batch [918/1801] Loss: 0.0125 Acc: 96.76%
+[2025-12-03 07:13:25] src.utils.training - [32mINFO[0m - Epoch [6] Batch [936/1801] Loss: 0.0125 Acc: 96.76%
+[2025-12-03 07:14:08] src.utils.training - [32mINFO[0m - Epoch [6] Batch [954/1801] Loss: 0.0125 Acc: 96.76%
+[2025-12-03 07:14:43] src.utils.training - [32mINFO[0m - Epoch [6] Batch [972/1801] Loss: 0.0125 Acc: 96.76%
+[2025-12-03 07:15:26] src.utils.training - [32mINFO[0m - Epoch [6] Batch [990/1801] Loss: 0.0125 Acc: 96.78%
+[2025-12-03 07:16:01] src.utils.training - [32mINFO[0m - Epoch [6] Batch [1008/1801] Loss: 0.0125 Acc: 96.77%
+[2025-12-03 07:16:44] src.utils.training - [32mINFO[0m - Epoch [6] Batch [1026/1801] Loss: 0.0125 Acc: 96.77%
+[2025-12-03 07:17:19] src.utils.training - [32mINFO[0m - Epoch [6] Batch [1044/1801] Loss: 0.0125 Acc: 96.77%
+[2025-12-03 07:18:01] src.utils.training - [32mINFO[0m - Epoch [6] Batch [1062/1801] Loss: 0.0125 Acc: 96.77%
+[2025-12-03 07:18:37] src.utils.training - [32mINFO[0m - Epoch [6] Batch [1080/1801] Loss: 0.0125 Acc: 96.77%
+[2025-12-03 07:19:19] src.utils.training - [32mINFO[0m - Epoch [6] Batch [1098/1801] Loss: 0.0125 Acc: 96.77%
+[2025-12-03 07:19:55] src.utils.training - [32mINFO[0m - Epoch [6] Batch [1116/1801] Loss: 0.0125 Acc: 96.77%
+[2025-12-03 07:20:37] src.utils.training - [32mINFO[0m - Epoch [6] Batch [1134/1801] Loss: 0.0125 Acc: 96.77%
+[2025-12-03 07:21:12] src.utils.training - [32mINFO[0m - Epoch [6] Batch [1152/1801] Loss: 0.0124 Acc: 96.78%
+[2025-12-03 07:21:55] src.utils.training - [32mINFO[0m - Epoch [6] Batch [1170/1801] Loss: 0.0124 Acc: 96.78%
+[2025-12-03 07:22:30] src.utils.training - [32mINFO[0m - Epoch [6] Batch [1188/1801] Loss: 0.0124 Acc: 96.78%
+[2025-12-03 07:23:13] src.utils.training - [32mINFO[0m - Epoch [6] Batch [1206/1801] Loss: 0.0124 Acc: 96.78%
+[2025-12-03 07:23:49] src.utils.training - [32mINFO[0m - Epoch [6] Batch [1224/1801] Loss: 0.0124 Acc: 96.78%
+[2025-12-03 07:24:31] src.utils.training - [32mINFO[0m - Epoch [6] Batch [1242/1801] Loss: 0.0124 Acc: 96.78%
+[2025-12-03 07:25:06] src.utils.training - [32mINFO[0m - Epoch [6] Batch [1260/1801] Loss: 0.0124 Acc: 96.78%
+[2025-12-03 07:25:49] src.utils.training - [32mINFO[0m - Epoch [6] Batch [1278/1801] Loss: 0.0124 Acc: 96.78%
+[2025-12-03 07:26:24] src.utils.training - [32mINFO[0m - Epoch [6] Batch [1296/1801] Loss: 0.0124 Acc: 96.79%
+[2025-12-03 07:27:06] src.utils.training - [32mINFO[0m - Epoch [6] Batch [1314/1801] Loss: 0.0123 Acc: 96.79%
+[2025-12-03 07:27:42] src.utils.training - [32mINFO[0m - Epoch [6] Batch [1332/1801] Loss: 0.0124 Acc: 96.79%
+[2025-12-03 07:28:24] src.utils.training - [32mINFO[0m - Epoch [6] Batch [1350/1801] Loss: 0.0123 Acc: 96.80%
+[2025-12-03 07:29:00] src.utils.training - [32mINFO[0m - Epoch [6] Batch [1368/1801] Loss: 0.0123 Acc: 96.80%
+[2025-12-03 07:29:42] src.utils.training - [32mINFO[0m - Epoch [6] Batch [1386/1801] Loss: 0.0123 Acc: 96.79%
+[2025-12-03 07:30:17] src.utils.training - [32mINFO[0m - Epoch [6] Batch [1404/1801] Loss: 0.0124 Acc: 96.78%
+[2025-12-03 07:30:59] src.utils.training - [32mINFO[0m - Epoch [6] Batch [1422/1801] Loss: 0.0124 Acc: 96.78%
+[2025-12-03 07:31:35] src.utils.training - [32mINFO[0m - Epoch [6] Batch [1440/1801] Loss: 0.0124 Acc: 96.78%
+[2025-12-03 07:32:17] src.utils.training - [32mINFO[0m - Epoch [6] Batch [1458/1801] Loss: 0.0124 Acc: 96.78%
+[2025-12-03 07:32:52] src.utils.training - [32mINFO[0m - Epoch [6] Batch [1476/1801] Loss: 0.0124 Acc: 96.78%
+[2025-12-03 07:33:34] src.utils.training - [32mINFO[0m - Epoch [6] Batch [1494/1801] Loss: 0.0124 Acc: 96.78%
+[2025-12-03 07:34:10] src.utils.training - [32mINFO[0m - Epoch [6] Batch [1512/1801] Loss: 0.0124 Acc: 96.78%
+[2025-12-03 07:34:52] src.utils.training - [32mINFO[0m - Epoch [6] Batch [1530/1801] Loss: 0.0124 Acc: 96.78%
+[2025-12-03 07:35:27] src.utils.training - [32mINFO[0m - Epoch [6] Batch [1548/1801] Loss: 0.0123 Acc: 96.79%
+[2025-12-03 07:36:10] src.utils.training - [32mINFO[0m - Epoch [6] Batch [1566/1801] Loss: 0.0123 Acc: 96.79%
+[2025-12-03 07:36:46] src.utils.training - [32mINFO[0m - Epoch [6] Batch [1584/1801] Loss: 0.0123 Acc: 96.79%
+[2025-12-03 07:37:28] src.utils.training - [32mINFO[0m - Epoch [6] Batch [1602/1801] Loss: 0.0124 Acc: 96.79%
+[2025-12-03 07:38:03] src.utils.training - [32mINFO[0m - Epoch [6] Batch [1620/1801] Loss: 0.0124 Acc: 96.78%
+[2025-12-03 07:38:45] src.utils.training - [32mINFO[0m - Epoch [6] Batch [1638/1801] Loss: 0.0124 Acc: 96.77%
+[2025-12-03 07:39:20] src.utils.training - [32mINFO[0m - Epoch [6] Batch [1656/1801] Loss: 0.0124 Acc: 96.77%
+[2025-12-03 07:40:03] src.utils.training - [32mINFO[0m - Epoch [6] Batch [1674/1801] Loss: 0.0123 Acc: 96.78%
+[2025-12-03 07:40:38] src.utils.training - [32mINFO[0m - Epoch [6] Batch [1692/1801] Loss: 0.0123 Acc: 96.78%
+[2025-12-03 07:41:20] src.utils.training - [32mINFO[0m - Epoch [6] Batch [1710/1801] Loss: 0.0123 Acc: 96.78%
+[2025-12-03 07:41:56] src.utils.training - [32mINFO[0m - Epoch [6] Batch [1728/1801] Loss: 0.0123 Acc: 96.77%
+[2025-12-03 07:42:38] src.utils.training - [32mINFO[0m - Epoch [6] Batch [1746/1801] Loss: 0.0123 Acc: 96.77%
+[2025-12-03 07:43:14] src.utils.training - [32mINFO[0m - Epoch [6] Batch [1764/1801] Loss: 0.0123 Acc: 96.77%
+[2025-12-03 07:43:56] src.utils.training - [32mINFO[0m - Epoch [6] Batch [1782/1801] Loss: 0.0124 Acc: 96.77%
+[2025-12-03 07:44:31] src.utils.training - [32mINFO[0m - Epoch [6] Batch [1800/1801] Loss: 0.0123 Acc: 96.77%
+[2025-12-03 07:44:31] src.utils.training - [32mINFO[0m - Epoch [6] Training Completed in 3889s - Loss: 0.0124 Acc: 96.77%
+[2025-12-03 07:46:17] src.utils.clip_level_evaluation - [32mINFO[0m - [VAL] Batch 50/477 Loss: 0.0643
+[2025-12-03 07:48:05] src.utils.clip_level_evaluation - [32mINFO[0m - [VAL] Batch 100/477 Loss: 0.0331
+[2025-12-03 07:49:43] src.utils.clip_level_evaluation - [32mINFO[0m - [VAL] Batch 150/477 Loss: 0.0228
+[2025-12-03 07:51:29] src.utils.clip_level_evaluation - [32mINFO[0m - [VAL] Batch 200/477 Loss: 0.0174
+[2025-12-03 07:53:04] src.utils.clip_level_evaluation - [32mINFO[0m - [VAL] Batch 250/477 Loss: 0.0142
+[2025-12-03 07:54:56] src.utils.clip_level_evaluation - [32mINFO[0m - [VAL] Batch 300/477 Loss: 0.0121
+[2025-12-03 07:56:45] src.utils.clip_level_evaluation - [32mINFO[0m - [VAL] Batch 350/477 Loss: 0.0108
+[2025-12-03 07:58:37] src.utils.clip_level_evaluation - [32mINFO[0m - [VAL] Batch 400/477 Loss: 0.0097
+[2025-12-03 08:00:19] src.utils.clip_level_evaluation - [32mINFO[0m - [VAL] Batch 450/477 Loss: 0.0090
+[2025-12-03 08:01:15] src.utils.clip_level_evaluation - [32mINFO[0m - [VAL] Finished in 1004s
+[2025-12-03 08:01:15] src.utils.clip_level_evaluation - [32mINFO[0m - Results:
+Loss: 0.0086 | Acc: 97.56% | AUC: 0.8864
+   >> Anomaly: P=0.976 R=1.000 F1=0.988
+   >> Normal:  P=0.000 R=0.000
+   >> Counts:  TP=59446 FN=0 (Missed) | TN=0 FP=1488 (False Alarm)
+   >> Rates:   FPR=1.0000 | FNR=0.0000
+[2025-12-03 08:01:15] __main__ - [32mINFO[0m - Epoch [6] Validation Summary - Loss: 0.0086 | Acc: 97.56% | AUC: 0.8864
+[2025-12-03 08:01:15] __main__ - [32mINFO[0m -   Anomaly Detection: Precision=0.976 Recall=1.000 F1=0.988
+[2025-12-03 08:01:15] __main__ - [32mINFO[0m -   Confusion Matrix: TP=59446 FN=0 TN=0 FP=1488
+[2025-12-03 08:01:15] __main__ - [32mINFO[0m -   Error Rates: FPR=1.0000 FNR=0.0000
+[2025-12-03 08:01:15] __main__ - [32mINFO[0m - New best AUC: 0.8864
+[2025-12-03 08:01:16] src.utils.training_utils - [32mINFO[0m - Saved best model to /work3/s225224/ucf-crime/checkpoints/r3d_binary_20251202_234604/best_model.pth
+[2025-12-03 08:02:00] src.utils.training - [32mINFO[0m - Epoch [7] Batch [18/1801] Loss: 0.0116 Acc: 96.83%
+[2025-12-03 08:02:35] src.utils.training - [32mINFO[0m - Epoch [7] Batch [36/1801] Loss: 0.0118 Acc: 96.77%
+[2025-12-03 08:03:18] src.utils.training - [32mINFO[0m - Epoch [7] Batch [54/1801] Loss: 0.0113 Acc: 96.92%
+[2025-12-03 08:03:53] src.utils.training - [32mINFO[0m - Epoch [7] Batch [72/1801] Loss: 0.0113 Acc: 96.97%
+[2025-12-03 08:04:36] src.utils.training - [32mINFO[0m - Epoch [7] Batch [90/1801] Loss: 0.0110 Acc: 97.05%
+[2025-12-03 08:05:11] src.utils.training - [32mINFO[0m - Epoch [7] Batch [108/1801] Loss: 0.0113 Acc: 96.96%
+[2025-12-03 08:05:53] src.utils.training - [32mINFO[0m - Epoch [7] Batch [126/1801] Loss: 0.0115 Acc: 96.92%
+[2025-12-03 08:06:28] src.utils.training - [32mINFO[0m - Epoch [7] Batch [144/1801] Loss: 0.0114 Acc: 96.96%
+[2025-12-03 08:07:10] src.utils.training - [32mINFO[0m - Epoch [7] Batch [162/1801] Loss: 0.0115 Acc: 96.91%
+[2025-12-03 08:07:46] src.utils.training - [32mINFO[0m - Epoch [7] Batch [180/1801] Loss: 0.0115 Acc: 96.93%
+[2025-12-03 08:08:28] src.utils.training - [32mINFO[0m - Epoch [7] Batch [198/1801] Loss: 0.0116 Acc: 96.89%
+[2025-12-03 08:09:03] src.utils.training - [32mINFO[0m - Epoch [7] Batch [216/1801] Loss: 0.0117 Acc: 96.89%
+[2025-12-03 08:09:45] src.utils.training - [32mINFO[0m - Epoch [7] Batch [234/1801] Loss: 0.0118 Acc: 96.85%
+[2025-12-03 08:10:20] src.utils.training - [32mINFO[0m - Epoch [7] Batch [252/1801] Loss: 0.0119 Acc: 96.84%
+[2025-12-03 08:11:02] src.utils.training - [32mINFO[0m - Epoch [7] Batch [270/1801] Loss: 0.0118 Acc: 96.83%
+[2025-12-03 08:11:38] src.utils.training - [32mINFO[0m - Epoch [7] Batch [288/1801] Loss: 0.0120 Acc: 96.80%
+[2025-12-03 08:12:20] src.utils.training - [32mINFO[0m - Epoch [7] Batch [306/1801] Loss: 0.0119 Acc: 96.83%
+[2025-12-03 08:12:56] src.utils.training - [32mINFO[0m - Epoch [7] Batch [324/1801] Loss: 0.0119 Acc: 96.81%
+[2025-12-03 08:13:38] src.utils.training - [32mINFO[0m - Epoch [7] Batch [342/1801] Loss: 0.0119 Acc: 96.81%
+[2025-12-03 08:14:14] src.utils.training - [32mINFO[0m - Epoch [7] Batch [360/1801] Loss: 0.0119 Acc: 96.82%
+[2025-12-03 08:14:57] src.utils.training - [32mINFO[0m - Epoch [7] Batch [378/1801] Loss: 0.0118 Acc: 96.82%
+[2025-12-03 08:15:32] src.utils.training - [32mINFO[0m - Epoch [7] Batch [396/1801] Loss: 0.0119 Acc: 96.79%
+[2025-12-03 08:16:14] src.utils.training - [32mINFO[0m - Epoch [7] Batch [414/1801] Loss: 0.0119 Acc: 96.81%
+[2025-12-03 08:16:49] src.utils.training - [32mINFO[0m - Epoch [7] Batch [432/1801] Loss: 0.0119 Acc: 96.82%
+[2025-12-03 08:17:32] src.utils.training - [32mINFO[0m - Epoch [7] Batch [450/1801] Loss: 0.0118 Acc: 96.82%
+[2025-12-03 08:18:07] src.utils.training - [32mINFO[0m - Epoch [7] Batch [468/1801] Loss: 0.0119 Acc: 96.81%
+[2025-12-03 08:18:48] src.utils.training - [32mINFO[0m - Epoch [7] Batch [486/1801] Loss: 0.0118 Acc: 96.82%
+[2025-12-03 08:19:24] src.utils.training - [32mINFO[0m - Epoch [7] Batch [504/1801] Loss: 0.0118 Acc: 96.83%
+[2025-12-03 08:20:06] src.utils.training - [32mINFO[0m - Epoch [7] Batch [522/1801] Loss: 0.0118 Acc: 96.84%
+[2025-12-03 08:20:41] src.utils.training - [32mINFO[0m - Epoch [7] Batch [540/1801] Loss: 0.0118 Acc: 96.84%
+[2025-12-03 08:21:24] src.utils.training - [32mINFO[0m - Epoch [7] Batch [558/1801] Loss: 0.0118 Acc: 96.83%
+[2025-12-03 08:21:59] src.utils.training - [32mINFO[0m - Epoch [7] Batch [576/1801] Loss: 0.0118 Acc: 96.83%
+[2025-12-03 08:22:41] src.utils.training - [32mINFO[0m - Epoch [7] Batch [594/1801] Loss: 0.0118 Acc: 96.83%
+[2025-12-03 08:23:17] src.utils.training - [32mINFO[0m - Epoch [7] Batch [612/1801] Loss: 0.0118 Acc: 96.82%
+[2025-12-03 08:23:59] src.utils.training - [32mINFO[0m - Epoch [7] Batch [630/1801] Loss: 0.0118 Acc: 96.83%
+[2025-12-03 08:24:35] src.utils.training - [32mINFO[0m - Epoch [7] Batch [648/1801] Loss: 0.0118 Acc: 96.82%
+[2025-12-03 08:25:17] src.utils.training - [32mINFO[0m - Epoch [7] Batch [666/1801] Loss: 0.0118 Acc: 96.83%
+[2025-12-03 08:25:52] src.utils.training - [32mINFO[0m - Epoch [7] Batch [684/1801] Loss: 0.0118 Acc: 96.82%
+[2025-12-03 08:26:35] src.utils.training - [32mINFO[0m - Epoch [7] Batch [702/1801] Loss: 0.0118 Acc: 96.80%
+[2025-12-03 08:27:10] src.utils.training - [32mINFO[0m - Epoch [7] Batch [720/1801] Loss: 0.0119 Acc: 96.80%
+[2025-12-03 08:27:52] src.utils.training - [32mINFO[0m - Epoch [7] Batch [738/1801] Loss: 0.0118 Acc: 96.80%
+[2025-12-03 08:28:27] src.utils.training - [32mINFO[0m - Epoch [7] Batch [756/1801] Loss: 0.0118 Acc: 96.81%
+[2025-12-03 08:29:10] src.utils.training - [32mINFO[0m - Epoch [7] Batch [774/1801] Loss: 0.0119 Acc: 96.80%
+[2025-12-03 08:29:45] src.utils.training - [32mINFO[0m - Epoch [7] Batch [792/1801] Loss: 0.0118 Acc: 96.80%
+[2025-12-03 08:30:28] src.utils.training - [32mINFO[0m - Epoch [7] Batch [810/1801] Loss: 0.0118 Acc: 96.80%
+[2025-12-03 08:31:03] src.utils.training - [32mINFO[0m - Epoch [7] Batch [828/1801] Loss: 0.0119 Acc: 96.77%
+[2025-12-03 08:31:45] src.utils.training - [32mINFO[0m - Epoch [7] Batch [846/1801] Loss: 0.0119 Acc: 96.78%
+[2025-12-03 08:32:21] src.utils.training - [32mINFO[0m - Epoch [7] Batch [864/1801] Loss: 0.0119 Acc: 96.78%
+[2025-12-03 08:33:03] src.utils.training - [32mINFO[0m - Epoch [7] Batch [882/1801] Loss: 0.0119 Acc: 96.78%
+[2025-12-03 08:33:38] src.utils.training - [32mINFO[0m - Epoch [7] Batch [900/1801] Loss: 0.0119 Acc: 96.78%
+[2025-12-03 08:34:20] src.utils.training - [32mINFO[0m - Epoch [7] Batch [918/1801] Loss: 0.0118 Acc: 96.78%
+[2025-12-03 08:34:55] src.utils.training - [32mINFO[0m - Epoch [7] Batch [936/1801] Loss: 0.0119 Acc: 96.77%
+[2025-12-03 08:35:37] src.utils.training - [32mINFO[0m - Epoch [7] Batch [954/1801] Loss: 0.0119 Acc: 96.77%
+[2025-12-03 08:36:13] src.utils.training - [32mINFO[0m - Epoch [7] Batch [972/1801] Loss: 0.0119 Acc: 96.77%
+[2025-12-03 08:36:54] src.utils.training - [32mINFO[0m - Epoch [7] Batch [990/1801] Loss: 0.0119 Acc: 96.77%
+[2025-12-03 08:37:31] src.utils.training - [32mINFO[0m - Epoch [7] Batch [1008/1801] Loss: 0.0119 Acc: 96.77%
+[2025-12-03 08:38:12] src.utils.training - [32mINFO[0m - Epoch [7] Batch [1026/1801] Loss: 0.0119 Acc: 96.78%
+[2025-12-03 08:38:48] src.utils.training - [32mINFO[0m - Epoch [7] Batch [1044/1801] Loss: 0.0119 Acc: 96.78%
+[2025-12-03 08:39:30] src.utils.training - [32mINFO[0m - Epoch [7] Batch [1062/1801] Loss: 0.0119 Acc: 96.79%
+[2025-12-03 08:40:06] src.utils.training - [32mINFO[0m - Epoch [7] Batch [1080/1801] Loss: 0.0119 Acc: 96.79%
+[2025-12-03 08:40:47] src.utils.training - [32mINFO[0m - Epoch [7] Batch [1098/1801] Loss: 0.0119 Acc: 96.79%
+[2025-12-03 08:41:24] src.utils.training - [32mINFO[0m - Epoch [7] Batch [1116/1801] Loss: 0.0119 Acc: 96.79%
+[2025-12-03 08:42:04] src.utils.training - [32mINFO[0m - Epoch [7] Batch [1134/1801] Loss: 0.0119 Acc: 96.79%
+[2025-12-03 08:42:43] src.utils.training - [32mINFO[0m - Epoch [7] Batch [1152/1801] Loss: 0.0119 Acc: 96.79%
+[2025-12-03 08:43:21] src.utils.training - [32mINFO[0m - Epoch [7] Batch [1170/1801] Loss: 0.0119 Acc: 96.78%
+[2025-12-03 08:44:01] src.utils.training - [32mINFO[0m - Epoch [7] Batch [1188/1801] Loss: 0.0119 Acc: 96.78%
+[2025-12-03 08:44:38] src.utils.training - [32mINFO[0m - Epoch [7] Batch [1206/1801] Loss: 0.0119 Acc: 96.78%
+[2025-12-03 08:45:19] src.utils.training - [32mINFO[0m - Epoch [7] Batch [1224/1801] Loss: 0.0119 Acc: 96.78%
+[2025-12-03 08:45:55] src.utils.training - [32mINFO[0m - Epoch [7] Batch [1242/1801] Loss: 0.0119 Acc: 96.79%
+[2025-12-03 08:46:37] src.utils.training - [32mINFO[0m - Epoch [7] Batch [1260/1801] Loss: 0.0119 Acc: 96.78%
+[2025-12-03 08:47:13] src.utils.training - [32mINFO[0m - Epoch [7] Batch [1278/1801] Loss: 0.0119 Acc: 96.79%
+[2025-12-03 08:47:55] src.utils.training - [32mINFO[0m - Epoch [7] Batch [1296/1801] Loss: 0.0119 Acc: 96.79%
+[2025-12-03 08:48:31] src.utils.training - [32mINFO[0m - Epoch [7] Batch [1314/1801] Loss: 0.0119 Acc: 96.79%
+[2025-12-03 08:49:13] src.utils.training - [32mINFO[0m - Epoch [7] Batch [1332/1801] Loss: 0.0119 Acc: 96.79%
+[2025-12-03 08:49:49] src.utils.training - [32mINFO[0m - Epoch [7] Batch [1350/1801] Loss: 0.0119 Acc: 96.79%
+[2025-12-03 08:50:31] src.utils.training - [32mINFO[0m - Epoch [7] Batch [1368/1801] Loss: 0.0119 Acc: 96.79%
+[2025-12-03 08:51:06] src.utils.training - [32mINFO[0m - Epoch [7] Batch [1386/1801] Loss: 0.0119 Acc: 96.79%
+[2025-12-03 08:51:48] src.utils.training - [32mINFO[0m - Epoch [7] Batch [1404/1801] Loss: 0.0119 Acc: 96.79%
+[2025-12-03 08:52:24] src.utils.training - [32mINFO[0m - Epoch [7] Batch [1422/1801] Loss: 0.0119 Acc: 96.78%
+[2025-12-03 08:53:07] src.utils.training - [32mINFO[0m - Epoch [7] Batch [1440/1801] Loss: 0.0119 Acc: 96.77%
+[2025-12-03 08:53:42] src.utils.training - [32mINFO[0m - Epoch [7] Batch [1458/1801] Loss: 0.0120 Acc: 96.77%
+[2025-12-03 08:54:24] src.utils.training - [32mINFO[0m - Epoch [7] Batch [1476/1801] Loss: 0.0120 Acc: 96.77%
+[2025-12-03 08:55:00] src.utils.training - [32mINFO[0m - Epoch [7] Batch [1494/1801] Loss: 0.0120 Acc: 96.77%
+[2025-12-03 08:55:42] src.utils.training - [32mINFO[0m - Epoch [7] Batch [1512/1801] Loss: 0.0120 Acc: 96.77%
+[2025-12-03 08:56:17] src.utils.training - [32mINFO[0m - Epoch [7] Batch [1530/1801] Loss: 0.0120 Acc: 96.77%
+[2025-12-03 08:57:00] src.utils.training - [32mINFO[0m - Epoch [7] Batch [1548/1801] Loss: 0.0120 Acc: 96.77%
+[2025-12-03 08:57:35] src.utils.training - [32mINFO[0m - Epoch [7] Batch [1566/1801] Loss: 0.0119 Acc: 96.78%
+[2025-12-03 08:58:17] src.utils.training - [32mINFO[0m - Epoch [7] Batch [1584/1801] Loss: 0.0119 Acc: 96.77%
+[2025-12-03 08:58:52] src.utils.training - [32mINFO[0m - Epoch [7] Batch [1602/1801] Loss: 0.0120 Acc: 96.77%
+[2025-12-03 08:59:35] src.utils.training - [32mINFO[0m - Epoch [7] Batch [1620/1801] Loss: 0.0120 Acc: 96.76%
+[2025-12-03 09:00:10] src.utils.training - [32mINFO[0m - Epoch [7] Batch [1638/1801] Loss: 0.0120 Acc: 96.77%
+[2025-12-03 09:00:53] src.utils.training - [32mINFO[0m - Epoch [7] Batch [1656/1801] Loss: 0.0119 Acc: 96.77%
+[2025-12-03 09:01:28] src.utils.training - [32mINFO[0m - Epoch [7] Batch [1674/1801] Loss: 0.0119 Acc: 96.77%
+[2025-12-03 09:02:11] src.utils.training - [32mINFO[0m - Epoch [7] Batch [1692/1801] Loss: 0.0119 Acc: 96.77%
+[2025-12-03 09:02:46] src.utils.training - [32mINFO[0m - Epoch [7] Batch [1710/1801] Loss: 0.0119 Acc: 96.78%
+[2025-12-03 09:03:29] src.utils.training - [32mINFO[0m - Epoch [7] Batch [1728/1801] Loss: 0.0119 Acc: 96.78%
+[2025-12-03 09:04:04] src.utils.training - [32mINFO[0m - Epoch [7] Batch [1746/1801] Loss: 0.0119 Acc: 96.78%
+[2025-12-03 09:04:47] src.utils.training - [32mINFO[0m - Epoch [7] Batch [1764/1801] Loss: 0.0119 Acc: 96.78%
+[2025-12-03 09:05:22] src.utils.training - [32mINFO[0m - Epoch [7] Batch [1782/1801] Loss: 0.0119 Acc: 96.78%
+[2025-12-03 09:06:04] src.utils.training - [32mINFO[0m - Epoch [7] Batch [1800/1801] Loss: 0.0119 Acc: 96.79%
+[2025-12-03 09:06:04] src.utils.training - [32mINFO[0m - Epoch [7] Training Completed in 3889s - Loss: 0.0119 Acc: 96.79%
+[2025-12-03 09:07:50] src.utils.clip_level_evaluation - [32mINFO[0m - [VAL] Batch 50/477 Loss: 0.0642
+[2025-12-03 09:09:37] src.utils.clip_level_evaluation - [32mINFO[0m - [VAL] Batch 100/477 Loss: 0.0330
+[2025-12-03 09:11:16] src.utils.clip_level_evaluation - [32mINFO[0m - [VAL] Batch 150/477 Loss: 0.0226
+[2025-12-03 09:13:02] src.utils.clip_level_evaluation - [32mINFO[0m - [VAL] Batch 200/477 Loss: 0.0173
+[2025-12-03 09:14:36] src.utils.clip_level_evaluation - [32mINFO[0m - [VAL] Batch 250/477 Loss: 0.0140
+[2025-12-03 09:16:28] src.utils.clip_level_evaluation - [32mINFO[0m - [VAL] Batch 300/477 Loss: 0.0120
+[2025-12-03 09:18:16] src.utils.clip_level_evaluation - [32mINFO[0m - [VAL] Batch 350/477 Loss: 0.0107
+[2025-12-03 09:20:08] src.utils.clip_level_evaluation - [32mINFO[0m - [VAL] Batch 400/477 Loss: 0.0096
+[2025-12-03 09:21:49] src.utils.clip_level_evaluation - [32mINFO[0m - [VAL] Batch 450/477 Loss: 0.0088
+[2025-12-03 09:22:46] src.utils.clip_level_evaluation - [32mINFO[0m - [VAL] Finished in 1001s
+[2025-12-03 09:22:46] src.utils.clip_level_evaluation - [32mINFO[0m - Results:
+Loss: 0.0085 | Acc: 97.56% | AUC: 0.8939
+   >> Anomaly: P=0.976 R=1.000 F1=0.988
+   >> Normal:  P=0.000 R=0.000
+   >> Counts:  TP=59446 FN=0 (Missed) | TN=0 FP=1488 (False Alarm)
+   >> Rates:   FPR=1.0000 | FNR=0.0000
+[2025-12-03 09:22:46] __main__ - [32mINFO[0m - Epoch [7] Validation Summary - Loss: 0.0085 | Acc: 97.56% | AUC: 0.8939
+[2025-12-03 09:22:46] __main__ - [32mINFO[0m -   Anomaly Detection: Precision=0.976 Recall=1.000 F1=0.988
+[2025-12-03 09:22:46] __main__ - [32mINFO[0m -   Confusion Matrix: TP=59446 FN=0 TN=0 FP=1488
+[2025-12-03 09:22:46] __main__ - [32mINFO[0m -   Error Rates: FPR=1.0000 FNR=0.0000
+[2025-12-03 09:22:46] __main__ - [32mINFO[0m - New best AUC: 0.8939
+[2025-12-03 09:22:46] src.utils.training_utils - [32mINFO[0m - Saved best model to /work3/s225224/ucf-crime/checkpoints/r3d_binary_20251202_234604/best_model.pth
+[2025-12-03 09:23:31] src.utils.training - [32mINFO[0m - Epoch [8] Batch [18/1801] Loss: 0.0110 Acc: 96.70%
+[2025-12-03 09:24:06] src.utils.training - [32mINFO[0m - Epoch [8] Batch [36/1801] Loss: 0.0115 Acc: 96.85%
+[2025-12-03 09:24:48] src.utils.training - [32mINFO[0m - Epoch [8] Batch [54/1801] Loss: 0.0114 Acc: 96.85%
+[2025-12-03 09:25:23] src.utils.training - [32mINFO[0m - Epoch [8] Batch [72/1801] Loss: 0.0113 Acc: 96.81%
+[2025-12-03 09:26:05] src.utils.training - [32mINFO[0m - Epoch [8] Batch [90/1801] Loss: 0.0111 Acc: 96.94%
+[2025-12-03 09:26:40] src.utils.training - [32mINFO[0m - Epoch [8] Batch [108/1801] Loss: 0.0112 Acc: 96.84%
+[2025-12-03 09:27:23] src.utils.training - [32mINFO[0m - Epoch [8] Batch [126/1801] Loss: 0.0113 Acc: 96.81%
+[2025-12-03 09:27:58] src.utils.training - [32mINFO[0m - Epoch [8] Batch [144/1801] Loss: 0.0116 Acc: 96.73%
+[2025-12-03 09:28:40] src.utils.training - [32mINFO[0m - Epoch [8] Batch [162/1801] Loss: 0.0116 Acc: 96.72%
+[2025-12-03 09:29:15] src.utils.training - [32mINFO[0m - Epoch [8] Batch [180/1801] Loss: 0.0117 Acc: 96.72%
+[2025-12-03 09:29:58] src.utils.training - [32mINFO[0m - Epoch [8] Batch [198/1801] Loss: 0.0117 Acc: 96.70%
+[2025-12-03 09:30:33] src.utils.training - [32mINFO[0m - Epoch [8] Batch [216/1801] Loss: 0.0114 Acc: 96.77%
+[2025-12-03 09:31:15] src.utils.training - [32mINFO[0m - Epoch [8] Batch [234/1801] Loss: 0.0115 Acc: 96.74%
+[2025-12-03 09:31:50] src.utils.training - [32mINFO[0m - Epoch [8] Batch [252/1801] Loss: 0.0115 Acc: 96.74%
+[2025-12-03 09:32:33] src.utils.training - [32mINFO[0m - Epoch [8] Batch [270/1801] Loss: 0.0114 Acc: 96.75%
+[2025-12-03 09:33:08] src.utils.training - [32mINFO[0m - Epoch [8] Batch [288/1801] Loss: 0.0114 Acc: 96.77%
+[2025-12-03 09:33:50] src.utils.training - [32mINFO[0m - Epoch [8] Batch [306/1801] Loss: 0.0114 Acc: 96.80%
+[2025-12-03 09:34:26] src.utils.training - [32mINFO[0m - Epoch [8] Batch [324/1801] Loss: 0.0114 Acc: 96.81%
+[2025-12-03 09:35:08] src.utils.training - [32mINFO[0m - Epoch [8] Batch [342/1801] Loss: 0.0114 Acc: 96.83%
+[2025-12-03 09:35:43] src.utils.training - [32mINFO[0m - Epoch [8] Batch [360/1801] Loss: 0.0113 Acc: 96.86%
+[2025-12-03 09:36:26] src.utils.training - [32mINFO[0m - Epoch [8] Batch [378/1801] Loss: 0.0114 Acc: 96.86%
+[2025-12-03 09:37:01] src.utils.training - [32mINFO[0m - Epoch [8] Batch [396/1801] Loss: 0.0114 Acc: 96.84%
+[2025-12-03 09:37:43] src.utils.training - [32mINFO[0m - Epoch [8] Batch [414/1801] Loss: 0.0115 Acc: 96.82%
+[2025-12-03 09:38:19] src.utils.training - [32mINFO[0m - Epoch [8] Batch [432/1801] Loss: 0.0115 Acc: 96.81%
+[2025-12-03 09:39:01] src.utils.training - [32mINFO[0m - Epoch [8] Batch [450/1801] Loss: 0.0114 Acc: 96.83%
+[2025-12-03 09:39:37] src.utils.training - [32mINFO[0m - Epoch [8] Batch [468/1801] Loss: 0.0114 Acc: 96.83%
+[2025-12-03 09:40:19] src.utils.training - [32mINFO[0m - Epoch [8] Batch [486/1801] Loss: 0.0114 Acc: 96.84%
+[2025-12-03 09:40:55] src.utils.training - [32mINFO[0m - Epoch [8] Batch [504/1801] Loss: 0.0115 Acc: 96.84%
+[2025-12-03 09:41:37] src.utils.training - [32mINFO[0m - Epoch [8] Batch [522/1801] Loss: 0.0114 Acc: 96.85%
+[2025-12-03 09:42:12] src.utils.training - [32mINFO[0m - Epoch [8] Batch [540/1801] Loss: 0.0114 Acc: 96.86%
+[2025-12-03 09:42:54] src.utils.training - [32mINFO[0m - Epoch [8] Batch [558/1801] Loss: 0.0114 Acc: 96.84%
+[2025-12-03 09:43:30] src.utils.training - [32mINFO[0m - Epoch [8] Batch [576/1801] Loss: 0.0115 Acc: 96.82%
+[2025-12-03 09:44:12] src.utils.training - [32mINFO[0m - Epoch [8] Batch [594/1801] Loss: 0.0115 Acc: 96.83%
+[2025-12-03 09:44:48] src.utils.training - [32mINFO[0m - Epoch [8] Batch [612/1801] Loss: 0.0115 Acc: 96.82%
+[2025-12-03 09:45:30] src.utils.training - [32mINFO[0m - Epoch [8] Batch [630/1801] Loss: 0.0115 Acc: 96.80%
+[2025-12-03 09:46:05] src.utils.training - [32mINFO[0m - Epoch [8] Batch [648/1801] Loss: 0.0115 Acc: 96.81%
+[2025-12-03 09:46:47] src.utils.training - [32mINFO[0m - Epoch [8] Batch [666/1801] Loss: 0.0114 Acc: 96.83%
+[2025-12-03 09:47:23] src.utils.training - [32mINFO[0m - Epoch [8] Batch [684/1801] Loss: 0.0114 Acc: 96.84%
+[2025-12-03 09:48:05] src.utils.training - [32mINFO[0m - Epoch [8] Batch [702/1801] Loss: 0.0114 Acc: 96.84%
+[2025-12-03 09:48:41] src.utils.training - [32mINFO[0m - Epoch [8] Batch [720/1801] Loss: 0.0114 Acc: 96.86%
+[2025-12-03 09:49:23] src.utils.training - [32mINFO[0m - Epoch [8] Batch [738/1801] Loss: 0.0114 Acc: 96.85%
+[2025-12-03 09:49:58] src.utils.training - [32mINFO[0m - Epoch [8] Batch [756/1801] Loss: 0.0114 Acc: 96.86%
+[2025-12-03 09:50:41] src.utils.training - [32mINFO[0m - Epoch [8] Batch [774/1801] Loss: 0.0114 Acc: 96.86%
+[2025-12-03 09:51:16] src.utils.training - [32mINFO[0m - Epoch [8] Batch [792/1801] Loss: 0.0114 Acc: 96.86%
+[2025-12-03 09:51:59] src.utils.training - [32mINFO[0m - Epoch [8] Batch [810/1801] Loss: 0.0113 Acc: 96.86%
+[2025-12-03 09:52:34] src.utils.training - [32mINFO[0m - Epoch [8] Batch [828/1801] Loss: 0.0114 Acc: 96.86%
+[2025-12-03 09:53:16] src.utils.training - [32mINFO[0m - Epoch [8] Batch [846/1801] Loss: 0.0113 Acc: 96.86%
+[2025-12-03 09:53:51] src.utils.training - [32mINFO[0m - Epoch [8] Batch [864/1801] Loss: 0.0114 Acc: 96.84%
+[2025-12-03 09:54:33] src.utils.training - [32mINFO[0m - Epoch [8] Batch [882/1801] Loss: 0.0114 Acc: 96.85%
+[2025-12-03 09:55:11] src.utils.training - [32mINFO[0m - Epoch [8] Batch [900/1801] Loss: 0.0114 Acc: 96.84%
+[2025-12-03 09:55:54] src.utils.training - [32mINFO[0m - Epoch [8] Batch [918/1801] Loss: 0.0114 Acc: 96.82%
+[2025-12-03 09:56:30] src.utils.training - [32mINFO[0m - Epoch [8] Batch [936/1801] Loss: 0.0114 Acc: 96.83%
+[2025-12-03 09:57:14] src.utils.training - [32mINFO[0m - Epoch [8] Batch [954/1801] Loss: 0.0114 Acc: 96.83%
+[2025-12-03 09:57:51] src.utils.training - [32mINFO[0m - Epoch [8] Batch [972/1801] Loss: 0.0114 Acc: 96.83%
+[2025-12-03 09:58:34] src.utils.training - [32mINFO[0m - Epoch [8] Batch [990/1801] Loss: 0.0114 Acc: 96.83%
+[2025-12-03 09:59:10] src.utils.training - [32mINFO[0m - Epoch [8] Batch [1008/1801] Loss: 0.0114 Acc: 96.83%
+[2025-12-03 09:59:53] src.utils.training - [32mINFO[0m - Epoch [8] Batch [1026/1801] Loss: 0.0115 Acc: 96.82%
+[2025-12-03 10:00:31] src.utils.training - [32mINFO[0m - Epoch [8] Batch [1044/1801] Loss: 0.0115 Acc: 96.83%
+[2025-12-03 10:01:14] src.utils.training - [32mINFO[0m - Epoch [8] Batch [1062/1801] Loss: 0.0115 Acc: 96.81%
+[2025-12-03 10:01:51] src.utils.training - [32mINFO[0m - Epoch [8] Batch [1080/1801] Loss: 0.0115 Acc: 96.81%
+[2025-12-03 10:02:33] src.utils.training - [32mINFO[0m - Epoch [8] Batch [1098/1801] Loss: 0.0115 Acc: 96.81%
+[2025-12-03 10:03:10] src.utils.training - [32mINFO[0m - Epoch [8] Batch [1116/1801] Loss: 0.0115 Acc: 96.82%
+[2025-12-03 10:03:53] src.utils.training - [32mINFO[0m - Epoch [8] Batch [1134/1801] Loss: 0.0115 Acc: 96.81%
+[2025-12-03 10:04:30] src.utils.training - [32mINFO[0m - Epoch [8] Batch [1152/1801] Loss: 0.0115 Acc: 96.80%
+[2025-12-03 10:05:13] src.utils.training - [32mINFO[0m - Epoch [8] Batch [1170/1801] Loss: 0.0115 Acc: 96.79%
+[2025-12-03 10:05:51] src.utils.training - [32mINFO[0m - Epoch [8] Batch [1188/1801] Loss: 0.0115 Acc: 96.79%
+[2025-12-03 10:06:34] src.utils.training - [32mINFO[0m - Epoch [8] Batch [1206/1801] Loss: 0.0115 Acc: 96.79%
+[2025-12-03 10:07:12] src.utils.training - [32mINFO[0m - Epoch [8] Batch [1224/1801] Loss: 0.0115 Acc: 96.79%
+[2025-12-03 10:07:54] src.utils.training - [32mINFO[0m - Epoch [8] Batch [1242/1801] Loss: 0.0115 Acc: 96.80%
+[2025-12-03 10:08:33] src.utils.training - [32mINFO[0m - Epoch [8] Batch [1260/1801] Loss: 0.0115 Acc: 96.80%
+[2025-12-03 10:09:15] src.utils.training - [32mINFO[0m - Epoch [8] Batch [1278/1801] Loss: 0.0115 Acc: 96.81%
+[2025-12-03 10:09:53] src.utils.training - [32mINFO[0m - Epoch [8] Batch [1296/1801] Loss: 0.0115 Acc: 96.81%
+[2025-12-03 10:10:36] src.utils.training - [32mINFO[0m - Epoch [8] Batch [1314/1801] Loss: 0.0115 Acc: 96.82%
+[2025-12-03 10:11:12] src.utils.training - [32mINFO[0m - Epoch [8] Batch [1332/1801] Loss: 0.0115 Acc: 96.82%
+[2025-12-03 10:11:57] src.utils.training - [32mINFO[0m - Epoch [8] Batch [1350/1801] Loss: 0.0115 Acc: 96.82%
+[2025-12-03 10:12:33] src.utils.training - [32mINFO[0m - Epoch [8] Batch [1368/1801] Loss: 0.0115 Acc: 96.82%
+[2025-12-03 10:13:18] src.utils.training - [32mINFO[0m - Epoch [8] Batch [1386/1801] Loss: 0.0115 Acc: 96.82%
+[2025-12-03 10:13:54] src.utils.training - [32mINFO[0m - Epoch [8] Batch [1404/1801] Loss: 0.0115 Acc: 96.81%
+[2025-12-03 10:14:38] src.utils.training - [32mINFO[0m - Epoch [8] Batch [1422/1801] Loss: 0.0115 Acc: 96.82%
+[2025-12-03 10:15:16] src.utils.training - [32mINFO[0m - Epoch [8] Batch [1440/1801] Loss: 0.0115 Acc: 96.82%
+[2025-12-03 10:16:00] src.utils.training - [32mINFO[0m - Epoch [8] Batch [1458/1801] Loss: 0.0114 Acc: 96.82%
+[2025-12-03 10:16:36] src.utils.training - [32mINFO[0m - Epoch [8] Batch [1476/1801] Loss: 0.0115 Acc: 96.82%
+[2025-12-03 10:17:20] src.utils.training - [32mINFO[0m - Epoch [8] Batch [1494/1801] Loss: 0.0114 Acc: 96.82%
+[2025-12-03 10:17:57] src.utils.training - [32mINFO[0m - Epoch [8] Batch [1512/1801] Loss: 0.0115 Acc: 96.81%
+[2025-12-03 10:18:41] src.utils.training - [32mINFO[0m - Epoch [8] Batch [1530/1801] Loss: 0.0115 Acc: 96.81%
+[2025-12-03 10:19:17] src.utils.training - [32mINFO[0m - Epoch [8] Batch [1548/1801] Loss: 0.0115 Acc: 96.81%
+[2025-12-03 10:20:02] src.utils.training - [32mINFO[0m - Epoch [8] Batch [1566/1801] Loss: 0.0115 Acc: 96.81%
+[2025-12-03 10:20:38] src.utils.training - [32mINFO[0m - Epoch [8] Batch [1584/1801] Loss: 0.0115 Acc: 96.81%
+[2025-12-03 10:21:23] src.utils.training - [32mINFO[0m - Epoch [8] Batch [1602/1801] Loss: 0.0115 Acc: 96.81%
+[2025-12-03 10:22:01] src.utils.training - [32mINFO[0m - Epoch [8] Batch [1620/1801] Loss: 0.0115 Acc: 96.81%
+[2025-12-03 10:22:44] src.utils.training - [32mINFO[0m - Epoch [8] Batch [1638/1801] Loss: 0.0115 Acc: 96.81%
+[2025-12-03 10:23:22] src.utils.training - [32mINFO[0m - Epoch [8] Batch [1656/1801] Loss: 0.0115 Acc: 96.82%
+[2025-12-03 10:24:06] src.utils.training - [32mINFO[0m - Epoch [8] Batch [1674/1801] Loss: 0.0115 Acc: 96.82%
+[2025-12-03 10:24:46] src.utils.training - [32mINFO[0m - Epoch [8] Batch [1692/1801] Loss: 0.0115 Acc: 96.81%
+[2025-12-03 10:25:31] src.utils.training - [32mINFO[0m - Epoch [8] Batch [1710/1801] Loss: 0.0115 Acc: 96.81%
+[2025-12-03 10:26:11] src.utils.training - [32mINFO[0m - Epoch [8] Batch [1728/1801] Loss: 0.0115 Acc: 96.81%
+[2025-12-03 10:26:54] src.utils.training - [32mINFO[0m - Epoch [8] Batch [1746/1801] Loss: 0.0115 Acc: 96.81%
+[2025-12-03 10:27:30] src.utils.training - [32mINFO[0m - Epoch [8] Batch [1764/1801] Loss: 0.0115 Acc: 96.81%
+[2025-12-03 10:28:13] src.utils.training - [32mINFO[0m - Epoch [8] Batch [1782/1801] Loss: 0.0115 Acc: 96.81%
+[2025-12-03 10:28:49] src.utils.training - [32mINFO[0m - Epoch [8] Batch [1800/1801] Loss: 0.0115 Acc: 96.81%
+[2025-12-03 10:28:50] src.utils.training - [32mINFO[0m - Epoch [8] Training Completed in 3963s - Loss: 0.0115 Acc: 96.81%
+[2025-12-03 10:30:37] src.utils.clip_level_evaluation - [32mINFO[0m - [VAL] Batch 50/477 Loss: 0.0607
+[2025-12-03 10:32:27] src.utils.clip_level_evaluation - [32mINFO[0m - [VAL] Batch 100/477 Loss: 0.0314
+[2025-12-03 10:34:08] src.utils.clip_level_evaluation - [32mINFO[0m - [VAL] Batch 150/477 Loss: 0.0216
+[2025-12-03 10:35:57] src.utils.clip_level_evaluation - [32mINFO[0m - [VAL] Batch 200/477 Loss: 0.0166
+[2025-12-03 10:37:34] src.utils.clip_level_evaluation - [32mINFO[0m - [VAL] Batch 250/477 Loss: 0.0135
+[2025-12-03 10:39:28] src.utils.clip_level_evaluation - [32mINFO[0m - [VAL] Batch 300/477 Loss: 0.0116
+[2025-12-03 10:41:20] src.utils.clip_level_evaluation - [32mINFO[0m - [VAL] Batch 350/477 Loss: 0.0104
+[2025-12-03 10:43:14] src.utils.clip_level_evaluation - [32mINFO[0m - [VAL] Batch 400/477 Loss: 0.0094
+[2025-12-03 10:44:59] src.utils.clip_level_evaluation - [32mINFO[0m - [VAL] Batch 450/477 Loss: 0.0087
+[2025-12-03 10:45:57] src.utils.clip_level_evaluation - [32mINFO[0m - [VAL] Finished in 1027s
+[2025-12-03 10:45:57] src.utils.clip_level_evaluation - [32mINFO[0m - Results:
+Loss: 0.0083 | Acc: 97.56% | AUC: 0.8983
+   >> Anomaly: P=0.976 R=1.000 F1=0.988
+   >> Normal:  P=0.000 R=0.000
+   >> Counts:  TP=59446 FN=0 (Missed) | TN=0 FP=1488 (False Alarm)
+   >> Rates:   FPR=1.0000 | FNR=0.0000
+[2025-12-03 10:45:57] __main__ - [32mINFO[0m - Epoch [8] Validation Summary - Loss: 0.0083 | Acc: 97.56% | AUC: 0.8983
+[2025-12-03 10:45:57] __main__ - [32mINFO[0m -   Anomaly Detection: Precision=0.976 Recall=1.000 F1=0.988
+[2025-12-03 10:45:57] __main__ - [32mINFO[0m -   Confusion Matrix: TP=59446 FN=0 TN=0 FP=1488
+[2025-12-03 10:45:57] __main__ - [32mINFO[0m -   Error Rates: FPR=1.0000 FNR=0.0000
+[2025-12-03 10:45:57] __main__ - [32mINFO[0m - New best AUC: 0.8983
+[2025-12-03 10:45:57] src.utils.training_utils - [32mINFO[0m - Saved best model to /work3/s225224/ucf-crime/checkpoints/r3d_binary_20251202_234604/best_model.pth
+[2025-12-03 10:46:42] src.utils.training - [32mINFO[0m - Epoch [9] Batch [18/1801] Loss: 0.0113 Acc: 96.96%
+[2025-12-03 10:47:17] src.utils.training - [32mINFO[0m - Epoch [9] Batch [36/1801] Loss: 0.0109 Acc: 97.29%
+[2025-12-03 10:48:00] src.utils.training - [32mINFO[0m - Epoch [9] Batch [54/1801] Loss: 0.0109 Acc: 97.18%
+[2025-12-03 10:48:34] src.utils.training - [32mINFO[0m - Epoch [9] Batch [72/1801] Loss: 0.0111 Acc: 97.12%
+[2025-12-03 10:49:17] src.utils.training - [32mINFO[0m - Epoch [9] Batch [90/1801] Loss: 0.0111 Acc: 97.02%
+[2025-12-03 10:49:52] src.utils.training - [32mINFO[0m - Epoch [9] Batch [108/1801] Loss: 0.0111 Acc: 96.95%
+[2025-12-03 10:50:36] src.utils.training - [32mINFO[0m - Epoch [9] Batch [126/1801] Loss: 0.0110 Acc: 97.01%
+[2025-12-03 10:51:11] src.utils.training - [32mINFO[0m - Epoch [9] Batch [144/1801] Loss: 0.0110 Acc: 97.02%
+[2025-12-03 10:51:53] src.utils.training - [32mINFO[0m - Epoch [9] Batch [162/1801] Loss: 0.0109 Acc: 97.02%
+[2025-12-03 10:52:29] src.utils.training - [32mINFO[0m - Epoch [9] Batch [180/1801] Loss: 0.0109 Acc: 97.03%
+[2025-12-03 10:53:11] src.utils.training - [32mINFO[0m - Epoch [9] Batch [198/1801] Loss: 0.0107 Acc: 97.09%
+[2025-12-03 10:53:47] src.utils.training - [32mINFO[0m - Epoch [9] Batch [216/1801] Loss: 0.0108 Acc: 97.08%
+[2025-12-03 10:54:29] src.utils.training - [32mINFO[0m - Epoch [9] Batch [234/1801] Loss: 0.0108 Acc: 97.09%
+[2025-12-03 10:55:05] src.utils.training - [32mINFO[0m - Epoch [9] Batch [252/1801] Loss: 0.0107 Acc: 97.10%
+[2025-12-03 10:55:47] src.utils.training - [32mINFO[0m - Epoch [9] Batch [270/1801] Loss: 0.0107 Acc: 97.09%
+[2025-12-03 10:56:23] src.utils.training - [32mINFO[0m - Epoch [9] Batch [288/1801] Loss: 0.0107 Acc: 97.09%
+[2025-12-03 10:57:05] src.utils.training - [32mINFO[0m - Epoch [9] Batch [306/1801] Loss: 0.0108 Acc: 97.06%
+[2025-12-03 10:57:41] src.utils.training - [32mINFO[0m - Epoch [9] Batch [324/1801] Loss: 0.0108 Acc: 97.05%
+[2025-12-03 10:58:23] src.utils.training - [32mINFO[0m - Epoch [9] Batch [342/1801] Loss: 0.0109 Acc: 97.03%
+[2025-12-03 10:58:59] src.utils.training - [32mINFO[0m - Epoch [9] Batch [360/1801] Loss: 0.0108 Acc: 97.04%
+[2025-12-03 10:59:41] src.utils.training - [32mINFO[0m - Epoch [9] Batch [378/1801] Loss: 0.0108 Acc: 97.03%
+[2025-12-03 11:00:16] src.utils.training - [32mINFO[0m - Epoch [9] Batch [396/1801] Loss: 0.0107 Acc: 97.03%
+[2025-12-03 11:00:59] src.utils.training - [32mINFO[0m - Epoch [9] Batch [414/1801] Loss: 0.0108 Acc: 97.03%
+[2025-12-03 11:01:34] src.utils.training - [32mINFO[0m - Epoch [9] Batch [432/1801] Loss: 0.0108 Acc: 97.00%
+[2025-12-03 11:02:17] src.utils.training - [32mINFO[0m - Epoch [9] Batch [450/1801] Loss: 0.0109 Acc: 97.00%
+[2025-12-03 11:02:52] src.utils.training - [32mINFO[0m - Epoch [9] Batch [468/1801] Loss: 0.0109 Acc: 97.00%
+[2025-12-03 11:03:35] src.utils.training - [32mINFO[0m - Epoch [9] Batch [486/1801] Loss: 0.0109 Acc: 97.01%
+[2025-12-03 11:04:10] src.utils.training - [32mINFO[0m - Epoch [9] Batch [504/1801] Loss: 0.0109 Acc: 96.99%
+[2025-12-03 11:04:52] src.utils.training - [32mINFO[0m - Epoch [9] Batch [522/1801] Loss: 0.0110 Acc: 96.98%
+[2025-12-03 11:05:28] src.utils.training - [32mINFO[0m - Epoch [9] Batch [540/1801] Loss: 0.0110 Acc: 96.97%
+[2025-12-03 11:06:10] src.utils.training - [32mINFO[0m - Epoch [9] Batch [558/1801] Loss: 0.0110 Acc: 96.96%
+[2025-12-03 11:06:46] src.utils.training - [32mINFO[0m - Epoch [9] Batch [576/1801] Loss: 0.0110 Acc: 96.94%
+[2025-12-03 11:07:29] src.utils.training - [32mINFO[0m - Epoch [9] Batch [594/1801] Loss: 0.0110 Acc: 96.94%
+[2025-12-03 11:08:04] src.utils.training - [32mINFO[0m - Epoch [9] Batch [612/1801] Loss: 0.0111 Acc: 96.94%
+[2025-12-03 11:08:46] src.utils.training - [32mINFO[0m - Epoch [9] Batch [630/1801] Loss: 0.0110 Acc: 96.93%
+[2025-12-03 11:09:22] src.utils.training - [32mINFO[0m - Epoch [9] Batch [648/1801] Loss: 0.0111 Acc: 96.92%
+[2025-12-03 11:10:05] src.utils.training - [32mINFO[0m - Epoch [9] Batch [666/1801] Loss: 0.0111 Acc: 96.90%
+[2025-12-03 11:10:40] src.utils.training - [32mINFO[0m - Epoch [9] Batch [684/1801] Loss: 0.0111 Acc: 96.90%
+[2025-12-03 11:11:23] src.utils.training - [32mINFO[0m - Epoch [9] Batch [702/1801] Loss: 0.0111 Acc: 96.89%
+[2025-12-03 11:11:58] src.utils.training - [32mINFO[0m - Epoch [9] Batch [720/1801] Loss: 0.0111 Acc: 96.90%
+[2025-12-03 11:12:41] src.utils.training - [32mINFO[0m - Epoch [9] Batch [738/1801] Loss: 0.0111 Acc: 96.90%
+[2025-12-03 11:13:16] src.utils.training - [32mINFO[0m - Epoch [9] Batch [756/1801] Loss: 0.0111 Acc: 96.90%
+[2025-12-03 11:13:58] src.utils.training - [32mINFO[0m - Epoch [9] Batch [774/1801] Loss: 0.0111 Acc: 96.90%
+[2025-12-03 11:14:34] src.utils.training - [32mINFO[0m - Epoch [9] Batch [792/1801] Loss: 0.0111 Acc: 96.90%
+[2025-12-03 11:15:17] src.utils.training - [32mINFO[0m - Epoch [9] Batch [810/1801] Loss: 0.0111 Acc: 96.90%
+[2025-12-03 11:15:54] src.utils.training - [32mINFO[0m - Epoch [9] Batch [828/1801] Loss: 0.0111 Acc: 96.89%
+[2025-12-03 11:16:37] src.utils.training - [32mINFO[0m - Epoch [9] Batch [846/1801] Loss: 0.0111 Acc: 96.89%
+[2025-12-03 11:17:16] src.utils.training - [32mINFO[0m - Epoch [9] Batch [864/1801] Loss: 0.0111 Acc: 96.89%
+[2025-12-03 11:17:58] src.utils.training - [32mINFO[0m - Epoch [9] Batch [882/1801] Loss: 0.0111 Acc: 96.90%
+[2025-12-03 11:18:34] src.utils.training - [32mINFO[0m - Epoch [9] Batch [900/1801] Loss: 0.0111 Acc: 96.90%
+[2025-12-03 11:19:16] src.utils.training - [32mINFO[0m - Epoch [9] Batch [918/1801] Loss: 0.0111 Acc: 96.88%
+[2025-12-03 11:19:52] src.utils.training - [32mINFO[0m - Epoch [9] Batch [936/1801] Loss: 0.0111 Acc: 96.88%
+[2025-12-03 11:20:34] src.utils.training - [32mINFO[0m - Epoch [9] Batch [954/1801] Loss: 0.0112 Acc: 96.88%
+[2025-12-03 11:21:10] src.utils.training - [32mINFO[0m - Epoch [9] Batch [972/1801] Loss: 0.0112 Acc: 96.87%
+[2025-12-03 11:21:52] src.utils.training - [32mINFO[0m - Epoch [9] Batch [990/1801] Loss: 0.0112 Acc: 96.87%
+[2025-12-03 11:22:28] src.utils.training - [32mINFO[0m - Epoch [9] Batch [1008/1801] Loss: 0.0112 Acc: 96.85%
+[2025-12-03 11:23:10] src.utils.training - [32mINFO[0m - Epoch [9] Batch [1026/1801] Loss: 0.0112 Acc: 96.85%
+[2025-12-03 11:23:46] src.utils.training - [32mINFO[0m - Epoch [9] Batch [1044/1801] Loss: 0.0113 Acc: 96.84%
+[2025-12-03 11:24:28] src.utils.training - [32mINFO[0m - Epoch [9] Batch [1062/1801] Loss: 0.0113 Acc: 96.84%
+[2025-12-03 11:25:04] src.utils.training - [32mINFO[0m - Epoch [9] Batch [1080/1801] Loss: 0.0113 Acc: 96.83%
+[2025-12-03 11:25:46] src.utils.training - [32mINFO[0m - Epoch [9] Batch [1098/1801] Loss: 0.0113 Acc: 96.83%
+[2025-12-03 11:26:22] src.utils.training - [32mINFO[0m - Epoch [9] Batch [1116/1801] Loss: 0.0113 Acc: 96.82%
+[2025-12-03 11:27:05] src.utils.training - [32mINFO[0m - Epoch [9] Batch [1134/1801] Loss: 0.0113 Acc: 96.82%
+[2025-12-03 11:27:43] src.utils.training - [32mINFO[0m - Epoch [9] Batch [1152/1801] Loss: 0.0113 Acc: 96.83%
+[2025-12-03 11:28:26] src.utils.training - [32mINFO[0m - Epoch [9] Batch [1170/1801] Loss: 0.0113 Acc: 96.83%
+[2025-12-03 11:29:01] src.utils.training - [32mINFO[0m - Epoch [9] Batch [1188/1801] Loss: 0.0114 Acc: 96.81%
+[2025-12-03 11:29:44] src.utils.training - [32mINFO[0m - Epoch [9] Batch [1206/1801] Loss: 0.0114 Acc: 96.81%
+[2025-12-03 11:30:20] src.utils.training - [32mINFO[0m - Epoch [9] Batch [1224/1801] Loss: 0.0114 Acc: 96.81%
+[2025-12-03 11:31:02] src.utils.training - [32mINFO[0m - Epoch [9] Batch [1242/1801] Loss: 0.0114 Acc: 96.81%
+[2025-12-03 11:31:38] src.utils.training - [32mINFO[0m - Epoch [9] Batch [1260/1801] Loss: 0.0114 Acc: 96.81%
+[2025-12-03 11:32:21] src.utils.training - [32mINFO[0m - Epoch [9] Batch [1278/1801] Loss: 0.0114 Acc: 96.81%
+[2025-12-03 11:32:57] src.utils.training - [32mINFO[0m - Epoch [9] Batch [1296/1801] Loss: 0.0114 Acc: 96.82%
+[2025-12-03 11:33:39] src.utils.training - [32mINFO[0m - Epoch [9] Batch [1314/1801] Loss: 0.0114 Acc: 96.81%
+[2025-12-03 11:34:14] src.utils.training - [32mINFO[0m - Epoch [9] Batch [1332/1801] Loss: 0.0114 Acc: 96.81%
+[2025-12-03 11:34:57] src.utils.training - [32mINFO[0m - Epoch [9] Batch [1350/1801] Loss: 0.0114 Acc: 96.81%
+[2025-12-03 11:35:32] src.utils.training - [32mINFO[0m - Epoch [9] Batch [1368/1801] Loss: 0.0114 Acc: 96.81%
+[2025-12-03 11:36:15] src.utils.training - [32mINFO[0m - Epoch [9] Batch [1386/1801] Loss: 0.0114 Acc: 96.82%
+[2025-12-03 11:36:50] src.utils.training - [32mINFO[0m - Epoch [9] Batch [1404/1801] Loss: 0.0114 Acc: 96.81%
+[2025-12-03 11:37:33] src.utils.training - [32mINFO[0m - Epoch [9] Batch [1422/1801] Loss: 0.0114 Acc: 96.81%
+[2025-12-03 11:38:08] src.utils.training - [32mINFO[0m - Epoch [9] Batch [1440/1801] Loss: 0.0113 Acc: 96.82%
+[2025-12-03 11:38:51] src.utils.training - [32mINFO[0m - Epoch [9] Batch [1458/1801] Loss: 0.0113 Acc: 96.82%
+[2025-12-03 11:39:26] src.utils.training - [32mINFO[0m - Epoch [9] Batch [1476/1801] Loss: 0.0113 Acc: 96.82%
+[2025-12-03 11:40:09] src.utils.training - [32mINFO[0m - Epoch [9] Batch [1494/1801] Loss: 0.0113 Acc: 96.82%
+[2025-12-03 11:40:46] src.utils.training - [32mINFO[0m - Epoch [9] Batch [1512/1801] Loss: 0.0114 Acc: 96.82%
+[2025-12-03 11:41:28] src.utils.training - [32mINFO[0m - Epoch [9] Batch [1530/1801] Loss: 0.0113 Acc: 96.82%
+[2025-12-03 11:42:04] src.utils.training - [32mINFO[0m - Epoch [9] Batch [1548/1801] Loss: 0.0113 Acc: 96.82%
+[2025-12-03 11:42:46] src.utils.training - [32mINFO[0m - Epoch [9] Batch [1566/1801] Loss: 0.0113 Acc: 96.82%
+[2025-12-03 11:43:22] src.utils.training - [32mINFO[0m - Epoch [9] Batch [1584/1801] Loss: 0.0113 Acc: 96.82%
+[2025-12-03 11:44:05] src.utils.training - [32mINFO[0m - Epoch [9] Batch [1602/1801] Loss: 0.0113 Acc: 96.81%
+[2025-12-03 11:44:40] src.utils.training - [32mINFO[0m - Epoch [9] Batch [1620/1801] Loss: 0.0113 Acc: 96.82%
+[2025-12-03 11:45:22] src.utils.training - [32mINFO[0m - Epoch [9] Batch [1638/1801] Loss: 0.0113 Acc: 96.83%
+[2025-12-03 11:45:59] src.utils.training - [32mINFO[0m - Epoch [9] Batch [1656/1801] Loss: 0.0113 Acc: 96.82%
+
+------------------------------------------------------------
+Sender: LSF System <lsfadmin@hpc.dtu.dk>
+Subject: Job 27256958: <train_r3d_l40s> in cluster <dcc> Exited
+
+Job <train_r3d_l40s> was submitted from host <n-62-11-12> by user <s225224> in cluster <dcc> at Tue Dec  2 23:45:01 2025
+Job was executed on host(s) <8*n-62-13-15>, in queue <gpul40s>, as user <s225224> in cluster <dcc> at Tue Dec  2 23:45:55 2025
+</zhome/77/2/187952> was used as the home directory.
+</zhome/77/2/187952/projects/perimiter-net/jobs> was used as the working directory.
+Started at Tue Dec  2 23:45:55 2025
+Terminated at Wed Dec  3 11:46:25 2025
+Results reported at Wed Dec  3 11:46:25 2025
+
+Your job looked like:
+
+------------------------------------------------------------
+# LSBATCH: User input
+#!/bin/sh
+#BSUB -q gpul40s
+#BSUB -gpu "num=1:mode=exclusive_process"
+#BSUB -J train_r3d_l40s
+#BSUB -n 8
+#BSUB -R "span[hosts=1]"
+#BSUB -R "rusage[mem=16GB]"
+#BSUB -W 12:00
+#BSUB -o outputs/output_r3d_l40s_%J.out
+#BSUB -e outputs/output_r3d_l40s_%J.err
+
+cd ~/projects/perimiter-net
+mkdir -p outputs
+
+uv sync
+
+uv run python scripts/training/train_r3d.py
+# IMPORTANT: Update batch_size=128 in train_r3d.py before submitting
+
+------------------------------------------------------------
+
+TERM_RUNLIMIT: job killed after reaching LSF run time limit.
+Exited with exit code 140.
+
+Resource usage summary:
+
+    CPU time :                                   166780.00 sec.
+    Max Memory :                                 16921 MB
+    Average Memory :                             12430.57 MB
+    Total Requested Memory :                     131072.00 MB
+    Delta Memory :                               114151.00 MB
+    Max Swap :                                   -
+    Max Processes :                              9
+    Max Threads :                                29
+    Run time :                                   43231 sec.
+    Turnaround time :                            43284 sec.
+
+The output (if any) is above this job summary.
+
+
+
+PS:
+
+Read file <outputs/output_r3d_l40s_27256958.err> for stderr output of this job.
+

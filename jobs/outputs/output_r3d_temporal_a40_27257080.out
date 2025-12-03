@@ -1,0 +1,1374 @@
+[2025-12-03 00:45:34] __main__ - [32mINFO[0m - Starting MOTION STREAM training run: r3d_motion_sobel_20251203_004534
+[2025-12-03 00:45:34] __main__ - [32mINFO[0m - Checkpoints will be saved to: /work3/s225224/ucf-crime/checkpoints/r3d_motion_sobel_20251203_004534
+[2025-12-03 00:45:34] src.utils.training_utils - [32mINFO[0m - Created training history CSV at /work3/s225224/ucf-crime/checkpoints/r3d_motion_sobel_20251203_004534/training_history.csv
+[2025-12-03 00:45:34] __main__ - [32mINFO[0m - Setting up datasets with SOBEL MOTION Transform...
+Loading cached dataset index from /work3/s225224/ucf-crime/data/ucf_index_train_len16_stride16_modebinary_rat0.2.pkl...
+Loading cached dataset index from /work3/s225224/ucf-crime/data/ucf_index_val_len16_stride16_modebinary_rat0.2.pkl...
+[2025-12-03 00:45:35] __main__ - [32mINFO[0m - Train samples: 64489, Val samples: 13917
+[2025-12-03 00:45:35] __main__ - [32mINFO[0m - Instantiating R3D-18 (Motion Stream)...
+[2025-12-03 00:45:37] src.utils.training_utils - [32mINFO[0m - Early stopping initialized with patience=10, mode=max
+[2025-12-03 00:45:37] __main__ - [32mINFO[0m - Training on device: cuda
+[2025-12-03 00:45:37] __main__ - [32mINFO[0m - GPU Name: NVIDIA A40
+[2025-12-03 00:45:37] __main__ - [32mINFO[0m - GPU Memory: 47.70 GB
+[2025-12-03 00:45:37] __main__ - [32mINFO[0m - Starting training loop...
+[2025-12-03 00:46:09] src.utils.training - [32mINFO[0m - Epoch [1] Batch [10/504] Loss: 0.1224 Acc: 50.00%
+[2025-12-03 00:46:28] src.utils.training - [32mINFO[0m - Epoch [1] Batch [20/504] Loss: 0.1304 Acc: 49.49%
+[2025-12-03 00:46:53] src.utils.training - [32mINFO[0m - Epoch [1] Batch [30/504] Loss: 0.1301 Acc: 49.79%
+[2025-12-03 00:47:18] src.utils.training - [32mINFO[0m - Epoch [1] Batch [40/504] Loss: 0.1282 Acc: 50.20%
+[2025-12-03 00:47:40] src.utils.training - [32mINFO[0m - Epoch [1] Batch [50/504] Loss: 0.1282 Acc: 50.33%
+[2025-12-03 00:48:05] src.utils.training - [32mINFO[0m - Epoch [1] Batch [60/504] Loss: 0.1285 Acc: 50.36%
+[2025-12-03 00:48:38] src.utils.training - [32mINFO[0m - Epoch [1] Batch [70/504] Loss: 0.1287 Acc: 50.47%
+[2025-12-03 00:48:56] src.utils.training - [32mINFO[0m - Epoch [1] Batch [80/504] Loss: 0.1277 Acc: 51.12%
+[2025-12-03 00:49:24] src.utils.training - [32mINFO[0m - Epoch [1] Batch [90/504] Loss: 0.1273 Acc: 51.48%
+[2025-12-03 00:49:42] src.utils.training - [32mINFO[0m - Epoch [1] Batch [100/504] Loss: 0.1268 Acc: 51.48%
+[2025-12-03 00:50:10] src.utils.training - [32mINFO[0m - Epoch [1] Batch [110/504] Loss: 0.1267 Acc: 51.65%
+[2025-12-03 00:50:28] src.utils.training - [32mINFO[0m - Epoch [1] Batch [120/504] Loss: 0.1262 Acc: 51.96%
+[2025-12-03 00:50:53] src.utils.training - [32mINFO[0m - Epoch [1] Batch [130/504] Loss: 0.1259 Acc: 52.21%
+[2025-12-03 00:51:18] src.utils.training - [32mINFO[0m - Epoch [1] Batch [140/504] Loss: 0.1261 Acc: 52.39%
+[2025-12-03 00:51:37] src.utils.training - [32mINFO[0m - Epoch [1] Batch [150/504] Loss: 0.1265 Acc: 52.47%
+[2025-12-03 00:52:01] src.utils.training - [32mINFO[0m - Epoch [1] Batch [160/504] Loss: 0.1267 Acc: 52.55%
+[2025-12-03 00:52:19] src.utils.training - [32mINFO[0m - Epoch [1] Batch [170/504] Loss: 0.1269 Acc: 52.68%
+[2025-12-03 00:52:43] src.utils.training - [32mINFO[0m - Epoch [1] Batch [180/504] Loss: 0.1265 Acc: 52.78%
+[2025-12-03 00:53:05] src.utils.training - [32mINFO[0m - Epoch [1] Batch [190/504] Loss: 0.1266 Acc: 52.85%
+[2025-12-03 00:53:25] src.utils.training - [32mINFO[0m - Epoch [1] Batch [200/504] Loss: 0.1267 Acc: 52.86%
+[2025-12-03 00:53:47] src.utils.training - [32mINFO[0m - Epoch [1] Batch [210/504] Loss: 0.1267 Acc: 52.92%
+[2025-12-03 00:54:10] src.utils.training - [32mINFO[0m - Epoch [1] Batch [220/504] Loss: 0.1262 Acc: 53.09%
+[2025-12-03 00:54:34] src.utils.training - [32mINFO[0m - Epoch [1] Batch [230/504] Loss: 0.1262 Acc: 53.20%
+[2025-12-03 00:54:57] src.utils.training - [32mINFO[0m - Epoch [1] Batch [240/504] Loss: 0.1265 Acc: 53.30%
+[2025-12-03 00:55:22] src.utils.training - [32mINFO[0m - Epoch [1] Batch [250/504] Loss: 0.1268 Acc: 53.32%
+[2025-12-03 00:55:41] src.utils.training - [32mINFO[0m - Epoch [1] Batch [260/504] Loss: 0.1270 Acc: 53.29%
+[2025-12-03 00:56:05] src.utils.training - [32mINFO[0m - Epoch [1] Batch [270/504] Loss: 0.1268 Acc: 53.35%
+[2025-12-03 00:56:29] src.utils.training - [32mINFO[0m - Epoch [1] Batch [280/504] Loss: 0.1268 Acc: 53.35%
+[2025-12-03 00:56:57] src.utils.training - [32mINFO[0m - Epoch [1] Batch [290/504] Loss: 0.1267 Acc: 53.39%
+[2025-12-03 00:57:18] src.utils.training - [32mINFO[0m - Epoch [1] Batch [300/504] Loss: 0.1268 Acc: 53.36%
+[2025-12-03 00:57:48] src.utils.training - [32mINFO[0m - Epoch [1] Batch [310/504] Loss: 0.1271 Acc: 53.38%
+[2025-12-03 00:58:06] src.utils.training - [32mINFO[0m - Epoch [1] Batch [320/504] Loss: 0.1274 Acc: 53.25%
+[2025-12-03 00:58:41] src.utils.training - [32mINFO[0m - Epoch [1] Batch [330/504] Loss: 0.1272 Acc: 53.34%
+[2025-12-03 00:58:59] src.utils.training - [32mINFO[0m - Epoch [1] Batch [340/504] Loss: 0.1271 Acc: 53.27%
+[2025-12-03 00:59:25] src.utils.training - [32mINFO[0m - Epoch [1] Batch [350/504] Loss: 0.1269 Acc: 53.29%
+[2025-12-03 00:59:42] src.utils.training - [32mINFO[0m - Epoch [1] Batch [360/504] Loss: 0.1271 Acc: 53.30%
+[2025-12-03 01:00:05] src.utils.training - [32mINFO[0m - Epoch [1] Batch [370/504] Loss: 0.1273 Acc: 53.27%
+[2025-12-03 01:00:28] src.utils.training - [32mINFO[0m - Epoch [1] Batch [380/504] Loss: 0.1271 Acc: 53.35%
+[2025-12-03 01:00:58] src.utils.training - [32mINFO[0m - Epoch [1] Batch [390/504] Loss: 0.1271 Acc: 53.33%
+[2025-12-03 01:01:16] src.utils.training - [32mINFO[0m - Epoch [1] Batch [400/504] Loss: 0.1270 Acc: 53.36%
+[2025-12-03 01:01:39] src.utils.training - [32mINFO[0m - Epoch [1] Batch [410/504] Loss: 0.1267 Acc: 53.37%
+[2025-12-03 01:02:00] src.utils.training - [32mINFO[0m - Epoch [1] Batch [420/504] Loss: 0.1267 Acc: 53.33%
+[2025-12-03 01:02:24] src.utils.training - [32mINFO[0m - Epoch [1] Batch [430/504] Loss: 0.1265 Acc: 53.36%
+[2025-12-03 01:02:48] src.utils.training - [32mINFO[0m - Epoch [1] Batch [440/504] Loss: 0.1264 Acc: 53.36%
+[2025-12-03 01:03:14] src.utils.training - [32mINFO[0m - Epoch [1] Batch [450/504] Loss: 0.1265 Acc: 53.45%
+[2025-12-03 01:03:31] src.utils.training - [32mINFO[0m - Epoch [1] Batch [460/504] Loss: 0.1264 Acc: 53.46%
+[2025-12-03 01:03:55] src.utils.training - [32mINFO[0m - Epoch [1] Batch [470/504] Loss: 0.1262 Acc: 53.48%
+[2025-12-03 01:04:13] src.utils.training - [32mINFO[0m - Epoch [1] Batch [480/504] Loss: 0.1261 Acc: 53.50%
+[2025-12-03 01:04:40] src.utils.training - [32mINFO[0m - Epoch [1] Batch [490/504] Loss: 0.1260 Acc: 53.53%
+[2025-12-03 01:04:58] src.utils.training - [32mINFO[0m - Epoch [1] Batch [500/504] Loss: 0.1257 Acc: 53.56%
+[2025-12-03 01:05:06] src.utils.training - [32mINFO[0m - Epoch [1] Training Completed in 1169s - Loss: 0.1257 Acc: 53.57%
+[2025-12-03 01:07:01] src.utils.clip_level_evaluation - [32mINFO[0m - [VAL] Batch 50/109 Loss: 0.0481
+[2025-12-03 01:08:52] src.utils.clip_level_evaluation - [32mINFO[0m - [VAL] Batch 100/109 Loss: 0.0787
+[2025-12-03 01:09:11] src.utils.clip_level_evaluation - [32mINFO[0m - [VAL] Finished in 245s
+[2025-12-03 01:09:11] src.utils.clip_level_evaluation - [32mINFO[0m - Results:
+Loss: 0.0855 | Acc: 49.94% | AUC: 0.4772
+   >> Anomaly: P=0.307 R=0.415 F1=0.353
+   >> Normal:  P=0.654 R=0.541
+   >> Counts:  TP=1900 FN=2676 (Missed) | TN=5050 FP=4291 (False Alarm)
+   >> Rates:   FPR=0.4594 | FNR=0.5848
+[2025-12-03 01:09:11] __main__ - [32mINFO[0m - Epoch [1] Motion Validation - Loss: 0.0855 | Acc: 49.94% | AUC: 0.4772
+[2025-12-03 01:09:11] __main__ - [32mINFO[0m -   Motion Anomaly Stats: P=0.307 R=0.415 F1=0.353
+[2025-12-03 01:09:11] __main__ - [32mINFO[0m -   Conf Matrix: TP=1900 FN=2676 TN=5050 FP=4291
+[2025-12-03 01:09:11] __main__ - [32mINFO[0m - 🔥 New Best Motion AUC: 0.4772
+[2025-12-03 01:09:12] src.utils.training_utils - [32mINFO[0m - Saved best model to /work3/s225224/ucf-crime/checkpoints/r3d_motion_sobel_20251203_004534/best_model.pth
+[2025-12-03 01:09:40] src.utils.training - [32mINFO[0m - Epoch [2] Batch [10/504] Loss: 0.1270 Acc: 53.05%
+[2025-12-03 01:09:57] src.utils.training - [32mINFO[0m - Epoch [2] Batch [20/504] Loss: 0.1261 Acc: 53.67%
+[2025-12-03 01:10:24] src.utils.training - [32mINFO[0m - Epoch [2] Batch [30/504] Loss: 0.1215 Acc: 54.30%
+[2025-12-03 01:10:41] src.utils.training - [32mINFO[0m - Epoch [2] Batch [40/504] Loss: 0.1186 Acc: 54.92%
+[2025-12-03 01:11:07] src.utils.training - [32mINFO[0m - Epoch [2] Batch [50/504] Loss: 0.1177 Acc: 55.17%
+[2025-12-03 01:11:32] src.utils.training - [32mINFO[0m - Epoch [2] Batch [60/504] Loss: 0.1184 Acc: 54.97%
+[2025-12-03 01:12:10] src.utils.training - [32mINFO[0m - Epoch [2] Batch [70/504] Loss: 0.1185 Acc: 54.63%
+[2025-12-03 01:12:31] src.utils.training - [32mINFO[0m - Epoch [2] Batch [80/504] Loss: 0.1179 Acc: 54.78%
+[2025-12-03 01:12:54] src.utils.training - [32mINFO[0m - Epoch [2] Batch [90/504] Loss: 0.1189 Acc: 54.84%
+[2025-12-03 01:13:12] src.utils.training - [32mINFO[0m - Epoch [2] Batch [100/504] Loss: 0.1183 Acc: 54.98%
+[2025-12-03 01:13:38] src.utils.training - [32mINFO[0m - Epoch [2] Batch [110/504] Loss: 0.1183 Acc: 55.20%
+[2025-12-03 01:13:56] src.utils.training - [32mINFO[0m - Epoch [2] Batch [120/504] Loss: 0.1174 Acc: 55.36%
+[2025-12-03 01:14:19] src.utils.training - [32mINFO[0m - Epoch [2] Batch [130/504] Loss: 0.1179 Acc: 55.32%
+[2025-12-03 01:14:41] src.utils.training - [32mINFO[0m - Epoch [2] Batch [140/504] Loss: 0.1184 Acc: 55.28%
+[2025-12-03 01:15:05] src.utils.training - [32mINFO[0m - Epoch [2] Batch [150/504] Loss: 0.1189 Acc: 55.14%
+[2025-12-03 01:15:31] src.utils.training - [32mINFO[0m - Epoch [2] Batch [160/504] Loss: 0.1187 Acc: 55.22%
+[2025-12-03 01:15:50] src.utils.training - [32mINFO[0m - Epoch [2] Batch [170/504] Loss: 0.1191 Acc: 55.07%
+[2025-12-03 01:16:13] src.utils.training - [32mINFO[0m - Epoch [2] Batch [180/504] Loss: 0.1194 Acc: 55.03%
+[2025-12-03 01:16:36] src.utils.training - [32mINFO[0m - Epoch [2] Batch [190/504] Loss: 0.1191 Acc: 54.97%
+[2025-12-03 01:16:58] src.utils.training - [32mINFO[0m - Epoch [2] Batch [200/504] Loss: 0.1190 Acc: 55.00%
+[2025-12-03 01:17:23] src.utils.training - [32mINFO[0m - Epoch [2] Batch [210/504] Loss: 0.1192 Acc: 54.91%
+[2025-12-03 01:17:47] src.utils.training - [32mINFO[0m - Epoch [2] Batch [220/504] Loss: 0.1187 Acc: 54.85%
+[2025-12-03 01:18:09] src.utils.training - [32mINFO[0m - Epoch [2] Batch [230/504] Loss: 0.1183 Acc: 54.95%
+[2025-12-03 01:18:31] src.utils.training - [32mINFO[0m - Epoch [2] Batch [240/504] Loss: 0.1187 Acc: 54.93%
+[2025-12-03 01:18:59] src.utils.training - [32mINFO[0m - Epoch [2] Batch [250/504] Loss: 0.1183 Acc: 54.93%
+[2025-12-03 01:19:19] src.utils.training - [32mINFO[0m - Epoch [2] Batch [260/504] Loss: 0.1183 Acc: 54.96%
+[2025-12-03 01:19:51] src.utils.training - [32mINFO[0m - Epoch [2] Batch [270/504] Loss: 0.1182 Acc: 54.94%
+[2025-12-03 01:20:10] src.utils.training - [32mINFO[0m - Epoch [2] Batch [280/504] Loss: 0.1181 Acc: 54.93%
+[2025-12-03 01:20:33] src.utils.training - [32mINFO[0m - Epoch [2] Batch [290/504] Loss: 0.1180 Acc: 54.90%
+[2025-12-03 01:20:50] src.utils.training - [32mINFO[0m - Epoch [2] Batch [300/504] Loss: 0.1179 Acc: 54.84%
+[2025-12-03 01:21:13] src.utils.training - [32mINFO[0m - Epoch [2] Batch [310/504] Loss: 0.1179 Acc: 54.83%
+[2025-12-03 01:21:35] src.utils.training - [32mINFO[0m - Epoch [2] Batch [320/504] Loss: 0.1181 Acc: 54.86%
+[2025-12-03 01:21:57] src.utils.training - [32mINFO[0m - Epoch [2] Batch [330/504] Loss: 0.1181 Acc: 54.83%
+[2025-12-03 01:22:14] src.utils.training - [32mINFO[0m - Epoch [2] Batch [340/504] Loss: 0.1181 Acc: 54.86%
+[2025-12-03 01:22:45] src.utils.training - [32mINFO[0m - Epoch [2] Batch [350/504] Loss: 0.1182 Acc: 54.81%
+[2025-12-03 01:23:08] src.utils.training - [32mINFO[0m - Epoch [2] Batch [360/504] Loss: 0.1180 Acc: 54.87%
+[2025-12-03 01:23:37] src.utils.training - [32mINFO[0m - Epoch [2] Batch [370/504] Loss: 0.1182 Acc: 54.79%
+[2025-12-03 01:23:56] src.utils.training - [32mINFO[0m - Epoch [2] Batch [380/504] Loss: 0.1180 Acc: 54.82%
+[2025-12-03 01:24:26] src.utils.training - [32mINFO[0m - Epoch [2] Batch [390/504] Loss: 0.1180 Acc: 54.82%
+[2025-12-03 01:24:48] src.utils.training - [32mINFO[0m - Epoch [2] Batch [400/504] Loss: 0.1179 Acc: 54.88%
+[2025-12-03 01:25:17] src.utils.training - [32mINFO[0m - Epoch [2] Batch [410/504] Loss: 0.1177 Acc: 54.89%
+[2025-12-03 01:25:36] src.utils.training - [32mINFO[0m - Epoch [2] Batch [420/504] Loss: 0.1175 Acc: 54.88%
+[2025-12-03 01:26:01] src.utils.training - [32mINFO[0m - Epoch [2] Batch [430/504] Loss: 0.1173 Acc: 54.97%
+[2025-12-03 01:26:20] src.utils.training - [32mINFO[0m - Epoch [2] Batch [440/504] Loss: 0.1173 Acc: 54.95%
+[2025-12-03 01:26:46] src.utils.training - [32mINFO[0m - Epoch [2] Batch [450/504] Loss: 0.1173 Acc: 54.93%
+[2025-12-03 01:27:11] src.utils.training - [32mINFO[0m - Epoch [2] Batch [460/504] Loss: 0.1172 Acc: 54.99%
+[2025-12-03 01:27:33] src.utils.training - [32mINFO[0m - Epoch [2] Batch [470/504] Loss: 0.1172 Acc: 54.99%
+[2025-12-03 01:28:03] src.utils.training - [32mINFO[0m - Epoch [2] Batch [480/504] Loss: 0.1172 Acc: 55.00%
+[2025-12-03 01:28:24] src.utils.training - [32mINFO[0m - Epoch [2] Batch [490/504] Loss: 0.1170 Acc: 55.01%
+[2025-12-03 01:28:49] src.utils.training - [32mINFO[0m - Epoch [2] Batch [500/504] Loss: 0.1169 Acc: 55.04%
+[2025-12-03 01:29:00] src.utils.training - [32mINFO[0m - Epoch [2] Training Completed in 1189s - Loss: 0.1168 Acc: 55.07%
+[2025-12-03 01:31:12] src.utils.clip_level_evaluation - [32mINFO[0m - [VAL] Batch 50/109 Loss: 0.0455
+[2025-12-03 01:33:01] src.utils.clip_level_evaluation - [32mINFO[0m - [VAL] Batch 100/109 Loss: 0.0761
+[2025-12-03 01:33:26] src.utils.clip_level_evaluation - [32mINFO[0m - [VAL] Finished in 266s
+[2025-12-03 01:33:26] src.utils.clip_level_evaluation - [32mINFO[0m - Results:
+Loss: 0.0830 | Acc: 52.32% | AUC: 0.5027
+   >> Anomaly: P=0.325 R=0.417 F1=0.365
+   >> Normal:  P=0.668 R=0.575
+   >> Counts:  TP=1907 FN=2669 (Missed) | TN=5375 FP=3966 (False Alarm)
+   >> Rates:   FPR=0.4246 | FNR=0.5833
+[2025-12-03 01:33:26] __main__ - [32mINFO[0m - Epoch [2] Motion Validation - Loss: 0.0830 | Acc: 52.32% | AUC: 0.5027
+[2025-12-03 01:33:26] __main__ - [32mINFO[0m -   Motion Anomaly Stats: P=0.325 R=0.417 F1=0.365
+[2025-12-03 01:33:26] __main__ - [32mINFO[0m -   Conf Matrix: TP=1907 FN=2669 TN=5375 FP=3966
+[2025-12-03 01:33:26] __main__ - [32mINFO[0m - 🔥 New Best Motion AUC: 0.5027
+[2025-12-03 01:33:26] src.utils.training_utils - [32mINFO[0m - Saved best model to /work3/s225224/ucf-crime/checkpoints/r3d_motion_sobel_20251203_004534/best_model.pth
+[2025-12-03 01:33:54] src.utils.training - [32mINFO[0m - Epoch [3] Batch [10/504] Loss: 0.1190 Acc: 54.69%
+[2025-12-03 01:34:26] src.utils.training - [32mINFO[0m - Epoch [3] Batch [20/504] Loss: 0.1174 Acc: 54.41%
+[2025-12-03 01:34:44] src.utils.training - [32mINFO[0m - Epoch [3] Batch [30/504] Loss: 0.1160 Acc: 54.30%
+[2025-12-03 01:35:08] src.utils.training - [32mINFO[0m - Epoch [3] Batch [40/504] Loss: 0.1132 Acc: 54.59%
+[2025-12-03 01:35:34] src.utils.training - [32mINFO[0m - Epoch [3] Batch [50/504] Loss: 0.1130 Acc: 54.81%
+[2025-12-03 01:35:52] src.utils.training - [32mINFO[0m - Epoch [3] Batch [60/504] Loss: 0.1122 Acc: 55.40%
+[2025-12-03 01:36:17] src.utils.training - [32mINFO[0m - Epoch [3] Batch [70/504] Loss: 0.1122 Acc: 55.57%
+[2025-12-03 01:36:36] src.utils.training - [32mINFO[0m - Epoch [3] Batch [80/504] Loss: 0.1124 Acc: 55.66%
+[2025-12-03 01:37:03] src.utils.training - [32mINFO[0m - Epoch [3] Batch [90/504] Loss: 0.1128 Acc: 55.37%
+[2025-12-03 01:37:27] src.utils.training - [32mINFO[0m - Epoch [3] Batch [100/504] Loss: 0.1132 Acc: 55.27%
+[2025-12-03 01:37:45] src.utils.training - [32mINFO[0m - Epoch [3] Batch [110/504] Loss: 0.1137 Acc: 55.26%
+[2025-12-03 01:38:16] src.utils.training - [32mINFO[0m - Epoch [3] Batch [120/504] Loss: 0.1132 Acc: 55.31%
+[2025-12-03 01:38:34] src.utils.training - [32mINFO[0m - Epoch [3] Batch [130/504] Loss: 0.1135 Acc: 55.29%
+[2025-12-03 01:39:01] src.utils.training - [32mINFO[0m - Epoch [3] Batch [140/504] Loss: 0.1132 Acc: 55.31%
+[2025-12-03 01:39:23] src.utils.training - [32mINFO[0m - Epoch [3] Batch [150/504] Loss: 0.1131 Acc: 55.26%
+[2025-12-03 01:39:51] src.utils.training - [32mINFO[0m - Epoch [3] Batch [160/504] Loss: 0.1125 Acc: 55.26%
+[2025-12-03 01:40:13] src.utils.training - [32mINFO[0m - Epoch [3] Batch [170/504] Loss: 0.1123 Acc: 55.28%
+[2025-12-03 01:40:37] src.utils.training - [32mINFO[0m - Epoch [3] Batch [180/504] Loss: 0.1122 Acc: 55.20%
+[2025-12-03 01:41:02] src.utils.training - [32mINFO[0m - Epoch [3] Batch [190/504] Loss: 0.1120 Acc: 55.38%
+[2025-12-03 01:41:29] src.utils.training - [32mINFO[0m - Epoch [3] Batch [200/504] Loss: 0.1120 Acc: 55.45%
+[2025-12-03 01:41:51] src.utils.training - [32mINFO[0m - Epoch [3] Batch [210/504] Loss: 0.1116 Acc: 55.51%
+[2025-12-03 01:42:17] src.utils.training - [32mINFO[0m - Epoch [3] Batch [220/504] Loss: 0.1116 Acc: 55.51%
+[2025-12-03 01:42:42] src.utils.training - [32mINFO[0m - Epoch [3] Batch [230/504] Loss: 0.1114 Acc: 55.52%
+[2025-12-03 01:43:08] src.utils.training - [32mINFO[0m - Epoch [3] Batch [240/504] Loss: 0.1114 Acc: 55.57%
+[2025-12-03 01:43:31] src.utils.training - [32mINFO[0m - Epoch [3] Batch [250/504] Loss: 0.1114 Acc: 55.57%
+[2025-12-03 01:44:01] src.utils.training - [32mINFO[0m - Epoch [3] Batch [260/504] Loss: 0.1116 Acc: 55.46%
+[2025-12-03 01:44:20] src.utils.training - [32mINFO[0m - Epoch [3] Batch [270/504] Loss: 0.1114 Acc: 55.50%
+[2025-12-03 01:44:47] src.utils.training - [32mINFO[0m - Epoch [3] Batch [280/504] Loss: 0.1113 Acc: 55.46%
+[2025-12-03 01:45:11] src.utils.training - [32mINFO[0m - Epoch [3] Batch [290/504] Loss: 0.1112 Acc: 55.44%
+[2025-12-03 01:45:44] src.utils.training - [32mINFO[0m - Epoch [3] Batch [300/504] Loss: 0.1110 Acc: 55.49%
+[2025-12-03 01:46:04] src.utils.training - [32mINFO[0m - Epoch [3] Batch [310/504] Loss: 0.1109 Acc: 55.48%
+[2025-12-03 01:46:30] src.utils.training - [32mINFO[0m - Epoch [3] Batch [320/504] Loss: 0.1107 Acc: 55.50%
+[2025-12-03 01:46:53] src.utils.training - [32mINFO[0m - Epoch [3] Batch [330/504] Loss: 0.1104 Acc: 55.54%
+[2025-12-03 01:47:19] src.utils.training - [32mINFO[0m - Epoch [3] Batch [340/504] Loss: 0.1105 Acc: 55.54%
+[2025-12-03 01:47:42] src.utils.training - [32mINFO[0m - Epoch [3] Batch [350/504] Loss: 0.1103 Acc: 55.60%
+[2025-12-03 01:48:09] src.utils.training - [32mINFO[0m - Epoch [3] Batch [360/504] Loss: 0.1102 Acc: 55.61%
+[2025-12-03 01:48:31] src.utils.training - [32mINFO[0m - Epoch [3] Batch [370/504] Loss: 0.1102 Acc: 55.61%
+[2025-12-03 01:49:00] src.utils.training - [32mINFO[0m - Epoch [3] Batch [380/504] Loss: 0.1102 Acc: 55.61%
+[2025-12-03 01:49:23] src.utils.training - [32mINFO[0m - Epoch [3] Batch [390/504] Loss: 0.1101 Acc: 55.63%
+[2025-12-03 01:49:51] src.utils.training - [32mINFO[0m - Epoch [3] Batch [400/504] Loss: 0.1099 Acc: 55.64%
+[2025-12-03 01:50:14] src.utils.training - [32mINFO[0m - Epoch [3] Batch [410/504] Loss: 0.1096 Acc: 55.66%
+[2025-12-03 01:50:42] src.utils.training - [32mINFO[0m - Epoch [3] Batch [420/504] Loss: 0.1097 Acc: 55.63%
+[2025-12-03 01:51:00] src.utils.training - [32mINFO[0m - Epoch [3] Batch [430/504] Loss: 0.1095 Acc: 55.68%
+[2025-12-03 01:51:25] src.utils.training - [32mINFO[0m - Epoch [3] Batch [440/504] Loss: 0.1091 Acc: 55.79%
+[2025-12-03 01:51:45] src.utils.training - [32mINFO[0m - Epoch [3] Batch [450/504] Loss: 0.1088 Acc: 55.87%
+[2025-12-03 01:52:10] src.utils.training - [32mINFO[0m - Epoch [3] Batch [460/504] Loss: 0.1086 Acc: 55.89%
+[2025-12-03 01:52:28] src.utils.training - [32mINFO[0m - Epoch [3] Batch [470/504] Loss: 0.1085 Acc: 55.94%
+[2025-12-03 01:52:53] src.utils.training - [32mINFO[0m - Epoch [3] Batch [480/504] Loss: 0.1085 Acc: 55.94%
+[2025-12-03 01:53:14] src.utils.training - [32mINFO[0m - Epoch [3] Batch [490/504] Loss: 0.1083 Acc: 56.00%
+[2025-12-03 01:53:49] src.utils.training - [32mINFO[0m - Epoch [3] Batch [500/504] Loss: 0.1083 Acc: 56.03%
+[2025-12-03 01:53:58] src.utils.training - [32mINFO[0m - Epoch [3] Training Completed in 1232s - Loss: 0.1082 Acc: 56.02%
+[2025-12-03 01:56:14] src.utils.clip_level_evaluation - [32mINFO[0m - [VAL] Batch 50/109 Loss: 0.0458
+[2025-12-03 01:58:07] src.utils.clip_level_evaluation - [32mINFO[0m - [VAL] Batch 100/109 Loss: 0.0733
+[2025-12-03 01:58:30] src.utils.clip_level_evaluation - [32mINFO[0m - [VAL] Finished in 272s
+[2025-12-03 01:58:30] src.utils.clip_level_evaluation - [32mINFO[0m - Results:
+Loss: 0.0798 | Acc: 53.24% | AUC: 0.5289
+   >> Anomaly: P=0.344 R=0.464 F1=0.395
+   >> Normal:  P=0.683 R=0.566
+   >> Counts:  TP=2122 FN=2454 (Missed) | TN=5288 FP=4053 (False Alarm)
+   >> Rates:   FPR=0.4339 | FNR=0.5363
+[2025-12-03 01:58:30] __main__ - [32mINFO[0m - Epoch [3] Motion Validation - Loss: 0.0798 | Acc: 53.24% | AUC: 0.5289
+[2025-12-03 01:58:30] __main__ - [32mINFO[0m -   Motion Anomaly Stats: P=0.344 R=0.464 F1=0.395
+[2025-12-03 01:58:30] __main__ - [32mINFO[0m -   Conf Matrix: TP=2122 FN=2454 TN=5288 FP=4053
+[2025-12-03 01:58:30] __main__ - [32mINFO[0m - 🔥 New Best Motion AUC: 0.5289
+[2025-12-03 01:58:30] src.utils.training_utils - [32mINFO[0m - Saved best model to /work3/s225224/ucf-crime/checkpoints/r3d_motion_sobel_20251203_004534/best_model.pth
+[2025-12-03 01:59:02] src.utils.training - [32mINFO[0m - Epoch [4] Batch [10/504] Loss: 0.1038 Acc: 57.66%
+[2025-12-03 01:59:25] src.utils.training - [32mINFO[0m - Epoch [4] Batch [20/504] Loss: 0.1046 Acc: 56.52%
+[2025-12-03 01:59:54] src.utils.training - [32mINFO[0m - Epoch [4] Batch [30/504] Loss: 0.1048 Acc: 56.38%
+[2025-12-03 02:00:13] src.utils.training - [32mINFO[0m - Epoch [4] Batch [40/504] Loss: 0.1036 Acc: 57.01%
+[2025-12-03 02:00:45] src.utils.training - [32mINFO[0m - Epoch [4] Batch [50/504] Loss: 0.1020 Acc: 57.27%
+[2025-12-03 02:01:07] src.utils.training - [32mINFO[0m - Epoch [4] Batch [60/504] Loss: 0.1019 Acc: 57.63%
+[2025-12-03 02:01:35] src.utils.training - [32mINFO[0m - Epoch [4] Batch [70/504] Loss: 0.1027 Acc: 57.50%
+[2025-12-03 02:02:02] src.utils.training - [32mINFO[0m - Epoch [4] Batch [80/504] Loss: 0.1025 Acc: 57.60%
+[2025-12-03 02:02:30] src.utils.training - [32mINFO[0m - Epoch [4] Batch [90/504] Loss: 0.1020 Acc: 57.53%
+[2025-12-03 02:02:51] src.utils.training - [32mINFO[0m - Epoch [4] Batch [100/504] Loss: 0.1028 Acc: 57.33%
+[2025-12-03 02:03:16] src.utils.training - [32mINFO[0m - Epoch [4] Batch [110/504] Loss: 0.1026 Acc: 57.40%
+[2025-12-03 02:03:35] src.utils.training - [32mINFO[0m - Epoch [4] Batch [120/504] Loss: 0.1034 Acc: 57.14%
+[2025-12-03 02:04:01] src.utils.training - [32mINFO[0m - Epoch [4] Batch [130/504] Loss: 0.1034 Acc: 57.01%
+[2025-12-03 02:04:24] src.utils.training - [32mINFO[0m - Epoch [4] Batch [140/504] Loss: 0.1038 Acc: 56.84%
+[2025-12-03 02:04:47] src.utils.training - [32mINFO[0m - Epoch [4] Batch [150/504] Loss: 0.1036 Acc: 56.83%
+[2025-12-03 02:05:10] src.utils.training - [32mINFO[0m - Epoch [4] Batch [160/504] Loss: 0.1036 Acc: 56.72%
+[2025-12-03 02:05:30] src.utils.training - [32mINFO[0m - Epoch [4] Batch [170/504] Loss: 0.1029 Acc: 56.88%
+[2025-12-03 02:05:53] src.utils.training - [32mINFO[0m - Epoch [4] Batch [180/504] Loss: 0.1032 Acc: 56.86%
+[2025-12-03 02:06:14] src.utils.training - [32mINFO[0m - Epoch [4] Batch [190/504] Loss: 0.1026 Acc: 56.99%
+[2025-12-03 02:06:36] src.utils.training - [32mINFO[0m - Epoch [4] Batch [200/504] Loss: 0.1032 Acc: 57.02%
+[2025-12-03 02:06:59] src.utils.training - [32mINFO[0m - Epoch [4] Batch [210/504] Loss: 0.1029 Acc: 57.05%
+[2025-12-03 02:07:20] src.utils.training - [32mINFO[0m - Epoch [4] Batch [220/504] Loss: 0.1031 Acc: 57.03%
+[2025-12-03 02:07:45] src.utils.training - [32mINFO[0m - Epoch [4] Batch [230/504] Loss: 0.1031 Acc: 57.06%
+[2025-12-03 02:08:11] src.utils.training - [32mINFO[0m - Epoch [4] Batch [240/504] Loss: 0.1033 Acc: 57.01%
+[2025-12-03 02:08:37] src.utils.training - [32mINFO[0m - Epoch [4] Batch [250/504] Loss: 0.1032 Acc: 57.01%
+[2025-12-03 02:09:07] src.utils.training - [32mINFO[0m - Epoch [4] Batch [260/504] Loss: 0.1031 Acc: 57.05%
+[2025-12-03 02:09:25] src.utils.training - [32mINFO[0m - Epoch [4] Batch [270/504] Loss: 0.1033 Acc: 57.11%
+[2025-12-03 02:09:49] src.utils.training - [32mINFO[0m - Epoch [4] Batch [280/504] Loss: 0.1029 Acc: 57.21%
+[2025-12-03 02:10:10] src.utils.training - [32mINFO[0m - Epoch [4] Batch [290/504] Loss: 0.1031 Acc: 57.17%
+[2025-12-03 02:10:39] src.utils.training - [32mINFO[0m - Epoch [4] Batch [300/504] Loss: 0.1028 Acc: 57.25%
+[2025-12-03 02:11:04] src.utils.training - [32mINFO[0m - Epoch [4] Batch [310/504] Loss: 0.1029 Acc: 57.17%
+[2025-12-03 02:11:30] src.utils.training - [32mINFO[0m - Epoch [4] Batch [320/504] Loss: 0.1032 Acc: 57.06%
+[2025-12-03 02:11:55] src.utils.training - [32mINFO[0m - Epoch [4] Batch [330/504] Loss: 0.1030 Acc: 57.09%
+[2025-12-03 02:12:21] src.utils.training - [32mINFO[0m - Epoch [4] Batch [340/504] Loss: 0.1029 Acc: 57.11%
+[2025-12-03 02:12:39] src.utils.training - [32mINFO[0m - Epoch [4] Batch [350/504] Loss: 0.1026 Acc: 57.12%
+[2025-12-03 02:13:04] src.utils.training - [32mINFO[0m - Epoch [4] Batch [360/504] Loss: 0.1026 Acc: 57.19%
+[2025-12-03 02:13:27] src.utils.training - [32mINFO[0m - Epoch [4] Batch [370/504] Loss: 0.1027 Acc: 57.17%
+[2025-12-03 02:13:52] src.utils.training - [32mINFO[0m - Epoch [4] Batch [380/504] Loss: 0.1028 Acc: 57.13%
+[2025-12-03 02:14:16] src.utils.training - [32mINFO[0m - Epoch [4] Batch [390/504] Loss: 0.1028 Acc: 57.04%
+[2025-12-03 02:14:41] src.utils.training - [32mINFO[0m - Epoch [4] Batch [400/504] Loss: 0.1029 Acc: 56.99%
+[2025-12-03 02:15:08] src.utils.training - [32mINFO[0m - Epoch [4] Batch [410/504] Loss: 0.1029 Acc: 56.96%
+[2025-12-03 02:15:26] src.utils.training - [32mINFO[0m - Epoch [4] Batch [420/504] Loss: 0.1028 Acc: 56.91%
+[2025-12-03 02:15:51] src.utils.training - [32mINFO[0m - Epoch [4] Batch [430/504] Loss: 0.1027 Acc: 56.90%
+[2025-12-03 02:16:14] src.utils.training - [32mINFO[0m - Epoch [4] Batch [440/504] Loss: 0.1026 Acc: 56.92%
+[2025-12-03 02:16:36] src.utils.training - [32mINFO[0m - Epoch [4] Batch [450/504] Loss: 0.1025 Acc: 56.91%
+[2025-12-03 02:17:02] src.utils.training - [32mINFO[0m - Epoch [4] Batch [460/504] Loss: 0.1025 Acc: 56.87%
+[2025-12-03 02:17:25] src.utils.training - [32mINFO[0m - Epoch [4] Batch [470/504] Loss: 0.1025 Acc: 56.89%
+[2025-12-03 02:17:48] src.utils.training - [32mINFO[0m - Epoch [4] Batch [480/504] Loss: 0.1024 Acc: 56.91%
+[2025-12-03 02:18:10] src.utils.training - [32mINFO[0m - Epoch [4] Batch [490/504] Loss: 0.1024 Acc: 56.84%
+[2025-12-03 02:18:36] src.utils.training - [32mINFO[0m - Epoch [4] Batch [500/504] Loss: 0.1025 Acc: 56.81%
+[2025-12-03 02:18:43] src.utils.training - [32mINFO[0m - Epoch [4] Training Completed in 1212s - Loss: 0.1024 Acc: 56.81%
+[2025-12-03 02:20:52] src.utils.clip_level_evaluation - [32mINFO[0m - [VAL] Batch 50/109 Loss: 0.0460
+[2025-12-03 02:22:36] src.utils.clip_level_evaluation - [32mINFO[0m - [VAL] Batch 100/109 Loss: 0.0709
+[2025-12-03 02:22:57] src.utils.clip_level_evaluation - [32mINFO[0m - [VAL] Finished in 254s
+[2025-12-03 02:22:57] src.utils.clip_level_evaluation - [32mINFO[0m - Results:
+Loss: 0.0771 | Acc: 53.95% | AUC: 0.5496
+   >> Anomaly: P=0.356 R=0.496 F1=0.415
+   >> Normal:  P=0.694 R=0.561
+   >> Counts:  TP=2271 FN=2305 (Missed) | TN=5237 FP=4104 (False Alarm)
+   >> Rates:   FPR=0.4394 | FNR=0.5037
+[2025-12-03 02:22:57] __main__ - [32mINFO[0m - Epoch [4] Motion Validation - Loss: 0.0771 | Acc: 53.95% | AUC: 0.5496
+[2025-12-03 02:22:57] __main__ - [32mINFO[0m -   Motion Anomaly Stats: P=0.356 R=0.496 F1=0.415
+[2025-12-03 02:22:57] __main__ - [32mINFO[0m -   Conf Matrix: TP=2271 FN=2305 TN=5237 FP=4104
+[2025-12-03 02:22:57] __main__ - [32mINFO[0m - 🔥 New Best Motion AUC: 0.5496
+[2025-12-03 02:22:57] src.utils.training_utils - [32mINFO[0m - Saved best model to /work3/s225224/ucf-crime/checkpoints/r3d_motion_sobel_20251203_004534/best_model.pth
+[2025-12-03 02:23:24] src.utils.training - [32mINFO[0m - Epoch [5] Batch [10/504] Loss: 0.1015 Acc: 55.08%
+[2025-12-03 02:23:46] src.utils.training - [32mINFO[0m - Epoch [5] Batch [20/504] Loss: 0.1011 Acc: 57.07%
+[2025-12-03 02:24:09] src.utils.training - [32mINFO[0m - Epoch [5] Batch [30/504] Loss: 0.0991 Acc: 57.60%
+[2025-12-03 02:24:32] src.utils.training - [32mINFO[0m - Epoch [5] Batch [40/504] Loss: 0.0982 Acc: 56.95%
+[2025-12-03 02:25:02] src.utils.training - [32mINFO[0m - Epoch [5] Batch [50/504] Loss: 0.0985 Acc: 57.08%
+[2025-12-03 02:25:25] src.utils.training - [32mINFO[0m - Epoch [5] Batch [60/504] Loss: 0.0984 Acc: 56.71%
+[2025-12-03 02:25:52] src.utils.training - [32mINFO[0m - Epoch [5] Batch [70/504] Loss: 0.0994 Acc: 56.72%
+[2025-12-03 02:26:18] src.utils.training - [32mINFO[0m - Epoch [5] Batch [80/504] Loss: 0.0997 Acc: 56.74%
+[2025-12-03 02:26:40] src.utils.training - [32mINFO[0m - Epoch [5] Batch [90/504] Loss: 0.1002 Acc: 56.68%
+[2025-12-03 02:27:02] src.utils.training - [32mINFO[0m - Epoch [5] Batch [100/504] Loss: 0.1005 Acc: 56.55%
+[2025-12-03 02:27:26] src.utils.training - [32mINFO[0m - Epoch [5] Batch [110/504] Loss: 0.1008 Acc: 56.33%
+[2025-12-03 02:27:48] src.utils.training - [32mINFO[0m - Epoch [5] Batch [120/504] Loss: 0.1010 Acc: 56.15%
+[2025-12-03 02:28:19] src.utils.training - [32mINFO[0m - Epoch [5] Batch [130/504] Loss: 0.1006 Acc: 56.23%
+[2025-12-03 02:28:44] src.utils.training - [32mINFO[0m - Epoch [5] Batch [140/504] Loss: 0.1004 Acc: 56.26%
+[2025-12-03 02:29:11] src.utils.training - [32mINFO[0m - Epoch [5] Batch [150/504] Loss: 0.0997 Acc: 56.34%
+[2025-12-03 02:29:30] src.utils.training - [32mINFO[0m - Epoch [5] Batch [160/504] Loss: 0.1000 Acc: 56.44%
+[2025-12-03 02:29:55] src.utils.training - [32mINFO[0m - Epoch [5] Batch [170/504] Loss: 0.0996 Acc: 56.58%
+[2025-12-03 02:30:14] src.utils.training - [32mINFO[0m - Epoch [5] Batch [180/504] Loss: 0.0997 Acc: 56.47%
+[2025-12-03 02:30:41] src.utils.training - [32mINFO[0m - Epoch [5] Batch [190/504] Loss: 0.0994 Acc: 56.49%
+[2025-12-03 02:31:05] src.utils.training - [32mINFO[0m - Epoch [5] Batch [200/504] Loss: 0.0993 Acc: 56.51%
+[2025-12-03 02:31:31] src.utils.training - [32mINFO[0m - Epoch [5] Batch [210/504] Loss: 0.0993 Acc: 56.51%
+[2025-12-03 02:31:50] src.utils.training - [32mINFO[0m - Epoch [5] Batch [220/504] Loss: 0.0991 Acc: 56.56%
+[2025-12-03 02:32:19] src.utils.training - [32mINFO[0m - Epoch [5] Batch [230/504] Loss: 0.0990 Acc: 56.58%
+[2025-12-03 02:32:38] src.utils.training - [32mINFO[0m - Epoch [5] Batch [240/504] Loss: 0.0987 Acc: 56.70%
+[2025-12-03 02:33:07] src.utils.training - [32mINFO[0m - Epoch [5] Batch [250/504] Loss: 0.0983 Acc: 56.79%
+[2025-12-03 02:33:29] src.utils.training - [32mINFO[0m - Epoch [5] Batch [260/504] Loss: 0.0981 Acc: 56.88%
+[2025-12-03 02:33:52] src.utils.training - [32mINFO[0m - Epoch [5] Batch [270/504] Loss: 0.0978 Acc: 56.99%
+[2025-12-03 02:34:16] src.utils.training - [32mINFO[0m - Epoch [5] Batch [280/504] Loss: 0.0977 Acc: 57.03%
+[2025-12-03 02:34:41] src.utils.training - [32mINFO[0m - Epoch [5] Batch [290/504] Loss: 0.0980 Acc: 57.03%
+[2025-12-03 02:35:13] src.utils.training - [32mINFO[0m - Epoch [5] Batch [300/504] Loss: 0.0977 Acc: 57.08%
+[2025-12-03 02:35:34] src.utils.training - [32mINFO[0m - Epoch [5] Batch [310/504] Loss: 0.0976 Acc: 57.09%
+[2025-12-03 02:35:56] src.utils.training - [32mINFO[0m - Epoch [5] Batch [320/504] Loss: 0.0976 Acc: 57.09%
+[2025-12-03 02:36:20] src.utils.training - [32mINFO[0m - Epoch [5] Batch [330/504] Loss: 0.0975 Acc: 57.12%
+[2025-12-03 02:36:43] src.utils.training - [32mINFO[0m - Epoch [5] Batch [340/504] Loss: 0.0975 Acc: 57.13%
+[2025-12-03 02:37:07] src.utils.training - [32mINFO[0m - Epoch [5] Batch [350/504] Loss: 0.0975 Acc: 57.16%
+[2025-12-03 02:37:27] src.utils.training - [32mINFO[0m - Epoch [5] Batch [360/504] Loss: 0.0973 Acc: 57.18%
+[2025-12-03 02:37:52] src.utils.training - [32mINFO[0m - Epoch [5] Batch [370/504] Loss: 0.0973 Acc: 57.21%
+[2025-12-03 02:38:11] src.utils.training - [32mINFO[0m - Epoch [5] Batch [380/504] Loss: 0.0972 Acc: 57.28%
+[2025-12-03 02:38:39] src.utils.training - [32mINFO[0m - Epoch [5] Batch [390/504] Loss: 0.0973 Acc: 57.30%
+[2025-12-03 02:38:57] src.utils.training - [32mINFO[0m - Epoch [5] Batch [400/504] Loss: 0.0971 Acc: 57.30%
+[2025-12-03 02:39:21] src.utils.training - [32mINFO[0m - Epoch [5] Batch [410/504] Loss: 0.0969 Acc: 57.30%
+[2025-12-03 02:39:39] src.utils.training - [32mINFO[0m - Epoch [5] Batch [420/504] Loss: 0.0969 Acc: 57.31%
+[2025-12-03 02:40:10] src.utils.training - [32mINFO[0m - Epoch [5] Batch [430/504] Loss: 0.0969 Acc: 57.28%
+[2025-12-03 02:40:31] src.utils.training - [32mINFO[0m - Epoch [5] Batch [440/504] Loss: 0.0969 Acc: 57.28%
+[2025-12-03 02:40:55] src.utils.training - [32mINFO[0m - Epoch [5] Batch [450/504] Loss: 0.0969 Acc: 57.27%
+[2025-12-03 02:41:17] src.utils.training - [32mINFO[0m - Epoch [5] Batch [460/504] Loss: 0.0968 Acc: 57.31%
+[2025-12-03 02:41:41] src.utils.training - [32mINFO[0m - Epoch [5] Batch [470/504] Loss: 0.0968 Acc: 57.31%
+[2025-12-03 02:42:00] src.utils.training - [32mINFO[0m - Epoch [5] Batch [480/504] Loss: 0.0967 Acc: 57.35%
+[2025-12-03 02:42:27] src.utils.training - [32mINFO[0m - Epoch [5] Batch [490/504] Loss: 0.0967 Acc: 57.36%
+[2025-12-03 02:42:49] src.utils.training - [32mINFO[0m - Epoch [5] Batch [500/504] Loss: 0.0966 Acc: 57.35%
+[2025-12-03 02:43:00] src.utils.training - [32mINFO[0m - Epoch [5] Training Completed in 1202s - Loss: 0.0966 Acc: 57.37%
+[2025-12-03 02:45:01] src.utils.clip_level_evaluation - [32mINFO[0m - [VAL] Batch 50/109 Loss: 0.0457
+[2025-12-03 02:46:55] src.utils.clip_level_evaluation - [32mINFO[0m - [VAL] Batch 100/109 Loss: 0.0698
+[2025-12-03 02:47:20] src.utils.clip_level_evaluation - [32mINFO[0m - [VAL] Finished in 260s
+[2025-12-03 02:47:20] src.utils.clip_level_evaluation - [32mINFO[0m - Results:
+Loss: 0.0759 | Acc: 54.21% | AUC: 0.5619
+   >> Anomaly: P=0.361 R=0.511 F1=0.423
+   >> Normal:  P=0.699 R=0.557
+   >> Counts:  TP=2339 FN=2237 (Missed) | TN=5206 FP=4135 (False Alarm)
+   >> Rates:   FPR=0.4427 | FNR=0.4889
+[2025-12-03 02:47:20] __main__ - [32mINFO[0m - Epoch [5] Motion Validation - Loss: 0.0759 | Acc: 54.21% | AUC: 0.5619
+[2025-12-03 02:47:20] __main__ - [32mINFO[0m -   Motion Anomaly Stats: P=0.361 R=0.511 F1=0.423
+[2025-12-03 02:47:20] __main__ - [32mINFO[0m -   Conf Matrix: TP=2339 FN=2237 TN=5206 FP=4135
+[2025-12-03 02:47:20] __main__ - [32mINFO[0m - 🔥 New Best Motion AUC: 0.5619
+[2025-12-03 02:47:20] src.utils.training_utils - [32mINFO[0m - Saved best model to /work3/s225224/ucf-crime/checkpoints/r3d_motion_sobel_20251203_004534/best_model.pth
+[2025-12-03 02:47:48] src.utils.training - [32mINFO[0m - Epoch [6] Batch [10/504] Loss: 0.0957 Acc: 58.12%
+[2025-12-03 02:48:12] src.utils.training - [32mINFO[0m - Epoch [6] Batch [20/504] Loss: 0.0940 Acc: 58.09%
+[2025-12-03 02:48:36] src.utils.training - [32mINFO[0m - Epoch [6] Batch [30/504] Loss: 0.0933 Acc: 58.46%
+[2025-12-03 02:48:58] src.utils.training - [32mINFO[0m - Epoch [6] Batch [40/504] Loss: 0.0955 Acc: 58.42%
+[2025-12-03 02:49:22] src.utils.training - [32mINFO[0m - Epoch [6] Batch [50/504] Loss: 0.0946 Acc: 58.11%
+[2025-12-03 02:49:48] src.utils.training - [32mINFO[0m - Epoch [6] Batch [60/504] Loss: 0.0940 Acc: 58.11%
+[2025-12-03 02:50:15] src.utils.training - [32mINFO[0m - Epoch [6] Batch [70/504] Loss: 0.0931 Acc: 58.34%
+[2025-12-03 02:50:37] src.utils.training - [32mINFO[0m - Epoch [6] Batch [80/504] Loss: 0.0935 Acc: 58.16%
+[2025-12-03 02:51:05] src.utils.training - [32mINFO[0m - Epoch [6] Batch [90/504] Loss: 0.0932 Acc: 58.17%
+[2025-12-03 02:51:23] src.utils.training - [32mINFO[0m - Epoch [6] Batch [100/504] Loss: 0.0935 Acc: 58.17%
+[2025-12-03 02:51:50] src.utils.training - [32mINFO[0m - Epoch [6] Batch [110/504] Loss: 0.0937 Acc: 58.20%
+[2025-12-03 02:52:11] src.utils.training - [32mINFO[0m - Epoch [6] Batch [120/504] Loss: 0.0936 Acc: 58.15%
+[2025-12-03 02:52:49] src.utils.training - [32mINFO[0m - Epoch [6] Batch [130/504] Loss: 0.0937 Acc: 58.23%
+[2025-12-03 02:53:07] src.utils.training - [32mINFO[0m - Epoch [6] Batch [140/504] Loss: 0.0931 Acc: 58.29%
+[2025-12-03 02:53:31] src.utils.training - [32mINFO[0m - Epoch [6] Batch [150/504] Loss: 0.0935 Acc: 58.09%
+[2025-12-03 02:53:49] src.utils.training - [32mINFO[0m - Epoch [6] Batch [160/504] Loss: 0.0936 Acc: 58.05%
+[2025-12-03 02:54:17] src.utils.training - [32mINFO[0m - Epoch [6] Batch [170/504] Loss: 0.0933 Acc: 57.93%
+[2025-12-03 02:54:35] src.utils.training - [32mINFO[0m - Epoch [6] Batch [180/504] Loss: 0.0937 Acc: 57.81%
+[2025-12-03 02:54:59] src.utils.training - [32mINFO[0m - Epoch [6] Batch [190/504] Loss: 0.0936 Acc: 57.71%
+[2025-12-03 02:55:17] src.utils.training - [32mINFO[0m - Epoch [6] Batch [200/504] Loss: 0.0934 Acc: 57.81%
+[2025-12-03 02:55:42] src.utils.training - [32mINFO[0m - Epoch [6] Batch [210/504] Loss: 0.0936 Acc: 57.72%
+[2025-12-03 02:56:02] src.utils.training - [32mINFO[0m - Epoch [6] Batch [220/504] Loss: 0.0934 Acc: 57.73%
+[2025-12-03 02:56:28] src.utils.training - [32mINFO[0m - Epoch [6] Batch [230/504] Loss: 0.0933 Acc: 57.74%
+[2025-12-03 02:56:46] src.utils.training - [32mINFO[0m - Epoch [6] Batch [240/504] Loss: 0.0931 Acc: 57.81%
+[2025-12-03 02:57:14] src.utils.training - [32mINFO[0m - Epoch [6] Batch [250/504] Loss: 0.0930 Acc: 57.81%
+[2025-12-03 02:57:32] src.utils.training - [32mINFO[0m - Epoch [6] Batch [260/504] Loss: 0.0930 Acc: 57.84%
+[2025-12-03 02:57:56] src.utils.training - [32mINFO[0m - Epoch [6] Batch [270/504] Loss: 0.0930 Acc: 57.92%
+[2025-12-03 02:58:17] src.utils.training - [32mINFO[0m - Epoch [6] Batch [280/504] Loss: 0.0927 Acc: 57.99%
+[2025-12-03 02:58:44] src.utils.training - [32mINFO[0m - Epoch [6] Batch [290/504] Loss: 0.0927 Acc: 58.01%
+[2025-12-03 02:59:05] src.utils.training - [32mINFO[0m - Epoch [6] Batch [300/504] Loss: 0.0926 Acc: 58.04%
+[2025-12-03 02:59:36] src.utils.training - [32mINFO[0m - Epoch [6] Batch [310/504] Loss: 0.0926 Acc: 58.05%
+[2025-12-03 02:59:57] src.utils.training - [32mINFO[0m - Epoch [6] Batch [320/504] Loss: 0.0926 Acc: 58.05%
+[2025-12-03 03:00:21] src.utils.training - [32mINFO[0m - Epoch [6] Batch [330/504] Loss: 0.0924 Acc: 58.15%
+[2025-12-03 03:00:39] src.utils.training - [32mINFO[0m - Epoch [6] Batch [340/504] Loss: 0.0926 Acc: 58.12%
+[2025-12-03 03:01:03] src.utils.training - [32mINFO[0m - Epoch [6] Batch [350/504] Loss: 0.0926 Acc: 58.12%
+[2025-12-03 03:01:24] src.utils.training - [32mINFO[0m - Epoch [6] Batch [360/504] Loss: 0.0927 Acc: 58.09%
+[2025-12-03 03:01:48] src.utils.training - [32mINFO[0m - Epoch [6] Batch [370/504] Loss: 0.0926 Acc: 58.08%
+[2025-12-03 03:02:09] src.utils.training - [32mINFO[0m - Epoch [6] Batch [380/504] Loss: 0.0925 Acc: 58.06%
+[2025-12-03 03:02:33] src.utils.training - [32mINFO[0m - Epoch [6] Batch [390/504] Loss: 0.0925 Acc: 57.99%
+[2025-12-03 03:02:52] src.utils.training - [32mINFO[0m - Epoch [6] Batch [400/504] Loss: 0.0926 Acc: 57.99%
+[2025-12-03 03:03:21] src.utils.training - [32mINFO[0m - Epoch [6] Batch [410/504] Loss: 0.0925 Acc: 57.95%
+[2025-12-03 03:03:42] src.utils.training - [32mINFO[0m - Epoch [6] Batch [420/504] Loss: 0.0923 Acc: 57.97%
+[2025-12-03 03:04:06] src.utils.training - [32mINFO[0m - Epoch [6] Batch [430/504] Loss: 0.0922 Acc: 57.99%
+[2025-12-03 03:04:26] src.utils.training - [32mINFO[0m - Epoch [6] Batch [440/504] Loss: 0.0922 Acc: 57.97%
+[2025-12-03 03:04:50] src.utils.training - [32mINFO[0m - Epoch [6] Batch [450/504] Loss: 0.0921 Acc: 57.95%
+[2025-12-03 03:05:10] src.utils.training - [32mINFO[0m - Epoch [6] Batch [460/504] Loss: 0.0920 Acc: 57.96%
+[2025-12-03 03:05:37] src.utils.training - [32mINFO[0m - Epoch [6] Batch [470/504] Loss: 0.0918 Acc: 58.03%
+[2025-12-03 03:06:01] src.utils.training - [32mINFO[0m - Epoch [6] Batch [480/504] Loss: 0.0917 Acc: 58.07%
+[2025-12-03 03:06:25] src.utils.training - [32mINFO[0m - Epoch [6] Batch [490/504] Loss: 0.0917 Acc: 58.06%
+[2025-12-03 03:06:46] src.utils.training - [32mINFO[0m - Epoch [6] Batch [500/504] Loss: 0.0917 Acc: 58.08%
+[2025-12-03 03:06:55] src.utils.training - [32mINFO[0m - Epoch [6] Training Completed in 1175s - Loss: 0.0917 Acc: 58.09%
+[2025-12-03 03:09:05] src.utils.clip_level_evaluation - [32mINFO[0m - [VAL] Batch 50/109 Loss: 0.0433
+[2025-12-03 03:11:00] src.utils.clip_level_evaluation - [32mINFO[0m - [VAL] Batch 100/109 Loss: 0.0685
+[2025-12-03 03:11:24] src.utils.clip_level_evaluation - [32mINFO[0m - [VAL] Finished in 269s
+[2025-12-03 03:11:24] src.utils.clip_level_evaluation - [32mINFO[0m - Results:
+Loss: 0.0749 | Acc: 56.23% | AUC: 0.5787
+   >> Anomaly: P=0.376 R=0.503 F1=0.431
+   >> Normal:  P=0.708 R=0.591
+   >> Counts:  TP=2303 FN=2273 (Missed) | TN=5523 FP=3818 (False Alarm)
+   >> Rates:   FPR=0.4087 | FNR=0.4967
+[2025-12-03 03:11:24] __main__ - [32mINFO[0m - Epoch [6] Motion Validation - Loss: 0.0749 | Acc: 56.23% | AUC: 0.5787
+[2025-12-03 03:11:24] __main__ - [32mINFO[0m -   Motion Anomaly Stats: P=0.376 R=0.503 F1=0.431
+[2025-12-03 03:11:24] __main__ - [32mINFO[0m -   Conf Matrix: TP=2303 FN=2273 TN=5523 FP=3818
+[2025-12-03 03:11:24] __main__ - [32mINFO[0m - 🔥 New Best Motion AUC: 0.5787
+[2025-12-03 03:11:24] src.utils.training_utils - [32mINFO[0m - Saved best model to /work3/s225224/ucf-crime/checkpoints/r3d_motion_sobel_20251203_004534/best_model.pth
+[2025-12-03 03:11:59] src.utils.training - [32mINFO[0m - Epoch [7] Batch [10/504] Loss: 0.0955 Acc: 57.97%
+[2025-12-03 03:12:22] src.utils.training - [32mINFO[0m - Epoch [7] Batch [20/504] Loss: 0.0913 Acc: 59.14%
+[2025-12-03 03:12:47] src.utils.training - [32mINFO[0m - Epoch [7] Batch [30/504] Loss: 0.0884 Acc: 58.85%
+[2025-12-03 03:13:07] src.utils.training - [32mINFO[0m - Epoch [7] Batch [40/504] Loss: 0.0871 Acc: 59.30%
+[2025-12-03 03:13:33] src.utils.training - [32mINFO[0m - Epoch [7] Batch [50/504] Loss: 0.0871 Acc: 58.95%
+[2025-12-03 03:13:58] src.utils.training - [32mINFO[0m - Epoch [7] Batch [60/504] Loss: 0.0868 Acc: 58.88%
+[2025-12-03 03:14:22] src.utils.training - [32mINFO[0m - Epoch [7] Batch [70/504] Loss: 0.0868 Acc: 58.96%
+[2025-12-03 03:14:43] src.utils.training - [32mINFO[0m - Epoch [7] Batch [80/504] Loss: 0.0870 Acc: 58.84%
+[2025-12-03 03:15:07] src.utils.training - [32mINFO[0m - Epoch [7] Batch [90/504] Loss: 0.0877 Acc: 58.79%
+[2025-12-03 03:15:25] src.utils.training - [32mINFO[0m - Epoch [7] Batch [100/504] Loss: 0.0880 Acc: 58.55%
+[2025-12-03 03:15:48] src.utils.training - [32mINFO[0m - Epoch [7] Batch [110/504] Loss: 0.0880 Acc: 58.65%
+[2025-12-03 03:16:09] src.utils.training - [32mINFO[0m - Epoch [7] Batch [120/504] Loss: 0.0879 Acc: 58.83%
+[2025-12-03 03:16:35] src.utils.training - [32mINFO[0m - Epoch [7] Batch [130/504] Loss: 0.0880 Acc: 58.94%
+[2025-12-03 03:16:53] src.utils.training - [32mINFO[0m - Epoch [7] Batch [140/504] Loss: 0.0876 Acc: 58.95%
+[2025-12-03 03:17:17] src.utils.training - [32mINFO[0m - Epoch [7] Batch [150/504] Loss: 0.0875 Acc: 59.04%
+[2025-12-03 03:17:38] src.utils.training - [32mINFO[0m - Epoch [7] Batch [160/504] Loss: 0.0876 Acc: 59.00%
+[2025-12-03 03:18:03] src.utils.training - [32mINFO[0m - Epoch [7] Batch [170/504] Loss: 0.0880 Acc: 58.93%
+[2025-12-03 03:18:21] src.utils.training - [32mINFO[0m - Epoch [7] Batch [180/504] Loss: 0.0879 Acc: 58.89%
+[2025-12-03 03:18:49] src.utils.training - [32mINFO[0m - Epoch [7] Batch [190/504] Loss: 0.0881 Acc: 58.75%
+[2025-12-03 03:19:07] src.utils.training - [32mINFO[0m - Epoch [7] Batch [200/504] Loss: 0.0880 Acc: 58.71%
+[2025-12-03 03:19:35] src.utils.training - [32mINFO[0m - Epoch [7] Batch [210/504] Loss: 0.0881 Acc: 58.73%
+[2025-12-03 03:19:58] src.utils.training - [32mINFO[0m - Epoch [7] Batch [220/504] Loss: 0.0880 Acc: 58.76%
+[2025-12-03 03:20:26] src.utils.training - [32mINFO[0m - Epoch [7] Batch [230/504] Loss: 0.0877 Acc: 58.84%
+[2025-12-03 03:20:50] src.utils.training - [32mINFO[0m - Epoch [7] Batch [240/504] Loss: 0.0875 Acc: 58.85%
+[2025-12-03 03:21:14] src.utils.training - [32mINFO[0m - Epoch [7] Batch [250/504] Loss: 0.0874 Acc: 58.89%
+[2025-12-03 03:21:32] src.utils.training - [32mINFO[0m - Epoch [7] Batch [260/504] Loss: 0.0872 Acc: 59.03%
+[2025-12-03 03:21:59] src.utils.training - [32mINFO[0m - Epoch [7] Batch [270/504] Loss: 0.0872 Acc: 58.96%
+[2025-12-03 03:22:17] src.utils.training - [32mINFO[0m - Epoch [7] Batch [280/504] Loss: 0.0873 Acc: 58.92%
+[2025-12-03 03:22:46] src.utils.training - [32mINFO[0m - Epoch [7] Batch [290/504] Loss: 0.0872 Acc: 58.96%
+[2025-12-03 03:23:04] src.utils.training - [32mINFO[0m - Epoch [7] Batch [300/504] Loss: 0.0872 Acc: 58.98%
+[2025-12-03 03:23:32] src.utils.training - [32mINFO[0m - Epoch [7] Batch [310/504] Loss: 0.0873 Acc: 58.99%
+[2025-12-03 03:23:54] src.utils.training - [32mINFO[0m - Epoch [7] Batch [320/504] Loss: 0.0873 Acc: 58.95%
+[2025-12-03 03:24:24] src.utils.training - [32mINFO[0m - Epoch [7] Batch [330/504] Loss: 0.0873 Acc: 58.98%
+[2025-12-03 03:24:42] src.utils.training - [32mINFO[0m - Epoch [7] Batch [340/504] Loss: 0.0871 Acc: 59.00%
+[2025-12-03 03:25:08] src.utils.training - [32mINFO[0m - Epoch [7] Batch [350/504] Loss: 0.0870 Acc: 59.02%
+[2025-12-03 03:25:26] src.utils.training - [32mINFO[0m - Epoch [7] Batch [360/504] Loss: 0.0871 Acc: 59.01%
+[2025-12-03 03:25:53] src.utils.training - [32mINFO[0m - Epoch [7] Batch [370/504] Loss: 0.0873 Acc: 59.02%
+[2025-12-03 03:26:18] src.utils.training - [32mINFO[0m - Epoch [7] Batch [380/504] Loss: 0.0873 Acc: 59.01%
+[2025-12-03 03:26:45] src.utils.training - [32mINFO[0m - Epoch [7] Batch [390/504] Loss: 0.0873 Acc: 58.96%
+[2025-12-03 03:27:05] src.utils.training - [32mINFO[0m - Epoch [7] Batch [400/504] Loss: 0.0873 Acc: 58.95%
+[2025-12-03 03:27:27] src.utils.training - [32mINFO[0m - Epoch [7] Batch [410/504] Loss: 0.0874 Acc: 58.87%
+[2025-12-03 03:27:50] src.utils.training - [32mINFO[0m - Epoch [7] Batch [420/504] Loss: 0.0873 Acc: 58.90%
+[2025-12-03 03:28:13] src.utils.training - [32mINFO[0m - Epoch [7] Batch [430/504] Loss: 0.0872 Acc: 58.87%
+[2025-12-03 03:28:32] src.utils.training - [32mINFO[0m - Epoch [7] Batch [440/504] Loss: 0.0872 Acc: 58.86%
+[2025-12-03 03:28:59] src.utils.training - [32mINFO[0m - Epoch [7] Batch [450/504] Loss: 0.0873 Acc: 58.88%
+[2025-12-03 03:29:19] src.utils.training - [32mINFO[0m - Epoch [7] Batch [460/504] Loss: 0.0872 Acc: 58.83%
+[2025-12-03 03:29:49] src.utils.training - [32mINFO[0m - Epoch [7] Batch [470/504] Loss: 0.0872 Acc: 58.82%
+[2025-12-03 03:30:10] src.utils.training - [32mINFO[0m - Epoch [7] Batch [480/504] Loss: 0.0872 Acc: 58.83%
+[2025-12-03 03:30:34] src.utils.training - [32mINFO[0m - Epoch [7] Batch [490/504] Loss: 0.0872 Acc: 58.81%
+[2025-12-03 03:30:53] src.utils.training - [32mINFO[0m - Epoch [7] Batch [500/504] Loss: 0.0872 Acc: 58.82%
+[2025-12-03 03:31:02] src.utils.training - [32mINFO[0m - Epoch [7] Training Completed in 1177s - Loss: 0.0872 Acc: 58.81%
+[2025-12-03 03:33:08] src.utils.clip_level_evaluation - [32mINFO[0m - [VAL] Batch 50/109 Loss: 0.0440
+[2025-12-03 03:35:03] src.utils.clip_level_evaluation - [32mINFO[0m - [VAL] Batch 100/109 Loss: 0.0675
+[2025-12-03 03:35:24] src.utils.clip_level_evaluation - [32mINFO[0m - [VAL] Finished in 262s
+[2025-12-03 03:35:24] src.utils.clip_level_evaluation - [32mINFO[0m - Results:
+Loss: 0.0737 | Acc: 56.20% | AUC: 0.5878
+   >> Anomaly: P=0.381 R=0.532 F1=0.444
+   >> Normal:  P=0.716 R=0.577
+   >> Counts:  TP=2434 FN=2142 (Missed) | TN=5387 FP=3954 (False Alarm)
+   >> Rates:   FPR=0.4233 | FNR=0.4681
+[2025-12-03 03:35:24] __main__ - [32mINFO[0m - Epoch [7] Motion Validation - Loss: 0.0737 | Acc: 56.20% | AUC: 0.5878
+[2025-12-03 03:35:24] __main__ - [32mINFO[0m -   Motion Anomaly Stats: P=0.381 R=0.532 F1=0.444
+[2025-12-03 03:35:24] __main__ - [32mINFO[0m -   Conf Matrix: TP=2434 FN=2142 TN=5387 FP=3954
+[2025-12-03 03:35:24] __main__ - [32mINFO[0m - 🔥 New Best Motion AUC: 0.5878
+[2025-12-03 03:35:24] src.utils.training_utils - [32mINFO[0m - Saved best model to /work3/s225224/ucf-crime/checkpoints/r3d_motion_sobel_20251203_004534/best_model.pth
+[2025-12-03 03:36:00] src.utils.training - [32mINFO[0m - Epoch [8] Batch [10/504] Loss: 0.0876 Acc: 56.64%
+[2025-12-03 03:36:19] src.utils.training - [32mINFO[0m - Epoch [8] Batch [20/504] Loss: 0.0872 Acc: 57.77%
+[2025-12-03 03:36:43] src.utils.training - [32mINFO[0m - Epoch [8] Batch [30/504] Loss: 0.0865 Acc: 58.41%
+[2025-12-03 03:37:01] src.utils.training - [32mINFO[0m - Epoch [8] Batch [40/504] Loss: 0.0871 Acc: 58.52%
+[2025-12-03 03:37:25] src.utils.training - [32mINFO[0m - Epoch [8] Batch [50/504] Loss: 0.0884 Acc: 58.50%
+[2025-12-03 03:37:50] src.utils.training - [32mINFO[0m - Epoch [8] Batch [60/504] Loss: 0.0883 Acc: 58.48%
+[2025-12-03 03:38:12] src.utils.training - [32mINFO[0m - Epoch [8] Batch [70/504] Loss: 0.0882 Acc: 58.39%
+[2025-12-03 03:38:37] src.utils.training - [32mINFO[0m - Epoch [8] Batch [80/504] Loss: 0.0879 Acc: 58.41%
+[2025-12-03 03:38:59] src.utils.training - [32mINFO[0m - Epoch [8] Batch [90/504] Loss: 0.0874 Acc: 58.59%
+[2025-12-03 03:39:21] src.utils.training - [32mINFO[0m - Epoch [8] Batch [100/504] Loss: 0.0873 Acc: 58.39%
+[2025-12-03 03:39:41] src.utils.training - [32mINFO[0m - Epoch [8] Batch [110/504] Loss: 0.0869 Acc: 58.47%
+[2025-12-03 03:40:08] src.utils.training - [32mINFO[0m - Epoch [8] Batch [120/504] Loss: 0.0869 Acc: 58.40%
+[2025-12-03 03:40:28] src.utils.training - [32mINFO[0m - Epoch [8] Batch [130/504] Loss: 0.0865 Acc: 58.52%
+[2025-12-03 03:40:52] src.utils.training - [32mINFO[0m - Epoch [8] Batch [140/504] Loss: 0.0857 Acc: 58.69%
+[2025-12-03 03:41:10] src.utils.training - [32mINFO[0m - Epoch [8] Batch [150/504] Loss: 0.0854 Acc: 58.60%
+[2025-12-03 03:41:38] src.utils.training - [32mINFO[0m - Epoch [8] Batch [160/504] Loss: 0.0854 Acc: 58.71%
+[2025-12-03 03:41:57] src.utils.training - [32mINFO[0m - Epoch [8] Batch [170/504] Loss: 0.0852 Acc: 58.82%
+[2025-12-03 03:42:22] src.utils.training - [32mINFO[0m - Epoch [8] Batch [180/504] Loss: 0.0851 Acc: 58.81%
+[2025-12-03 03:42:48] src.utils.training - [32mINFO[0m - Epoch [8] Batch [190/504] Loss: 0.0849 Acc: 58.78%
+[2025-12-03 03:43:10] src.utils.training - [32mINFO[0m - Epoch [8] Batch [200/504] Loss: 0.0853 Acc: 58.75%
+[2025-12-03 03:43:33] src.utils.training - [32mINFO[0m - Epoch [8] Batch [210/504] Loss: 0.0852 Acc: 58.81%
+[2025-12-03 03:43:50] src.utils.training - [32mINFO[0m - Epoch [8] Batch [220/504] Loss: 0.0850 Acc: 58.83%
+[2025-12-03 03:44:13] src.utils.training - [32mINFO[0m - Epoch [8] Batch [230/504] Loss: 0.0853 Acc: 58.76%
+[2025-12-03 03:44:33] src.utils.training - [32mINFO[0m - Epoch [8] Batch [240/504] Loss: 0.0853 Acc: 58.76%
+[2025-12-03 03:44:58] src.utils.training - [32mINFO[0m - Epoch [8] Batch [250/504] Loss: 0.0851 Acc: 58.77%
+[2025-12-03 03:45:18] src.utils.training - [32mINFO[0m - Epoch [8] Batch [260/504] Loss: 0.0850 Acc: 58.89%
+[2025-12-03 03:45:38] src.utils.training - [32mINFO[0m - Epoch [8] Batch [270/504] Loss: 0.0849 Acc: 58.93%
+[2025-12-03 03:45:59] src.utils.training - [32mINFO[0m - Epoch [8] Batch [280/504] Loss: 0.0849 Acc: 59.00%
+[2025-12-03 03:46:20] src.utils.training - [32mINFO[0m - Epoch [8] Batch [290/504] Loss: 0.0847 Acc: 58.96%
+[2025-12-03 03:46:42] src.utils.training - [32mINFO[0m - Epoch [8] Batch [300/504] Loss: 0.0848 Acc: 58.93%
+[2025-12-03 03:47:08] src.utils.training - [32mINFO[0m - Epoch [8] Batch [310/504] Loss: 0.0848 Acc: 58.93%
+[2025-12-03 03:47:31] src.utils.training - [32mINFO[0m - Epoch [8] Batch [320/504] Loss: 0.0848 Acc: 58.87%
+[2025-12-03 03:47:54] src.utils.training - [32mINFO[0m - Epoch [8] Batch [330/504] Loss: 0.0847 Acc: 58.86%
+[2025-12-03 03:48:20] src.utils.training - [32mINFO[0m - Epoch [8] Batch [340/504] Loss: 0.0847 Acc: 58.87%
+[2025-12-03 03:48:38] src.utils.training - [32mINFO[0m - Epoch [8] Batch [350/504] Loss: 0.0848 Acc: 58.92%
+[2025-12-03 03:49:12] src.utils.training - [32mINFO[0m - Epoch [8] Batch [360/504] Loss: 0.0847 Acc: 58.93%
+[2025-12-03 03:49:30] src.utils.training - [32mINFO[0m - Epoch [8] Batch [370/504] Loss: 0.0847 Acc: 58.95%
+[2025-12-03 03:49:55] src.utils.training - [32mINFO[0m - Epoch [8] Batch [380/504] Loss: 0.0846 Acc: 58.92%
+[2025-12-03 03:50:15] src.utils.training - [32mINFO[0m - Epoch [8] Batch [390/504] Loss: 0.0846 Acc: 58.99%
+[2025-12-03 03:50:42] src.utils.training - [32mINFO[0m - Epoch [8] Batch [400/504] Loss: 0.0844 Acc: 59.01%
+[2025-12-03 03:51:05] src.utils.training - [32mINFO[0m - Epoch [8] Batch [410/504] Loss: 0.0843 Acc: 59.06%
+[2025-12-03 03:51:30] src.utils.training - [32mINFO[0m - Epoch [8] Batch [420/504] Loss: 0.0843 Acc: 59.04%
+[2025-12-03 03:51:55] src.utils.training - [32mINFO[0m - Epoch [8] Batch [430/504] Loss: 0.0843 Acc: 59.03%
+[2025-12-03 03:52:26] src.utils.training - [32mINFO[0m - Epoch [8] Batch [440/504] Loss: 0.0842 Acc: 59.01%
+[2025-12-03 03:52:45] src.utils.training - [32mINFO[0m - Epoch [8] Batch [450/504] Loss: 0.0841 Acc: 58.98%
+[2025-12-03 03:53:12] src.utils.training - [32mINFO[0m - Epoch [8] Batch [460/504] Loss: 0.0839 Acc: 59.04%
+[2025-12-03 03:53:38] src.utils.training - [32mINFO[0m - Epoch [8] Batch [470/504] Loss: 0.0837 Acc: 59.10%
+[2025-12-03 03:54:03] src.utils.training - [32mINFO[0m - Epoch [8] Batch [480/504] Loss: 0.0836 Acc: 59.12%
+[2025-12-03 03:54:25] src.utils.training - [32mINFO[0m - Epoch [8] Batch [490/504] Loss: 0.0836 Acc: 59.12%
+[2025-12-03 03:54:50] src.utils.training - [32mINFO[0m - Epoch [8] Batch [500/504] Loss: 0.0836 Acc: 59.15%
+[2025-12-03 03:54:57] src.utils.training - [32mINFO[0m - Epoch [8] Training Completed in 1172s - Loss: 0.0836 Acc: 59.16%
+[2025-12-03 03:56:59] src.utils.clip_level_evaluation - [32mINFO[0m - [VAL] Batch 50/109 Loss: 0.0439
+[2025-12-03 03:59:03] src.utils.clip_level_evaluation - [32mINFO[0m - [VAL] Batch 100/109 Loss: 0.0664
+[2025-12-03 03:59:24] src.utils.clip_level_evaluation - [32mINFO[0m - [VAL] Finished in 267s
+[2025-12-03 03:59:24] src.utils.clip_level_evaluation - [32mINFO[0m - Results:
+Loss: 0.0723 | Acc: 56.78% | AUC: 0.6014
+   >> Anomaly: P=0.390 R=0.558 F1=0.459
+   >> Normal:  P=0.726 R=0.573
+   >> Counts:  TP=2554 FN=2022 (Missed) | TN=5348 FP=3993 (False Alarm)
+   >> Rates:   FPR=0.4275 | FNR=0.4419
+[2025-12-03 03:59:24] __main__ - [32mINFO[0m - Epoch [8] Motion Validation - Loss: 0.0723 | Acc: 56.78% | AUC: 0.6014
+[2025-12-03 03:59:24] __main__ - [32mINFO[0m -   Motion Anomaly Stats: P=0.390 R=0.558 F1=0.459
+[2025-12-03 03:59:24] __main__ - [32mINFO[0m -   Conf Matrix: TP=2554 FN=2022 TN=5348 FP=3993
+[2025-12-03 03:59:24] __main__ - [32mINFO[0m - 🔥 New Best Motion AUC: 0.6014
+[2025-12-03 03:59:24] src.utils.training_utils - [32mINFO[0m - Saved best model to /work3/s225224/ucf-crime/checkpoints/r3d_motion_sobel_20251203_004534/best_model.pth
+[2025-12-03 03:59:55] src.utils.training - [32mINFO[0m - Epoch [9] Batch [10/504] Loss: 0.0798 Acc: 58.44%
+[2025-12-03 04:00:14] src.utils.training - [32mINFO[0m - Epoch [9] Batch [20/504] Loss: 0.0845 Acc: 57.97%
+[2025-12-03 04:00:44] src.utils.training - [32mINFO[0m - Epoch [9] Batch [30/504] Loss: 0.0828 Acc: 58.12%
+[2025-12-03 04:01:04] src.utils.training - [32mINFO[0m - Epoch [9] Batch [40/504] Loss: 0.0821 Acc: 58.67%
+[2025-12-03 04:01:30] src.utils.training - [32mINFO[0m - Epoch [9] Batch [50/504] Loss: 0.0819 Acc: 58.88%
+[2025-12-03 04:01:52] src.utils.training - [32mINFO[0m - Epoch [9] Batch [60/504] Loss: 0.0824 Acc: 58.70%
+[2025-12-03 04:02:16] src.utils.training - [32mINFO[0m - Epoch [9] Batch [70/504] Loss: 0.0816 Acc: 59.01%
+[2025-12-03 04:02:39] src.utils.training - [32mINFO[0m - Epoch [9] Batch [80/504] Loss: 0.0819 Acc: 59.05%
+[2025-12-03 04:02:59] src.utils.training - [32mINFO[0m - Epoch [9] Batch [90/504] Loss: 0.0820 Acc: 59.00%
+[2025-12-03 04:03:29] src.utils.training - [32mINFO[0m - Epoch [9] Batch [100/504] Loss: 0.0818 Acc: 59.23%
+[2025-12-03 04:03:50] src.utils.training - [32mINFO[0m - Epoch [9] Batch [110/504] Loss: 0.0814 Acc: 59.37%
+[2025-12-03 04:04:14] src.utils.training - [32mINFO[0m - Epoch [9] Batch [120/504] Loss: 0.0812 Acc: 59.43%
+[2025-12-03 04:04:34] src.utils.training - [32mINFO[0m - Epoch [9] Batch [130/504] Loss: 0.0807 Acc: 59.83%
+[2025-12-03 04:04:58] src.utils.training - [32mINFO[0m - Epoch [9] Batch [140/504] Loss: 0.0807 Acc: 59.77%
+[2025-12-03 04:05:19] src.utils.training - [32mINFO[0m - Epoch [9] Batch [150/504] Loss: 0.0807 Acc: 59.86%
+[2025-12-03 04:05:42] src.utils.training - [32mINFO[0m - Epoch [9] Batch [160/504] Loss: 0.0805 Acc: 60.02%
+[2025-12-03 04:06:09] src.utils.training - [32mINFO[0m - Epoch [9] Batch [170/504] Loss: 0.0807 Acc: 60.08%
+[2025-12-03 04:06:32] src.utils.training - [32mINFO[0m - Epoch [9] Batch [180/504] Loss: 0.0806 Acc: 60.03%
+[2025-12-03 04:07:00] src.utils.training - [32mINFO[0m - Epoch [9] Batch [190/504] Loss: 0.0804 Acc: 60.09%
+[2025-12-03 04:07:19] src.utils.training - [32mINFO[0m - Epoch [9] Batch [200/504] Loss: 0.0805 Acc: 60.13%
+[2025-12-03 04:07:46] src.utils.training - [32mINFO[0m - Epoch [9] Batch [210/504] Loss: 0.0803 Acc: 60.15%
+[2025-12-03 04:08:05] src.utils.training - [32mINFO[0m - Epoch [9] Batch [220/504] Loss: 0.0807 Acc: 60.10%
+[2025-12-03 04:08:29] src.utils.training - [32mINFO[0m - Epoch [9] Batch [230/504] Loss: 0.0807 Acc: 60.13%
+[2025-12-03 04:08:48] src.utils.training - [32mINFO[0m - Epoch [9] Batch [240/504] Loss: 0.0806 Acc: 60.12%
+[2025-12-03 04:09:17] src.utils.training - [32mINFO[0m - Epoch [9] Batch [250/504] Loss: 0.0805 Acc: 60.16%
+[2025-12-03 04:09:36] src.utils.training - [32mINFO[0m - Epoch [9] Batch [260/504] Loss: 0.0804 Acc: 60.15%
+[2025-12-03 04:10:04] src.utils.training - [32mINFO[0m - Epoch [9] Batch [270/504] Loss: 0.0807 Acc: 60.12%
+[2025-12-03 04:10:31] src.utils.training - [32mINFO[0m - Epoch [9] Batch [280/504] Loss: 0.0807 Acc: 60.09%
+[2025-12-03 04:10:56] src.utils.training - [32mINFO[0m - Epoch [9] Batch [290/504] Loss: 0.0807 Acc: 60.07%
+[2025-12-03 04:11:17] src.utils.training - [32mINFO[0m - Epoch [9] Batch [300/504] Loss: 0.0805 Acc: 60.10%
+[2025-12-03 04:11:46] src.utils.training - [32mINFO[0m - Epoch [9] Batch [310/504] Loss: 0.0805 Acc: 60.03%
+[2025-12-03 04:12:04] src.utils.training - [32mINFO[0m - Epoch [9] Batch [320/504] Loss: 0.0806 Acc: 59.95%
+[2025-12-03 04:12:37] src.utils.training - [32mINFO[0m - Epoch [9] Batch [330/504] Loss: 0.0806 Acc: 60.00%
+[2025-12-03 04:12:59] src.utils.training - [32mINFO[0m - Epoch [9] Batch [340/504] Loss: 0.0807 Acc: 59.97%
+[2025-12-03 04:13:30] src.utils.training - [32mINFO[0m - Epoch [9] Batch [350/504] Loss: 0.0807 Acc: 59.97%
+[2025-12-03 04:13:49] src.utils.training - [32mINFO[0m - Epoch [9] Batch [360/504] Loss: 0.0807 Acc: 59.97%
+[2025-12-03 04:14:28] src.utils.training - [32mINFO[0m - Epoch [9] Batch [370/504] Loss: 0.0807 Acc: 59.96%
+[2025-12-03 04:14:48] src.utils.training - [32mINFO[0m - Epoch [9] Batch [380/504] Loss: 0.0807 Acc: 60.01%
+[2025-12-03 04:15:16] src.utils.training - [32mINFO[0m - Epoch [9] Batch [390/504] Loss: 0.0806 Acc: 59.99%
+[2025-12-03 04:15:39] src.utils.training - [32mINFO[0m - Epoch [9] Batch [400/504] Loss: 0.0806 Acc: 59.99%
+[2025-12-03 04:16:13] src.utils.training - [32mINFO[0m - Epoch [9] Batch [410/504] Loss: 0.0805 Acc: 59.96%
+[2025-12-03 04:16:33] src.utils.training - [32mINFO[0m - Epoch [9] Batch [420/504] Loss: 0.0805 Acc: 59.97%
+[2025-12-03 04:17:04] src.utils.training - [32mINFO[0m - Epoch [9] Batch [430/504] Loss: 0.0804 Acc: 59.98%
+[2025-12-03 04:17:26] src.utils.training - [32mINFO[0m - Epoch [9] Batch [440/504] Loss: 0.0805 Acc: 59.99%
+[2025-12-03 04:17:57] src.utils.training - [32mINFO[0m - Epoch [9] Batch [450/504] Loss: 0.0804 Acc: 60.00%
+[2025-12-03 04:18:20] src.utils.training - [32mINFO[0m - Epoch [9] Batch [460/504] Loss: 0.0803 Acc: 59.98%
+[2025-12-03 04:18:52] src.utils.training - [32mINFO[0m - Epoch [9] Batch [470/504] Loss: 0.0804 Acc: 59.98%
+[2025-12-03 04:19:10] src.utils.training - [32mINFO[0m - Epoch [9] Batch [480/504] Loss: 0.0803 Acc: 59.96%
+[2025-12-03 04:19:37] src.utils.training - [32mINFO[0m - Epoch [9] Batch [490/504] Loss: 0.0803 Acc: 59.96%
+[2025-12-03 04:20:00] src.utils.training - [32mINFO[0m - Epoch [9] Batch [500/504] Loss: 0.0803 Acc: 59.95%
+[2025-12-03 04:20:08] src.utils.training - [32mINFO[0m - Epoch [9] Training Completed in 1244s - Loss: 0.0803 Acc: 59.95%
+[2025-12-03 04:22:33] src.utils.clip_level_evaluation - [32mINFO[0m - [VAL] Batch 50/109 Loss: 0.0435
+[2025-12-03 04:24:26] src.utils.clip_level_evaluation - [32mINFO[0m - [VAL] Batch 100/109 Loss: 0.0655
+[2025-12-03 04:24:49] src.utils.clip_level_evaluation - [32mINFO[0m - [VAL] Finished in 280s
+[2025-12-03 04:24:49] src.utils.clip_level_evaluation - [32mINFO[0m - Results:
+Loss: 0.0715 | Acc: 57.33% | AUC: 0.6123
+   >> Anomaly: P=0.396 R=0.567 F1=0.466
+   >> Normal:  P=0.731 R=0.576
+   >> Counts:  TP=2595 FN=1981 (Missed) | TN=5384 FP=3957 (False Alarm)
+   >> Rates:   FPR=0.4236 | FNR=0.4329
+[2025-12-03 04:24:49] __main__ - [32mINFO[0m - Epoch [9] Motion Validation - Loss: 0.0715 | Acc: 57.33% | AUC: 0.6123
+[2025-12-03 04:24:49] __main__ - [32mINFO[0m -   Motion Anomaly Stats: P=0.396 R=0.567 F1=0.466
+[2025-12-03 04:24:49] __main__ - [32mINFO[0m -   Conf Matrix: TP=2595 FN=1981 TN=5384 FP=3957
+[2025-12-03 04:24:49] __main__ - [32mINFO[0m - 🔥 New Best Motion AUC: 0.6123
+[2025-12-03 04:24:49] src.utils.training_utils - [32mINFO[0m - Saved best model to /work3/s225224/ucf-crime/checkpoints/r3d_motion_sobel_20251203_004534/best_model.pth
+[2025-12-03 04:25:18] src.utils.training - [32mINFO[0m - Epoch [10] Batch [10/504] Loss: 0.0750 Acc: 60.16%
+[2025-12-03 04:25:39] src.utils.training - [32mINFO[0m - Epoch [10] Batch [20/504] Loss: 0.0777 Acc: 60.51%
+[2025-12-03 04:26:07] src.utils.training - [32mINFO[0m - Epoch [10] Batch [30/504] Loss: 0.0761 Acc: 60.89%
+[2025-12-03 04:26:28] src.utils.training - [32mINFO[0m - Epoch [10] Batch [40/504] Loss: 0.0780 Acc: 60.39%
+[2025-12-03 04:26:57] src.utils.training - [32mINFO[0m - Epoch [10] Batch [50/504] Loss: 0.0783 Acc: 60.27%
+[2025-12-03 04:27:19] src.utils.training - [32mINFO[0m - Epoch [10] Batch [60/504] Loss: 0.0788 Acc: 60.17%
+[2025-12-03 04:27:50] src.utils.training - [32mINFO[0m - Epoch [10] Batch [70/504] Loss: 0.0794 Acc: 60.03%
+[2025-12-03 04:28:08] src.utils.training - [32mINFO[0m - Epoch [10] Batch [80/504] Loss: 0.0802 Acc: 59.96%
+[2025-12-03 04:28:33] src.utils.training - [32mINFO[0m - Epoch [10] Batch [90/504] Loss: 0.0802 Acc: 60.12%
+[2025-12-03 04:28:52] src.utils.training - [32mINFO[0m - Epoch [10] Batch [100/504] Loss: 0.0796 Acc: 60.06%
+[2025-12-03 04:29:17] src.utils.training - [32mINFO[0m - Epoch [10] Batch [110/504] Loss: 0.0804 Acc: 59.99%
+[2025-12-03 04:29:36] src.utils.training - [32mINFO[0m - Epoch [10] Batch [120/504] Loss: 0.0804 Acc: 60.07%
+[2025-12-03 04:30:06] src.utils.training - [32mINFO[0m - Epoch [10] Batch [130/504] Loss: 0.0806 Acc: 59.97%
+[2025-12-03 04:30:27] src.utils.training - [32mINFO[0m - Epoch [10] Batch [140/504] Loss: 0.0800 Acc: 60.11%
+[2025-12-03 04:30:52] src.utils.training - [32mINFO[0m - Epoch [10] Batch [150/504] Loss: 0.0799 Acc: 60.18%
+[2025-12-03 04:31:13] src.utils.training - [32mINFO[0m - Epoch [10] Batch [160/504] Loss: 0.0802 Acc: 60.14%
+[2025-12-03 04:31:39] src.utils.training - [32mINFO[0m - Epoch [10] Batch [170/504] Loss: 0.0797 Acc: 60.17%
+[2025-12-03 04:32:01] src.utils.training - [32mINFO[0m - Epoch [10] Batch [180/504] Loss: 0.0798 Acc: 60.13%
+[2025-12-03 04:32:26] src.utils.training - [32mINFO[0m - Epoch [10] Batch [190/504] Loss: 0.0800 Acc: 60.02%
+[2025-12-03 04:32:49] src.utils.training - [32mINFO[0m - Epoch [10] Batch [200/504] Loss: 0.0799 Acc: 60.05%
+[2025-12-03 04:33:13] src.utils.training - [32mINFO[0m - Epoch [10] Batch [210/504] Loss: 0.0800 Acc: 60.01%
+[2025-12-03 04:33:40] src.utils.training - [32mINFO[0m - Epoch [10] Batch [220/504] Loss: 0.0801 Acc: 59.99%
+[2025-12-03 04:34:03] src.utils.training - [32mINFO[0m - Epoch [10] Batch [230/504] Loss: 0.0800 Acc: 59.97%
+[2025-12-03 04:34:28] src.utils.training - [32mINFO[0m - Epoch [10] Batch [240/504] Loss: 0.0799 Acc: 59.95%
+[2025-12-03 04:34:50] src.utils.training - [32mINFO[0m - Epoch [10] Batch [250/504] Loss: 0.0797 Acc: 59.97%
+[2025-12-03 04:35:22] src.utils.training - [32mINFO[0m - Epoch [10] Batch [260/504] Loss: 0.0797 Acc: 59.91%
+[2025-12-03 04:35:47] src.utils.training - [32mINFO[0m - Epoch [10] Batch [270/504] Loss: 0.0795 Acc: 59.94%
+[2025-12-03 04:36:14] src.utils.training - [32mINFO[0m - Epoch [10] Batch [280/504] Loss: 0.0796 Acc: 59.88%
+[2025-12-03 04:36:37] src.utils.training - [32mINFO[0m - Epoch [10] Batch [290/504] Loss: 0.0795 Acc: 59.86%
+[2025-12-03 04:37:11] src.utils.training - [32mINFO[0m - Epoch [10] Batch [300/504] Loss: 0.0795 Acc: 59.84%
+[2025-12-03 04:37:33] src.utils.training - [32mINFO[0m - Epoch [10] Batch [310/504] Loss: 0.0794 Acc: 59.83%
+[2025-12-03 04:37:55] src.utils.training - [32mINFO[0m - Epoch [10] Batch [320/504] Loss: 0.0792 Acc: 59.89%
+[2025-12-03 04:38:17] src.utils.training - [32mINFO[0m - Epoch [10] Batch [330/504] Loss: 0.0791 Acc: 59.89%
+[2025-12-03 04:38:39] src.utils.training - [32mINFO[0m - Epoch [10] Batch [340/504] Loss: 0.0789 Acc: 59.97%
+[2025-12-03 04:39:06] src.utils.training - [32mINFO[0m - Epoch [10] Batch [350/504] Loss: 0.0788 Acc: 60.10%
+[2025-12-03 04:39:25] src.utils.training - [32mINFO[0m - Epoch [10] Batch [360/504] Loss: 0.0787 Acc: 60.12%
+[2025-12-03 04:39:53] src.utils.training - [32mINFO[0m - Epoch [10] Batch [370/504] Loss: 0.0787 Acc: 60.10%
+[2025-12-03 04:40:12] src.utils.training - [32mINFO[0m - Epoch [10] Batch [380/504] Loss: 0.0787 Acc: 60.13%
+[2025-12-03 04:40:40] src.utils.training - [32mINFO[0m - Epoch [10] Batch [390/504] Loss: 0.0786 Acc: 60.15%
+[2025-12-03 04:41:05] src.utils.training - [32mINFO[0m - Epoch [10] Batch [400/504] Loss: 0.0786 Acc: 60.19%
+[2025-12-03 04:41:31] src.utils.training - [32mINFO[0m - Epoch [10] Batch [410/504] Loss: 0.0784 Acc: 60.25%
+[2025-12-03 04:41:53] src.utils.training - [32mINFO[0m - Epoch [10] Batch [420/504] Loss: 0.0783 Acc: 60.35%
+[2025-12-03 04:42:18] src.utils.training - [32mINFO[0m - Epoch [10] Batch [430/504] Loss: 0.0780 Acc: 60.39%
+[2025-12-03 04:42:40] src.utils.training - [32mINFO[0m - Epoch [10] Batch [440/504] Loss: 0.0781 Acc: 60.39%
+[2025-12-03 04:43:05] src.utils.training - [32mINFO[0m - Epoch [10] Batch [450/504] Loss: 0.0781 Acc: 60.38%
+[2025-12-03 04:43:27] src.utils.training - [32mINFO[0m - Epoch [10] Batch [460/504] Loss: 0.0779 Acc: 60.43%
+[2025-12-03 04:43:53] src.utils.training - [32mINFO[0m - Epoch [10] Batch [470/504] Loss: 0.0779 Acc: 60.47%
+[2025-12-03 04:44:12] src.utils.training - [32mINFO[0m - Epoch [10] Batch [480/504] Loss: 0.0779 Acc: 60.44%
+[2025-12-03 04:44:36] src.utils.training - [32mINFO[0m - Epoch [10] Batch [490/504] Loss: 0.0780 Acc: 60.48%
+[2025-12-03 04:44:55] src.utils.training - [32mINFO[0m - Epoch [10] Batch [500/504] Loss: 0.0780 Acc: 60.47%
+[2025-12-03 04:45:04] src.utils.training - [32mINFO[0m - Epoch [10] Training Completed in 1215s - Loss: 0.0780 Acc: 60.47%
+[2025-12-03 04:47:11] src.utils.clip_level_evaluation - [32mINFO[0m - [VAL] Batch 50/109 Loss: 0.0429
+[2025-12-03 04:48:55] src.utils.clip_level_evaluation - [32mINFO[0m - [VAL] Batch 100/109 Loss: 0.0652
+[2025-12-03 04:49:17] src.utils.clip_level_evaluation - [32mINFO[0m - [VAL] Finished in 253s
+[2025-12-03 04:49:17] src.utils.clip_level_evaluation - [32mINFO[0m - Results:
+Loss: 0.0711 | Acc: 57.64% | AUC: 0.6166
+   >> Anomaly: P=0.399 R=0.567 F1=0.468
+   >> Normal:  P=0.733 R=0.581
+   >> Counts:  TP=2594 FN=1982 (Missed) | TN=5428 FP=3913 (False Alarm)
+   >> Rates:   FPR=0.4189 | FNR=0.4331
+[2025-12-03 04:49:17] __main__ - [32mINFO[0m - Epoch [10] Motion Validation - Loss: 0.0711 | Acc: 57.64% | AUC: 0.6166
+[2025-12-03 04:49:17] __main__ - [32mINFO[0m -   Motion Anomaly Stats: P=0.399 R=0.567 F1=0.468
+[2025-12-03 04:49:17] __main__ - [32mINFO[0m -   Conf Matrix: TP=2594 FN=1982 TN=5428 FP=3913
+[2025-12-03 04:49:17] __main__ - [32mINFO[0m - 🔥 New Best Motion AUC: 0.6166
+[2025-12-03 04:49:17] src.utils.training_utils - [32mINFO[0m - Saved best model to /work3/s225224/ucf-crime/checkpoints/r3d_motion_sobel_20251203_004534/best_model.pth
+[2025-12-03 04:49:46] src.utils.training - [32mINFO[0m - Epoch [11] Batch [10/504] Loss: 0.0823 Acc: 59.92%
+[2025-12-03 04:50:04] src.utils.training - [32mINFO[0m - Epoch [11] Batch [20/504] Loss: 0.0811 Acc: 59.92%
+[2025-12-03 04:50:27] src.utils.training - [32mINFO[0m - Epoch [11] Batch [30/504] Loss: 0.0794 Acc: 60.03%
+[2025-12-03 04:50:49] src.utils.training - [32mINFO[0m - Epoch [11] Batch [40/504] Loss: 0.0783 Acc: 60.39%
+[2025-12-03 04:51:09] src.utils.training - [32mINFO[0m - Epoch [11] Batch [50/504] Loss: 0.0786 Acc: 60.09%
+[2025-12-03 04:51:33] src.utils.training - [32mINFO[0m - Epoch [11] Batch [60/504] Loss: 0.0782 Acc: 60.36%
+[2025-12-03 04:51:56] src.utils.training - [32mINFO[0m - Epoch [11] Batch [70/504] Loss: 0.0784 Acc: 60.02%
+[2025-12-03 04:52:23] src.utils.training - [32mINFO[0m - Epoch [11] Batch [80/504] Loss: 0.0781 Acc: 60.07%
+[2025-12-03 04:52:50] src.utils.training - [32mINFO[0m - Epoch [11] Batch [90/504] Loss: 0.0777 Acc: 60.03%
+[2025-12-03 04:53:12] src.utils.training - [32mINFO[0m - Epoch [11] Batch [100/504] Loss: 0.0778 Acc: 59.91%
+[2025-12-03 04:53:37] src.utils.training - [32mINFO[0m - Epoch [11] Batch [110/504] Loss: 0.0780 Acc: 59.95%
+[2025-12-03 04:53:56] src.utils.training - [32mINFO[0m - Epoch [11] Batch [120/504] Loss: 0.0780 Acc: 59.88%
+[2025-12-03 04:54:27] src.utils.training - [32mINFO[0m - Epoch [11] Batch [130/504] Loss: 0.0779 Acc: 59.80%
+[2025-12-03 04:54:46] src.utils.training - [32mINFO[0m - Epoch [11] Batch [140/504] Loss: 0.0781 Acc: 59.85%
+[2025-12-03 04:55:11] src.utils.training - [32mINFO[0m - Epoch [11] Batch [150/504] Loss: 0.0783 Acc: 59.83%
+[2025-12-03 04:55:30] src.utils.training - [32mINFO[0m - Epoch [11] Batch [160/504] Loss: 0.0785 Acc: 59.75%
+[2025-12-03 04:55:55] src.utils.training - [32mINFO[0m - Epoch [11] Batch [170/504] Loss: 0.0784 Acc: 59.77%
+[2025-12-03 04:56:16] src.utils.training - [32mINFO[0m - Epoch [11] Batch [180/504] Loss: 0.0781 Acc: 59.93%
+[2025-12-03 04:56:46] src.utils.training - [32mINFO[0m - Epoch [11] Batch [190/504] Loss: 0.0780 Acc: 59.99%
+[2025-12-03 04:57:05] src.utils.training - [32mINFO[0m - Epoch [11] Batch [200/504] Loss: 0.0779 Acc: 59.98%
+[2025-12-03 04:57:32] src.utils.training - [32mINFO[0m - Epoch [11] Batch [210/504] Loss: 0.0781 Acc: 59.96%
+[2025-12-03 04:57:55] src.utils.training - [32mINFO[0m - Epoch [11] Batch [220/504] Loss: 0.0782 Acc: 59.99%
+[2025-12-03 04:58:18] src.utils.training - [32mINFO[0m - Epoch [11] Batch [230/504] Loss: 0.0781 Acc: 59.93%
+[2025-12-03 04:58:40] src.utils.training - [32mINFO[0m - Epoch [11] Batch [240/504] Loss: 0.0779 Acc: 59.96%
+[2025-12-03 04:59:04] src.utils.training - [32mINFO[0m - Epoch [11] Batch [250/504] Loss: 0.0780 Acc: 59.89%
+[2025-12-03 04:59:23] src.utils.training - [32mINFO[0m - Epoch [11] Batch [260/504] Loss: 0.0777 Acc: 59.98%
+[2025-12-03 04:59:46] src.utils.training - [32mINFO[0m - Epoch [11] Batch [270/504] Loss: 0.0776 Acc: 59.95%
+[2025-12-03 05:00:10] src.utils.training - [32mINFO[0m - Epoch [11] Batch [280/504] Loss: 0.0776 Acc: 59.99%
+[2025-12-03 05:00:28] src.utils.training - [32mINFO[0m - Epoch [11] Batch [290/504] Loss: 0.0775 Acc: 59.94%
+[2025-12-03 05:00:52] src.utils.training - [32mINFO[0m - Epoch [11] Batch [300/504] Loss: 0.0773 Acc: 59.96%
+[2025-12-03 05:01:12] src.utils.training - [32mINFO[0m - Epoch [11] Batch [310/504] Loss: 0.0773 Acc: 59.97%
+[2025-12-03 05:01:36] src.utils.training - [32mINFO[0m - Epoch [11] Batch [320/504] Loss: 0.0770 Acc: 60.07%
+[2025-12-03 05:01:55] src.utils.training - [32mINFO[0m - Epoch [11] Batch [330/504] Loss: 0.0770 Acc: 60.03%
+[2025-12-03 05:02:22] src.utils.training - [32mINFO[0m - Epoch [11] Batch [340/504] Loss: 0.0770 Acc: 60.05%
+[2025-12-03 05:02:41] src.utils.training - [32mINFO[0m - Epoch [11] Batch [350/504] Loss: 0.0770 Acc: 60.08%
+[2025-12-03 05:03:07] src.utils.training - [32mINFO[0m - Epoch [11] Batch [360/504] Loss: 0.0771 Acc: 60.14%
+[2025-12-03 05:03:26] src.utils.training - [32mINFO[0m - Epoch [11] Batch [370/504] Loss: 0.0771 Acc: 60.11%
+[2025-12-03 05:03:52] src.utils.training - [32mINFO[0m - Epoch [11] Batch [380/504] Loss: 0.0770 Acc: 60.14%
+[2025-12-03 05:04:14] src.utils.training - [32mINFO[0m - Epoch [11] Batch [390/504] Loss: 0.0770 Acc: 60.16%
+[2025-12-03 05:04:43] src.utils.training - [32mINFO[0m - Epoch [11] Batch [400/504] Loss: 0.0770 Acc: 60.10%
+[2025-12-03 05:05:03] src.utils.training - [32mINFO[0m - Epoch [11] Batch [410/504] Loss: 0.0769 Acc: 60.05%
+[2025-12-03 05:05:36] src.utils.training - [32mINFO[0m - Epoch [11] Batch [420/504] Loss: 0.0768 Acc: 60.10%
+[2025-12-03 05:05:55] src.utils.training - [32mINFO[0m - Epoch [11] Batch [430/504] Loss: 0.0767 Acc: 60.11%
+[2025-12-03 05:06:23] src.utils.training - [32mINFO[0m - Epoch [11] Batch [440/504] Loss: 0.0767 Acc: 60.15%
+[2025-12-03 05:06:42] src.utils.training - [32mINFO[0m - Epoch [11] Batch [450/504] Loss: 0.0768 Acc: 60.16%
+[2025-12-03 05:07:11] src.utils.training - [32mINFO[0m - Epoch [11] Batch [460/504] Loss: 0.0768 Acc: 60.11%
+[2025-12-03 05:07:32] src.utils.training - [32mINFO[0m - Epoch [11] Batch [470/504] Loss: 0.0767 Acc: 60.16%
+[2025-12-03 05:08:01] src.utils.training - [32mINFO[0m - Epoch [11] Batch [480/504] Loss: 0.0767 Acc: 60.10%
+[2025-12-03 05:08:19] src.utils.training - [32mINFO[0m - Epoch [11] Batch [490/504] Loss: 0.0767 Acc: 60.11%
+[2025-12-03 05:08:47] src.utils.training - [32mINFO[0m - Epoch [11] Batch [500/504] Loss: 0.0766 Acc: 60.11%
+[2025-12-03 05:08:54] src.utils.training - [32mINFO[0m - Epoch [11] Training Completed in 1177s - Loss: 0.0766 Acc: 60.14%
+[2025-12-03 05:10:56] src.utils.clip_level_evaluation - [32mINFO[0m - [VAL] Batch 50/109 Loss: 0.0416
+[2025-12-03 05:12:40] src.utils.clip_level_evaluation - [32mINFO[0m - [VAL] Batch 100/109 Loss: 0.0647
+[2025-12-03 05:13:00] src.utils.clip_level_evaluation - [32mINFO[0m - [VAL] Finished in 246s
+[2025-12-03 05:13:00] src.utils.clip_level_evaluation - [32mINFO[0m - Results:
+Loss: 0.0709 | Acc: 58.78% | AUC: 0.6247
+   >> Anomaly: P=0.406 R=0.550 F1=0.467
+   >> Normal:  P=0.733 R=0.606
+   >> Counts:  TP=2517 FN=2059 (Missed) | TN=5664 FP=3677 (False Alarm)
+   >> Rates:   FPR=0.3936 | FNR=0.4500
+[2025-12-03 05:13:00] __main__ - [32mINFO[0m - Epoch [11] Motion Validation - Loss: 0.0709 | Acc: 58.78% | AUC: 0.6247
+[2025-12-03 05:13:00] __main__ - [32mINFO[0m -   Motion Anomaly Stats: P=0.406 R=0.550 F1=0.467
+[2025-12-03 05:13:00] __main__ - [32mINFO[0m -   Conf Matrix: TP=2517 FN=2059 TN=5664 FP=3677
+[2025-12-03 05:13:00] __main__ - [32mINFO[0m - 🔥 New Best Motion AUC: 0.6247
+[2025-12-03 05:13:00] src.utils.training_utils - [32mINFO[0m - Saved best model to /work3/s225224/ucf-crime/checkpoints/r3d_motion_sobel_20251203_004534/best_model.pth
+[2025-12-03 05:13:26] src.utils.training - [32mINFO[0m - Epoch [12] Batch [10/504] Loss: 0.0710 Acc: 61.56%
+[2025-12-03 05:13:44] src.utils.training - [32mINFO[0m - Epoch [12] Batch [20/504] Loss: 0.0733 Acc: 61.25%
+[2025-12-03 05:14:12] src.utils.training - [32mINFO[0m - Epoch [12] Batch [30/504] Loss: 0.0756 Acc: 60.81%
+[2025-12-03 05:14:32] src.utils.training - [32mINFO[0m - Epoch [12] Batch [40/504] Loss: 0.0754 Acc: 60.70%
+[2025-12-03 05:14:56] src.utils.training - [32mINFO[0m - Epoch [12] Batch [50/504] Loss: 0.0755 Acc: 60.39%
+[2025-12-03 05:15:15] src.utils.training - [32mINFO[0m - Epoch [12] Batch [60/504] Loss: 0.0754 Acc: 60.42%
+[2025-12-03 05:15:41] src.utils.training - [32mINFO[0m - Epoch [12] Batch [70/504] Loss: 0.0751 Acc: 60.29%
+[2025-12-03 05:16:01] src.utils.training - [32mINFO[0m - Epoch [12] Batch [80/504] Loss: 0.0752 Acc: 60.28%
+[2025-12-03 05:16:25] src.utils.training - [32mINFO[0m - Epoch [12] Batch [90/504] Loss: 0.0749 Acc: 60.54%
+[2025-12-03 05:16:44] src.utils.training - [32mINFO[0m - Epoch [12] Batch [100/504] Loss: 0.0746 Acc: 60.55%
+[2025-12-03 05:17:12] src.utils.training - [32mINFO[0m - Epoch [12] Batch [110/504] Loss: 0.0744 Acc: 60.52%
+[2025-12-03 05:17:35] src.utils.training - [32mINFO[0m - Epoch [12] Batch [120/504] Loss: 0.0745 Acc: 60.53%
+[2025-12-03 05:17:59] src.utils.training - [32mINFO[0m - Epoch [12] Batch [130/504] Loss: 0.0746 Acc: 60.45%
+[2025-12-03 05:18:18] src.utils.training - [32mINFO[0m - Epoch [12] Batch [140/504] Loss: 0.0748 Acc: 60.50%
+[2025-12-03 05:18:43] src.utils.training - [32mINFO[0m - Epoch [12] Batch [150/504] Loss: 0.0748 Acc: 60.51%
+[2025-12-03 05:19:01] src.utils.training - [32mINFO[0m - Epoch [12] Batch [160/504] Loss: 0.0748 Acc: 60.50%
+[2025-12-03 05:19:27] src.utils.training - [32mINFO[0m - Epoch [12] Batch [170/504] Loss: 0.0747 Acc: 60.52%
+[2025-12-03 05:19:46] src.utils.training - [32mINFO[0m - Epoch [12] Batch [180/504] Loss: 0.0746 Acc: 60.54%
+[2025-12-03 05:20:10] src.utils.training - [32mINFO[0m - Epoch [12] Batch [190/504] Loss: 0.0744 Acc: 60.58%
+[2025-12-03 05:20:29] src.utils.training - [32mINFO[0m - Epoch [12] Batch [200/504] Loss: 0.0743 Acc: 60.71%
+[2025-12-03 05:20:54] src.utils.training - [32mINFO[0m - Epoch [12] Batch [210/504] Loss: 0.0745 Acc: 60.78%
+[2025-12-03 05:21:13] src.utils.training - [32mINFO[0m - Epoch [12] Batch [220/504] Loss: 0.0744 Acc: 60.82%
+[2025-12-03 05:21:36] src.utils.training - [32mINFO[0m - Epoch [12] Batch [230/504] Loss: 0.0743 Acc: 60.82%
+[2025-12-03 05:21:57] src.utils.training - [32mINFO[0m - Epoch [12] Batch [240/504] Loss: 0.0743 Acc: 60.85%
+[2025-12-03 05:22:19] src.utils.training - [32mINFO[0m - Epoch [12] Batch [250/504] Loss: 0.0743 Acc: 60.83%
+[2025-12-03 05:22:43] src.utils.training - [32mINFO[0m - Epoch [12] Batch [260/504] Loss: 0.0744 Acc: 60.86%
+[2025-12-03 05:23:04] src.utils.training - [32mINFO[0m - Epoch [12] Batch [270/504] Loss: 0.0744 Acc: 60.86%
+[2025-12-03 05:23:25] src.utils.training - [32mINFO[0m - Epoch [12] Batch [280/504] Loss: 0.0746 Acc: 60.87%
+[2025-12-03 05:23:48] src.utils.training - [32mINFO[0m - Epoch [12] Batch [290/504] Loss: 0.0744 Acc: 60.88%
+[2025-12-03 05:24:16] src.utils.training - [32mINFO[0m - Epoch [12] Batch [300/504] Loss: 0.0744 Acc: 60.92%
+[2025-12-03 05:24:34] src.utils.training - [32mINFO[0m - Epoch [12] Batch [310/504] Loss: 0.0743 Acc: 60.93%
+[2025-12-03 05:24:58] src.utils.training - [32mINFO[0m - Epoch [12] Batch [320/504] Loss: 0.0744 Acc: 60.89%
+[2025-12-03 05:25:16] src.utils.training - [32mINFO[0m - Epoch [12] Batch [330/504] Loss: 0.0743 Acc: 60.88%
+[2025-12-03 05:25:41] src.utils.training - [32mINFO[0m - Epoch [12] Batch [340/504] Loss: 0.0743 Acc: 60.86%
+[2025-12-03 05:25:59] src.utils.training - [32mINFO[0m - Epoch [12] Batch [350/504] Loss: 0.0744 Acc: 60.80%
+[2025-12-03 05:26:24] src.utils.training - [32mINFO[0m - Epoch [12] Batch [360/504] Loss: 0.0743 Acc: 60.77%
+[2025-12-03 05:26:42] src.utils.training - [32mINFO[0m - Epoch [12] Batch [370/504] Loss: 0.0742 Acc: 60.85%
+[2025-12-03 05:27:06] src.utils.training - [32mINFO[0m - Epoch [12] Batch [380/504] Loss: 0.0742 Acc: 60.83%
+[2025-12-03 05:27:24] src.utils.training - [32mINFO[0m - Epoch [12] Batch [390/504] Loss: 0.0742 Acc: 60.81%
+[2025-12-03 05:27:51] src.utils.training - [32mINFO[0m - Epoch [12] Batch [400/504] Loss: 0.0742 Acc: 60.79%
+[2025-12-03 05:28:12] src.utils.training - [32mINFO[0m - Epoch [12] Batch [410/504] Loss: 0.0742 Acc: 60.80%
+[2025-12-03 05:28:36] src.utils.training - [32mINFO[0m - Epoch [12] Batch [420/504] Loss: 0.0741 Acc: 60.81%
+[2025-12-03 05:28:58] src.utils.training - [32mINFO[0m - Epoch [12] Batch [430/504] Loss: 0.0740 Acc: 60.82%
+[2025-12-03 05:29:22] src.utils.training - [32mINFO[0m - Epoch [12] Batch [440/504] Loss: 0.0742 Acc: 60.83%
+[2025-12-03 05:29:46] src.utils.training - [32mINFO[0m - Epoch [12] Batch [450/504] Loss: 0.0742 Acc: 60.82%
+[2025-12-03 05:30:14] src.utils.training - [32mINFO[0m - Epoch [12] Batch [460/504] Loss: 0.0742 Acc: 60.78%
+[2025-12-03 05:30:36] src.utils.training - [32mINFO[0m - Epoch [12] Batch [470/504] Loss: 0.0742 Acc: 60.77%
+[2025-12-03 05:31:02] src.utils.training - [32mINFO[0m - Epoch [12] Batch [480/504] Loss: 0.0742 Acc: 60.77%
+[2025-12-03 05:31:20] src.utils.training - [32mINFO[0m - Epoch [12] Batch [490/504] Loss: 0.0742 Acc: 60.74%
+[2025-12-03 05:31:44] src.utils.training - [32mINFO[0m - Epoch [12] Batch [500/504] Loss: 0.0743 Acc: 60.73%
+[2025-12-03 05:31:50] src.utils.training - [32mINFO[0m - Epoch [12] Training Completed in 1130s - Loss: 0.0743 Acc: 60.74%
+[2025-12-03 05:33:44] src.utils.clip_level_evaluation - [32mINFO[0m - [VAL] Batch 50/109 Loss: 0.0423
+[2025-12-03 05:35:24] src.utils.clip_level_evaluation - [32mINFO[0m - [VAL] Batch 100/109 Loss: 0.0643
+[2025-12-03 05:35:47] src.utils.clip_level_evaluation - [32mINFO[0m - [VAL] Finished in 236s
+[2025-12-03 05:35:47] src.utils.clip_level_evaluation - [32mINFO[0m - Results:
+Loss: 0.0702 | Acc: 58.76% | AUC: 0.6303
+   >> Anomaly: P=0.409 R=0.573 F1=0.477
+   >> Normal:  P=0.740 R=0.595
+   >> Counts:  TP=2622 FN=1954 (Missed) | TN=5555 FP=3786 (False Alarm)
+   >> Rates:   FPR=0.4053 | FNR=0.4270
+[2025-12-03 05:35:47] __main__ - [32mINFO[0m - Epoch [12] Motion Validation - Loss: 0.0702 | Acc: 58.76% | AUC: 0.6303
+[2025-12-03 05:35:47] __main__ - [32mINFO[0m -   Motion Anomaly Stats: P=0.409 R=0.573 F1=0.477
+[2025-12-03 05:35:47] __main__ - [32mINFO[0m -   Conf Matrix: TP=2622 FN=1954 TN=5555 FP=3786
+[2025-12-03 05:35:47] __main__ - [32mINFO[0m - 🔥 New Best Motion AUC: 0.6303
+[2025-12-03 05:35:47] src.utils.training_utils - [32mINFO[0m - Saved best model to /work3/s225224/ucf-crime/checkpoints/r3d_motion_sobel_20251203_004534/best_model.pth
+[2025-12-03 05:36:17] src.utils.training - [32mINFO[0m - Epoch [13] Batch [10/504] Loss: 0.0763 Acc: 62.73%
+[2025-12-03 05:36:36] src.utils.training - [32mINFO[0m - Epoch [13] Batch [20/504] Loss: 0.0722 Acc: 63.28%
+[2025-12-03 05:37:00] src.utils.training - [32mINFO[0m - Epoch [13] Batch [30/504] Loss: 0.0714 Acc: 62.47%
+[2025-12-03 05:37:18] src.utils.training - [32mINFO[0m - Epoch [13] Batch [40/504] Loss: 0.0710 Acc: 62.44%
+[2025-12-03 05:37:42] src.utils.training - [32mINFO[0m - Epoch [13] Batch [50/504] Loss: 0.0703 Acc: 62.42%
+[2025-12-03 05:38:00] src.utils.training - [32mINFO[0m - Epoch [13] Batch [60/504] Loss: 0.0715 Acc: 62.54%
+[2025-12-03 05:38:24] src.utils.training - [32mINFO[0m - Epoch [13] Batch [70/504] Loss: 0.0721 Acc: 62.31%
+[2025-12-03 05:38:42] src.utils.training - [32mINFO[0m - Epoch [13] Batch [80/504] Loss: 0.0722 Acc: 62.26%
+[2025-12-03 05:39:06] src.utils.training - [32mINFO[0m - Epoch [13] Batch [90/504] Loss: 0.0723 Acc: 62.20%
+[2025-12-03 05:39:28] src.utils.training - [32mINFO[0m - Epoch [13] Batch [100/504] Loss: 0.0723 Acc: 62.23%
+[2025-12-03 05:39:53] src.utils.training - [32mINFO[0m - Epoch [13] Batch [110/504] Loss: 0.0725 Acc: 62.24%
+[2025-12-03 05:40:12] src.utils.training - [32mINFO[0m - Epoch [13] Batch [120/504] Loss: 0.0724 Acc: 62.16%
+[2025-12-03 05:40:36] src.utils.training - [32mINFO[0m - Epoch [13] Batch [130/504] Loss: 0.0723 Acc: 62.13%
+[2025-12-03 05:40:54] src.utils.training - [32mINFO[0m - Epoch [13] Batch [140/504] Loss: 0.0721 Acc: 62.09%
+[2025-12-03 05:41:19] src.utils.training - [32mINFO[0m - Epoch [13] Batch [150/504] Loss: 0.0721 Acc: 62.03%
+[2025-12-03 05:41:37] src.utils.training - [32mINFO[0m - Epoch [13] Batch [160/504] Loss: 0.0723 Acc: 61.94%
+[2025-12-03 05:42:01] src.utils.training - [32mINFO[0m - Epoch [13] Batch [170/504] Loss: 0.0720 Acc: 61.93%
+[2025-12-03 05:42:20] src.utils.training - [32mINFO[0m - Epoch [13] Batch [180/504] Loss: 0.0722 Acc: 61.65%
+[2025-12-03 05:42:44] src.utils.training - [32mINFO[0m - Epoch [13] Batch [190/504] Loss: 0.0721 Acc: 61.76%
+[2025-12-03 05:43:02] src.utils.training - [32mINFO[0m - Epoch [13] Batch [200/504] Loss: 0.0719 Acc: 61.74%
+[2025-12-03 05:43:27] src.utils.training - [32mINFO[0m - Epoch [13] Batch [210/504] Loss: 0.0720 Acc: 61.75%
+[2025-12-03 05:43:46] src.utils.training - [32mINFO[0m - Epoch [13] Batch [220/504] Loss: 0.0721 Acc: 61.62%
+[2025-12-03 05:44:11] src.utils.training - [32mINFO[0m - Epoch [13] Batch [230/504] Loss: 0.0719 Acc: 61.80%
+[2025-12-03 05:44:30] src.utils.training - [32mINFO[0m - Epoch [13] Batch [240/504] Loss: 0.0719 Acc: 61.81%
+[2025-12-03 05:44:54] src.utils.training - [32mINFO[0m - Epoch [13] Batch [250/504] Loss: 0.0718 Acc: 61.85%
+[2025-12-03 05:45:12] src.utils.training - [32mINFO[0m - Epoch [13] Batch [260/504] Loss: 0.0718 Acc: 61.86%
+[2025-12-03 05:45:37] src.utils.training - [32mINFO[0m - Epoch [13] Batch [270/504] Loss: 0.0718 Acc: 61.81%
+[2025-12-03 05:45:55] src.utils.training - [32mINFO[0m - Epoch [13] Batch [280/504] Loss: 0.0720 Acc: 61.83%
+[2025-12-03 05:46:20] src.utils.training - [32mINFO[0m - Epoch [13] Batch [290/504] Loss: 0.0719 Acc: 61.78%
+[2025-12-03 05:46:37] src.utils.training - [32mINFO[0m - Epoch [13] Batch [300/504] Loss: 0.0720 Acc: 61.71%
+[2025-12-03 05:47:02] src.utils.training - [32mINFO[0m - Epoch [13] Batch [310/504] Loss: 0.0719 Acc: 61.72%
+[2025-12-03 05:47:19] src.utils.training - [32mINFO[0m - Epoch [13] Batch [320/504] Loss: 0.0720 Acc: 61.66%
+[2025-12-03 05:47:43] src.utils.training - [32mINFO[0m - Epoch [13] Batch [330/504] Loss: 0.0720 Acc: 61.63%
+[2025-12-03 05:48:01] src.utils.training - [32mINFO[0m - Epoch [13] Batch [340/504] Loss: 0.0721 Acc: 61.63%
+[2025-12-03 05:48:26] src.utils.training - [32mINFO[0m - Epoch [13] Batch [350/504] Loss: 0.0720 Acc: 61.61%
+[2025-12-03 05:48:44] src.utils.training - [32mINFO[0m - Epoch [13] Batch [360/504] Loss: 0.0720 Acc: 61.61%
+[2025-12-03 05:49:07] src.utils.training - [32mINFO[0m - Epoch [13] Batch [370/504] Loss: 0.0720 Acc: 61.57%
+[2025-12-03 05:49:25] src.utils.training - [32mINFO[0m - Epoch [13] Batch [380/504] Loss: 0.0720 Acc: 61.53%
+[2025-12-03 05:49:49] src.utils.training - [32mINFO[0m - Epoch [13] Batch [390/504] Loss: 0.0720 Acc: 61.52%
+[2025-12-03 05:50:07] src.utils.training - [32mINFO[0m - Epoch [13] Batch [400/504] Loss: 0.0719 Acc: 61.59%
+[2025-12-03 05:50:35] src.utils.training - [32mINFO[0m - Epoch [13] Batch [410/504] Loss: 0.0719 Acc: 61.61%
+[2025-12-03 05:50:52] src.utils.training - [32mINFO[0m - Epoch [13] Batch [420/504] Loss: 0.0721 Acc: 61.56%
+[2025-12-03 05:51:16] src.utils.training - [32mINFO[0m - Epoch [13] Batch [430/504] Loss: 0.0722 Acc: 61.50%
+[2025-12-03 05:51:34] src.utils.training - [32mINFO[0m - Epoch [13] Batch [440/504] Loss: 0.0722 Acc: 61.49%
+[2025-12-03 05:51:59] src.utils.training - [32mINFO[0m - Epoch [13] Batch [450/504] Loss: 0.0720 Acc: 61.49%
+[2025-12-03 05:52:17] src.utils.training - [32mINFO[0m - Epoch [13] Batch [460/504] Loss: 0.0721 Acc: 61.49%
+[2025-12-03 05:52:42] src.utils.training - [32mINFO[0m - Epoch [13] Batch [470/504] Loss: 0.0720 Acc: 61.52%
+[2025-12-03 05:53:01] src.utils.training - [32mINFO[0m - Epoch [13] Batch [480/504] Loss: 0.0720 Acc: 61.48%
+[2025-12-03 05:53:26] src.utils.training - [32mINFO[0m - Epoch [13] Batch [490/504] Loss: 0.0720 Acc: 61.50%
+[2025-12-03 05:53:45] src.utils.training - [32mINFO[0m - Epoch [13] Batch [500/504] Loss: 0.0720 Acc: 61.49%
+[2025-12-03 05:53:53] src.utils.training - [32mINFO[0m - Epoch [13] Training Completed in 1086s - Loss: 0.0720 Acc: 61.50%
+[2025-12-03 05:55:54] src.utils.clip_level_evaluation - [32mINFO[0m - [VAL] Batch 50/109 Loss: 0.0420
+[2025-12-03 05:57:43] src.utils.clip_level_evaluation - [32mINFO[0m - [VAL] Batch 100/109 Loss: 0.0640
+[2025-12-03 05:58:08] src.utils.clip_level_evaluation - [32mINFO[0m - [VAL] Finished in 255s
+[2025-12-03 05:58:08] src.utils.clip_level_evaluation - [32mINFO[0m - Results:
+Loss: 0.0699 | Acc: 58.95% | AUC: 0.6350
+   >> Anomaly: P=0.411 R=0.571 F1=0.478
+   >> Normal:  P=0.740 R=0.599
+   >> Counts:  TP=2612 FN=1964 (Missed) | TN=5592 FP=3749 (False Alarm)
+   >> Rates:   FPR=0.4013 | FNR=0.4292
+[2025-12-03 05:58:08] __main__ - [32mINFO[0m - Epoch [13] Motion Validation - Loss: 0.0699 | Acc: 58.95% | AUC: 0.6350
+[2025-12-03 05:58:08] __main__ - [32mINFO[0m -   Motion Anomaly Stats: P=0.411 R=0.571 F1=0.478
+[2025-12-03 05:58:08] __main__ - [32mINFO[0m -   Conf Matrix: TP=2612 FN=1964 TN=5592 FP=3749
+[2025-12-03 05:58:08] __main__ - [32mINFO[0m - 🔥 New Best Motion AUC: 0.6350
+[2025-12-03 05:58:09] src.utils.training_utils - [32mINFO[0m - Saved best model to /work3/s225224/ucf-crime/checkpoints/r3d_motion_sobel_20251203_004534/best_model.pth
+[2025-12-03 05:58:38] src.utils.training - [32mINFO[0m - Epoch [14] Batch [10/504] Loss: 0.0685 Acc: 61.09%
+[2025-12-03 05:59:00] src.utils.training - [32mINFO[0m - Epoch [14] Batch [20/504] Loss: 0.0716 Acc: 61.88%
+[2025-12-03 05:59:24] src.utils.training - [32mINFO[0m - Epoch [14] Batch [30/504] Loss: 0.0713 Acc: 61.67%
+[2025-12-03 05:59:48] src.utils.training - [32mINFO[0m - Epoch [14] Batch [40/504] Loss: 0.0706 Acc: 61.88%
+[2025-12-03 06:00:14] src.utils.training - [32mINFO[0m - Epoch [14] Batch [50/504] Loss: 0.0720 Acc: 61.56%
+[2025-12-03 06:00:33] src.utils.training - [32mINFO[0m - Epoch [14] Batch [60/504] Loss: 0.0724 Acc: 61.51%
+[2025-12-03 06:00:59] src.utils.training - [32mINFO[0m - Epoch [14] Batch [70/504] Loss: 0.0720 Acc: 61.58%
+[2025-12-03 06:01:18] src.utils.training - [32mINFO[0m - Epoch [14] Batch [80/504] Loss: 0.0722 Acc: 61.30%
+[2025-12-03 06:01:44] src.utils.training - [32mINFO[0m - Epoch [14] Batch [90/504] Loss: 0.0723 Acc: 61.40%
+[2025-12-03 06:02:01] src.utils.training - [32mINFO[0m - Epoch [14] Batch [100/504] Loss: 0.0726 Acc: 61.38%
+[2025-12-03 06:02:25] src.utils.training - [32mINFO[0m - Epoch [14] Batch [110/504] Loss: 0.0723 Acc: 61.45%
+[2025-12-03 06:02:42] src.utils.training - [32mINFO[0m - Epoch [14] Batch [120/504] Loss: 0.0724 Acc: 61.33%
+[2025-12-03 06:03:06] src.utils.training - [32mINFO[0m - Epoch [14] Batch [130/504] Loss: 0.0726 Acc: 61.32%
+[2025-12-03 06:03:24] src.utils.training - [32mINFO[0m - Epoch [14] Batch [140/504] Loss: 0.0729 Acc: 61.21%
+[2025-12-03 06:03:47] src.utils.training - [32mINFO[0m - Epoch [14] Batch [150/504] Loss: 0.0726 Acc: 61.24%
+[2025-12-03 06:04:05] src.utils.training - [32mINFO[0m - Epoch [14] Batch [160/504] Loss: 0.0725 Acc: 61.22%
+[2025-12-03 06:04:29] src.utils.training - [32mINFO[0m - Epoch [14] Batch [170/504] Loss: 0.0725 Acc: 61.24%
+[2025-12-03 06:04:47] src.utils.training - [32mINFO[0m - Epoch [14] Batch [180/504] Loss: 0.0726 Acc: 61.28%
+[2025-12-03 06:05:10] src.utils.training - [32mINFO[0m - Epoch [14] Batch [190/504] Loss: 0.0724 Acc: 61.25%
+[2025-12-03 06:05:28] src.utils.training - [32mINFO[0m - Epoch [14] Batch [200/504] Loss: 0.0729 Acc: 61.13%
+[2025-12-03 06:05:51] src.utils.training - [32mINFO[0m - Epoch [14] Batch [210/504] Loss: 0.0727 Acc: 61.19%
+[2025-12-03 06:06:09] src.utils.training - [32mINFO[0m - Epoch [14] Batch [220/504] Loss: 0.0727 Acc: 61.16%
+[2025-12-03 06:06:34] src.utils.training - [32mINFO[0m - Epoch [14] Batch [230/504] Loss: 0.0728 Acc: 61.06%
+[2025-12-03 06:06:52] src.utils.training - [32mINFO[0m - Epoch [14] Batch [240/504] Loss: 0.0727 Acc: 61.02%
+[2025-12-03 06:07:15] src.utils.training - [32mINFO[0m - Epoch [14] Batch [250/504] Loss: 0.0726 Acc: 61.06%
+[2025-12-03 06:07:33] src.utils.training - [32mINFO[0m - Epoch [14] Batch [260/504] Loss: 0.0725 Acc: 61.15%
+[2025-12-03 06:07:57] src.utils.training - [32mINFO[0m - Epoch [14] Batch [270/504] Loss: 0.0725 Acc: 61.21%
+[2025-12-03 06:08:15] src.utils.training - [32mINFO[0m - Epoch [14] Batch [280/504] Loss: 0.0723 Acc: 61.18%
+[2025-12-03 06:08:39] src.utils.training - [32mINFO[0m - Epoch [14] Batch [290/504] Loss: 0.0722 Acc: 61.19%
+[2025-12-03 06:08:56] src.utils.training - [32mINFO[0m - Epoch [14] Batch [300/504] Loss: 0.0721 Acc: 61.21%
+[2025-12-03 06:09:20] src.utils.training - [32mINFO[0m - Epoch [14] Batch [310/504] Loss: 0.0721 Acc: 61.20%
+[2025-12-03 06:09:38] src.utils.training - [32mINFO[0m - Epoch [14] Batch [320/504] Loss: 0.0719 Acc: 61.22%
+[2025-12-03 06:10:01] src.utils.training - [32mINFO[0m - Epoch [14] Batch [330/504] Loss: 0.0719 Acc: 61.22%
+[2025-12-03 06:10:18] src.utils.training - [32mINFO[0m - Epoch [14] Batch [340/504] Loss: 0.0719 Acc: 61.19%
+[2025-12-03 06:10:42] src.utils.training - [32mINFO[0m - Epoch [14] Batch [350/504] Loss: 0.0718 Acc: 61.24%
+[2025-12-03 06:11:00] src.utils.training - [32mINFO[0m - Epoch [14] Batch [360/504] Loss: 0.0718 Acc: 61.23%
+[2025-12-03 06:11:22] src.utils.training - [32mINFO[0m - Epoch [14] Batch [370/504] Loss: 0.0718 Acc: 61.25%
+[2025-12-03 06:11:39] src.utils.training - [32mINFO[0m - Epoch [14] Batch [380/504] Loss: 0.0718 Acc: 61.28%
+[2025-12-03 06:12:02] src.utils.training - [32mINFO[0m - Epoch [14] Batch [390/504] Loss: 0.0718 Acc: 61.32%
+[2025-12-03 06:12:19] src.utils.training - [32mINFO[0m - Epoch [14] Batch [400/504] Loss: 0.0719 Acc: 61.29%
+[2025-12-03 06:12:42] src.utils.training - [32mINFO[0m - Epoch [14] Batch [410/504] Loss: 0.0718 Acc: 61.26%
+[2025-12-03 06:12:59] src.utils.training - [32mINFO[0m - Epoch [14] Batch [420/504] Loss: 0.0719 Acc: 61.22%
+[2025-12-03 06:13:25] src.utils.training - [32mINFO[0m - Epoch [14] Batch [430/504] Loss: 0.0719 Acc: 61.23%
+[2025-12-03 06:13:44] src.utils.training - [32mINFO[0m - Epoch [14] Batch [440/504] Loss: 0.0719 Acc: 61.23%
+[2025-12-03 06:14:09] src.utils.training - [32mINFO[0m - Epoch [14] Batch [450/504] Loss: 0.0720 Acc: 61.21%
+[2025-12-03 06:14:29] src.utils.training - [32mINFO[0m - Epoch [14] Batch [460/504] Loss: 0.0719 Acc: 61.20%
+[2025-12-03 06:14:56] src.utils.training - [32mINFO[0m - Epoch [14] Batch [470/504] Loss: 0.0719 Acc: 61.19%
+[2025-12-03 06:15:16] src.utils.training - [32mINFO[0m - Epoch [14] Batch [480/504] Loss: 0.0719 Acc: 61.22%
+[2025-12-03 06:15:43] src.utils.training - [32mINFO[0m - Epoch [14] Batch [490/504] Loss: 0.0720 Acc: 61.19%
+[2025-12-03 06:16:02] src.utils.training - [32mINFO[0m - Epoch [14] Batch [500/504] Loss: 0.0719 Acc: 61.23%
+[2025-12-03 06:16:12] src.utils.training - [32mINFO[0m - Epoch [14] Training Completed in 1083s - Loss: 0.0719 Acc: 61.23%
+[2025-12-03 06:18:07] src.utils.clip_level_evaluation - [32mINFO[0m - [VAL] Batch 50/109 Loss: 0.0417
+[2025-12-03 06:19:56] src.utils.clip_level_evaluation - [32mINFO[0m - [VAL] Batch 100/109 Loss: 0.0638
+[2025-12-03 06:20:21] src.utils.clip_level_evaluation - [32mINFO[0m - [VAL] Finished in 250s
+[2025-12-03 06:20:21] src.utils.clip_level_evaluation - [32mINFO[0m - Results:
+Loss: 0.0697 | Acc: 59.45% | AUC: 0.6390
+   >> Anomaly: P=0.416 R=0.576 F1=0.483
+   >> Normal:  P=0.744 R=0.604
+   >> Counts:  TP=2635 FN=1941 (Missed) | TN=5639 FP=3702 (False Alarm)
+   >> Rates:   FPR=0.3963 | FNR=0.4242
+[2025-12-03 06:20:21] __main__ - [32mINFO[0m - Epoch [14] Motion Validation - Loss: 0.0697 | Acc: 59.45% | AUC: 0.6390
+[2025-12-03 06:20:21] __main__ - [32mINFO[0m -   Motion Anomaly Stats: P=0.416 R=0.576 F1=0.483
+[2025-12-03 06:20:21] __main__ - [32mINFO[0m -   Conf Matrix: TP=2635 FN=1941 TN=5639 FP=3702
+[2025-12-03 06:20:21] __main__ - [32mINFO[0m - 🔥 New Best Motion AUC: 0.6390
+[2025-12-03 06:20:22] src.utils.training_utils - [32mINFO[0m - Saved best model to /work3/s225224/ucf-crime/checkpoints/r3d_motion_sobel_20251203_004534/best_model.pth
+[2025-12-03 06:20:50] src.utils.training - [32mINFO[0m - Epoch [15] Batch [10/504] Loss: 0.0711 Acc: 63.05%
+[2025-12-03 06:21:11] src.utils.training - [32mINFO[0m - Epoch [15] Batch [20/504] Loss: 0.0719 Acc: 61.41%
+[2025-12-03 06:21:36] src.utils.training - [32mINFO[0m - Epoch [15] Batch [30/504] Loss: 0.0725 Acc: 60.94%
+[2025-12-03 06:21:56] src.utils.training - [32mINFO[0m - Epoch [15] Batch [40/504] Loss: 0.0727 Acc: 60.92%
+[2025-12-03 06:22:21] src.utils.training - [32mINFO[0m - Epoch [15] Batch [50/504] Loss: 0.0728 Acc: 60.78%
+[2025-12-03 06:22:41] src.utils.training - [32mINFO[0m - Epoch [15] Batch [60/504] Loss: 0.0721 Acc: 61.22%
+[2025-12-03 06:23:04] src.utils.training - [32mINFO[0m - Epoch [15] Batch [70/504] Loss: 0.0713 Acc: 61.40%
+[2025-12-03 06:23:25] src.utils.training - [32mINFO[0m - Epoch [15] Batch [80/504] Loss: 0.0716 Acc: 61.10%
+[2025-12-03 06:23:47] src.utils.training - [32mINFO[0m - Epoch [15] Batch [90/504] Loss: 0.0714 Acc: 61.10%
+[2025-12-03 06:24:08] src.utils.training - [32mINFO[0m - Epoch [15] Batch [100/504] Loss: 0.0712 Acc: 61.14%
+[2025-12-03 06:24:30] src.utils.training - [32mINFO[0m - Epoch [15] Batch [110/504] Loss: 0.0715 Acc: 61.09%
+[2025-12-03 06:24:52] src.utils.training - [32mINFO[0m - Epoch [15] Batch [120/504] Loss: 0.0715 Acc: 61.07%
+[2025-12-03 06:25:13] src.utils.training - [32mINFO[0m - Epoch [15] Batch [130/504] Loss: 0.0716 Acc: 61.14%
+[2025-12-03 06:25:35] src.utils.training - [32mINFO[0m - Epoch [15] Batch [140/504] Loss: 0.0713 Acc: 61.36%
+[2025-12-03 06:25:56] src.utils.training - [32mINFO[0m - Epoch [15] Batch [150/504] Loss: 0.0712 Acc: 61.37%
+[2025-12-03 06:26:18] src.utils.training - [32mINFO[0m - Epoch [15] Batch [160/504] Loss: 0.0713 Acc: 61.36%
+[2025-12-03 06:26:39] src.utils.training - [32mINFO[0m - Epoch [15] Batch [170/504] Loss: 0.0713 Acc: 61.39%
+[2025-12-03 06:27:01] src.utils.training - [32mINFO[0m - Epoch [15] Batch [180/504] Loss: 0.0713 Acc: 61.29%
+[2025-12-03 06:27:21] src.utils.training - [32mINFO[0m - Epoch [15] Batch [190/504] Loss: 0.0712 Acc: 61.39%
+[2025-12-03 06:27:44] src.utils.training - [32mINFO[0m - Epoch [15] Batch [200/504] Loss: 0.0712 Acc: 61.37%
+[2025-12-03 06:28:06] src.utils.training - [32mINFO[0m - Epoch [15] Batch [210/504] Loss: 0.0713 Acc: 61.45%
+[2025-12-03 06:28:29] src.utils.training - [32mINFO[0m - Epoch [15] Batch [220/504] Loss: 0.0712 Acc: 61.49%
+[2025-12-03 06:28:48] src.utils.training - [32mINFO[0m - Epoch [15] Batch [230/504] Loss: 0.0709 Acc: 61.63%
+[2025-12-03 06:29:12] src.utils.training - [32mINFO[0m - Epoch [15] Batch [240/504] Loss: 0.0709 Acc: 61.67%
+[2025-12-03 06:29:32] src.utils.training - [32mINFO[0m - Epoch [15] Batch [250/504] Loss: 0.0710 Acc: 61.67%
+[2025-12-03 06:29:56] src.utils.training - [32mINFO[0m - Epoch [15] Batch [260/504] Loss: 0.0708 Acc: 61.64%
+[2025-12-03 06:30:15] src.utils.training - [32mINFO[0m - Epoch [15] Batch [270/504] Loss: 0.0708 Acc: 61.61%
+[2025-12-03 06:30:39] src.utils.training - [32mINFO[0m - Epoch [15] Batch [280/504] Loss: 0.0708 Acc: 61.58%
+[2025-12-03 06:30:59] src.utils.training - [32mINFO[0m - Epoch [15] Batch [290/504] Loss: 0.0708 Acc: 61.60%
+[2025-12-03 06:31:26] src.utils.training - [32mINFO[0m - Epoch [15] Batch [300/504] Loss: 0.0707 Acc: 61.61%
+[2025-12-03 06:31:45] src.utils.training - [32mINFO[0m - Epoch [15] Batch [310/504] Loss: 0.0706 Acc: 61.67%
+[2025-12-03 06:32:11] src.utils.training - [32mINFO[0m - Epoch [15] Batch [320/504] Loss: 0.0708 Acc: 61.65%
+[2025-12-03 06:32:30] src.utils.training - [32mINFO[0m - Epoch [15] Batch [330/504] Loss: 0.0708 Acc: 61.67%
+[2025-12-03 06:32:55] src.utils.training - [32mINFO[0m - Epoch [15] Batch [340/504] Loss: 0.0708 Acc: 61.68%
+[2025-12-03 06:33:14] src.utils.training - [32mINFO[0m - Epoch [15] Batch [350/504] Loss: 0.0708 Acc: 61.80%
+[2025-12-03 06:33:40] src.utils.training - [32mINFO[0m - Epoch [15] Batch [360/504] Loss: 0.0707 Acc: 61.79%
+[2025-12-03 06:33:59] src.utils.training - [32mINFO[0m - Epoch [15] Batch [370/504] Loss: 0.0707 Acc: 61.73%
+[2025-12-03 06:34:24] src.utils.training - [32mINFO[0m - Epoch [15] Batch [380/504] Loss: 0.0707 Acc: 61.75%
+[2025-12-03 06:34:43] src.utils.training - [32mINFO[0m - Epoch [15] Batch [390/504] Loss: 0.0706 Acc: 61.76%
+[2025-12-03 06:35:08] src.utils.training - [32mINFO[0m - Epoch [15] Batch [400/504] Loss: 0.0706 Acc: 61.73%
+[2025-12-03 06:35:27] src.utils.training - [32mINFO[0m - Epoch [15] Batch [410/504] Loss: 0.0706 Acc: 61.74%
+[2025-12-03 06:35:52] src.utils.training - [32mINFO[0m - Epoch [15] Batch [420/504] Loss: 0.0706 Acc: 61.76%
+[2025-12-03 06:36:11] src.utils.training - [32mINFO[0m - Epoch [15] Batch [430/504] Loss: 0.0705 Acc: 61.80%
+[2025-12-03 06:36:35] src.utils.training - [32mINFO[0m - Epoch [15] Batch [440/504] Loss: 0.0704 Acc: 61.84%
+[2025-12-03 06:36:53] src.utils.training - [32mINFO[0m - Epoch [15] Batch [450/504] Loss: 0.0706 Acc: 61.80%
+[2025-12-03 06:37:18] src.utils.training - [32mINFO[0m - Epoch [15] Batch [460/504] Loss: 0.0706 Acc: 61.80%
+[2025-12-03 06:37:37] src.utils.training - [32mINFO[0m - Epoch [15] Batch [470/504] Loss: 0.0706 Acc: 61.76%
+[2025-12-03 06:38:01] src.utils.training - [32mINFO[0m - Epoch [15] Batch [480/504] Loss: 0.0705 Acc: 61.75%
+[2025-12-03 06:38:20] src.utils.training - [32mINFO[0m - Epoch [15] Batch [490/504] Loss: 0.0705 Acc: 61.71%
+[2025-12-03 06:38:44] src.utils.training - [32mINFO[0m - Epoch [15] Batch [500/504] Loss: 0.0705 Acc: 61.72%
+[2025-12-03 06:38:52] src.utils.training - [32mINFO[0m - Epoch [15] Training Completed in 1110s - Loss: 0.0704 Acc: 61.73%
+[2025-12-03 06:40:44] src.utils.clip_level_evaluation - [32mINFO[0m - [VAL] Batch 50/109 Loss: 0.0419
+[2025-12-03 06:42:31] src.utils.clip_level_evaluation - [32mINFO[0m - [VAL] Batch 100/109 Loss: 0.0634
+[2025-12-03 06:42:58] src.utils.clip_level_evaluation - [32mINFO[0m - [VAL] Finished in 246s
+[2025-12-03 06:42:58] src.utils.clip_level_evaluation - [32mINFO[0m - Results:
+Loss: 0.0693 | Acc: 59.42% | AUC: 0.6433
+   >> Anomaly: P=0.417 R=0.587 F1=0.488
+   >> Normal:  P=0.747 R=0.597
+   >> Counts:  TP=2688 FN=1888 (Missed) | TN=5581 FP=3760 (False Alarm)
+   >> Rates:   FPR=0.4025 | FNR=0.4126
+[2025-12-03 06:42:58] __main__ - [32mINFO[0m - Epoch [15] Motion Validation - Loss: 0.0693 | Acc: 59.42% | AUC: 0.6433
+[2025-12-03 06:42:58] __main__ - [32mINFO[0m -   Motion Anomaly Stats: P=0.417 R=0.587 F1=0.488
+[2025-12-03 06:42:58] __main__ - [32mINFO[0m -   Conf Matrix: TP=2688 FN=1888 TN=5581 FP=3760
+[2025-12-03 06:42:58] __main__ - [32mINFO[0m - 🔥 New Best Motion AUC: 0.6433
+[2025-12-03 06:42:58] src.utils.training_utils - [32mINFO[0m - Saved best model to /work3/s225224/ucf-crime/checkpoints/r3d_motion_sobel_20251203_004534/best_model.pth
+[2025-12-03 06:43:26] src.utils.training - [32mINFO[0m - Epoch [16] Batch [10/504] Loss: 0.0699 Acc: 62.73%
+[2025-12-03 06:43:44] src.utils.training - [32mINFO[0m - Epoch [16] Batch [20/504] Loss: 0.0701 Acc: 62.34%
+[2025-12-03 06:44:09] src.utils.training - [32mINFO[0m - Epoch [16] Batch [30/504] Loss: 0.0703 Acc: 61.95%
+[2025-12-03 06:44:28] src.utils.training - [32mINFO[0m - Epoch [16] Batch [40/504] Loss: 0.0690 Acc: 62.32%
+[2025-12-03 06:44:54] src.utils.training - [32mINFO[0m - Epoch [16] Batch [50/504] Loss: 0.0692 Acc: 61.91%
+[2025-12-03 06:45:14] src.utils.training - [32mINFO[0m - Epoch [16] Batch [60/504] Loss: 0.0702 Acc: 61.85%
+[2025-12-03 06:45:40] src.utils.training - [32mINFO[0m - Epoch [16] Batch [70/504] Loss: 0.0705 Acc: 61.89%
+[2025-12-03 06:45:59] src.utils.training - [32mINFO[0m - Epoch [16] Batch [80/504] Loss: 0.0707 Acc: 62.01%
+[2025-12-03 06:46:25] src.utils.training - [32mINFO[0m - Epoch [16] Batch [90/504] Loss: 0.0707 Acc: 62.04%
+[2025-12-03 06:46:45] src.utils.training - [32mINFO[0m - Epoch [16] Batch [100/504] Loss: 0.0706 Acc: 62.10%
+[2025-12-03 06:47:11] src.utils.training - [32mINFO[0m - Epoch [16] Batch [110/504] Loss: 0.0701 Acc: 62.30%
+[2025-12-03 06:47:31] src.utils.training - [32mINFO[0m - Epoch [16] Batch [120/504] Loss: 0.0700 Acc: 62.35%
+[2025-12-03 06:47:58] src.utils.training - [32mINFO[0m - Epoch [16] Batch [130/504] Loss: 0.0699 Acc: 62.26%
+[2025-12-03 06:48:17] src.utils.training - [32mINFO[0m - Epoch [16] Batch [140/504] Loss: 0.0699 Acc: 62.24%
+[2025-12-03 06:48:44] src.utils.training - [32mINFO[0m - Epoch [16] Batch [150/504] Loss: 0.0702 Acc: 62.32%
+[2025-12-03 06:49:03] src.utils.training - [32mINFO[0m - Epoch [16] Batch [160/504] Loss: 0.0700 Acc: 62.30%
+[2025-12-03 06:49:29] src.utils.training - [32mINFO[0m - Epoch [16] Batch [170/504] Loss: 0.0698 Acc: 62.34%
+[2025-12-03 06:49:48] src.utils.training - [32mINFO[0m - Epoch [16] Batch [180/504] Loss: 0.0696 Acc: 62.55%
+[2025-12-03 06:50:15] src.utils.training - [32mINFO[0m - Epoch [16] Batch [190/504] Loss: 0.0695 Acc: 62.50%
+[2025-12-03 06:50:34] src.utils.training - [32mINFO[0m - Epoch [16] Batch [200/504] Loss: 0.0696 Acc: 62.55%
+[2025-12-03 06:51:01] src.utils.training - [32mINFO[0m - Epoch [16] Batch [210/504] Loss: 0.0696 Acc: 62.55%
+[2025-12-03 06:51:20] src.utils.training - [32mINFO[0m - Epoch [16] Batch [220/504] Loss: 0.0697 Acc: 62.55%
+[2025-12-03 06:51:47] src.utils.training - [32mINFO[0m - Epoch [16] Batch [230/504] Loss: 0.0698 Acc: 62.46%
+[2025-12-03 06:52:06] src.utils.training - [32mINFO[0m - Epoch [16] Batch [240/504] Loss: 0.0698 Acc: 62.46%
+[2025-12-03 06:52:32] src.utils.training - [32mINFO[0m - Epoch [16] Batch [250/504] Loss: 0.0697 Acc: 62.52%
+[2025-12-03 06:52:52] src.utils.training - [32mINFO[0m - Epoch [16] Batch [260/504] Loss: 0.0698 Acc: 62.43%
+[2025-12-03 06:53:17] src.utils.training - [32mINFO[0m - Epoch [16] Batch [270/504] Loss: 0.0697 Acc: 62.40%
+[2025-12-03 06:53:36] src.utils.training - [32mINFO[0m - Epoch [16] Batch [280/504] Loss: 0.0697 Acc: 62.41%
+[2025-12-03 06:54:00] src.utils.training - [32mINFO[0m - Epoch [16] Batch [290/504] Loss: 0.0698 Acc: 62.31%
+[2025-12-03 06:54:19] src.utils.training - [32mINFO[0m - Epoch [16] Batch [300/504] Loss: 0.0697 Acc: 62.32%
+[2025-12-03 06:54:44] src.utils.training - [32mINFO[0m - Epoch [16] Batch [310/504] Loss: 0.0698 Acc: 62.35%
+[2025-12-03 06:55:02] src.utils.training - [32mINFO[0m - Epoch [16] Batch [320/504] Loss: 0.0698 Acc: 62.32%
+[2025-12-03 06:55:32] src.utils.training - [32mINFO[0m - Epoch [16] Batch [330/504] Loss: 0.0697 Acc: 62.34%
+[2025-12-03 06:55:51] src.utils.training - [32mINFO[0m - Epoch [16] Batch [340/504] Loss: 0.0696 Acc: 62.36%
+[2025-12-03 06:56:18] src.utils.training - [32mINFO[0m - Epoch [16] Batch [350/504] Loss: 0.0697 Acc: 62.31%
+[2025-12-03 06:56:37] src.utils.training - [32mINFO[0m - Epoch [16] Batch [360/504] Loss: 0.0696 Acc: 62.29%
+[2025-12-03 06:57:03] src.utils.training - [32mINFO[0m - Epoch [16] Batch [370/504] Loss: 0.0696 Acc: 62.33%
+[2025-12-03 06:57:21] src.utils.training - [32mINFO[0m - Epoch [16] Batch [380/504] Loss: 0.0695 Acc: 62.35%
+[2025-12-03 06:57:46] src.utils.training - [32mINFO[0m - Epoch [16] Batch [390/504] Loss: 0.0695 Acc: 62.31%
+[2025-12-03 06:58:05] src.utils.training - [32mINFO[0m - Epoch [16] Batch [400/504] Loss: 0.0695 Acc: 62.34%
+[2025-12-03 06:58:31] src.utils.training - [32mINFO[0m - Epoch [16] Batch [410/504] Loss: 0.0694 Acc: 62.33%
+[2025-12-03 06:58:50] src.utils.training - [32mINFO[0m - Epoch [16] Batch [420/504] Loss: 0.0695 Acc: 62.35%
+[2025-12-03 06:59:14] src.utils.training - [32mINFO[0m - Epoch [16] Batch [430/504] Loss: 0.0694 Acc: 62.34%
+[2025-12-03 06:59:33] src.utils.training - [32mINFO[0m - Epoch [16] Batch [440/504] Loss: 0.0694 Acc: 62.33%
+[2025-12-03 06:59:57] src.utils.training - [32mINFO[0m - Epoch [16] Batch [450/504] Loss: 0.0695 Acc: 62.32%
+[2025-12-03 07:00:16] src.utils.training - [32mINFO[0m - Epoch [16] Batch [460/504] Loss: 0.0695 Acc: 62.31%
+[2025-12-03 07:00:40] src.utils.training - [32mINFO[0m - Epoch [16] Batch [470/504] Loss: 0.0695 Acc: 62.26%
+[2025-12-03 07:00:59] src.utils.training - [32mINFO[0m - Epoch [16] Batch [480/504] Loss: 0.0696 Acc: 62.22%
+[2025-12-03 07:01:24] src.utils.training - [32mINFO[0m - Epoch [16] Batch [490/504] Loss: 0.0696 Acc: 62.21%
+[2025-12-03 07:01:42] src.utils.training - [32mINFO[0m - Epoch [16] Batch [500/504] Loss: 0.0697 Acc: 62.18%
+[2025-12-03 07:01:51] src.utils.training - [32mINFO[0m - Epoch [16] Training Completed in 1133s - Loss: 0.0697 Acc: 62.17%
+[2025-12-03 07:03:47] src.utils.clip_level_evaluation - [32mINFO[0m - [VAL] Batch 50/109 Loss: 0.0420
+[2025-12-03 07:05:39] src.utils.clip_level_evaluation - [32mINFO[0m - [VAL] Batch 100/109 Loss: 0.0634
+[2025-12-03 07:06:06] src.utils.clip_level_evaluation - [32mINFO[0m - [VAL] Finished in 255s
+[2025-12-03 07:06:06] src.utils.clip_level_evaluation - [32mINFO[0m - Results:
+Loss: 0.0692 | Acc: 59.32% | AUC: 0.6434
+   >> Anomaly: P=0.416 R=0.588 F1=0.487
+   >> Normal:  P=0.747 R=0.596
+   >> Counts:  TP=2692 FN=1884 (Missed) | TN=5564 FP=3777 (False Alarm)
+   >> Rates:   FPR=0.4043 | FNR=0.4117
+[2025-12-03 07:06:06] __main__ - [32mINFO[0m - Epoch [16] Motion Validation - Loss: 0.0692 | Acc: 59.32% | AUC: 0.6434
+[2025-12-03 07:06:06] __main__ - [32mINFO[0m -   Motion Anomaly Stats: P=0.416 R=0.588 F1=0.487
+[2025-12-03 07:06:06] __main__ - [32mINFO[0m -   Conf Matrix: TP=2692 FN=1884 TN=5564 FP=3777
+[2025-12-03 07:06:06] __main__ - [32mINFO[0m - 🔥 New Best Motion AUC: 0.6434
+[2025-12-03 07:06:06] src.utils.training_utils - [32mINFO[0m - Saved best model to /work3/s225224/ucf-crime/checkpoints/r3d_motion_sobel_20251203_004534/best_model.pth
+[2025-12-03 07:06:35] src.utils.training - [32mINFO[0m - Epoch [17] Batch [10/504] Loss: 0.0709 Acc: 62.34%
+[2025-12-03 07:06:55] src.utils.training - [32mINFO[0m - Epoch [17] Batch [20/504] Loss: 0.0698 Acc: 61.68%
+[2025-12-03 07:07:21] src.utils.training - [32mINFO[0m - Epoch [17] Batch [30/504] Loss: 0.0702 Acc: 61.51%
+[2025-12-03 07:07:41] src.utils.training - [32mINFO[0m - Epoch [17] Batch [40/504] Loss: 0.0700 Acc: 61.29%
+[2025-12-03 07:08:06] src.utils.training - [32mINFO[0m - Epoch [17] Batch [50/504] Loss: 0.0709 Acc: 61.12%
+[2025-12-03 07:08:25] src.utils.training - [32mINFO[0m - Epoch [17] Batch [60/504] Loss: 0.0701 Acc: 61.37%
+[2025-12-03 07:08:50] src.utils.training - [32mINFO[0m - Epoch [17] Batch [70/504] Loss: 0.0700 Acc: 61.63%
+[2025-12-03 07:09:09] src.utils.training - [32mINFO[0m - Epoch [17] Batch [80/504] Loss: 0.0696 Acc: 61.74%
+[2025-12-03 07:09:35] src.utils.training - [32mINFO[0m - Epoch [17] Batch [90/504] Loss: 0.0694 Acc: 61.80%
+[2025-12-03 07:09:53] src.utils.training - [32mINFO[0m - Epoch [17] Batch [100/504] Loss: 0.0696 Acc: 61.61%
+[2025-12-03 07:10:18] src.utils.training - [32mINFO[0m - Epoch [17] Batch [110/504] Loss: 0.0696 Acc: 61.66%
+[2025-12-03 07:10:36] src.utils.training - [32mINFO[0m - Epoch [17] Batch [120/504] Loss: 0.0694 Acc: 61.71%
+[2025-12-03 07:11:00] src.utils.training - [32mINFO[0m - Epoch [17] Batch [130/504] Loss: 0.0697 Acc: 61.64%
+[2025-12-03 07:11:22] src.utils.training - [32mINFO[0m - Epoch [17] Batch [140/504] Loss: 0.0698 Acc: 61.64%
+[2025-12-03 07:11:46] src.utils.training - [32mINFO[0m - Epoch [17] Batch [150/504] Loss: 0.0699 Acc: 61.72%
+[2025-12-03 07:12:05] src.utils.training - [32mINFO[0m - Epoch [17] Batch [160/504] Loss: 0.0700 Acc: 61.81%
+[2025-12-03 07:12:29] src.utils.training - [32mINFO[0m - Epoch [17] Batch [170/504] Loss: 0.0698 Acc: 61.95%
+[2025-12-03 07:12:48] src.utils.training - [32mINFO[0m - Epoch [17] Batch [180/504] Loss: 0.0700 Acc: 61.92%
+[2025-12-03 07:13:13] src.utils.training - [32mINFO[0m - Epoch [17] Batch [190/504] Loss: 0.0700 Acc: 61.86%
+[2025-12-03 07:13:33] src.utils.training - [32mINFO[0m - Epoch [17] Batch [200/504] Loss: 0.0702 Acc: 61.87%
+[2025-12-03 07:13:58] src.utils.training - [32mINFO[0m - Epoch [17] Batch [210/504] Loss: 0.0702 Acc: 61.87%
+[2025-12-03 07:14:16] src.utils.training - [32mINFO[0m - Epoch [17] Batch [220/504] Loss: 0.0700 Acc: 61.94%
+[2025-12-03 07:14:41] src.utils.training - [32mINFO[0m - Epoch [17] Batch [230/504] Loss: 0.0699 Acc: 61.97%
+[2025-12-03 07:14:59] src.utils.training - [32mINFO[0m - Epoch [17] Batch [240/504] Loss: 0.0698 Acc: 62.04%
+[2025-12-03 07:15:23] src.utils.training - [32mINFO[0m - Epoch [17] Batch [250/504] Loss: 0.0698 Acc: 62.04%
+[2025-12-03 07:15:42] src.utils.training - [32mINFO[0m - Epoch [17] Batch [260/504] Loss: 0.0700 Acc: 62.07%
+[2025-12-03 07:16:06] src.utils.training - [32mINFO[0m - Epoch [17] Batch [270/504] Loss: 0.0699 Acc: 62.09%
+[2025-12-03 07:16:25] src.utils.training - [32mINFO[0m - Epoch [17] Batch [280/504] Loss: 0.0699 Acc: 62.06%
+[2025-12-03 07:16:49] src.utils.training - [32mINFO[0m - Epoch [17] Batch [290/504] Loss: 0.0699 Acc: 62.09%
+[2025-12-03 07:17:07] src.utils.training - [32mINFO[0m - Epoch [17] Batch [300/504] Loss: 0.0698 Acc: 62.14%
+[2025-12-03 07:17:32] src.utils.training - [32mINFO[0m - Epoch [17] Batch [310/504] Loss: 0.0699 Acc: 62.13%
+[2025-12-03 07:17:50] src.utils.training - [32mINFO[0m - Epoch [17] Batch [320/504] Loss: 0.0698 Acc: 62.17%
+[2025-12-03 07:18:15] src.utils.training - [32mINFO[0m - Epoch [17] Batch [330/504] Loss: 0.0697 Acc: 62.14%
+[2025-12-03 07:18:33] src.utils.training - [32mINFO[0m - Epoch [17] Batch [340/504] Loss: 0.0698 Acc: 62.09%
+[2025-12-03 07:18:57] src.utils.training - [32mINFO[0m - Epoch [17] Batch [350/504] Loss: 0.0697 Acc: 62.11%
+[2025-12-03 07:19:15] src.utils.training - [32mINFO[0m - Epoch [17] Batch [360/504] Loss: 0.0697 Acc: 62.07%
+[2025-12-03 07:19:40] src.utils.training - [32mINFO[0m - Epoch [17] Batch [370/504] Loss: 0.0696 Acc: 62.06%
+[2025-12-03 07:19:58] src.utils.training - [32mINFO[0m - Epoch [17] Batch [380/504] Loss: 0.0696 Acc: 62.04%
+[2025-12-03 07:20:22] src.utils.training - [32mINFO[0m - Epoch [17] Batch [390/504] Loss: 0.0697 Acc: 62.04%
+[2025-12-03 07:20:41] src.utils.training - [32mINFO[0m - Epoch [17] Batch [400/504] Loss: 0.0697 Acc: 62.03%
+[2025-12-03 07:21:05] src.utils.training - [32mINFO[0m - Epoch [17] Batch [410/504] Loss: 0.0697 Acc: 62.01%
+[2025-12-03 07:21:28] src.utils.training - [32mINFO[0m - Epoch [17] Batch [420/504] Loss: 0.0696 Acc: 62.02%
+[2025-12-03 07:21:52] src.utils.training - [32mINFO[0m - Epoch [17] Batch [430/504] Loss: 0.0696 Acc: 62.05%
+[2025-12-03 07:22:10] src.utils.training - [32mINFO[0m - Epoch [17] Batch [440/504] Loss: 0.0695 Acc: 62.05%
+[2025-12-03 07:22:34] src.utils.training - [32mINFO[0m - Epoch [17] Batch [450/504] Loss: 0.0694 Acc: 62.02%
+[2025-12-03 07:22:52] src.utils.training - [32mINFO[0m - Epoch [17] Batch [460/504] Loss: 0.0695 Acc: 62.00%
+[2025-12-03 07:23:16] src.utils.training - [32mINFO[0m - Epoch [17] Batch [470/504] Loss: 0.0694 Acc: 62.04%
+[2025-12-03 07:23:34] src.utils.training - [32mINFO[0m - Epoch [17] Batch [480/504] Loss: 0.0695 Acc: 62.02%
+[2025-12-03 07:23:59] src.utils.training - [32mINFO[0m - Epoch [17] Batch [490/504] Loss: 0.0694 Acc: 62.06%
+[2025-12-03 07:24:17] src.utils.training - [32mINFO[0m - Epoch [17] Batch [500/504] Loss: 0.0694 Acc: 62.08%
+[2025-12-03 07:24:25] src.utils.training - [32mINFO[0m - Epoch [17] Training Completed in 1099s - Loss: 0.0693 Acc: 62.09%
+[2025-12-03 07:26:22] src.utils.clip_level_evaluation - [32mINFO[0m - [VAL] Batch 50/109 Loss: 0.0409
+[2025-12-03 07:28:03] src.utils.clip_level_evaluation - [32mINFO[0m - [VAL] Batch 100/109 Loss: 0.0634
+[2025-12-03 07:28:26] src.utils.clip_level_evaluation - [32mINFO[0m - [VAL] Finished in 241s
+[2025-12-03 07:28:26] src.utils.clip_level_evaluation - [32mINFO[0m - Results:
+Loss: 0.0694 | Acc: 60.08% | AUC: 0.6461
+   >> Anomaly: P=0.421 R=0.570 F1=0.484
+   >> Normal:  P=0.745 R=0.616
+   >> Counts:  TP=2607 FN=1969 (Missed) | TN=5755 FP=3586 (False Alarm)
+   >> Rates:   FPR=0.3839 | FNR=0.4303
+[2025-12-03 07:28:26] __main__ - [32mINFO[0m - Epoch [17] Motion Validation - Loss: 0.0694 | Acc: 60.08% | AUC: 0.6461
+[2025-12-03 07:28:26] __main__ - [32mINFO[0m -   Motion Anomaly Stats: P=0.421 R=0.570 F1=0.484
+[2025-12-03 07:28:26] __main__ - [32mINFO[0m -   Conf Matrix: TP=2607 FN=1969 TN=5755 FP=3586
+[2025-12-03 07:28:26] __main__ - [32mINFO[0m - 🔥 New Best Motion AUC: 0.6461
+[2025-12-03 07:28:26] src.utils.training_utils - [32mINFO[0m - Saved best model to /work3/s225224/ucf-crime/checkpoints/r3d_motion_sobel_20251203_004534/best_model.pth
+[2025-12-03 07:28:55] src.utils.training - [32mINFO[0m - Epoch [18] Batch [10/504] Loss: 0.0714 Acc: 60.47%
+[2025-12-03 07:29:13] src.utils.training - [32mINFO[0m - Epoch [18] Batch [20/504] Loss: 0.0695 Acc: 62.11%
+[2025-12-03 07:29:37] src.utils.training - [32mINFO[0m - Epoch [18] Batch [30/504] Loss: 0.0704 Acc: 61.64%
+[2025-12-03 07:29:56] src.utils.training - [32mINFO[0m - Epoch [18] Batch [40/504] Loss: 0.0706 Acc: 61.72%
+[2025-12-03 07:30:23] src.utils.training - [32mINFO[0m - Epoch [18] Batch [50/504] Loss: 0.0703 Acc: 61.67%
+[2025-12-03 07:30:42] src.utils.training - [32mINFO[0m - Epoch [18] Batch [60/504] Loss: 0.0706 Acc: 61.78%
+[2025-12-03 07:31:06] src.utils.training - [32mINFO[0m - Epoch [18] Batch [70/504] Loss: 0.0703 Acc: 61.67%
+[2025-12-03 07:31:24] src.utils.training - [32mINFO[0m - Epoch [18] Batch [80/504] Loss: 0.0704 Acc: 61.70%
+[2025-12-03 07:31:49] src.utils.training - [32mINFO[0m - Epoch [18] Batch [90/504] Loss: 0.0704 Acc: 61.74%
+[2025-12-03 07:32:07] src.utils.training - [32mINFO[0m - Epoch [18] Batch [100/504] Loss: 0.0704 Acc: 61.80%
+[2025-12-03 07:32:31] src.utils.training - [32mINFO[0m - Epoch [18] Batch [110/504] Loss: 0.0700 Acc: 61.81%
+[2025-12-03 07:32:49] src.utils.training - [32mINFO[0m - Epoch [18] Batch [120/504] Loss: 0.0696 Acc: 61.89%
+[2025-12-03 07:33:13] src.utils.training - [32mINFO[0m - Epoch [18] Batch [130/504] Loss: 0.0694 Acc: 61.93%
+[2025-12-03 07:33:31] src.utils.training - [32mINFO[0m - Epoch [18] Batch [140/504] Loss: 0.0690 Acc: 62.11%
+[2025-12-03 07:33:55] src.utils.training - [32mINFO[0m - Epoch [18] Batch [150/504] Loss: 0.0690 Acc: 62.04%
+[2025-12-03 07:34:14] src.utils.training - [32mINFO[0m - Epoch [18] Batch [160/504] Loss: 0.0692 Acc: 62.01%
+[2025-12-03 07:34:38] src.utils.training - [32mINFO[0m - Epoch [18] Batch [170/504] Loss: 0.0694 Acc: 61.88%
+[2025-12-03 07:34:55] src.utils.training - [32mINFO[0m - Epoch [18] Batch [180/504] Loss: 0.0693 Acc: 61.96%
+[2025-12-03 07:35:20] src.utils.training - [32mINFO[0m - Epoch [18] Batch [190/504] Loss: 0.0691 Acc: 62.00%
+[2025-12-03 07:35:38] src.utils.training - [32mINFO[0m - Epoch [18] Batch [200/504] Loss: 0.0689 Acc: 62.08%
+[2025-12-03 07:36:03] src.utils.training - [32mINFO[0m - Epoch [18] Batch [210/504] Loss: 0.0690 Acc: 62.11%
+[2025-12-03 07:36:21] src.utils.training - [32mINFO[0m - Epoch [18] Batch [220/504] Loss: 0.0691 Acc: 62.22%
+[2025-12-03 07:36:46] src.utils.training - [32mINFO[0m - Epoch [18] Batch [230/504] Loss: 0.0690 Acc: 62.16%
+[2025-12-03 07:37:05] src.utils.training - [32mINFO[0m - Epoch [18] Batch [240/504] Loss: 0.0691 Acc: 62.15%
+[2025-12-03 07:37:29] src.utils.training - [32mINFO[0m - Epoch [18] Batch [250/504] Loss: 0.0691 Acc: 62.19%
+[2025-12-03 07:37:47] src.utils.training - [32mINFO[0m - Epoch [18] Batch [260/504] Loss: 0.0691 Acc: 62.25%
+[2025-12-03 07:38:13] src.utils.training - [32mINFO[0m - Epoch [18] Batch [270/504] Loss: 0.0691 Acc: 62.25%
+[2025-12-03 07:38:32] src.utils.training - [32mINFO[0m - Epoch [18] Batch [280/504] Loss: 0.0692 Acc: 62.21%
+[2025-12-03 07:38:56] src.utils.training - [32mINFO[0m - Epoch [18] Batch [290/504] Loss: 0.0692 Acc: 62.21%
+[2025-12-03 07:39:14] src.utils.training - [32mINFO[0m - Epoch [18] Batch [300/504] Loss: 0.0692 Acc: 62.21%
+[2025-12-03 07:39:39] src.utils.training - [32mINFO[0m - Epoch [18] Batch [310/504] Loss: 0.0694 Acc: 62.13%
+[2025-12-03 07:39:59] src.utils.training - [32mINFO[0m - Epoch [18] Batch [320/504] Loss: 0.0693 Acc: 62.13%
+[2025-12-03 07:40:22] src.utils.training - [32mINFO[0m - Epoch [18] Batch [330/504] Loss: 0.0693 Acc: 62.15%
+[2025-12-03 07:40:41] src.utils.training - [32mINFO[0m - Epoch [18] Batch [340/504] Loss: 0.0693 Acc: 62.16%
+[2025-12-03 07:41:04] src.utils.training - [32mINFO[0m - Epoch [18] Batch [350/504] Loss: 0.0693 Acc: 62.14%
+[2025-12-03 07:41:23] src.utils.training - [32mINFO[0m - Epoch [18] Batch [360/504] Loss: 0.0693 Acc: 62.10%
+[2025-12-03 07:41:49] src.utils.training - [32mINFO[0m - Epoch [18] Batch [370/504] Loss: 0.0693 Acc: 62.11%
+[2025-12-03 07:42:06] src.utils.training - [32mINFO[0m - Epoch [18] Batch [380/504] Loss: 0.0692 Acc: 62.17%
+[2025-12-03 07:42:30] src.utils.training - [32mINFO[0m - Epoch [18] Batch [390/504] Loss: 0.0693 Acc: 62.14%
+[2025-12-03 07:42:49] src.utils.training - [32mINFO[0m - Epoch [18] Batch [400/504] Loss: 0.0692 Acc: 62.13%
+[2025-12-03 07:43:13] src.utils.training - [32mINFO[0m - Epoch [18] Batch [410/504] Loss: 0.0692 Acc: 62.14%
+[2025-12-03 07:43:32] src.utils.training - [32mINFO[0m - Epoch [18] Batch [420/504] Loss: 0.0692 Acc: 62.10%
+[2025-12-03 07:43:55] src.utils.training - [32mINFO[0m - Epoch [18] Batch [430/504] Loss: 0.0691 Acc: 62.15%
+[2025-12-03 07:44:12] src.utils.training - [32mINFO[0m - Epoch [18] Batch [440/504] Loss: 0.0691 Acc: 62.16%
+[2025-12-03 07:44:36] src.utils.training - [32mINFO[0m - Epoch [18] Batch [450/504] Loss: 0.0690 Acc: 62.17%
+[2025-12-03 07:44:54] src.utils.training - [32mINFO[0m - Epoch [18] Batch [460/504] Loss: 0.0690 Acc: 62.20%
+[2025-12-03 07:45:18] src.utils.training - [32mINFO[0m - Epoch [18] Batch [470/504] Loss: 0.0690 Acc: 62.18%
+[2025-12-03 07:45:35] src.utils.training - [32mINFO[0m - Epoch [18] Batch [480/504] Loss: 0.0690 Acc: 62.14%
+[2025-12-03 07:45:59] src.utils.training - [32mINFO[0m - Epoch [18] Batch [490/504] Loss: 0.0690 Acc: 62.16%
+[2025-12-03 07:46:18] src.utils.training - [32mINFO[0m - Epoch [18] Batch [500/504] Loss: 0.0689 Acc: 62.18%
+[2025-12-03 07:46:26] src.utils.training - [32mINFO[0m - Epoch [18] Training Completed in 1079s - Loss: 0.0689 Acc: 62.18%
+[2025-12-03 07:48:18] src.utils.clip_level_evaluation - [32mINFO[0m - [VAL] Batch 50/109 Loss: 0.0426
+[2025-12-03 07:50:04] src.utils.clip_level_evaluation - [32mINFO[0m - [VAL] Batch 100/109 Loss: 0.0632
+[2025-12-03 07:50:29] src.utils.clip_level_evaluation - [32mINFO[0m - [VAL] Finished in 243s
+[2025-12-03 07:50:29] src.utils.clip_level_evaluation - [32mINFO[0m - Results:
+Loss: 0.0689 | Acc: 59.16% | AUC: 0.6460
+   >> Anomaly: P=0.417 R=0.607 F1=0.494
+   >> Normal:  P=0.752 R=0.584
+   >> Counts:  TP=2776 FN=1800 (Missed) | TN=5457 FP=3884 (False Alarm)
+   >> Rates:   FPR=0.4158 | FNR=0.3934
+[2025-12-03 07:50:29] __main__ - [32mINFO[0m - Epoch [18] Motion Validation - Loss: 0.0689 | Acc: 59.16% | AUC: 0.6460
+[2025-12-03 07:50:29] __main__ - [32mINFO[0m -   Motion Anomaly Stats: P=0.417 R=0.607 F1=0.494
+[2025-12-03 07:50:29] __main__ - [32mINFO[0m -   Conf Matrix: TP=2776 FN=1800 TN=5457 FP=3884
+[2025-12-03 07:50:29] src.utils.training_utils - [32mINFO[0m - No improvement for 1/10 epochs
+[2025-12-03 07:50:57] src.utils.training - [32mINFO[0m - Epoch [19] Batch [10/504] Loss: 0.0677 Acc: 63.52%
+[2025-12-03 07:51:15] src.utils.training - [32mINFO[0m - Epoch [19] Batch [20/504] Loss: 0.0693 Acc: 61.72%
+[2025-12-03 07:51:40] src.utils.training - [32mINFO[0m - Epoch [19] Batch [30/504] Loss: 0.0701 Acc: 61.17%
+[2025-12-03 07:51:59] src.utils.training - [32mINFO[0m - Epoch [19] Batch [40/504] Loss: 0.0692 Acc: 61.56%
+[2025-12-03 07:52:22] src.utils.training - [32mINFO[0m - Epoch [19] Batch [50/504] Loss: 0.0690 Acc: 61.52%
+[2025-12-03 07:52:42] src.utils.training - [32mINFO[0m - Epoch [19] Batch [60/504] Loss: 0.0689 Acc: 61.56%
+[2025-12-03 07:53:06] src.utils.training - [32mINFO[0m - Epoch [19] Batch [70/504] Loss: 0.0691 Acc: 61.83%
+[2025-12-03 07:53:24] src.utils.training - [32mINFO[0m - Epoch [19] Batch [80/504] Loss: 0.0690 Acc: 61.87%
+[2025-12-03 07:53:49] src.utils.training - [32mINFO[0m - Epoch [19] Batch [90/504] Loss: 0.0691 Acc: 61.66%
+[2025-12-03 07:54:07] src.utils.training - [32mINFO[0m - Epoch [19] Batch [100/504] Loss: 0.0692 Acc: 61.60%
+[2025-12-03 07:54:31] src.utils.training - [32mINFO[0m - Epoch [19] Batch [110/504] Loss: 0.0697 Acc: 61.55%
+[2025-12-03 07:54:50] src.utils.training - [32mINFO[0m - Epoch [19] Batch [120/504] Loss: 0.0697 Acc: 61.61%
+[2025-12-03 07:55:14] src.utils.training - [32mINFO[0m - Epoch [19] Batch [130/504] Loss: 0.0697 Acc: 61.62%
+[2025-12-03 07:55:32] src.utils.training - [32mINFO[0m - Epoch [19] Batch [140/504] Loss: 0.0696 Acc: 61.66%
+[2025-12-03 07:55:56] src.utils.training - [32mINFO[0m - Epoch [19] Batch [150/504] Loss: 0.0695 Acc: 61.68%
+[2025-12-03 07:56:15] src.utils.training - [32mINFO[0m - Epoch [19] Batch [160/504] Loss: 0.0696 Acc: 61.70%
+[2025-12-03 07:56:39] src.utils.training - [32mINFO[0m - Epoch [19] Batch [170/504] Loss: 0.0696 Acc: 61.62%
+[2025-12-03 07:56:58] src.utils.training - [32mINFO[0m - Epoch [19] Batch [180/504] Loss: 0.0698 Acc: 61.66%
+[2025-12-03 07:57:21] src.utils.training - [32mINFO[0m - Epoch [19] Batch [190/504] Loss: 0.0697 Acc: 61.67%
+[2025-12-03 07:57:40] src.utils.training - [32mINFO[0m - Epoch [19] Batch [200/504] Loss: 0.0696 Acc: 61.68%
+[2025-12-03 07:58:03] src.utils.training - [32mINFO[0m - Epoch [19] Batch [210/504] Loss: 0.0696 Acc: 61.67%
+[2025-12-03 07:58:25] src.utils.training - [32mINFO[0m - Epoch [19] Batch [220/504] Loss: 0.0694 Acc: 61.75%
+[2025-12-03 07:58:45] src.utils.training - [32mINFO[0m - Epoch [19] Batch [230/504] Loss: 0.0693 Acc: 61.73%
+[2025-12-03 07:59:07] src.utils.training - [32mINFO[0m - Epoch [19] Batch [240/504] Loss: 0.0693 Acc: 61.71%
+[2025-12-03 07:59:27] src.utils.training - [32mINFO[0m - Epoch [19] Batch [250/504] Loss: 0.0693 Acc: 61.76%
+[2025-12-03 07:59:49] src.utils.training - [32mINFO[0m - Epoch [19] Batch [260/504] Loss: 0.0693 Acc: 61.71%
+[2025-12-03 08:00:08] src.utils.training - [32mINFO[0m - Epoch [19] Batch [270/504] Loss: 0.0692 Acc: 61.71%
+[2025-12-03 08:00:32] src.utils.training - [32mINFO[0m - Epoch [19] Batch [280/504] Loss: 0.0692 Acc: 61.70%
+[2025-12-03 08:00:51] src.utils.training - [32mINFO[0m - Epoch [19] Batch [290/504] Loss: 0.0693 Acc: 61.69%
+[2025-12-03 08:01:14] src.utils.training - [32mINFO[0m - Epoch [19] Batch [300/504] Loss: 0.0692 Acc: 61.72%
+[2025-12-03 08:01:33] src.utils.training - [32mINFO[0m - Epoch [19] Batch [310/504] Loss: 0.0692 Acc: 61.83%
+[2025-12-03 08:01:57] src.utils.training - [32mINFO[0m - Epoch [19] Batch [320/504] Loss: 0.0691 Acc: 61.84%
+[2025-12-03 08:02:15] src.utils.training - [32mINFO[0m - Epoch [19] Batch [330/504] Loss: 0.0690 Acc: 61.89%
+[2025-12-03 08:02:39] src.utils.training - [32mINFO[0m - Epoch [19] Batch [340/504] Loss: 0.0690 Acc: 61.84%
+[2025-12-03 08:02:57] src.utils.training - [32mINFO[0m - Epoch [19] Batch [350/504] Loss: 0.0691 Acc: 61.83%
+[2025-12-03 08:03:21] src.utils.training - [32mINFO[0m - Epoch [19] Batch [360/504] Loss: 0.0691 Acc: 61.84%
+[2025-12-03 08:03:40] src.utils.training - [32mINFO[0m - Epoch [19] Batch [370/504] Loss: 0.0691 Acc: 61.90%
+[2025-12-03 08:04:04] src.utils.training - [32mINFO[0m - Epoch [19] Batch [380/504] Loss: 0.0692 Acc: 61.88%
+[2025-12-03 08:04:22] src.utils.training - [32mINFO[0m - Epoch [19] Batch [390/504] Loss: 0.0693 Acc: 61.80%
+[2025-12-03 08:04:47] src.utils.training - [32mINFO[0m - Epoch [19] Batch [400/504] Loss: 0.0694 Acc: 61.76%
+[2025-12-03 08:05:05] src.utils.training - [32mINFO[0m - Epoch [19] Batch [410/504] Loss: 0.0694 Acc: 61.75%
+[2025-12-03 08:05:30] src.utils.training - [32mINFO[0m - Epoch [19] Batch [420/504] Loss: 0.0693 Acc: 61.76%
+[2025-12-03 08:05:48] src.utils.training - [32mINFO[0m - Epoch [19] Batch [430/504] Loss: 0.0693 Acc: 61.75%
+[2025-12-03 08:06:13] src.utils.training - [32mINFO[0m - Epoch [19] Batch [440/504] Loss: 0.0693 Acc: 61.71%
+[2025-12-03 08:06:31] src.utils.training - [32mINFO[0m - Epoch [19] Batch [450/504] Loss: 0.0692 Acc: 61.68%
+[2025-12-03 08:06:56] src.utils.training - [32mINFO[0m - Epoch [19] Batch [460/504] Loss: 0.0693 Acc: 61.64%
+[2025-12-03 08:07:14] src.utils.training - [32mINFO[0m - Epoch [19] Batch [470/504] Loss: 0.0693 Acc: 61.66%
+[2025-12-03 08:07:39] src.utils.training - [32mINFO[0m - Epoch [19] Batch [480/504] Loss: 0.0693 Acc: 61.66%
+[2025-12-03 08:07:57] src.utils.training - [32mINFO[0m - Epoch [19] Batch [490/504] Loss: 0.0693 Acc: 61.63%
+[2025-12-03 08:08:22] src.utils.training - [32mINFO[0m - Epoch [19] Batch [500/504] Loss: 0.0695 Acc: 61.61%
+[2025-12-03 08:08:28] src.utils.training - [32mINFO[0m - Epoch [19] Training Completed in 1079s - Loss: 0.0694 Acc: 61.65%
+[2025-12-03 08:10:18] src.utils.clip_level_evaluation - [32mINFO[0m - [VAL] Batch 50/109 Loss: 0.0419
+[2025-12-03 08:12:01] src.utils.clip_level_evaluation - [32mINFO[0m - [VAL] Batch 100/109 Loss: 0.0630
+[2025-12-03 08:12:25] src.utils.clip_level_evaluation - [32mINFO[0m - [VAL] Finished in 236s
+[2025-12-03 08:12:25] src.utils.clip_level_evaluation - [32mINFO[0m - Results:
+Loss: 0.0688 | Acc: 59.60% | AUC: 0.6491
+   >> Anomaly: P=0.420 R=0.598 F1=0.493
+   >> Normal:  P=0.751 R=0.595
+   >> Counts:  TP=2735 FN=1841 (Missed) | TN=5560 FP=3781 (False Alarm)
+   >> Rates:   FPR=0.4048 | FNR=0.4023
+[2025-12-03 08:12:25] __main__ - [32mINFO[0m - Epoch [19] Motion Validation - Loss: 0.0688 | Acc: 59.60% | AUC: 0.6491
+[2025-12-03 08:12:25] __main__ - [32mINFO[0m -   Motion Anomaly Stats: P=0.420 R=0.598 F1=0.493
+[2025-12-03 08:12:25] __main__ - [32mINFO[0m -   Conf Matrix: TP=2735 FN=1841 TN=5560 FP=3781
+[2025-12-03 08:12:25] __main__ - [32mINFO[0m - 🔥 New Best Motion AUC: 0.6491
+[2025-12-03 08:12:25] src.utils.training_utils - [32mINFO[0m - Saved best model to /work3/s225224/ucf-crime/checkpoints/r3d_motion_sobel_20251203_004534/best_model.pth
+[2025-12-03 08:12:55] src.utils.training - [32mINFO[0m - Epoch [20] Batch [10/504] Loss: 0.0699 Acc: 62.19%
+[2025-12-03 08:13:14] src.utils.training - [32mINFO[0m - Epoch [20] Batch [20/504] Loss: 0.0693 Acc: 62.58%
+[2025-12-03 08:13:38] src.utils.training - [32mINFO[0m - Epoch [20] Batch [30/504] Loss: 0.0698 Acc: 62.47%
+[2025-12-03 08:13:57] src.utils.training - [32mINFO[0m - Epoch [20] Batch [40/504] Loss: 0.0682 Acc: 62.71%
+[2025-12-03 08:14:22] src.utils.training - [32mINFO[0m - Epoch [20] Batch [50/504] Loss: 0.0676 Acc: 62.64%
+[2025-12-03 08:14:40] src.utils.training - [32mINFO[0m - Epoch [20] Batch [60/504] Loss: 0.0683 Acc: 62.10%
+[2025-12-03 08:15:05] src.utils.training - [32mINFO[0m - Epoch [20] Batch [70/504] Loss: 0.0683 Acc: 62.09%
+[2025-12-03 08:15:24] src.utils.training - [32mINFO[0m - Epoch [20] Batch [80/504] Loss: 0.0677 Acc: 62.36%
+[2025-12-03 08:15:47] src.utils.training - [32mINFO[0m - Epoch [20] Batch [90/504] Loss: 0.0678 Acc: 61.90%
+[2025-12-03 08:16:06] src.utils.training - [32mINFO[0m - Epoch [20] Batch [100/504] Loss: 0.0677 Acc: 62.05%
+[2025-12-03 08:16:30] src.utils.training - [32mINFO[0m - Epoch [20] Batch [110/504] Loss: 0.0679 Acc: 61.99%
+[2025-12-03 08:16:48] src.utils.training - [32mINFO[0m - Epoch [20] Batch [120/504] Loss: 0.0682 Acc: 61.92%
+[2025-12-03 08:17:12] src.utils.training - [32mINFO[0m - Epoch [20] Batch [130/504] Loss: 0.0684 Acc: 61.78%
+[2025-12-03 08:17:31] src.utils.training - [32mINFO[0m - Epoch [20] Batch [140/504] Loss: 0.0682 Acc: 61.85%
+[2025-12-03 08:17:55] src.utils.training - [32mINFO[0m - Epoch [20] Batch [150/504] Loss: 0.0683 Acc: 61.83%
+[2025-12-03 08:18:13] src.utils.training - [32mINFO[0m - Epoch [20] Batch [160/504] Loss: 0.0684 Acc: 61.89%
+[2025-12-03 08:18:38] src.utils.training - [32mINFO[0m - Epoch [20] Batch [170/504] Loss: 0.0689 Acc: 61.77%
+[2025-12-03 08:18:57] src.utils.training - [32mINFO[0m - Epoch [20] Batch [180/504] Loss: 0.0689 Acc: 61.78%
+[2025-12-03 08:19:21] src.utils.training - [32mINFO[0m - Epoch [20] Batch [190/504] Loss: 0.0689 Acc: 61.83%
+[2025-12-03 08:19:39] src.utils.training - [32mINFO[0m - Epoch [20] Batch [200/504] Loss: 0.0691 Acc: 61.79%
+[2025-12-03 08:20:04] src.utils.training - [32mINFO[0m - Epoch [20] Batch [210/504] Loss: 0.0689 Acc: 61.85%
+[2025-12-03 08:20:22] src.utils.training - [32mINFO[0m - Epoch [20] Batch [220/504] Loss: 0.0687 Acc: 61.92%
+[2025-12-03 08:20:46] src.utils.training - [32mINFO[0m - Epoch [20] Batch [230/504] Loss: 0.0686 Acc: 61.96%
+[2025-12-03 08:21:05] src.utils.training - [32mINFO[0m - Epoch [20] Batch [240/504] Loss: 0.0686 Acc: 61.91%
+[2025-12-03 08:21:29] src.utils.training - [32mINFO[0m - Epoch [20] Batch [250/504] Loss: 0.0686 Acc: 61.86%
+[2025-12-03 08:21:47] src.utils.training - [32mINFO[0m - Epoch [20] Batch [260/504] Loss: 0.0689 Acc: 61.82%
+[2025-12-03 08:22:11] src.utils.training - [32mINFO[0m - Epoch [20] Batch [270/504] Loss: 0.0689 Acc: 61.74%
+[2025-12-03 08:22:29] src.utils.training - [32mINFO[0m - Epoch [20] Batch [280/504] Loss: 0.0691 Acc: 61.70%
+[2025-12-03 08:22:53] src.utils.training - [32mINFO[0m - Epoch [20] Batch [290/504] Loss: 0.0690 Acc: 61.76%
+[2025-12-03 08:23:11] src.utils.training - [32mINFO[0m - Epoch [20] Batch [300/504] Loss: 0.0690 Acc: 61.76%
+[2025-12-03 08:23:34] src.utils.training - [32mINFO[0m - Epoch [20] Batch [310/504] Loss: 0.0691 Acc: 61.76%
+[2025-12-03 08:23:52] src.utils.training - [32mINFO[0m - Epoch [20] Batch [320/504] Loss: 0.0689 Acc: 61.84%
+[2025-12-03 08:24:16] src.utils.training - [32mINFO[0m - Epoch [20] Batch [330/504] Loss: 0.0689 Acc: 61.84%
+[2025-12-03 08:24:35] src.utils.training - [32mINFO[0m - Epoch [20] Batch [340/504] Loss: 0.0689 Acc: 61.79%
+[2025-12-03 08:25:00] src.utils.training - [32mINFO[0m - Epoch [20] Batch [350/504] Loss: 0.0688 Acc: 61.79%
+[2025-12-03 08:25:18] src.utils.training - [32mINFO[0m - Epoch [20] Batch [360/504] Loss: 0.0687 Acc: 61.84%
+[2025-12-03 08:25:42] src.utils.training - [32mINFO[0m - Epoch [20] Batch [370/504] Loss: 0.0688 Acc: 61.89%
+[2025-12-03 08:26:04] src.utils.training - [32mINFO[0m - Epoch [20] Batch [380/504] Loss: 0.0688 Acc: 61.88%
+[2025-12-03 08:26:29] src.utils.training - [32mINFO[0m - Epoch [20] Batch [390/504] Loss: 0.0688 Acc: 61.89%
+[2025-12-03 08:26:47] src.utils.training - [32mINFO[0m - Epoch [20] Batch [400/504] Loss: 0.0688 Acc: 61.90%
+[2025-12-03 08:27:11] src.utils.training - [32mINFO[0m - Epoch [20] Batch [410/504] Loss: 0.0688 Acc: 61.89%
+[2025-12-03 08:27:30] src.utils.training - [32mINFO[0m - Epoch [20] Batch [420/504] Loss: 0.0687 Acc: 61.92%
+[2025-12-03 08:27:55] src.utils.training - [32mINFO[0m - Epoch [20] Batch [430/504] Loss: 0.0688 Acc: 61.92%
+[2025-12-03 08:28:14] src.utils.training - [32mINFO[0m - Epoch [20] Batch [440/504] Loss: 0.0686 Acc: 62.01%
+[2025-12-03 08:28:39] src.utils.training - [32mINFO[0m - Epoch [20] Batch [450/504] Loss: 0.0686 Acc: 62.05%
+[2025-12-03 08:28:57] src.utils.training - [32mINFO[0m - Epoch [20] Batch [460/504] Loss: 0.0686 Acc: 62.04%
+[2025-12-03 08:29:21] src.utils.training - [32mINFO[0m - Epoch [20] Batch [470/504] Loss: 0.0686 Acc: 62.00%
+[2025-12-03 08:29:40] src.utils.training - [32mINFO[0m - Epoch [20] Batch [480/504] Loss: 0.0686 Acc: 62.00%
+[2025-12-03 08:30:03] src.utils.training - [32mINFO[0m - Epoch [20] Batch [490/504] Loss: 0.0685 Acc: 62.08%
+[2025-12-03 08:30:21] src.utils.training - [32mINFO[0m - Epoch [20] Batch [500/504] Loss: 0.0686 Acc: 62.06%
+[2025-12-03 08:30:29] src.utils.training - [32mINFO[0m - Epoch [20] Training Completed in 1084s - Loss: 0.0686 Acc: 62.08%
+[2025-12-03 08:32:15] src.utils.clip_level_evaluation - [32mINFO[0m - [VAL] Batch 50/109 Loss: 0.0421
+[2025-12-03 08:33:51] src.utils.clip_level_evaluation - [32mINFO[0m - [VAL] Batch 100/109 Loss: 0.0630
+[2025-12-03 08:34:13] src.utils.clip_level_evaluation - [32mINFO[0m - [VAL] Finished in 224s
+[2025-12-03 08:34:13] src.utils.clip_level_evaluation - [32mINFO[0m - Results:
+Loss: 0.0687 | Acc: 59.62% | AUC: 0.6500
+   >> Anomaly: P=0.420 R=0.601 F1=0.495
+   >> Normal:  P=0.752 R=0.594
+   >> Counts:  TP=2752 FN=1824 (Missed) | TN=5545 FP=3796 (False Alarm)
+   >> Rates:   FPR=0.4064 | FNR=0.3986
+[2025-12-03 08:34:13] __main__ - [32mINFO[0m - Epoch [20] Motion Validation - Loss: 0.0687 | Acc: 59.62% | AUC: 0.6500
+[2025-12-03 08:34:13] __main__ - [32mINFO[0m -   Motion Anomaly Stats: P=0.420 R=0.601 F1=0.495
+[2025-12-03 08:34:13] __main__ - [32mINFO[0m -   Conf Matrix: TP=2752 FN=1824 TN=5545 FP=3796
+[2025-12-03 08:34:13] __main__ - [32mINFO[0m - 🔥 New Best Motion AUC: 0.6500
+[2025-12-03 08:34:14] src.utils.training_utils - [32mINFO[0m - Saved best model to /work3/s225224/ucf-crime/checkpoints/r3d_motion_sobel_20251203_004534/best_model.pth
+[2025-12-03 08:34:14] __main__ - [32mINFO[0m - Motion Training complete. Best AUC: 0.6500 at epoch 20
+[2025-12-03 08:34:14] __main__ - [32mINFO[0m - Training history saved to: /work3/s225224/ucf-crime/checkpoints/r3d_motion_sobel_20251203_004534/training_history.csv
+
+------------------------------------------------------------
+Sender: LSF System <lsfadmin@hpc.dtu.dk>
+Subject: Job 27257080: <train_r3d_temporal_a40> in cluster <dcc> Done
+
+Job <train_r3d_temporal_a40> was submitted from host <n-62-11-12> by user <s225224> in cluster <dcc> at Wed Dec  3 00:06:34 2025
+Job was executed on host(s) <8*n-62-18-4>, in queue <gpua40>, as user <s225224> in cluster <dcc> at Wed Dec  3 00:45:08 2025
+</zhome/77/2/187952> was used as the home directory.
+</zhome/77/2/187952/projects/perimiter-net/jobs> was used as the working directory.
+Started at Wed Dec  3 00:45:08 2025
+Terminated at Wed Dec  3 08:34:19 2025
+Results reported at Wed Dec  3 08:34:19 2025
+
+Your job looked like:
+
+------------------------------------------------------------
+# LSBATCH: User input
+#!/bin/sh
+#BSUB -q gpua40
+#BSUB -gpu "num=1:mode=exclusive_process"
+#BSUB -J train_r3d_temporal_a40
+#BSUB -n 8
+#BSUB -R "span[hosts=1]"
+#BSUB -R "rusage[mem=16GB]"
+#BSUB -W 12:00
+#BSUB -o outputs/output_r3d_temporal_a40_%J.out
+#BSUB -e outputs/output_r3d_temporal_a40_%J.err
+
+cd ~/projects/perimiter-net
+mkdir -p outputs
+
+uv sync
+
+uv run python scripts/training/train_r3d_temporal.py
+# IMPORTANT: Update batch_size=128 in train_r3d.py before submitting
+------------------------------------------------------------
+
+Successfully completed.
+
+Resource usage summary:
+
+    CPU time :                                   61279.74 sec.
+    Max Memory :                                 3620 MB
+    Average Memory :                             3086.01 MB
+    Total Requested Memory :                     131072.00 MB
+    Delta Memory :                               127452.00 MB
+    Max Swap :                                   -
+    Max Processes :                              9
+    Max Threads :                                27
+    Run time :                                   28151 sec.
+    Turnaround time :                            30465 sec.
+
+The output (if any) is above this job summary.
+
+
+
+PS:
+
+Read file <outputs/output_r3d_temporal_a40_27257080.err> for stderr output of this job.
+
