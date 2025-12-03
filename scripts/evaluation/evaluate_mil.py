@@ -64,6 +64,7 @@ def main():
     segments = 32
     clip_len = 16
     stride = 16
+    frame_start_idx = 1  # UCF-Crime frame indices are 1-based in annotations
 
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
@@ -106,6 +107,7 @@ def main():
         segments=segments,
         clip_len=clip_len,
         stride=stride,
+        frame_start_idx=frame_start_idx,
         decision_threshold=None,
     )
 

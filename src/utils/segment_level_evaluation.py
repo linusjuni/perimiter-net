@@ -128,12 +128,13 @@ def _build_segment_labels(
     segments: int,
     clip_len: int = 16,
     stride: int = 16,
+    frame_start_idx: int = 0,
 ) -> np.ndarray:
     """Create per-segment labels by checking clip/frame overlap with annotations."""
     clip_labels = np.zeros(num_clips, dtype=np.int32)
 
     for idx in range(num_clips):
-        start = idx * stride
+        start = frame_start_idx + idx * stride
         end = start + clip_len - 1
 
         for ann_start, ann_end in annotation_intervals:
@@ -161,6 +162,7 @@ def evaluate_segment_level(
     segments: int = 32,
     clip_len: int = 16,
     stride: int = 16,
+    frame_start_idx: int = 0,
     decision_threshold: Optional[float] = None,
 ) -> Tuple[SegmentLevelMetrics, SegmentLevelCurves, list, np.ndarray, np.ndarray]:
     """
@@ -174,6 +176,7 @@ def evaluate_segment_level(
         segments: Number of segments to interpolate to (matches training)
         clip_len: Frames per clip used during feature extraction
         stride: Stride between clips during feature extraction
+        frame_start_idx: First frame index used during feature extraction (e.g., 0 or 1)
         decision_threshold: Optional fixed threshold; defaults to Youden's J
 
     Returns:
@@ -217,6 +220,7 @@ def evaluate_segment_level(
                 segments=segments,
                 clip_len=clip_len,
                 stride=stride,
+                frame_start_idx=frame_start_idx,
             )
 
             # Features -> segments
