@@ -111,17 +111,23 @@ def plot_comparison(histories: List[Tuple[str, pd.DataFrame]], out_dir: Path, ta
         axes[0].set_ylabel("Loss")
         axes[0].xaxis.set_major_locator(MaxNLocator(integer=True))
         y_top = axes[0].get_ylim()[1]
+        x_min, x_max = axes[0].get_xlim()
+        x_span = max(x_max - x_min, 1e-6)
+        x_mid = x_min + x_span / 2
+        x_offset = 0.01 * x_span
         for run, epoch in best_epochs.items():
             axes[0].axvline(epoch, color=BEST_LINE_COLOR, linestyle="-", linewidth=1.1, alpha=0.9)
             axes[0].text(
-                epoch,
+                epoch + (-x_offset if epoch > x_mid else x_offset),
                 y_top,
                 f"best {run}",
                 rotation=90,
                 va="top",
-                ha="right",
+                ha="right" if epoch > x_mid else "left",
                 fontsize=8.5,
                 color=BEST_LINE_COLOR,
+                bbox=dict(facecolor="white", edgecolor="none", alpha=0.8, pad=0.2),
+                zorder=5,
             )
     else:
         axes[0].set_visible(False)
