@@ -57,7 +57,7 @@ def plot_loss(df: pd.DataFrame, out_dir: Path):
         sns.lineplot(data=data, x="epoch", y="train_loss", label="Train Loss", ax=ax)
     if val_data is not None and not val_data.empty:
         sns.lineplot(data=val_data, x="epoch", y="val_loss", label="Val Loss", ax=ax)
-    ax.set_title("Loss vs Epoch")
+    ax.set_title("Video-Level Loss vs Epoch")
     ax.set_xlabel("Epoch")
     ax.set_ylabel("Loss")
     ax.legend()
@@ -85,7 +85,7 @@ def plot_accuracy(df: pd.DataFrame, out_dir: Path):
         sns.lineplot(data=train_data, x="epoch", y="train_acc", label="Train Acc", ax=ax)
     if val_data is not None and not val_data.empty:
         sns.lineplot(data=val_data, x="epoch", y="val_acc", label="Val Acc", ax=ax)
-    ax.set_title("Accuracy vs Epoch")
+    ax.set_title("Video-Level Accuracy vs Epoch")
     ax.set_xlabel("Epoch")
     ax.set_ylabel("Accuracy (%)")
     ax.legend()
@@ -105,7 +105,7 @@ def plot_auc(df: pd.DataFrame, out_dir: Path):
         return
     fig, ax = plt.subplots(figsize=(8, 5))
     sns.lineplot(data=data, x="epoch", y="val_auc", label="Val AUC", ax=ax)
-    ax.set_title("Validation AUC vs Epoch")
+    ax.set_title("Video-Level Validation AUC vs Epoch")
     ax.set_xlabel("Epoch")
     ax.set_ylabel("AUC")
     ax.legend()
