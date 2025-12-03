@@ -7,6 +7,7 @@ matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 import pandas as pd
 import seaborn as sns
+from matplotlib.ticker import MaxNLocator
 
 sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 
@@ -56,6 +57,7 @@ def plot_loss(df: pd.DataFrame, out_dir: Path):
     ax.set_xlabel("Epoch")
     ax.set_ylabel("Loss")
     ax.legend()
+    ax.xaxis.set_major_locator(MaxNLocator(integer=True))
     fig.tight_layout()
     fig.savefig(out_dir / "loss.png", dpi=150)
     plt.close(fig)
@@ -83,6 +85,7 @@ def plot_accuracy(df: pd.DataFrame, out_dir: Path):
     ax.set_xlabel("Epoch")
     ax.set_ylabel("Accuracy (%)")
     ax.legend()
+    ax.xaxis.set_major_locator(MaxNLocator(integer=True))
     fig.tight_layout()
     fig.savefig(out_dir / "accuracy.png", dpi=150)
     plt.close(fig)
@@ -102,6 +105,7 @@ def plot_auc(df: pd.DataFrame, out_dir: Path):
     ax.set_xlabel("Epoch")
     ax.set_ylabel("AUC")
     ax.legend()
+    ax.xaxis.set_major_locator(MaxNLocator(integer=True))
     fig.tight_layout()
     fig.savefig(out_dir / "val_auc.png", dpi=150)
     plt.close(fig)
@@ -121,6 +125,7 @@ def plot_learning_rate(df: pd.DataFrame, out_dir: Path):
     ax.set_xlabel("Epoch")
     ax.set_ylabel("LR")
     ax.legend()
+    ax.xaxis.set_major_locator(MaxNLocator(integer=True))
     fig.tight_layout()
     fig.savefig(out_dir / "learning_rate.png", dpi=150)
     plt.close(fig)
