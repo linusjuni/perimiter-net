@@ -67,13 +67,13 @@ def main():
 
     # Precision-Recall curve
     logger.info("Plotting Precision-Recall curve...")
-    plot_precision_recall_curve(
-        precision,
-        recall,
-        plot_dir / f"precision_recall_{run_label}.png",
-        positive_rate=positive_rate,
-        title="Segment-Level Precision-Recall Curve",
-    )
+        plot_precision_recall_curve(
+            precision,
+            recall,
+            plot_dir / f"precision_recall_{run_label}.png",
+            positive_rate=positive_rate,
+            title="Segment-Level Precision-Recall Curve",
+        )
 
     # Confusion matrix
     logger.info("Plotting confusion matrix...")
