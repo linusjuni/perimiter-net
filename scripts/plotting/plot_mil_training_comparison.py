@@ -97,9 +97,9 @@ def plot_comparison(histories: List[Tuple[str, pd.DataFrame]], out_dir: Path, ta
     # Add vertical lines for best epochs
     y_min, y_max = ax.get_ylim()
     for best_epoch, color, label in best_epochs:
-        ax.axvline(best_epoch, color=color, linestyle=":", linewidth=1.5, alpha=0.8)
+        ax.axvline(best_epoch, color=color, linestyle=":", linewidth=2, alpha=0.8)
         ax.text(best_epoch + 0.5, y_max * 0.95, f"Best {label}",
-                rotation=90, va="top", ha="left", fontsize=9, color=color)
+                rotation=90, va="top", ha="left", fontsize=12, color=color)
 
     ax.set_title("Training vs Validation Loss", fontsize=14)
     ax.set_xlabel("Epoch", fontsize=12)
