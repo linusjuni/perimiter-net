@@ -213,6 +213,10 @@ def evaluate_segment_level(
 
             num_clips, feat_dim = features.shape
 
+            # Clip-level frame ranges
+            clip_starts = frame_start_idx + np.arange(num_clips) * stride
+            clip_ends = clip_starts + clip_len - 1
+
             # Labels
             segment_labels = _build_segment_labels(
                 num_clips=num_clips,
@@ -222,6 +226,22 @@ def evaluate_segment_level(
                 stride=stride,
                 frame_start_idx=frame_start_idx,
             )
+
+            # Segment frame ranges (min/max over clips in each chunk)
+            seg_starts: List[float] = []
+            seg_ends: List[float] = []
+            seg_centers: List[float] = []
+            clip_indices_chunks = np.array_split(np.arange(num_clips), segments)
+            for chunk in clip_indices_chunks:
+                if len(chunk) > 0:
+                    start = float(np.min(clip_starts[chunk]))
+                    end = float(np.max(clip_ends[chunk]))
+                else:
+                    start = float(frame_start_idx)
+                    end = float(frame_start_idx)
+                seg_starts.append(start)
+                seg_ends.append(end)
+                seg_centers.append((start + end) / 2.0)
 
             # Features -> segments
             seg_features = _interpolate_features(features, segments=segments)
@@ -254,7 +274,8 @@ def evaluate_segment_level(
                     video_auc,
                     seg_scores,
                     segment_labels,
-                    segment_frame_centers,
+                    seg_centers,
+                    list(zip(seg_starts, seg_ends)),
                     intervals,
                 )
             )
@@ -413,7 +434,7 @@ def save_segment_level_results(
                     "video_auc": auc,
                     "intervals": intervals,
                 }
-                for vid, auc, _, _, _, intervals in video_results
+                for vid, auc, _, _, _, _, intervals in video_results
             ],
             f,
             indent=2,
