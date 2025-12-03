@@ -38,7 +38,7 @@ def main():
     epochs = 2000
     batch_size = 30  # Videos per class (total batch = 60)
     segments = 32
-    patience = 50  # Early stopping patience
+    patience = 10
 
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
