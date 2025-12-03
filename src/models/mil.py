@@ -8,7 +8,7 @@ class MILModel(nn.Module):
     Output: Anomaly Scores (Batch, 32, 1)
     """
 
-    def __init__(self, input_dim=512):
+    def __init__(self, input_dim=512, dropout=0.6):
         super(MILModel, self).__init__()
 
         # Architecture following Sultani et al. (CVPR 2018)
@@ -16,7 +16,7 @@ class MILModel(nn.Module):
         self.fc2 = nn.Linear(32, 1)
 
         self.relu = nn.ReLU()
-        self.dropout = nn.Dropout(0.6)
+        self.dropout = nn.Dropout(dropout)
         self.sigmoid = nn.Sigmoid()
 
         # Weight Initialization

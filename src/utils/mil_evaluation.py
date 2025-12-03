@@ -47,6 +47,7 @@ def evaluate_mil(
     criterion,  # MILRankingLoss
     device: torch.device,
     split: str = "val",
+    return_scores: bool = False,
 ) -> MILMetrics:
     """
     Evaluate MIL model on video-level anomaly detection.
@@ -61,9 +62,10 @@ def evaluate_mil(
         criterion: MILRankingLoss instance
         device: Device to evaluate on
         split: Split name for logging ('val' or 'test')
+        return_scores: If True, also return (y_true, y_scores) arrays
 
     Returns:
-        MILMetrics dataclass
+        MILMetrics dataclass (and optionally scores)
     """
     model.eval()
     start_time = time.time()
@@ -136,5 +138,8 @@ def evaluate_mil(
     )
 
     logger.info(f"[{split.upper()}] Evaluation [{duration:.0f}s] - {metrics}")
+
+    if return_scores:
+        return metrics, y_true, y_scores
 
     return metrics

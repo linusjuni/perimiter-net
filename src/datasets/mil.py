@@ -24,6 +24,8 @@ class MILDataLoader:
         split: str = "train",
         val_split: float = 0.2,
         random_seed: int = 69,
+        normal_files=None,
+        anomaly_files=None,
     ):
         """
         Args:
@@ -33,6 +35,8 @@ class MILDataLoader:
             split: 'train' or 'val'
             val_split: Fraction of data to use for validation (default: 0.2)
             random_seed: Random seed for reproducible splits (default: 42)
+            normal_files: Optional iterable of paths to use instead of scanning feature_dir (for CV)
+            anomaly_files: Optional iterable of paths to use instead of scanning feature_dir (for CV)
         """
         self.feature_dir = Path(feature_dir)
         self.segments = segments
@@ -40,6 +44,8 @@ class MILDataLoader:
         self.split = split
         self.val_split = val_split
         self.random_seed = random_seed
+        self.normal_files_override = normal_files
+        self.anomaly_files_override = anomaly_files
 
         # Load and separate videos
         logger.info(f"Loading MIL features from: {feature_dir} (split={split})")
@@ -74,75 +80,81 @@ class MILDataLoader:
         return interpolated
 
     def _load_videos(self) -> Tuple[List[np.ndarray], List[np.ndarray]]:
-        """Load videos and split into train/val deterministically."""
-        if not self.feature_dir.exists():
-            raise FileNotFoundError(f"Feature directory not found: {self.feature_dir}")
+        """Load videos and split into train/val deterministically or from overrides."""
+        # Use explicit file lists when provided (for cross-validation)
+        if self.normal_files_override is not None or self.anomaly_files_override is not None:
+            if self.normal_files_override is None or self.anomaly_files_override is None:
+                raise ValueError(
+                    "Both normal_files and anomaly_files must be provided when using overrides."
+                )
 
-        all_files = list(self.feature_dir.glob("*.npy"))
+            normal_files = sorted(
+                [Path(p) for p in self.normal_files_override], key=lambda x: x.name
+            )
+            anomaly_files = sorted(
+                [Path(p) for p in self.anomaly_files_override], key=lambda x: x.name
+            )
+        else:
+            if not self.feature_dir.exists():
+                raise FileNotFoundError(
+                    f"Feature directory not found: {self.feature_dir}"
+                )
 
-        if len(all_files) == 0:
-            raise ValueError(f"No .npy files found in {self.feature_dir}")
+            all_files = list(self.feature_dir.glob("*.npy"))
 
-        # Separate by class first
-        normal_files = []
-        anomaly_files = []
+            if len(all_files) == 0:
+                raise ValueError(f"No .npy files found in {self.feature_dir}")
 
-        for file_path in all_files:
-            if "Normal" in file_path.name:
-                normal_files.append(file_path)
-            else:
-                anomaly_files.append(file_path)
+            # Separate by class first
+            normal_files = []
+            anomaly_files = []
 
-        # Deterministic split (sort by name for reproducibility)
-        normal_files = sorted(normal_files, key=lambda x: x.name)
-        anomaly_files = sorted(anomaly_files, key=lambda x: x.name)
+            for file_path in all_files:
+                if "Normal" in file_path.name:
+                    normal_files.append(file_path)
+                else:
+                    anomaly_files.append(file_path)
 
-        # Set seed for reproducible split
-        rng = np.random.RandomState(self.random_seed)
+            # Deterministic split (sort by name for reproducibility)
+            normal_files = sorted(normal_files, key=lambda x: x.name)
+            anomaly_files = sorted(anomaly_files, key=lambda x: x.name)
 
-        # Split indices
-        n_norm_val = int(len(normal_files) * self.val_split)
-        n_anom_val = int(len(anomaly_files) * self.val_split)
+            # Set seed for reproducible split
+            rng = np.random.RandomState(self.random_seed)
 
-        # Shuffle indices (but deterministically)
-        norm_indices = np.arange(len(normal_files))
-        anom_indices = np.arange(len(anomaly_files))
-        rng.shuffle(norm_indices)
-        rng.shuffle(anom_indices)
+            # Split indices
+            n_norm_val = int(len(normal_files) * self.val_split)
+            n_anom_val = int(len(anomaly_files) * self.val_split)
 
-        # Select files based on split
-        if self.split == "val":
-            normal_files = [normal_files[i] for i in norm_indices[:n_norm_val]]
-            anomaly_files = [anomaly_files[i] for i in anom_indices[:n_anom_val]]
-        else:  # train
-            normal_files = [normal_files[i] for i in norm_indices[n_norm_val:]]
-            anomaly_files = [anomaly_files[i] for i in anom_indices[n_anom_val:]]
+            # Shuffle indices (but deterministically)
+            norm_indices = np.arange(len(normal_files))
+            anom_indices = np.arange(len(anomaly_files))
+            rng.shuffle(norm_indices)
+            rng.shuffle(anom_indices)
+
+            # Select files based on split
+            if self.split == "val":
+                normal_files = [normal_files[i] for i in norm_indices[:n_norm_val]]
+                anomaly_files = [anomaly_files[i] for i in anom_indices[:n_anom_val]]
+            else:  # train
+                normal_files = [normal_files[i] for i in norm_indices[n_norm_val:]]
+                anomaly_files = [
+                    anomaly_files[i] for i in anom_indices[n_anom_val:]
+                ]
 
         # Load features
         normal_videos = []
         anomaly_videos = []
 
         for file_path in normal_files:
-            try:
-                features = np.load(file_path)
-                if features.ndim != 2 or features.shape[0] == 0:
-                    continue
-                features = self._interpolate(features)
+            features = self._load_feature_file(file_path)
+            if features is not None:
                 normal_videos.append(features)
-            except Exception as e:
-                logger.error(f"Error loading {file_path.name}: {e}")
-                continue
 
         for file_path in anomaly_files:
-            try:
-                features = np.load(file_path)
-                if features.ndim != 2 or features.shape[0] == 0:
-                    continue
-                features = self._interpolate(features)
+            features = self._load_feature_file(file_path)
+            if features is not None:
                 anomaly_videos.append(features)
-            except Exception as e:
-                logger.error(f"Error loading {file_path.name}: {e}")
-                continue
 
         if len(normal_videos) == 0 or len(anomaly_videos) == 0:
             raise ValueError(
@@ -150,6 +162,17 @@ class MILDataLoader:
             )
 
         return normal_videos, anomaly_videos
+
+    def _load_feature_file(self, file_path: Path) -> np.ndarray | None:
+        """Load and interpolate a single feature file."""
+        try:
+            features = np.load(file_path)
+            if features.ndim != 2 or features.shape[0] == 0:
+                return None
+            return self._interpolate(features)
+        except Exception as e:
+            logger.error(f"Error loading {file_path.name}: {e}")
+            return None
 
     def get_batch(self, batch_size: int) -> Tuple[torch.Tensor, torch.Tensor]:
         """Sample a balanced batch of Normal and Anomaly videos."""
