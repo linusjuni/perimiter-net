@@ -71,7 +71,8 @@ def main():
     # Create experiment-specific results directory
     run_name = checkpoint_path.parent.name
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-    results_dir = results_base_dir / f"{run_name}_{timestamp}"
+    #results_dir = results_base_dir / f"{run_name}_{timestamp}" # choose this
+    results_dir = Path("results") / run_name  # saves to results/<run_name>/
     results_dir.mkdir(parents=True, exist_ok=True)
 
     logger.info("=" * 60)
@@ -105,7 +106,7 @@ def main():
         transform,
         device,
         clip_len=16,
-        stride=16,
+        stride=8,
         sigma=5,
     )
 
