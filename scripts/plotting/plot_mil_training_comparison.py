@@ -112,7 +112,7 @@ def plot_comparison(histories: List[Tuple[str, pd.DataFrame]], out_dir: Path, ta
         axes[0].xaxis.set_major_locator(MaxNLocator(integer=True))
         y_top = axes[0].get_ylim()[1]
         for run, epoch in best_epochs.items():
-            axes[0].axvline(epoch, color=BEST_LINE_COLOR, linestyle="--", linewidth=1.1, alpha=0.9)
+            axes[0].axvline(epoch, color=BEST_LINE_COLOR, linestyle="-", linewidth=1.1, alpha=0.9)
             axes[0].text(
                 epoch,
                 y_top,
