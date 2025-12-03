@@ -18,11 +18,11 @@ from src.utils.logger import get_logger
 
 logger = get_logger(__name__)
 
-sns.set_style("whitegrid")
+sns.set_style("white")
 sns.set_palette("muted")
 
 BEST_LINE_COLOR = "gray"
-MAX_EPOCH = 100
+MAX_EPOCH = 300
 
 
 def _friendly_run_label(run_name: str) -> str:
@@ -117,26 +117,51 @@ def plot_comparison(histories: List[Tuple[str, pd.DataFrame]], out_dir: Path, ta
 
     # Loss subplot
     if not loss_df.empty:
-        sns.lineplot(
-            data=loss_df,
-            x="epoch",
-            y="value",
-            hue="run_label",
-            style="split",
-            palette=run_palette,
-            ax=ax,
-        )
-        ax.set_title("Train/Val Loss Comparison")
+        ax.set_title("Training vs Validation Loss")
         ax.set_xlabel("Epoch")
         ax.set_ylabel("Loss")
         ax.xaxis.set_major_locator(MaxNLocator(integer=True))
         ax.set_xlim(0, MAX_EPOCH)
+
+        for run_label in run_labels:
+            color = run_palette.get(run_label)
+            for split, style in (("Train", "-"), ("Val", "--")):
+                data = loss_df[(loss_df["run_label"] == run_label) & (loss_df["split"] == split)]
+                if data.empty:
+                    continue
+                ax.plot(
+                    data["epoch"],
+                    data["value"],
+                    label=f"{run_label} ({split.lower()})",
+                    color=color,
+                    linestyle=style,
+                    linewidth=1.6,
+                )
+
+        ax.grid(True, color="#e5e5e5", linewidth=0.8, alpha=0.8)
+        ax.legend(frameon=True, fontsize=9)
+
         y_min, y_top = ax.get_ylim()
         y_span = max(y_top - y_min, 1e-6)
         y_pos = y_top - 0.02 * y_span
         x_min, x_max = ax.get_xlim()
         x_span = max(x_max - x_min, 1e-6)
         x_offset = 0.01 * x_span
+        for run, epoch in best_epochs.items():
+            ax.axvline(epoch, color=BEST_LINE_COLOR, linestyle="-", linewidth=1.1, alpha=0.9)
+            label = f"Best {_friendly_run_label(run)}"
+            ax.text(
+                epoch - x_offset,
+                y_pos,
+                label,
+                rotation=0,
+                va="top",
+                ha="right",
+                fontsize=8.5,
+                color=BEST_LINE_COLOR,
+                bbox=dict(facecolor="white", edgecolor="none", alpha=0.8, pad=0.2),
+                zorder=5,
+            )
 
 
     fig.tight_layout()
