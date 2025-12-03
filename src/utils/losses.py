@@ -52,3 +52,44 @@ class FocalLoss(nn.Module):
             return focal_loss.sum()
         else:
             return focal_loss
+
+
+class MILRankingLoss(nn.Module):
+    """
+    Deep MIL Ranking Loss (Sultani et al.)
+    """
+
+    def __init__(self, lambda_1=8e-5, lambda_2=8e-5):
+        super(MILRankingLoss, self).__init__()
+        self.lambda_1 = lambda_1  # Sparsity
+        self.lambda_2 = lambda_2  # Smoothness
+
+    def forward(self, preds_normal, preds_anomaly):
+        """
+        preds_normal:  (Batch, 32, 1)
+        preds_anomaly: (Batch, 32, 1)
+        """
+        # Remove the singleton dimension -> (Batch, 32)
+        preds_normal = preds_normal.squeeze(-1)
+        preds_anomaly = preds_anomaly.squeeze(-1)
+
+        # 1. Ranking Loss (Max Anomaly > Max Normal)
+        max_normal = torch.max(preds_normal, dim=1)[0]  # (Batch,)
+        max_anomaly = torch.max(preds_anomaly, dim=1)[0]  # (Batch,)
+
+        loss_rank = torch.mean(torch.clamp(1.0 - max_anomaly + max_normal, min=0))
+
+        # 2. Sparsity (Sum of scores in Anomaly bag should be small)
+        loss_sparsity = torch.mean(torch.sum(preds_anomaly, dim=1)) * self.lambda_1
+
+        # 3. Smoothness (Temporal Consistency)
+        diff = preds_anomaly[:, 1:] - preds_anomaly[:, :-1]
+        loss_smoothness = torch.mean(torch.sum(diff**2, dim=1)) * self.lambda_2
+
+        total_loss = loss_rank + loss_sparsity + loss_smoothness
+
+        return total_loss, {
+            "rank": loss_rank.item(),
+            "sparse": loss_sparsity.item(),
+            "smooth": loss_smoothness.item(),
+        }

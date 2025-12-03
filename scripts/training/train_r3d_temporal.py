@@ -10,7 +10,9 @@ from torch.amp import GradScaler
 sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 
 from src.datasets.ucf import UCFCrimeDataset
-from src.datasets.transforms import RGBVideoTransform
+
+# IMPORT THE MOTION TRANSFORM
+from src.datasets.transforms import SobelMotionTransform
 from src.models.r3d import create_r3d_classifier
 from src.utils.training_utils import (
     save_checkpoint,
@@ -26,11 +28,14 @@ from src.utils.losses import FocalLoss
 
 def main():
     # --- Config ---
+    # IMPORTANT: Ensure this points to the folder containing your frames
+    # (e.g. /dtu/blackhole/.../Frames or /work3/.../data if you moved them)
     root_dir = "/work3/s225224/ucf-crime/data"
     base_checkpoint_dir = "/work3/s225224/ucf-crime/checkpoints"
 
     # Create model-specific directory with timestamp
-    model_name = "r3d_binary"
+    # Changed name to indicate Motion Stream
+    model_name = "r3d_motion_sobel"
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
     run_name = f"{model_name}_{timestamp}"
     checkpoint_dir = Path(base_checkpoint_dir) / run_name
@@ -40,6 +45,7 @@ def main():
     batch_size = 128
     num_workers = 4
     num_epochs = 20
+    # Hyperparameters from your RGB script
     lr = 1e-5
     weight_decay = 1e-1
     patience = 10
@@ -47,16 +53,19 @@ def main():
     clip_len = 16
 
     logger = get_logger(__name__)
-    logger.info(f"Starting training run: {run_name}")
+    logger.info(f"Starting MOTION STREAM training run: {run_name}")
     logger.info(f"Checkpoints will be saved to: {checkpoint_dir}")
 
     # --- Training History Tracker ---
     history = TrainingHistory(checkpoint_dir)
 
     # --- Data ---
-    logger.info("Setting up datasets and dataloaders...")
-    train_transform = RGBVideoTransform(mode="train", crop_size=112, resize_size=128)
-    val_transform = RGBVideoTransform(mode="val", crop_size=112, resize_size=128)
+    logger.info("Setting up datasets with SOBEL MOTION Transform...")
+
+    # USE SOBEL MOTION TRANSFORM
+    # This calculates dx, dy, dt derivatives on the fly
+    train_transform = SobelMotionTransform(mode="train", crop_size=112, resize_size=128)
+    val_transform = SobelMotionTransform(mode="val", crop_size=112, resize_size=128)
 
     # Use 20% of the Training folder for Validation
     val_ratio = 0.20
@@ -65,7 +74,7 @@ def main():
         root_dir,
         split="train",
         clip_len=clip_len,
-        transform=train_transform,
+        transform=train_transform,  # Pass motion transform
         stride=clip_len,
         val_ratio=val_ratio,
     )
@@ -74,7 +83,7 @@ def main():
         root_dir,
         split="val",
         clip_len=clip_len,
-        transform=val_transform,
+        transform=val_transform,  # Pass motion transform
         stride=clip_len,
         val_ratio=val_ratio,
     )
@@ -97,7 +106,8 @@ def main():
     logger.info(f"Train samples: {len(train_dataset)}, Val samples: {len(val_dataset)}")
 
     # --- Model ---
-    logger.info("Instantiating model...")
+    logger.info("Instantiating R3D-18 (Motion Stream)...")
+    # Pretrained weights are still useful for motion (shapes are similar)
     model = create_r3d_classifier(
         num_classes=num_classes, pretrained=True, freeze_backbone=False, dropout=0.7
     )
@@ -135,10 +145,6 @@ def main():
         logger.info(
             f"GPU Memory: {torch.cuda.get_device_properties(0).total_memory / 1e9:.2f} GB"
         )
-        logger.info(f"Number of GPUs: {torch.cuda.device_count()}")
-        logger.info(f"CUDA Version: {torch.version.cuda}")
-        logger.info(f"cuDNN Version: {torch.backends.cudnn.version()}")
-        logger.info(f"PyTorch Version: {torch.__version__}")
 
     # --- Training Loop ---
     logger.info("Starting training loop...")
@@ -153,7 +159,7 @@ def main():
             scaler=scaler,
         )
 
-        # Evaluate and get metrics dataclass
+        # Evaluate (Motion Stream)
         val_metrics = evaluate(model, val_loader, criterion, device, split="val")
 
         # Extract metrics
@@ -175,22 +181,18 @@ def main():
 
         # Log validation results
         logger.info(
-            f"Epoch [{epoch + 1}] Validation Summary - "
+            f"Epoch [{epoch + 1}] Motion Validation - "
             f"Loss: {val_loss:.4f} | Acc: {val_acc:.2f}% | AUC: {val_auc:.4f}"
         )
         logger.info(
-            f"  Anomaly Detection: Precision={val_metrics.anomaly_precision:.3f} "
-            f"Recall={val_metrics.anomaly_recall:.3f} F1={val_metrics.anomaly_f1:.3f}"
+            f"  Motion Anomaly Stats: P={val_metrics.anomaly_precision:.3f} "
+            f"R={val_metrics.anomaly_recall:.3f} F1={val_metrics.anomaly_f1:.3f}"
         )
 
-        # Log confusion matrix if binary
         if val_metrics.tp > 0:
             logger.info(
-                f"  Confusion Matrix: TP={val_metrics.tp} FN={val_metrics.fn} "
+                f"  Conf Matrix: TP={val_metrics.tp} FN={val_metrics.fn} "
                 f"TN={val_metrics.tn} FP={val_metrics.fp}"
-            )
-            logger.info(
-                f"  Error Rates: FPR={val_metrics.fpr:.4f} FNR={val_metrics.fnr:.4f}"
             )
 
         scheduler.step()
@@ -199,7 +201,7 @@ def main():
 
         if is_best:
             best_auc = val_auc
-            logger.info(f"New best AUC: {val_auc:.4f}")
+            logger.info(f"🔥 New Best Motion AUC: {val_auc:.4f}")
 
         state = {
             "epoch": epoch + 1,
@@ -217,7 +219,7 @@ def main():
     # Final summary
     best_epoch_info = history.get_best_epoch("val_auc")
     logger.info(
-        f"Training complete. Best val AUC: {best_auc:.4f} at epoch {best_epoch_info['epoch']}"
+        f"Motion Training complete. Best AUC: {best_auc:.4f} at epoch {best_epoch_info['epoch']}"
     )
     logger.info(f"Training history saved to: {history.csv_path}")
 
