@@ -119,7 +119,7 @@ def plot_total_loss(df: pd.DataFrame, out_dir: Path):
             color=mark_color,
         )
     fig.tight_layout()
-    fig.savefig(out_dir / "loss.png", dpi=150)
+    fig.savefig(out_dir / "loss.png", dpi=600)
     plt.close(fig)
 
 
@@ -139,7 +139,7 @@ def plot_loss_components(df: pd.DataFrame, out_dir: Path, split: str):
     ax.legend(title=None)
     ax.xaxis.set_major_locator(MaxNLocator(integer=True))
     fig.tight_layout()
-    fig.savefig(out_dir / f"{split}_loss_components.png", dpi=150)
+    fig.savefig(out_dir / f"{split}_loss_components.png", dpi=600)
     plt.close(fig)
 
 
@@ -162,7 +162,7 @@ def plot_auc(df: pd.DataFrame, out_dir: Path):
     ax.legend()
     ax.xaxis.set_major_locator(MaxNLocator(integer=True))
     fig.tight_layout()
-    fig.savefig(out_dir / "val_auc.png", dpi=150)
+    fig.savefig(out_dir / "val_auc.png", dpi=600)
     plt.close(fig)
 
 
@@ -185,7 +185,7 @@ def plot_learning_rate(df: pd.DataFrame, out_dir: Path):
     ax.legend()
     ax.xaxis.set_major_locator(MaxNLocator(integer=True))
     fig.tight_layout()
-    fig.savefig(out_dir / "learning_rate.png", dpi=150)
+    fig.savefig(out_dir / "learning_rate.png", dpi=600)
     plt.close(fig)
 
 

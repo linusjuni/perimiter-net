@@ -63,7 +63,7 @@ def plot_video_timeline(
     ax.legend(by_label.values(), by_label.keys(), frameon=True, loc="best")
 
     plt.tight_layout()
-    plt.savefig(save_path, dpi=150, bbox_inches="tight")
+    plt.savefig(save_path, dpi=600, bbox_inches="tight")
     plt.close()
     logger.debug(f"Saved timeline: {save_path.name}")
 
@@ -99,7 +99,7 @@ def plot_roc_curve(fpr, tpr, auc_score, save_path):
     ax.legend(loc="lower right", fontsize=12, frameon=True)
 
     plt.tight_layout()
-    plt.savefig(save_path, dpi=150, bbox_inches="tight")
+    plt.savefig(save_path, dpi=600, bbox_inches="tight")
     plt.close()
     logger.info(f"Saved ROC curve: {save_path}")
 
@@ -133,7 +133,7 @@ def plot_precision_recall_curve(precision, recall, save_path, positive_rate=None
     ax.legend(loc="best", fontsize=12, frameon=True)
 
     plt.tight_layout()
-    plt.savefig(save_path, dpi=150, bbox_inches="tight")
+    plt.savefig(save_path, dpi=600, bbox_inches="tight")
     plt.close()
     logger.info(f"Saved PR curve: {save_path}")
 
@@ -172,7 +172,7 @@ def plot_confusion_matrix(cm, class_names, save_path, normalize=False, threshold
     ax.set_title(title, fontsize=14, fontweight="bold")
 
     plt.tight_layout()
-    plt.savefig(save_path, dpi=150, bbox_inches="tight")
+    plt.savefig(save_path, dpi=600, bbox_inches="tight")
     plt.close()
     logger.info(f"Saved confusion matrix: {save_path}")
 

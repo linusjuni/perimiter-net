@@ -108,7 +108,7 @@ def plot_comparison(histories: List[Tuple[str, pd.DataFrame]], out_dir: Path, ta
 
     fig.tight_layout()
     out_path = out_dir / f"{tag}_comparison.png"
-    fig.savefig(out_path, dpi=150)
+    fig.savefig(out_path, dpi=600)
     plt.close(fig)
     logger.info(f"Saved comparison plot to {out_path}")
 
