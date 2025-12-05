@@ -157,6 +157,23 @@ def compute_metrics(y_true: np.ndarray, y_scores: np.ndarray):
     }
 
 
+def count_frame_lengths(frames_root: Path) -> Dict[str, int]:
+    """
+    Count number of extracted frames per video under the provided root.
+
+    Expects structure Test/<class>/*.png with filenames like {VideoId}_x264_{FrameNum}.png.
+    """
+    if not frames_root.exists():
+        print(f"[WARN] Frames root not found: {frames_root}")
+        return {}
+
+    counts: Dict[str, int] = {}
+    for png in frames_root.rglob("*.png"):
+        vid = png.name.rsplit("_", 1)[0]
+        counts[vid] = counts.get(vid, 0) + 1
+    return counts
+
+
 def parse_args():
     repo_root = Path(__file__).parent.parent
 
@@ -210,6 +227,12 @@ def parse_args():
         default=None,
         help="Optional tag to include in the output folder name.",
     )
+    parser.add_argument(
+        "--frames-root",
+        type=Path,
+        default=None,
+        help="Optional root of extracted test frames to align to true frame counts (improves positive_rate).",
+    )
     return parser.parse_args()
 
 
@@ -250,6 +273,12 @@ def main():
     if not annotations:
         print("[WARN] No annotations loaded; metrics may be degenerate if GT missing.")
 
+    frame_counts: Dict[str, int] = {}
+    if args.frames_root is not None:
+        print(f"Counting frames under: {args.frames_root} (this can take a moment)...")
+        frame_counts = count_frame_lengths(args.frames_root)
+        print(f"Found frame counts for {len(frame_counts)} videos.")
+
     predictions: Dict[str, np.ndarray] = {}
     per_video: List[Dict[str, object]] = []
     all_scores: List[np.ndarray] = []
@@ -275,11 +304,20 @@ def main():
             predictions[vid_name] = fused_scores
 
             # Frame-level projection and smoothing
-            frame_scores = np.repeat(fused_scores, args.stride)
-            smoothed_scores = gaussian_filter1d(frame_scores, sigma=args.sigma)
+            if frame_counts.get(vid_name):
+                frame_len = frame_counts[vid_name]
+                # Interpolate clip scores to match true frame length
+                clip_positions = np.linspace(0, frame_len - 1, num=len(fused_scores))
+                frame_indices = np.arange(frame_len)
+                interp_scores = np.interp(frame_indices, clip_positions, fused_scores)
+                smoothed_scores = gaussian_filter1d(interp_scores, sigma=args.sigma)
+            else:
+                frame_scores = np.repeat(fused_scores, args.stride)
+                smoothed_scores = gaussian_filter1d(frame_scores, sigma=args.sigma)
+                frame_len = len(smoothed_scores)
 
             intervals = annotations.get(vid_name, [])
-            gt_mask = build_ground_truth_mask(len(smoothed_scores), intervals)
+            gt_mask = build_ground_truth_mask(frame_len, intervals)
 
             all_scores.append(smoothed_scores.astype(np.float32))
             all_labels.append(gt_mask.astype(np.int32))
