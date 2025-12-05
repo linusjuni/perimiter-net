@@ -4,7 +4,7 @@ import os
 
 
 class PersonDetector:
-    """Simple YOLOv8 wrapper for person detection."""
+    """YOLOv8 person detector wrapper."""
 
     def __init__(
         self,
@@ -13,7 +13,7 @@ class PersonDetector:
         img_size=640,
         min_box_area=800,
     ):
-        """Initialize detector with YOLOv8."""
+        """Initialize YOLOv8 detector."""
         self.device = "cuda" if torch.cuda.is_available() else "cpu"
 
         # Look for model in models/ directory
@@ -30,7 +30,7 @@ class PersonDetector:
         self.min_box_area = min_box_area
 
     def detect(self, frame):
-        """Detect persons in frame with filtering."""
+        """Detect persons in frame."""
         results = self.model(
             frame,
             classes=[0],
