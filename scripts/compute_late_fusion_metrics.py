@@ -276,6 +276,42 @@ def main():
     frame_counts = count_frame_lengths(args.frames_root)
     print(f"Found frame counts for {len(frame_counts)} videos.")
 
+    # Sanity-check annotation coverage against frame counts
+    coverage_total_frames = 0
+    coverage_total_pos = 0
+    missing_ann = []
+    missing_frames = []
+    for vid in common_videos:
+        if vid not in frame_counts:
+            missing_frames.append(vid)
+            continue
+        if vid not in annotations:
+            missing_ann.append(vid)
+            continue
+        frame_len = frame_counts[vid]
+        intervals = annotations[vid]
+        pos = 0
+        for s, e in intervals:
+            if e < 0 or s >= frame_len:
+                continue
+            s_clamp = max(0, s)
+            e_clamp = min(frame_len - 1, e)
+            if e_clamp >= s_clamp:
+                pos += e_clamp - s_clamp + 1
+        coverage_total_frames += frame_len
+        coverage_total_pos += pos
+
+    if coverage_total_frames > 0:
+        coverage_rate = coverage_total_pos / coverage_total_frames
+        print(
+            f"GT coverage (clamped to frame counts): pos={coverage_total_pos:,} / "
+            f"frames={coverage_total_frames:,} (rate={coverage_rate:.6f})"
+        )
+    if missing_frames:
+        print(f"Videos missing frame counts: {len(missing_frames)} (e.g., {missing_frames[:3]})")
+    if missing_ann:
+        print(f"Videos missing annotations: {len(missing_ann)} (e.g., {missing_ann[:3]})")
+
     predictions: Dict[str, np.ndarray] = {}
     per_video: List[Dict[str, object]] = []
     all_scores: List[np.ndarray] = []
@@ -329,12 +365,14 @@ def main():
                     video_auc = roc_auc_score(gt_mask, smoothed_scores)
                 except ValueError:
                     video_auc = None
+            pos_count = int(gt_mask.sum())
 
             per_video.append(
                 {
                     "video_id": vid_name,
                     "num_clips": int(len(fused_scores)),
                     "num_frames": int(len(smoothed_scores)),
+                    "pos_frames": pos_count,
                     "video_auc": float(video_auc) if video_auc is not None else None,
                 }
             )
@@ -379,6 +417,10 @@ def main():
         "stride": args.stride,
         "sigma": args.sigma,
         "annotation_file": str(args.annotation_file),
+        "coverage": {
+            "total_frames": coverage_total_frames,
+            "total_pos_frames": coverage_total_pos,
+        },
         "metrics": metrics,
         "per_video": per_video,
     }
