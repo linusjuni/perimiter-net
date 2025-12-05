@@ -8,7 +8,7 @@ logger = get_logger(__name__)
 
 
 class TrainingHistory:
-    """Tracks and saves training/validation metrics to CSV."""
+    """Tracks and saves training metrics to CSV."""
 
     def __init__(self, save_dir: Path):
         self.save_dir = Path(save_dir)
@@ -55,16 +55,7 @@ class TrainingHistory:
         val_metrics,
         learning_rate: float,
     ):
-        """
-        Add new epoch results to history.
-
-        Args:
-            epoch: Current epoch number
-            train_loss: Training loss
-            train_acc: Training accuracy
-            val_metrics: EvaluationMetrics dataclass from validation
-            learning_rate: Current learning rate
-        """
+        """Add new epoch results to history."""
         row = {
             "epoch": epoch,
             "train_loss": train_loss,
@@ -98,7 +89,7 @@ class TrainingHistory:
         logger.debug(f"Saved epoch {epoch} to training history")
 
     def get_best_epoch(self, metric: str = "val_auc") -> dict:
-        """Return the epoch with the best value for the given metric."""
+        """Return the epoch with the best metric value."""
         if not self.history:
             return None
 
@@ -111,7 +102,7 @@ class TrainingHistory:
 
 
 class MILTrainingHistory:
-    """Tracks and saves MIL training/validation metrics to CSV."""
+    """Tracks and saves MIL training metrics to CSV."""
 
     def __init__(self, save_dir: Path):
         self.save_dir = Path(save_dir)
@@ -146,18 +137,10 @@ class MILTrainingHistory:
         self,
         epoch: int,
         train_metrics: dict,
-        val_metrics,  # MILMetrics dataclass
+        val_metrics,
         learning_rate: float,
     ):
-        """
-        Add new epoch results to history.
-
-        Args:
-            epoch: Current epoch number
-            train_metrics: Dict with keys: loss, rank_loss, sparsity_loss, smoothness_loss
-            val_metrics: MILMetrics dataclass from validation
-            learning_rate: Current learning rate
-        """
+        """Add new epoch results to history."""
         row = {
             "epoch": epoch,
             "train_loss": train_metrics["loss"],
@@ -183,7 +166,7 @@ class MILTrainingHistory:
         logger.debug(f"Saved epoch {epoch} to MIL training history")
 
     def get_best_epoch(self, metric: str = "val_auc") -> dict:
-        """Return the epoch with the best value for the given metric."""
+        """Return the epoch with the best metric value."""
         if not self.history:
             return None
 
@@ -211,7 +194,7 @@ def save_checkpoint(state, checkpoint_dir, filename="checkpoint.pth", is_best=Fa
 
 
 def load_checkpoint(checkpoint_path, model, optimizer=None, device="cuda"):
-    """Load model checkpoint and optionally resume optimizer state."""
+    """Load model checkpoint and optionally optimizer state."""
     logger.info(f"Loading checkpoint from {checkpoint_path}")
     checkpoint = torch.load(checkpoint_path, map_location=device, weights_only=False)
 
@@ -230,7 +213,7 @@ def load_checkpoint(checkpoint_path, model, optimizer=None, device="cuda"):
 
 
 class AverageMeter:
-    """Computes and stores the average and current value."""
+    """Computes and stores average and current value."""
 
     def __init__(self):
         self.reset()
@@ -249,15 +232,10 @@ class AverageMeter:
 
 
 class EarlyStopping:
-    """Early stopping to stop training when validation metric stops improving."""
+    """Early stopping for training."""
 
     def __init__(self, patience=7, min_delta=0.0, mode="max"):
-        """
-        Args:
-            patience: How many epochs to wait after last improvement
-            min_delta: Minimum change to qualify as improvement
-            mode: 'max' for accuracy, 'min' for loss
-        """
+        """Initialize early stopping."""
         self.patience = patience
         self.min_delta = min_delta
         self.mode = mode

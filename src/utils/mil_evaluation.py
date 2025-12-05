@@ -12,10 +12,7 @@ logger = get_logger(__name__)
 
 @dataclass
 class MILMetrics:
-    """
-    Structured container for MIL evaluation results.
-    Stores video-level AUC and loss components.
-    """
+    """Container for MIL evaluation results."""
 
     loss: float
     rank_loss: float
@@ -24,16 +21,16 @@ class MILMetrics:
     auc: float
 
     def to_dict(self):
-        """Convert to dictionary for JSON serialization or logging."""
+        """Convert to dictionary."""
         return asdict(self)
 
     def save_to_json(self, path):
-        """Save metrics to JSON file."""
+        """Save metrics to JSON."""
         with open(path, "w") as f:
             json.dump(self.to_dict(), f, indent=2)
 
     def __str__(self):
-        """Pretty print for logging."""
+        """String representation for logging."""
         return (
             f"Loss: {self.loss:.4f} (Rank: {self.rank_loss:.4f}, "
             f"Sparse: {self.sparsity_loss:.6f}, Smooth: {self.smoothness_loss:.6f}) | "
@@ -43,28 +40,12 @@ class MILMetrics:
 
 def evaluate_mil(
     model: torch.nn.Module,
-    loader,  # MILDataLoader
-    criterion,  # MILRankingLoss
+    loader,
+    criterion,
     device: torch.device,
     split: str = "val",
 ) -> MILMetrics:
-    """
-    Evaluate MIL model on video-level anomaly detection.
-
-    Computes:
-    - Video-level AUC (max score per video)
-    - MIL loss components (ranking, sparsity, smoothness)
-
-    Args:
-        model: MIL model
-        loader: MILDataLoader instance
-        criterion: MILRankingLoss instance
-        device: Device to evaluate on
-        split: Split name for logging ('val' or 'test')
-
-    Returns:
-        MILMetrics dataclass
-    """
+    """Evaluate MIL model on video-level anomaly detection."""
     model.eval()
     start_time = time.time()
 

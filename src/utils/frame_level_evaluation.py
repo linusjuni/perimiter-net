@@ -1,4 +1,4 @@
-"""Frame-level evaluation for temporal anomaly localization."""
+"""Frame-level evaluation for anomaly localization."""
 
 import os
 import re
@@ -31,7 +31,7 @@ logger = get_logger(__name__)
 
 @dataclass
 class FrameLevelMetrics:
-    """Container for frame-level evaluation results."""
+    """Frame-level evaluation results container."""
 
     frame_auc: float
     num_frames: int
@@ -80,7 +80,7 @@ class FrameLevelMetrics:
 
 @dataclass
 class FrameLevelCurves:
-    """Precomputed curve data for downstream plotting."""
+    """Curve data for downstream plotting."""
 
     fpr: np.ndarray
     tpr: np.ndarray
@@ -91,18 +91,7 @@ class FrameLevelCurves:
 
 
 def parse_temporal_annotations(annotation_path):
-    """
-    Parse UCF-Crime temporal annotation file.
-
-    Format: VideoName  Class  Start1  End1  Start2  End2
-    Where -1 indicates no event.
-
-    Args:
-        annotation_path: Path to annotation file
-
-    Returns:
-        dict: {video_name: [(start1, end1), (start2, end2), ...]}
-    """
+    """Parse UCF-Crime temporal annotation file."""
     annotations = {}
 
     with open(annotation_path, "r") as f:
@@ -132,15 +121,7 @@ def parse_temporal_annotations(annotation_path):
 
 
 def get_test_videos(test_dir):
-    """
-    Scan test directory and group frames by video ID.
-
-    Args:
-        test_dir: Path to Test directory
-
-    Returns:
-        dict: {video_id: {'frames': [(idx, path), ...], 'class': class_name}}
-    """
+    """Scan test directory and group frames by video ID."""
     videos = {}
     pattern = re.compile(r"(.+?)_x264_(\d+)\.png")
 
@@ -174,16 +155,7 @@ def get_test_videos(test_dir):
 
 
 def create_ground_truth_mask(frame_indices, annotation_intervals):
-    """
-    Create binary mask for frames based on temporal annotations.
-
-    Args:
-        frame_indices: List of frame indices (e.g., [0, 10, 20, ...])
-        annotation_intervals: List of (start, end) tuples
-
-    Returns:
-        np.ndarray: Binary mask (1 = anomaly, 0 = normal)
-    """
+    """Create binary mask for frames based on annotations."""
     mask = np.zeros(len(frame_indices), dtype=np.int32)
 
     for start, end in annotation_intervals:
@@ -195,20 +167,7 @@ def create_ground_truth_mask(frame_indices, annotation_intervals):
 
 
 def sliding_window_inference(model, video_frames, clip_len, stride, transform, device):
-    """
-    Run model on video using sliding window with optimized memory usage.
-
-    Args:
-        model: Trained model
-        video_frames: List of (frame_idx, frame_path) tuples
-        clip_len: Frames per clip (16)
-        stride: Stride for sliding window
-        transform: RGBVideoTransform instance
-        device: Device
-
-    Returns:
-        np.ndarray: Anomaly scores per frame
-    """
+    """Run model on video using sliding window."""
     model.eval()
     num_frames = len(video_frames)
 
@@ -265,28 +224,7 @@ def evaluate_frame_level(
     sigma=5,
     decision_threshold: Optional[float] = None,
 ) -> Tuple[FrameLevelMetrics, FrameLevelCurves, list, np.ndarray, np.ndarray]:
-    """
-    Perform frame-level evaluation on UCF-Crime test set.
-
-    Args:
-        model: Trained model
-        test_dir: Path to Test directory
-        annotation_path: Path to temporal annotations
-        transform: RGBVideoTransform instance
-        device: Device
-        clip_len: Frames per clip
-        stride: Sliding window stride
-        sigma: Gaussian smoothing parameter
-        decision_threshold: Fixed score threshold to convert anomaly probabilities to labels.
-            If None, selects the threshold that maximizes Youden's J (TPR - FPR).
-
-    Returns:
-        FrameLevelMetrics dataclass
-        FrameLevelCurves dataclass (ROC + PR curve data)
-        video_results list
-        all_scores np.ndarray
-        all_labels np.ndarray
-    """
+    """Perform frame-level evaluation on UCF-Crime test set."""
     logger.info("Starting frame-level evaluation...")
 
     # Parse annotations
@@ -444,9 +382,7 @@ def save_frame_level_results(
     labels: np.ndarray,
     video_results: list,
 ):
-    """
-    Persist frame-level evaluation outputs (metrics, raw arrays, video results).
-    """
+    """Persist frame-level evaluation outputs."""
     results_dir.mkdir(parents=True, exist_ok=True)
 
     # Text summary
