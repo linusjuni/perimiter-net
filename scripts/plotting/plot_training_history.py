@@ -30,9 +30,6 @@ def load_history(csv_path: Path) -> pd.DataFrame:
 
 
 def ensure_out_dir(run_dir: Path, run_name: str) -> Path:
-    """
-    Save plots under repo_root/plots/<run_name>/...
-    """
     repo_root = Path(__file__).parent.parent.parent
     out_dir = repo_root / "plots" / run_name
     return out_dir
