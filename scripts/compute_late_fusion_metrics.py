@@ -164,8 +164,7 @@ def count_frame_lengths(frames_root: Path) -> Dict[str, int]:
     Expects structure Test/<class>/*.png with filenames like {VideoId}_x264_{FrameNum}.png.
     """
     if not frames_root.exists():
-        print(f"[WARN] Frames root not found: {frames_root}")
-        return {}
+        raise FileNotFoundError(f"Frames root not found: {frames_root}")
 
     counts: Dict[str, int] = {}
     for png in frames_root.rglob("*.png"):
@@ -230,8 +229,8 @@ def parse_args():
     parser.add_argument(
         "--frames-root",
         type=Path,
-        default=None,
-        help="Optional root of extracted test frames to align to true frame counts (improves positive_rate).",
+        default=Path("/work3/s225224/ucf-crime/data/Test"),
+        help="Root of extracted test frames to align to true frame counts (improves positive_rate).",
     )
     return parser.parse_args()
 
@@ -273,16 +272,16 @@ def main():
     if not annotations:
         print("[WARN] No annotations loaded; metrics may be degenerate if GT missing.")
 
-    frame_counts: Dict[str, int] = {}
-    if args.frames_root is not None:
-        print(f"Counting frames under: {args.frames_root} (this can take a moment)...")
-        frame_counts = count_frame_lengths(args.frames_root)
-        print(f"Found frame counts for {len(frame_counts)} videos.")
+    print(f"Counting frames under: {args.frames_root} (this can take a moment)...")
+    frame_counts = count_frame_lengths(args.frames_root)
+    print(f"Found frame counts for {len(frame_counts)} videos.")
 
     predictions: Dict[str, np.ndarray] = {}
     per_video: List[Dict[str, object]] = []
     all_scores: List[np.ndarray] = []
     all_labels: List[np.ndarray] = []
+    skipped_missing_frames = 0
+    skipped_missing_ann = 0
 
     print("Running inference, fusion, and frame-level scoring...")
     for vid_name in tqdm(common_videos):
@@ -304,19 +303,21 @@ def main():
             predictions[vid_name] = fused_scores
 
             # Frame-level projection and smoothing
-            if frame_counts.get(vid_name):
-                frame_len = frame_counts[vid_name]
-                # Interpolate clip scores to match true frame length
-                clip_positions = np.linspace(0, frame_len - 1, num=len(fused_scores))
-                frame_indices = np.arange(frame_len)
-                interp_scores = np.interp(frame_indices, clip_positions, fused_scores)
-                smoothed_scores = gaussian_filter1d(interp_scores, sigma=args.sigma)
-            else:
-                frame_scores = np.repeat(fused_scores, args.stride)
-                smoothed_scores = gaussian_filter1d(frame_scores, sigma=args.sigma)
-                frame_len = len(smoothed_scores)
+            if vid_name not in frame_counts:
+                skipped_missing_frames += 1
+                continue
 
-            intervals = annotations.get(vid_name, [])
+            frame_len = frame_counts[vid_name]
+            clip_positions = np.linspace(0, frame_len - 1, num=len(fused_scores))
+            frame_indices = np.arange(frame_len)
+            interp_scores = np.interp(frame_indices, clip_positions, fused_scores)
+            smoothed_scores = gaussian_filter1d(interp_scores, sigma=args.sigma)
+
+            intervals = annotations.get(vid_name)
+            if intervals is None:
+                skipped_missing_ann += 1
+                continue
+
             gt_mask = build_ground_truth_mask(frame_len, intervals)
 
             all_scores.append(smoothed_scores.astype(np.float32))
@@ -361,6 +362,8 @@ def main():
     print("Confusion Matrix [[TN, FP], [FN, TP]]")
     print(metrics["confusion_matrix"])
     print("=" * 80)
+    print(f"Videos processed: {len(per_video)} | Skipped (no frames): {skipped_missing_frames} | Skipped (no ann): {skipped_missing_ann}")
+    print(f"GT positives total: {int(y_true.sum())} / {len(y_true)} ({metrics['positive_rate']:.6f})")
 
     # Save artifacts
     predictions_path = run_dir / "predictions.pkl"
