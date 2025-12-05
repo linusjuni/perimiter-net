@@ -75,7 +75,8 @@ def main():
             
             # Sync lengths
             min_len = min(feat_rgb.shape[0], feat_motion.shape[0])
-            if min_len == 0: continue
+            if min_len == 0:
+                continue
             
             feat_rgb = feat_rgb[:min_len]
             feat_motion = feat_motion[:min_len]
