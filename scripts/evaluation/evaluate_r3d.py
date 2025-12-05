@@ -60,7 +60,6 @@ def main():
     # Paths
     test_dir = "/work3/s225224/ucf-crime/data/Test"
     annotation_path = "/work3/s225224/ucf-crime/data/Temporal_Anomaly_Annotation_for_Testing_Videos.txt"
-    results_base_dir = Path("/work3/s225224/ucf-crime/experiments/frame_level")
 
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
@@ -127,10 +126,6 @@ def main():
         labels=all_labels,
         video_results=video_results,
     )
-
-    logger.info(f"Results saved to: {results_dir}")
-    logger.info(f"Run plotting script to generate visualizations:")
-    logger.info(f"  python scripts/plotting/plot_r3d_results.py {results_dir}")
 
 
 if __name__ == "__main__":
