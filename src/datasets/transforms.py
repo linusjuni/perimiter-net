@@ -5,7 +5,7 @@ import torch.nn.functional as FN
 
 
 class RGBVideoTransform:
-    """Applies spatial transforms to RGB video clips for 3D CNNs, e.g., R3D."""
+    """Spatial transforms for RGB video clips."""
 
     def __init__(self, mode="train", crop_size=112, resize_size=128):
         self.mode = mode
@@ -17,8 +17,7 @@ class RGBVideoTransform:
         self.std = [0.22803, 0.22145, 0.216989]
 
     def __call__(self, frames):
-        """Transform video clip from (T,H,W,C) numpy array to tensor (C,T,H,W)."""
-        # Frames is numpy array of shape (T, H, W, C)
+        """Transform video clip to tensor."""
         clip = torch.from_numpy(frames).permute(3, 0, 1, 2).float() / 255.0
 
         if self.mode == "train":
@@ -32,7 +31,7 @@ class RGBVideoTransform:
         return clip
 
     def _train_transform(self, clip):
-        """Apply training augmentations."""
+        """Training augmentations."""
         C, T, H, W = clip.shape
         first_frame = clip[:, 0, :, :]  # (C, H, W)
 
@@ -64,26 +63,21 @@ class RGBVideoTransform:
         return clip
 
     def _val_transform(self, clip):
-        """Apply validation/test transforms."""
+        """Validation/test transforms."""
         # This already upsamples: 64×64 → 128×128 → center crop to 112×112
         clip = F.resize(clip, [self.resize_size, self.resize_size])
         clip = F.center_crop(clip, [self.crop_size, self.crop_size])
         return clip
 
     def _normalize(self, clip):
-        """Normalize with Kinetics mean/std."""
+        """Normalize with mean/std."""
         for c in range(3):
             clip[c] = (clip[c] - self.mean[c]) / self.std[c]
         return clip
 
 
 class SobelMotionTransform:
-    """
-    Computes Smoothed Motion Gradients.
-    Guarantees 'Background Blindness' while suppressing compression noise.
-
-    Pipeline: Grayscale -> Blur -> Diff -> Sobel -> Stack
-    """
+    """Smoothed motion gradients for video clips."""
 
     def __init__(self, mode="train", crop_size=112, resize_size=128):
         self.mode = mode
@@ -102,13 +96,10 @@ class SobelMotionTransform:
         self.blur = transforms.GaussianBlur(kernel_size=5, sigma=1.0)
 
     def __call__(self, frames):
-        # 1. Convert to Tensor (T, H, W, C) -> (T, C, H, W)
         clip = torch.from_numpy(frames).float().permute(0, 3, 1, 2) / 255.0
 
-        # 2. Convert to Grayscale (Weighted method)
         gray = 0.299 * clip[:, 0:1] + 0.587 * clip[:, 1:2] + 0.114 * clip[:, 2:3]
 
-        # 3. Spatial Resizing & Cropping (Internal)
         if self.mode == "train":
             i, j, h, w = transforms.RandomResizedCrop.get_params(
                 gray[0], scale=(0.6, 1.0), ratio=(0.9, 1.1)
@@ -125,19 +116,15 @@ class SobelMotionTransform:
             )
             gray = F.center_crop(gray, [self.crop_size, self.crop_size])
 
-        # 4. Apply Gaussian Blur (reduces compression noise)
         gray_smooth = self.blur(gray)
 
-        # 5. Temporal Derivative (dt) - computed on smoothed frames
         dt = torch.zeros_like(gray_smooth)
         dt[1:] = gray_smooth[1:] - gray_smooth[:-1]
 
-        # 6. Spatial Derivatives (dx, dy) - now operating on cleaner motion signal
         dx = FN.conv2d(dt, self.sobel_x, padding=1)
         dy = FN.conv2d(dt, self.sobel_y, padding=1)
 
-        # 7. Stack Channels: [dx, dy, dt]
         motion_clip = torch.cat([torch.abs(dx), torch.abs(dy), torch.abs(dt)], dim=1)
 
-        # Output: (T, 3, H, W) -> Permute to (C, T, H, W) for R3D
+        # ...existing code...
         return motion_clip.permute(1, 0, 2, 3)

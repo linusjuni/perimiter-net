@@ -19,9 +19,11 @@ logger = get_logger(__name__)
 
 sns.set_style("whitegrid")
 
+
 def clean_run_name(run_name: str) -> str:
     """Extract a clean label from run name by removing timestamp suffix."""
     import re
+
     # Remove timestamp pattern like _20251203_234217
     cleaned = re.sub(r"_\d{8}_\d{6}$", "", run_name)
     return cleaned
@@ -35,8 +37,10 @@ def friendly_label(run_name: str) -> str:
     if "motion" in cleaned:
         return "MIL Motion"
     # Fallback: capitalize words
-    return " ".join(word.upper() if word in ("mil", "rgb") else word.capitalize() 
-                    for word in cleaned.replace("_", " ").split())
+    return " ".join(
+        word.upper() if word in ("mil", "rgb") else word.capitalize()
+        for word in cleaned.replace("_", " ").split()
+    )
 
 
 def load_history(run_dir: Path) -> pd.DataFrame:
@@ -63,43 +67,61 @@ def plot_comparison(histories: List[Tuple[str, pd.DataFrame]], out_dir: Path, ta
 
     # Use a clean color palette
     colors = plt.cm.tab10.colors
-    
+
     fig, ax = plt.subplots(figsize=(10, 6))
-    
+
     best_epochs = []  # Store (epoch, color, label) for vertical lines
 
     for i, (run_name, df) in enumerate(histories):
         if "epoch" not in df.columns:
             continue
-        
+
         color = colors[i % len(colors)]
         epochs = df["epoch"].values
         label = friendly_label(run_name)
-        
+
         # Plot train loss (dashed)
         if "train_loss" in df.columns:
-            ax.plot(epochs, df["train_loss"].values, 
-                    linestyle="--", color=color, linewidth=2,
-                    label=f"{label} (Train)")
-        
+            ax.plot(
+                epochs,
+                df["train_loss"].values,
+                linestyle="--",
+                color=color,
+                linewidth=2,
+                label=f"{label} (Train)",
+            )
+
         # Plot val loss (solid)
         if "val_loss" in df.columns:
             val_loss = df["val_loss"].values
-            ax.plot(epochs, val_loss, 
-                    linestyle="-", color=color, linewidth=2,
-                    label=f"{label} (Val)")
-            
+            ax.plot(
+                epochs,
+                val_loss,
+                linestyle="-",
+                color=color,
+                linewidth=2,
+                label=f"{label} (Val)",
+            )
+
             # Find best epoch (lowest val loss)
             best_idx = val_loss.argmin()
             best_epoch = epochs[best_idx]
             best_epochs.append((best_epoch, color, label))
-    
+
     # Add vertical lines for best epochs
     y_min, y_max = ax.get_ylim()
     for best_epoch, color, label in best_epochs:
         ax.axvline(best_epoch, color=color, linestyle=":", linewidth=2, alpha=0.8)
-        ax.text(best_epoch + 1, y_max * 0.95, f"Best {label}",
-                rotation=90, va="top", ha="left", fontsize=12, color=color)
+        ax.text(
+            best_epoch + 1,
+            y_max * 0.95,
+            f"Best {label}",
+            rotation=90,
+            va="top",
+            ha="left",
+            fontsize=12,
+            color=color,
+        )
 
     ax.set_title("Training vs Validation Loss", fontsize=14)
     ax.set_xlabel("Epoch", fontsize=12)
@@ -118,16 +140,19 @@ def parse_args():
         description="Compare training histories from multiple run directories."
     )
     parser.add_argument(
-        "run_dirs", nargs="+", type=Path, 
-        help="Paths to run directories containing training_history.csv"
+        "run_dirs",
+        nargs="+",
+        type=Path,
+        help="Paths to run directories containing training_history.csv",
     )
     parser.add_argument(
-        "--tag", type=str, default=None,
-        help="Optional tag for output folder/file name."
+        "--tag",
+        type=str,
+        default=None,
+        help="Optional tag for output folder/file name.",
     )
     parser.add_argument(
-        "--title", type=str, default="Training vs Validation Loss",
-        help="Plot title."
+        "--title", type=str, default="Training vs Validation Loss", help="Plot title."
     )
     return parser.parse_args()
 

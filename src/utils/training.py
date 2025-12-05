@@ -16,9 +16,7 @@ def train_epoch(
     epoch: int,
     scaler=None,
 ) -> tuple[float, float]:
-    """
-    Train model for one epoch.
-    """
+    """Train model for one epoch."""
     model.train()
 
     losses = AverageMeter()
@@ -75,16 +73,14 @@ def train_epoch(
 
 def train_epoch_mil(
     model: torch.nn.Module,
-    loader,  # MILDataLoader
-    criterion,  # MILRankingLoss
+    loader,
+    criterion,
     optimizer: torch.optim.Optimizer,
     device: torch.device,
     epoch: int,
     batch_size: int,
 ) -> dict:
-    """
-    Train MIL model for one epoch.
-    """
+    """Train MIL model for one epoch."""
     model.train()
 
     # Meters for each loss component
@@ -92,8 +88,6 @@ def train_epoch_mil(
     rank_meter = AverageMeter()
     sparsity_meter = AverageMeter()
     smoothness_meter = AverageMeter()
-
-    start_time = time.time()
 
     # Calculate number of batches
     num_batches = loader.get_num_batches(batch_size)

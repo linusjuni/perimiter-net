@@ -74,7 +74,9 @@ def plot_total_loss(df: pd.DataFrame, out_dir: Path):
     def _best_val_loss_epoch() -> Optional[float]:
         if "val_loss" not in df.columns:
             return None
-        val_df = df[["epoch", "val_loss"]].apply(pd.to_numeric, errors="coerce").dropna()
+        val_df = (
+            df[["epoch", "val_loss"]].apply(pd.to_numeric, errors="coerce").dropna()
+        )
         if val_df.empty:
             return None
         min_idx = val_df["val_loss"].idxmin()
@@ -85,18 +87,26 @@ def plot_total_loss(df: pd.DataFrame, out_dir: Path):
     train_data = None
     val_data = None
     if "train_loss" in df.columns:
-        train_data = df[["epoch", "train_loss"]].apply(pd.to_numeric, errors="coerce").dropna()
+        train_data = (
+            df[["epoch", "train_loss"]].apply(pd.to_numeric, errors="coerce").dropna()
+        )
     if "val_loss" in df.columns:
-        val_data = df[["epoch", "val_loss"]].apply(pd.to_numeric, errors="coerce").dropna()
+        val_data = (
+            df[["epoch", "val_loss"]].apply(pd.to_numeric, errors="coerce").dropna()
+        )
 
-    if (train_data is None or train_data.empty) and (val_data is None or val_data.empty):
+    if (train_data is None or train_data.empty) and (
+        val_data is None or val_data.empty
+    ):
         logger.warning("Skipping total loss plot: no loss columns found.")
         return
 
     out_dir.mkdir(parents=True, exist_ok=True)
     fig, ax = plt.subplots(figsize=(8, 5))
     if train_data is not None and not train_data.empty:
-        sns.lineplot(data=train_data, x="epoch", y="train_loss", label="Train Loss", ax=ax)
+        sns.lineplot(
+            data=train_data, x="epoch", y="train_loss", label="Train Loss", ax=ax
+        )
     if val_data is not None and not val_data.empty:
         sns.lineplot(data=val_data, x="epoch", y="val_loss", label="Val Loss", ax=ax)
 
@@ -107,7 +117,9 @@ def plot_total_loss(df: pd.DataFrame, out_dir: Path):
     ax.xaxis.set_major_locator(MaxNLocator(integer=True))
     if best_epoch is not None:
         mark_color = sns.color_palette("muted")[3]
-        ax.axvline(best_epoch, color=mark_color, linestyle="--", linewidth=1.2, alpha=0.8)
+        ax.axvline(
+            best_epoch, color=mark_color, linestyle="--", linewidth=1.2, alpha=0.8
+        )
         ax.text(
             best_epoch,
             ax.get_ylim()[1],

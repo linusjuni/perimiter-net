@@ -146,7 +146,10 @@ def plot_confusion_matrix(cm, class_names, save_path, normalize=False, threshold
     if normalize:
         row_sums = display_cm.sum(axis=1, keepdims=True)
         display_cm = np.divide(
-            display_cm, row_sums, out=np.zeros_like(display_cm, dtype=float), where=row_sums != 0
+            display_cm,
+            row_sums,
+            out=np.zeros_like(display_cm, dtype=float),
+            where=row_sums != 0,
         )
         fmt = ".2f"
     else:

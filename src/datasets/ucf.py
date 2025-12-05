@@ -9,7 +9,7 @@ from src.datasets.transforms import RGBVideoTransform
 
 
 class UCFCrimeDataset(Dataset):
-    """UCF-Crime dataset with deterministic Train/Val splitting."""
+    """UCF-Crime dataset loader."""
 
     CLASSES = [
         "NormalVideos",
@@ -62,10 +62,7 @@ class UCFCrimeDataset(Dataset):
             self.transform = transform
 
     def _is_val_video(self, video_name):
-        """
-        Deterministically decide if a video belongs to validation set.
-        Uses MD5 hash of the video name to ensure consistency across runs.
-        """
+        """Deterministically assign video to validation set."""
         hash_object = hashlib.md5(video_name.encode())
         # Use first 8 chars of hex digest for integer conversion
         hash_int = int(hash_object.hexdigest()[:8], 16)
@@ -74,7 +71,7 @@ class UCFCrimeDataset(Dataset):
         return normalized_hash < self.val_ratio
 
     def _load_samples_with_cache(self):
-        """Wrapper to handle caching of the dataset index."""
+        """Cache dataset index for faster loading."""
         cache_name = (
             f"ucf_index_{self.split}_"
             f"len{self.clip_len}_"
@@ -101,85 +98,55 @@ class UCFCrimeDataset(Dataset):
         return samples
 
     def _load_samples(self):
+        """Index video clips for dataset split."""
         samples = []
-
-        # 1. Determine Source Folder
-        # 'train' and 'val' splits both come from the 'Train' folder on disk
-        # 'test' split comes from the 'Test' folder on disk
         is_train_disk_source = self.split in ["train", "val"]
         source_folder_name = "Train" if is_train_disk_source else "Test"
         target_dir = os.path.join(self.root_dir, source_folder_name)
-
         if not os.path.exists(target_dir):
             raise ValueError(f"Directory not found: {target_dir}")
-
         print(f"Scanning {target_dir}...")
-
         for class_name in self.CLASSES:
             class_path = os.path.join(target_dir, class_name)
             if not os.path.exists(class_path):
                 continue
-
-            # Determine Label
             if self.mode == "binary":
                 label = 0 if class_name == "NormalVideos" else 1
             else:
                 label = self.class_to_idx[class_name]
-
-            # Get all images
             image_files = sorted(glob.glob(os.path.join(class_path, "*.png")))
-
-            # Group by Video ID
             video_groups = {}
-
             for file_path in image_files:
                 filename = os.path.basename(file_path)
-                # Simple split usually works better than complex regex for this dataset
-                # Format is usually: VideoName_FrameNum.png
-                # But UCF-Crime extraction often results in: Name_x264_Num.png
                 parts = filename.rsplit("_", 1)
                 if len(parts) == 2:
                     vid_id = parts[0]
                     if vid_id not in video_groups:
                         video_groups[vid_id] = []
                     video_groups[vid_id].append(file_path)
-
-            # Process each video
             for vid_id, frames in video_groups.items():
-                # --- SPLIT LOGIC ---
                 if is_train_disk_source:
                     is_val = self._is_val_video(vid_id)
-
-                    # If we want 'train' split, skip validation videos
                     if self.split == "train" and is_val:
                         continue
-
-                    # If we want 'val' split, skip training videos
                     if self.split == "val" and not is_val:
                         continue
-                # -------------------
-
-                # Sort frames numerically
                 frames.sort(key=lambda x: int(x.rsplit("_", 1)[1].split(".")[0]))
-
                 num_frames = len(frames)
                 if num_frames < self.clip_len:
                     continue
-
-                # Create clips
                 for i in range(0, num_frames - self.clip_len + 1, self.stride):
                     clip_paths = frames[i : i + self.clip_len]
                     samples.append({"paths": clip_paths, "label": label})
-
         print(f"Loaded {len(samples)} clips for {self.split} split.")
         return samples
 
     def _load_video_clip(self, frame_paths):
+        """Load video clip frames."""
         frames = []
         for path in frame_paths:
             frame = cv2.imread(path)
             if frame is None:
-                # Create black frame if missing
                 frame = np.zeros((240, 320, 3), dtype=np.uint8)
             else:
                 frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
@@ -187,9 +154,11 @@ class UCFCrimeDataset(Dataset):
         return np.array(frames)
 
     def __len__(self):
+        """Number of clips in dataset."""
         return len(self.samples)
 
     def __getitem__(self, idx):
+        """Get item by index."""
         sample = self.samples[idx]
         frames = self._load_video_clip(sample["paths"])
         if self.transform:

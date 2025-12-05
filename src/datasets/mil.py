@@ -9,12 +9,7 @@ logger = get_logger(__name__)
 
 
 class MILDataLoader:
-    """
-    Multiple Instance Learning DataLoader for UCF-Crime.
-
-    Maintains separate lists of Normal and Anomaly videos for balanced sampling.
-    Supports deterministic train/val splitting.
-    """
+    """Multiple Instance Learning DataLoader for UCF-Crime."""
 
     def __init__(
         self,
@@ -25,15 +20,7 @@ class MILDataLoader:
         val_split: float = 0.2,
         random_seed: int = 69,
     ):
-        """
-        Args:
-            feature_dir: Path to directory containing .npy feature files
-            segments: Number of segments per video (default: 32)
-            shuffle: Whether to shuffle video lists (default: True)
-            split: 'train' or 'val'
-            val_split: Fraction of data to use for validation (default: 0.2)
-            random_seed: Random seed for reproducible splits (default: 42)
-        """
+        """Initialize MILDataLoader."""
         self.feature_dir = Path(feature_dir)
         self.segments = segments
         self.shuffle = shuffle
@@ -56,7 +43,7 @@ class MILDataLoader:
             random.shuffle(self.anomaly_videos)
 
     def _interpolate(self, features: np.ndarray) -> np.ndarray:
-        """Compress variable length video features into fixed 32 segments."""
+        """Interpolate features to fixed segments."""
         T, D = features.shape
 
         if T == self.segments:
@@ -68,14 +55,14 @@ class MILDataLoader:
         for i, chunk in enumerate(chunks):
             if chunk.shape[0] > 0:
                 interpolated[i] = np.mean(chunk, axis=0)
-                #interpolated[i] = np.max(chunk, axis=0)
+                # interpolated[i] = np.max(chunk, axis=0)
             else:
                 interpolated[i] = np.zeros(D)
 
         return interpolated
 
     def _load_videos(self) -> Tuple[List[np.ndarray], List[np.ndarray]]:
-        """Load videos and split into train/val deterministically."""
+        """Load and split videos."""
         if not self.feature_dir.exists():
             raise FileNotFoundError(f"Feature directory not found: {self.feature_dir}")
 
@@ -153,7 +140,7 @@ class MILDataLoader:
         return normal_videos, anomaly_videos
 
     def get_batch(self, batch_size: int) -> Tuple[torch.Tensor, torch.Tensor]:
-        """Sample a balanced batch of Normal and Anomaly videos."""
+        """Get a balanced batch of videos."""
         n_sample = min(batch_size, len(self.normal_videos))
         a_sample = min(batch_size, len(self.anomaly_videos))
 
@@ -179,9 +166,9 @@ class MILDataLoader:
         ).float()
 
     def __len__(self) -> int:
-        """Return total number of videos."""
+        """Total number of videos."""
         return len(self.normal_videos) + len(self.anomaly_videos)
 
     def get_num_batches(self, batch_size: int) -> int:
-        """Calculate number of batches per epoch."""
+        """Number of batches per epoch."""
         return min(len(self.normal_videos), len(self.anomaly_videos)) // batch_size

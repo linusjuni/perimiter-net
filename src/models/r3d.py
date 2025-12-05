@@ -47,5 +47,5 @@ class R3DClassifier(nn.Module):
 
 
 def create_r3d_classifier(num_classes=2, **kwargs):
-    """Factory function for easy model instantiation."""
+    """Create an R3D classifier instance."""
     return R3DClassifier(num_classes=num_classes, **kwargs)
