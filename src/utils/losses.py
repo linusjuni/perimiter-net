@@ -59,7 +59,7 @@ class MILRankingLoss(nn.Module):
     Deep MIL Ranking Loss (Sultani et al.)
     """
 
-    def __init__(self, lambda_1=8e-5, lambda_2=8e-5):
+    def __init__(self, lambda_1=1e-5, lambda_2=1e-5):
         super(MILRankingLoss, self).__init__()
         self.lambda_1 = lambda_1  # Sparsity
         self.lambda_2 = lambda_2  # Smoothness
