@@ -6,6 +6,7 @@ from tqdm import tqdm
 from datetime import datetime
 from sklearn.metrics import roc_auc_score
 import matplotlib.pyplot as plt
+import seaborn as sns
 from scipy.ndimage import uniform_filter1d
 
 # Ensure src is in path
@@ -62,11 +63,11 @@ def main():
     # --- CONFIGURATION ---
     # RGB Config
     rgb_features_dir = "/work3/s225224/ucf-crime/features/rgb/Test"
-    rgb_checkpoint = "/work3/s225224/ucf-crime/checkpoints/mil/mil_rgb_20251203_222804/best_model.pth"
+    rgb_checkpoint = "/work3/s225224/ucf-crime/checkpoints/mil/mil_rgb_20251204_130129/best_model.pth"
 
     # Motion Config
     motion_features_dir = "/work3/s225224/ucf-crime/features/motion/Test"
-    motion_checkpoint = "/work3/s225224/ucf-crime/checkpoints/mil/mil_motion_20251203_222824/best_model.pth"
+    motion_checkpoint = "/work3/s225224/ucf-crime/checkpoints/mil/mil_motion_20251204_130253/best_model.pth"
 
     # Ground Truth
     annotation_file = "/dtu/blackhole/10/187952/ucf-crime-blackhole/Temporal_Anomaly_Annotation_for_Testing_Videos.txt"
@@ -195,7 +196,7 @@ def main():
 
     # 7. Save Results
     # CSV
-    csv_path =  "weight_search_results.csv"
+    csv_path = "weight_search_results.csv"
     with open(csv_path, "w") as f:
         f.write("alpha,rgb_weight,motion_weight,auc\n")
         for r in results:
@@ -204,35 +205,60 @@ def main():
             )
     print(f"✅ Saved results to: {csv_path}")
 
-    # Plot
-    alphas = [r["alpha"] for r in results]
-    aucs = [r["auc"] for r in results]
+    # Plot with Seaborn
+    sns.set_style("whitegrid")
+    sns.set_palette("muted")
 
-    plt.figure(figsize=(10, 6))
-    plt.plot(alphas, aucs, "b-o", linewidth=2, markersize=6)
-    plt.axvline(
-        x=best_result["alpha"],
-        color="r",
+    alphas = np.array([r["alpha"] for r in results])
+    aucs = np.array([r["auc"] for r in results])
+    
+    # Convert alpha to percentages for plotting
+    rgb_weights = alphas * 100
+    motion_weights = (1 - alphas) * 100
+
+    fig, ax = plt.subplots(figsize=(10, 4))
+    
+    # Main line plot with RGB weight as percentage
+    sns.lineplot(x=rgb_weights, y=aucs, marker='o', linewidth=2, markersize=6, ax=ax)
+    
+    # Best alpha vertical line
+    best_rgb_weight = best_result["alpha"] * 100
+    ax.axvline(
+        x=best_rgb_weight,
+        color=sns.color_palette("muted")[3],  # muted red
         linestyle="--",
-        label=f"Best α={best_result['alpha']:.2f}",
+        linewidth=2,
+        label=f"Best RGB={best_rgb_weight:.0f}%",
     )
-    plt.xlabel("Alpha (RGB Weight)", fontsize=12)
-    plt.ylabel("Frame-Level AUC", fontsize=12)
-    plt.title("Late Fusion Weight Search: RGB vs Motion", fontsize=14)
-    plt.grid(True, alpha=0.3)
-    plt.legend()
-
-    # Add secondary x-axis labels
-    ax = plt.gca()
+    
+    ax.set_xlabel("RGB Weight", fontsize=12)
+    ax.xaxis.set_major_formatter(plt.FuncFormatter(lambda x, p: f'{x:.0f}%'))
+    ax.set_ylabel("Frame-Level AUC", fontsize=12)
+    ax.set_title("Late Fusion Weight Search: RGB vs Motion", fontsize=14, pad=20)
+    ax.legend(fontsize=11)
+    
+    # Set adaptive y-axis limits with some padding
+    y_min, y_max = aucs.min(), aucs.max()
+    y_range = y_max - y_min
+    y_padding = y_range * 0.1  # 10% padding
+    ax.set_ylim(y_min - y_padding, y_max + y_padding)
+    
+    # Add secondary x-axis for Motion weight
     ax2 = ax.twiny()
     ax2.set_xlim(ax.get_xlim())
-    ax2.set_xticks(alphas[::4])
-    ax2.set_xticklabels([f"{(1 - a) * 100:.0f}%" for a in alphas[::4]])
+    # Sample every 4th value for cleaner labels
+    sample_indices = list(range(0, len(motion_weights), 4))
+    ax2.set_xticks([motion_weights[i] for i in sample_indices])
+    ax2.set_xticklabels([f"{motion_weights[i]:.0f}%" for i in sample_indices])
     ax2.set_xlabel("Motion Weight", fontsize=12)
+    
+    # Invert the secondary x-axis so motion weight decreases left to right
+    ax2.invert_xaxis()
 
     plot_path = "weight_search_plot.png"
-    plt.savefig(plot_path, dpi=150, bbox_inches="tight")
+    plt.savefig(plot_path, dpi=600, bbox_inches="tight")
     print(f"✅ Saved plot to: {plot_path}")
+    plt.close()
 
 
 if __name__ == "__main__":
