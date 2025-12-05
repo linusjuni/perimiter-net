@@ -1,10 +1,8 @@
-import torch
 import torch.nn as nn
-import torch.nn.functional as F
 
 
 class TemporalAttention(nn.Module):
-    """Self-attention over temporal dimension."""
+    """Temporal self-attention module."""
     
     def __init__(self, dim, num_heads=4):
         super().__init__()
@@ -12,17 +10,12 @@ class TemporalAttention(nn.Module):
         self.norm = nn.LayerNorm(dim)
     
     def forward(self, x):
-        # x: (B, T, D)
         attn_out, _ = self.attn(x, x, x)
         return self.norm(x + attn_out)
 
 
 class MILModel(nn.Module):
-    """
-    Enhanced MIL Network with temporal attention.
-    Input: Bag of Features (Batch, 32, Input_Dim)
-    Output: Anomaly Scores (Batch, 32, 1)
-    """
+    """MIL network with temporal attention."""
 
     def __init__(self, input_dim=512, hidden_dim=128, use_attention=True):
         super(MILModel, self).__init__()
@@ -48,23 +41,12 @@ class MILModel(nn.Module):
             nn.init.zeros_(m.bias)
 
     def forward(self, x):
-        """
-        x shape: (Batch, Segments, Input_Dim) -> e.g. (30, 32, 512)
-        Returns: (Batch, Segments, 1) -> e.g. (30, 32, 1)
-        """
+        """Forward pass for MIL model."""
         B, T, D = x.shape
-        
-        # Optional attention
         if self.use_attention:
-            x = self.temporal_attn(x)  # (B, T, D)
-        
-        # Flatten for MLP
+            x = self.temporal_attn(x)
         x = x.view(B * T, D)
-
-        # Forward Pass
         x = self.dropout(self.relu(self.fc1(x)))
         x = self.dropout(self.relu(self.fc2(x)))
         x = self.sigmoid(self.fc3(x))
-
-        # Reshape back
         return x.view(B, T, 1)
