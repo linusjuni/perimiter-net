@@ -15,6 +15,7 @@ sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 from src.models.feature_extractor import FeatureExtractor
 from src.datasets.transforms import RGBVideoTransform, SobelMotionTransform
 
+
 def parse_args():
     parser = argparse.ArgumentParser(description="Extract Features for MIL")
     parser.add_argument("--data_dir", type=str, required=True, help="Path to frames")
@@ -45,6 +46,7 @@ def parse_args():
     )
     return parser.parse_args()
 
+
 def get_video_metadata(data_dir):
     """
     Scans the Train/Test folders and returns metadata.
@@ -65,7 +67,7 @@ def get_video_metadata(data_dir):
 
             # Find all frame images
             frames = glob.glob(os.path.join(class_path, "*.png"))
-            
+
             # Group by video ID locally first
             local_groups = defaultdict(list)
             for fpath in frames:
@@ -79,19 +81,17 @@ def get_video_metadata(data_dir):
                 except Exception as e:
                     print(f"Error parsing frame filename {fname}: {e}")
                     continue
-            
+
             # Add to main dict with Split info
             for vid_id, frame_list in local_groups.items():
                 # Sort frames by number
                 frame_list.sort(key=lambda x: x[0])
                 paths = [x[1] for x in frame_list]
-                
-                video_dict[vid_id] = {
-                    'frames': paths,
-                    'split': split
-                }
+
+                video_dict[vid_id] = {"frames": paths, "split": split}
 
     return video_dict
+
 
 def process_video(extractor, frames, transform, batch_size, stride=16, clip_len=16):
     """Extract features from a single video."""
@@ -139,18 +139,21 @@ def process_video(extractor, frames, transform, batch_size, stride=16, clip_len=
         return np.concatenate(video_features, axis=0)
     return None
 
+
 def main():
     args = parse_args()
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
     # Output directory
     mode_root = os.path.join(args.output_dir, args.mode)
-    
+
     # Ensure Train/Test subdirs exist
     os.makedirs(os.path.join(mode_root, "Train"), exist_ok=True)
     os.makedirs(os.path.join(mode_root, "Test"), exist_ok=True)
-    
-    print(f"Extracting {args.mode.upper()} features to {mode_root} (Train/Test split preserved)")
+
+    print(
+        f"Extracting {args.mode.upper()} features to {mode_root} (Train/Test split preserved)"
+    )
 
     # Initialize model and transform
     extractor = FeatureExtractor(args.checkpoint, device=device)
@@ -168,9 +171,9 @@ def main():
 
     # Process all videos
     for vid_name, data in tqdm(video_map.items(), desc="Extracting features"):
-        frames = data['frames']
-        split = data['split']
-        
+        frames = data["frames"]
+        split = data["split"]
+
         # Save directly to the correct subfolder
         save_path = os.path.join(mode_root, split, f"{vid_name}.npy")
 
@@ -190,6 +193,7 @@ def main():
             np.save(save_path, features)
 
         print("Feature extraction complete!")
+
 
 if __name__ == "__main__":
     main()

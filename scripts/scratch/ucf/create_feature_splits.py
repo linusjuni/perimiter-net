@@ -6,6 +6,7 @@ from tqdm import tqdm
 FEATURES_DIR = "/work3/s225224/ucf-crime/features/motion"
 ANNOTATION_FILE = "/dtu/blackhole/10/187952/ucf-crime-blackhole/Temporal_Anomaly_Annotation_for_Testing_Videos.txt"
 
+
 def load_test_set_names(annotation_path):
     """Load test set names."""
     test_videos = set()
@@ -20,6 +21,7 @@ def load_test_set_names(annotation_path):
                 vid_name = parts[0].replace(".mp4", "")
                 test_videos.add(vid_name)
     return test_videos
+
 
 def organize_features():
     """Organize features into Train and Test directories."""
@@ -54,6 +56,7 @@ def organize_features():
     print(f"Moved {count_moved} files.")
     print(f"   Train: {len(os.listdir(train_dir))}")
     print(f"   Test:  {len(os.listdir(test_dir))}")
+
 
 if __name__ == "__main__":
     organize_features()

@@ -109,7 +109,7 @@ def main():
 
     # Run inference and store scores
     print("\nRunning inference on all videos...")
-    video_data = {} 
+    video_data = {}
 
     for vid_name in tqdm(common_videos):
         try:
@@ -171,7 +171,7 @@ def main():
 
         for vid_name, data in video_data.items():
             fused = alpha * data["rgb"] + (1 - alpha) * data["motion"]
-            fused = uniform_filter1d(fused, size=8, mode='nearest')
+            fused = uniform_filter1d(fused, size=8, mode="nearest")
             global_preds.extend(fused)
             global_gt.extend(data["gt"])
 
@@ -209,16 +209,16 @@ def main():
 
     alphas = np.array([r["alpha"] for r in results])
     aucs = np.array([r["auc"] for r in results])
-    
+
     # Convert alpha to percentages for plotting
     rgb_weights = alphas * 100
     motion_weights = (1 - alphas) * 100
 
     fig, ax = plt.subplots(figsize=(10, 4))
-    
+
     # Main line plot with RGB weight as percentage
-    sns.lineplot(x=rgb_weights, y=aucs, marker='o', linewidth=2, markersize=6, ax=ax)
-    
+    sns.lineplot(x=rgb_weights, y=aucs, marker="o", linewidth=2, markersize=6, ax=ax)
+
     # Best alpha vertical line
     best_rgb_weight = best_result["alpha"] * 100
     ax.axvline(
@@ -228,19 +228,19 @@ def main():
         linewidth=2,
         label=f"Best RGB={best_rgb_weight:.0f}%",
     )
-    
+
     ax.set_xlabel("RGB Weight", fontsize=12)
-    ax.xaxis.set_major_formatter(plt.FuncFormatter(lambda x, p: f'{x:.0f}%'))
+    ax.xaxis.set_major_formatter(plt.FuncFormatter(lambda x, p: f"{x:.0f}%"))
     ax.set_ylabel("Frame-Level AUC", fontsize=12)
     ax.set_title("Late Fusion Weight Search: RGB vs Motion", fontsize=14, pad=20)
     ax.legend(fontsize=11)
-    
+
     # Set adaptive y-axis limits with some padding
     y_min, y_max = aucs.min(), aucs.max()
     y_range = y_max - y_min
     y_padding = y_range * 0.1  # 10% padding
     ax.set_ylim(y_min - y_padding, y_max + y_padding)
-    
+
     # Add secondary x-axis for Motion weight
     ax2 = ax.twiny()
     ax2.set_xlim(ax.get_xlim())
@@ -249,7 +249,7 @@ def main():
     ax2.set_xticks([motion_weights[i] for i in sample_indices])
     ax2.set_xticklabels([f"{motion_weights[i]:.0f}%" for i in sample_indices])
     ax2.set_xlabel("Motion Weight", fontsize=12)
-    
+
     # Invert the secondary x-axis so motion weight decreases left to right
     ax2.invert_xaxis()
 

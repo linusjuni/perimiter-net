@@ -78,7 +78,9 @@ def select_checkpoint(checkpoints: List[Tuple[str, Path]]) -> Optional[Path]:
     return checkpoints[sel_idx][1]
 
 
-def load_temporal_annotations(annotation_path: Path) -> Dict[str, List[Tuple[int, int]]]:
+def load_temporal_annotations(
+    annotation_path: Path,
+) -> Dict[str, List[Tuple[int, int]]]:
     """Parse UCF-Crime temporal annotations."""
     annotations: Dict[str, List[Tuple[int, int]]] = {}
 
@@ -117,7 +119,9 @@ def load_temporal_annotations(annotation_path: Path) -> Dict[str, List[Tuple[int
     return annotations
 
 
-def build_ground_truth_mask(length: int, intervals: List[Tuple[int, int]]) -> np.ndarray:
+def build_ground_truth_mask(
+    length: int, intervals: List[Tuple[int, int]]
+) -> np.ndarray:
     """Create a mask for intervals, clamped to length."""
     mask = np.zeros(length, dtype=np.int32)
 

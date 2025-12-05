@@ -17,7 +17,7 @@ def process_video_loud(video_path, output_root):
 
     # 1. Setup Path
     class_name = "NormalVideos"
-    split = "Train" 
+    split = "Train"
     save_dir = os.path.join(output_root, split, class_name)
     os.makedirs(save_dir, exist_ok=True)
 

@@ -55,7 +55,7 @@ class MILDataLoader:
         for i, chunk in enumerate(chunks):
             if chunk.shape[0] > 0:
                 interpolated[i] = np.mean(chunk, axis=0)
-                #interpolated[i] = np.max(chunk, axis=0)
+                # interpolated[i] = np.max(chunk, axis=0)
             else:
                 interpolated[i] = np.zeros(D)
 

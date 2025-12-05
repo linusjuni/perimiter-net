@@ -67,20 +67,26 @@ def plot_loss(df: pd.DataFrame, out_dir: Path):
 def plot_accuracy(df: pd.DataFrame, out_dir: Path):
     if "epoch" not in df.columns:
         return
-    train_data = df[["epoch", "train_acc"]].copy() if "train_acc" in df.columns else None
+    train_data = (
+        df[["epoch", "train_acc"]].copy() if "train_acc" in df.columns else None
+    )
     val_data = df[["epoch", "val_acc"]].copy() if "val_acc" in df.columns else None
     if train_data is not None:
         train_data = train_data.apply(pd.to_numeric, errors="coerce").dropna()
     if val_data is not None:
         val_data = val_data.apply(pd.to_numeric, errors="coerce").dropna()
-    if (train_data is None or train_data.empty) and (val_data is None or val_data.empty):
+    if (train_data is None or train_data.empty) and (
+        val_data is None or val_data.empty
+    ):
         logger.warning("Skipping accuracy plot: no accuracy data found.")
         return
 
     out_dir.mkdir(parents=True, exist_ok=True)
     fig, ax = plt.subplots(figsize=(8, 5))
     if train_data is not None and not train_data.empty:
-        sns.lineplot(data=train_data, x="epoch", y="train_acc", label="Train Acc", ax=ax)
+        sns.lineplot(
+            data=train_data, x="epoch", y="train_acc", label="Train Acc", ax=ax
+        )
     if val_data is not None and not val_data.empty:
         sns.lineplot(data=val_data, x="epoch", y="val_acc", label="Val Acc", ax=ax)
     ax.set_title("Video-Level Accuracy vs Epoch")

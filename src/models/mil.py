@@ -3,12 +3,12 @@ import torch.nn as nn
 
 class TemporalAttention(nn.Module):
     """Temporal self-attention module."""
-    
+
     def __init__(self, dim, num_heads=4):
         super().__init__()
         self.attn = nn.MultiheadAttention(dim, num_heads, batch_first=True)
         self.norm = nn.LayerNorm(dim)
-    
+
     def forward(self, x):
         attn_out, _ = self.attn(x, x, x)
         return self.norm(x + attn_out)
@@ -19,13 +19,13 @@ class MILModel(nn.Module):
 
     def __init__(self, input_dim=512, hidden_dim=128, use_attention=True):
         super(MILModel, self).__init__()
-        
+
         self.use_attention = use_attention
-        
+
         # Optional temporal attention
         if use_attention:
             self.temporal_attn = TemporalAttention(input_dim, num_heads=4)
-        
+
         # Deeper MLP
         self.fc1 = nn.Linear(input_dim, hidden_dim)
         self.fc2 = nn.Linear(hidden_dim, 64)

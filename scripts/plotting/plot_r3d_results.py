@@ -30,8 +30,8 @@ def main():
     logger.info(f"Generating plots for: {results_dir}")
 
     # Create plots subdirectory lazily (only if we actually write a plot)
-    #plot_dir = results_dir / "plots" # choose this
-    plot_dir = Path("plots") # or this
+    # plot_dir = results_dir / "plots" # choose this
+    plot_dir = Path("plots")  # or this
     plot_dir_created = False
 
     def ensure_plot_dir():
@@ -49,7 +49,9 @@ def main():
     recall = data["recall"]
     confusion = data["confusion"]
     decision_threshold = (
-        float(data["decision_threshold"]) if "decision_threshold" in data.files else None
+        float(data["decision_threshold"])
+        if "decision_threshold" in data.files
+        else None
     )
     positive_rate = float(np.mean(data["labels"])) if "labels" in data.files else None
     run_label = str(data["run_name"]) if "run_name" in data.files else results_dir.name
