@@ -18,7 +18,7 @@ logger = get_logger(__name__)
 
 
 def find_available_checkpoints(base_dir="/work3/s225224/ucf-crime/checkpoints"):
-    """Find all available model checkpoints."""
+    """Find available model checkpoints."""
     base_path = Path(base_dir)
     checkpoints = []
 
@@ -57,18 +57,18 @@ def select_checkpoint(checkpoints):
 
 
 def main():
-    # Fixed paths
+    # Paths
     test_dir = "/work3/s225224/ucf-crime/data/Test"
     annotation_path = "/work3/s225224/ucf-crime/data/Temporal_Anomaly_Annotation_for_Testing_Videos.txt"
     results_base_dir = Path("/work3/s225224/ucf-crime/experiments/frame_level")
 
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
-    # Interactive checkpoint selection
+    # Checkpoint selection
     checkpoints = find_available_checkpoints()
     checkpoint_path = select_checkpoint(checkpoints)
 
-    # Create experiment-specific results directory
+    # Results directory
     run_name = checkpoint_path.parent.name
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
     #results_dir = results_base_dir / f"{run_name}_{timestamp}" # choose this

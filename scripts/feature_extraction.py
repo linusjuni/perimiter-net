@@ -9,7 +9,7 @@ from pathlib import Path
 import sys
 from collections import defaultdict
 
-# Ensure src is in path (assuming scripts/data/extract_features.py)
+# Ensure src is in path
 sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 
 from src.models.feature_extractor import FeatureExtractor
@@ -57,7 +57,7 @@ def get_video_metadata(data_dir):
         if not os.path.exists(split_path):
             continue
 
-        # Iterate over Class folders (Abuse, Arson...)
+        # Iterate over Class folders
         for class_name in os.listdir(split_path):
             class_path = os.path.join(split_path, class_name)
             if not os.path.isdir(class_path):
@@ -76,7 +76,8 @@ def get_video_metadata(data_dir):
                     vid_id = parts[0]
                     frame_num = int(parts[1].split(".")[0])
                     local_groups[vid_id].append((frame_num, fpath))
-                except:
+                except Exception as e:
+                    print(f"Error parsing frame filename {fname}: {e}")
                     continue
             
             # Add to main dict with Split info
@@ -142,14 +143,14 @@ def main():
     args = parse_args()
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
-    # Base output dir (e.g., features/rgb)
+    # Output directory
     mode_root = os.path.join(args.output_dir, args.mode)
     
     # Ensure Train/Test subdirs exist
     os.makedirs(os.path.join(mode_root, "Train"), exist_ok=True)
     os.makedirs(os.path.join(mode_root, "Test"), exist_ok=True)
     
-    print(f"🚀 Extracting {args.mode.upper()} features to {mode_root} (Train/Test split preserved)")
+    print(f"Extracting {args.mode.upper()} features to {mode_root} (Train/Test split preserved)")
 
     # Initialize model and transform
     extractor = FeatureExtractor(args.checkpoint, device=device)
@@ -163,7 +164,7 @@ def main():
     # Group frames by video
     print("Grouping frames by video ID...")
     video_map = get_video_metadata(args.data_dir)
-    print(f"📹 Found {len(video_map)} unique videos.")
+    print(f"Found {len(video_map)} unique videos.")
 
     # Process all videos
     for vid_name, data in tqdm(video_map.items(), desc="Extracting features"):
@@ -188,7 +189,7 @@ def main():
         if features is not None:
             np.save(save_path, features)
 
-    print("✅ Feature extraction complete!")
+        print("Feature extraction complete!")
 
 if __name__ == "__main__":
     main()

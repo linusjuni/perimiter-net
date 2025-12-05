@@ -20,14 +20,7 @@ logger = get_logger(__name__)
 
 
 def resolve_checkpoint(path: Path) -> Optional[Path]:
-    """
-    Resolve a checkpoint path that may be a file or a run directory.
-
-    Checks, in order:
-    1) path itself if it is a file
-    2) path / best_model.pth
-    3) latest checkpoint_epoch_*.pth inside the directory
-    """
+    """Resolve checkpoint path from file or directory."""
     if path.is_file():
         return path
 
@@ -44,11 +37,7 @@ def resolve_checkpoint(path: Path) -> Optional[Path]:
 
 
 def find_available_checkpoints(base_dir: Path) -> List[Tuple[str, Path]]:
-    """
-    Find available MIL checkpoints under a base directory.
-
-    Returns a list of (run_name, checkpoint_file).
-    """
+    """Find available MIL checkpoints in base directory."""
     checkpoints: List[Tuple[str, Path]] = []
     if not base_dir.exists():
         return checkpoints
@@ -65,15 +54,7 @@ def find_available_checkpoints(base_dir: Path) -> List[Tuple[str, Path]]:
 
 
 def select_checkpoint(checkpoints: List[Tuple[str, Path]]) -> Optional[Path]:
-    """
-    Interactive selection of a checkpoint.
-
-    Args:
-        checkpoints: list of (run_name, checkpoint_path)
-
-    Returns:
-        Path to the selected checkpoint, or None if selection is aborted/invalid.
-    """
+    """Interactive selection of a checkpoint."""
     if not checkpoints:
         logger.error("No checkpoints found to select from.")
         return None
@@ -98,12 +79,7 @@ def select_checkpoint(checkpoints: List[Tuple[str, Path]]) -> Optional[Path]:
 
 
 def load_temporal_annotations(annotation_path: Path) -> Dict[str, List[Tuple[int, int]]]:
-    """
-    Parse UCF-Crime temporal annotations.
-
-    Format per line: VideoName Class Start1 End1 Start2 End2
-    Where -1 indicates no event for that slot.
-    """
+    """Parse UCF-Crime temporal annotations."""
     annotations: Dict[str, List[Tuple[int, int]]] = {}
 
     if not annotation_path.exists():
@@ -142,7 +118,7 @@ def load_temporal_annotations(annotation_path: Path) -> Dict[str, List[Tuple[int
 
 
 def build_ground_truth_mask(length: int, intervals: List[Tuple[int, int]]) -> np.ndarray:
-    """Create a 0/1 mask for the given intervals, clamped to the provided length."""
+    """Create a mask for intervals, clamped to length."""
     mask = np.zeros(length, dtype=np.int32)
 
     for start, end in intervals:
@@ -158,7 +134,7 @@ def build_ground_truth_mask(length: int, intervals: List[Tuple[int, int]]) -> np
 def run_inference(
     model: torch.nn.Module, features: np.ndarray, device: torch.device
 ) -> np.ndarray:
-    """Run the MIL model on a single video's feature matrix."""
+    """Run MIL model on feature matrix."""
     if features.ndim != 2:
         raise ValueError(f"Expected 2D feature matrix, got shape {features.shape}")
 
@@ -173,7 +149,7 @@ def run_inference(
 
 
 def main():
-    # ---------------- Configuration ---------------- #
+    # Configuration
     feature_dir = Path("/work3/s225224/ucf-crime/features/rgb/Test")
     base_checkpoint_dir = Path("/work3/s225224/ucf-crime/checkpoints/mil")
     annotation_file = Path(
@@ -183,7 +159,7 @@ def main():
     stride = 16  # Frames represented by each clip score
     sigma = 16  # Gaussian smoothing sigma for the expanded frame scores
     input_dim = 512
-    # ------------------------------------------------ #
+    # End configuration
 
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
@@ -216,7 +192,7 @@ def main():
     # Load annotations
     annotations = load_temporal_annotations(annotation_file)
 
-    # Load model + checkpoint
+    # Load model and checkpoint
     model = MILModel(input_dim=input_dim).to(device)
     load_checkpoint(resolved_checkpoint, model, device=device)
 
@@ -253,20 +229,20 @@ def main():
             logger.error(f"Inference failed for {video_id}: {exc}")
             continue
 
-        # Map clip scores back to frame timeline via repetition (staircase)
+        # Map clip scores to frame timeline
         frame_scores = np.repeat(clip_scores, stride)
 
-        # Smooth the staircase signal
+        # Smooth the signal
         smoothed_scores = gaussian_filter1d(frame_scores, sigma=sigma)
 
-        # Ground truth mask for this video
+        # Ground truth mask
         gt_mask = build_ground_truth_mask(len(smoothed_scores), intervals)
 
         video_auc = None
         if len(np.unique(gt_mask)) > 1:
             video_auc = compute_auc_safe(gt_mask, smoothed_scores)
 
-        # Accumulate
+        # Accumulate results
         all_scores.append(smoothed_scores.astype(np.float32))
         all_labels.append(gt_mask.astype(np.int32))
         per_video.append(
@@ -301,7 +277,7 @@ def main():
     logger.info(f"Total frames aggregated: {len(y_true):,}")
     logger.info("=" * 80)
 
-    # Persist results
+    # Save results
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
     run_name = resolved_checkpoint.parent.name
     results_dir = results_base_dir / f"{run_name}_{timestamp}"
