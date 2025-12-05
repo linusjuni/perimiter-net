@@ -141,7 +141,7 @@ def main():
             is_best = val_metrics.loss < best_loss
             if is_best:
                 best_loss = val_metrics.loss
-                logger.info(f"🎯 New Best Loss: {best_loss:.4f}")
+                logger.info(f"New Best Loss: {best_loss:.4f}")
 
             save_checkpoint(
                 state={

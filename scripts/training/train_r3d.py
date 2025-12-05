@@ -25,7 +25,7 @@ from src.utils.losses import FocalLoss
 
 
 def main():
-    # --- Config ---
+    # Configuration
     root_dir = "/work3/s225224/ucf-crime/data"
     base_checkpoint_dir = "/work3/s225224/ucf-crime/checkpoints"
 
@@ -50,10 +50,10 @@ def main():
     logger.info(f"Starting training run: {run_name}")
     logger.info(f"Checkpoints will be saved to: {checkpoint_dir}")
 
-    # --- Training History Tracker ---
+    # Training History Tracker
     history = TrainingHistory(checkpoint_dir)
 
-    # --- Data ---
+    # Data Loading
     logger.info("Setting up datasets and dataloaders...")
     train_transform = RGBVideoTransform(mode="train", crop_size=112, resize_size=128)
     val_transform = RGBVideoTransform(mode="val", crop_size=112, resize_size=128)
@@ -96,14 +96,14 @@ def main():
 
     logger.info(f"Train samples: {len(train_dataset)}, Val samples: {len(val_dataset)}")
 
-    # --- Model ---
+    # Model Setup
     logger.info("Instantiating model...")
     model = create_r3d_classifier(
         num_classes=num_classes, pretrained=True, freeze_backbone=False, dropout=0.7
     )
     model = model.to(device)
 
-    # --- Optimizer, Scheduler, Loss ---
+    # Optimizer, Scheduler, Loss
     optimizer = AdamW(model.parameters(), lr=lr, weight_decay=weight_decay)
     scheduler = CosineAnnealingLR(optimizer, T_max=num_epochs, eta_min=1e-6)
 
@@ -112,13 +112,13 @@ def main():
     criterion = FocalLoss(alpha=alpha, gamma=2.0)
     criterion = criterion.to(device)
 
-    # --- AMP Scaler ---
+    # AMP Scaler
     scaler = GradScaler("cuda")
 
-    # --- Early Stopping ---
+    # Early Stopping
     early_stopper = EarlyStopping(patience=patience, mode="max")
 
-    # --- Resume ---
+    # Resume
     start_epoch = 0
     best_auc = 0.0
     resume_path = checkpoint_dir / "checkpoint.pth"
@@ -128,7 +128,7 @@ def main():
         start_epoch = checkpoint.get("epoch", 0)
         best_auc = checkpoint.get("best_auc", 0.0)
 
-    # --- Log Device and Environment ---
+    # Log Device and Environment
     logger.info(f"Training on device: {device}")
     if torch.cuda.is_available():
         logger.info(f"GPU Name: {torch.cuda.get_device_name(0)}")
@@ -140,7 +140,7 @@ def main():
         logger.info(f"cuDNN Version: {torch.backends.cudnn.version()}")
         logger.info(f"PyTorch Version: {torch.__version__}")
 
-    # --- Training Loop ---
+    # Training Loop
     logger.info("Starting training loop...")
     for epoch in range(start_epoch, num_epochs):
         train_loss, train_acc = train_epoch(
@@ -214,7 +214,7 @@ def main():
             logger.warning("Early stopping triggered. Training halted.")
             break
 
-    # Final summary
+    # Training Complete
     best_epoch_info = history.get_best_epoch("val_auc")
     logger.info(
         f"Training complete. Best val AUC: {best_auc:.4f} at epoch {best_epoch_info['epoch']}"

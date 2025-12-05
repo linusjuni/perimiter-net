@@ -17,30 +17,30 @@ def process_video_loud(video_path, output_root):
 
     # 1. Setup Path
     class_name = "NormalVideos"
-    split = "Train"  # Forcing Train for these normal videos
+    split = "Train" 
     save_dir = os.path.join(output_root, split, class_name)
     os.makedirs(save_dir, exist_ok=True)
 
     # 2. Check Skip Logic
     first_frame = os.path.join(save_dir, f"{vid_name}_0.png")
     if os.path.exists(first_frame):
-        print(f"⏩ SKIPPED (File exists: {first_frame})")
+        print(f"SKIPPED (File exists: {first_frame})")
         return
 
     # 3. Open Video
     cap = cv2.VideoCapture(video_path)
     if not cap.isOpened():
-        print("❌ FAILED (Could not open video)")
+        print("FAILED (Could not open video)")
         return
 
     # 4. Read First Frame (The critical test)
     ret, frame = cap.read()
     if not ret:
-        print("❌ FAILED (Opened, but frame 0 read returned False)")
+        print("FAILED (Opened, but frame 0 read returned False)")
         return
 
     # 5. Extract Loop
-    print("✅ Extracting...", end=" ", flush=True)
+    print("Extracting...", end=" ", flush=True)
 
     # Save the first frame we already read
     cv2.imwrite(first_frame, frame, [cv2.IMWRITE_PNG_COMPRESSION, 1])

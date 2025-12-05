@@ -27,14 +27,11 @@ from src.utils.losses import FocalLoss
 
 
 def main():
-    # --- Config ---
-    # IMPORTANT: Ensure this points to the folder containing your frames
-    # (e.g. /dtu/blackhole/.../Frames or /work3/.../data if you moved them)
+    # Configuration
     root_dir = "/work3/s225224/ucf-crime/data"
     base_checkpoint_dir = "/work3/s225224/ucf-crime/checkpoints"
 
     # Create model-specific directory with timestamp
-    # Changed name to indicate Motion Stream
     model_name = "r3d_motion_sobel"
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
     run_name = f"{model_name}_{timestamp}"
@@ -45,7 +42,6 @@ def main():
     batch_size = 128
     num_workers = 4
     num_epochs = 20
-    # Hyperparameters from your RGB script
     lr = 1e-5
     weight_decay = 1e-1
     patience = 10
@@ -56,25 +52,22 @@ def main():
     logger.info(f"Starting MOTION STREAM training run: {run_name}")
     logger.info(f"Checkpoints will be saved to: {checkpoint_dir}")
 
-    # --- Training History Tracker ---
+    # Setup
     history = TrainingHistory(checkpoint_dir)
 
-    # --- Data ---
+    # Data Loading
     logger.info("Setting up datasets with SOBEL MOTION Transform...")
 
-    # USE SOBEL MOTION TRANSFORM
-    # This calculates dx, dy, dt derivatives on the fly
     train_transform = SobelMotionTransform(mode="train", crop_size=112, resize_size=128)
     val_transform = SobelMotionTransform(mode="val", crop_size=112, resize_size=128)
 
-    # Use 20% of the Training folder for Validation
     val_ratio = 0.20
 
     train_dataset = UCFCrimeDataset(
         root_dir,
         split="train",
         clip_len=clip_len,
-        transform=train_transform,  # Pass motion transform
+        transform=train_transform,
         stride=clip_len,
         val_ratio=val_ratio,
     )
@@ -83,7 +76,7 @@ def main():
         root_dir,
         split="val",
         clip_len=clip_len,
-        transform=val_transform,  # Pass motion transform
+        transform=val_transform,
         stride=clip_len,
         val_ratio=val_ratio,
     )
@@ -105,30 +98,24 @@ def main():
 
     logger.info(f"Train samples: {len(train_dataset)}, Val samples: {len(val_dataset)}")
 
-    # --- Model ---
+    # Model Setup
     logger.info("Instantiating R3D-18 (Motion Stream)...")
-    # Pretrained weights are still useful for motion (shapes are similar)
     model = create_r3d_classifier(
         num_classes=num_classes, pretrained=True, freeze_backbone=False, dropout=0.7
     )
     model = model.to(device)
 
-    # --- Optimizer, Scheduler, Loss ---
     optimizer = AdamW(model.parameters(), lr=lr, weight_decay=weight_decay)
     scheduler = CosineAnnealingLR(optimizer, T_max=num_epochs, eta_min=1e-6)
 
-    # Use Focal Loss with class weights
     alpha = torch.tensor([0.25, 0.75])
     criterion = FocalLoss(alpha=alpha, gamma=2.0)
     criterion = criterion.to(device)
 
-    # --- AMP Scaler ---
     scaler = GradScaler("cuda")
 
-    # --- Early Stopping ---
     early_stopper = EarlyStopping(patience=patience, mode="max")
 
-    # --- Resume ---
     start_epoch = 0
     best_auc = 0.0
     resume_path = checkpoint_dir / "checkpoint.pth"
@@ -138,7 +125,6 @@ def main():
         start_epoch = checkpoint.get("epoch", 0)
         best_auc = checkpoint.get("best_auc", 0.0)
 
-    # --- Log Device and Environment ---
     logger.info(f"Training on device: {device}")
     if torch.cuda.is_available():
         logger.info(f"GPU Name: {torch.cuda.get_device_name(0)}")
@@ -146,7 +132,7 @@ def main():
             f"GPU Memory: {torch.cuda.get_device_properties(0).total_memory / 1e9:.2f} GB"
         )
 
-    # --- Training Loop ---
+    # Training Loop
     logger.info("Starting training loop...")
     for epoch in range(start_epoch, num_epochs):
         train_loss, train_acc = train_epoch(
@@ -159,18 +145,14 @@ def main():
             scaler=scaler,
         )
 
-        # Evaluate (Motion Stream)
         val_metrics = evaluate(model, val_loader, criterion, device, split="val")
 
-        # Extract metrics
         val_loss = val_metrics.loss
         val_acc = val_metrics.acc
         val_auc = val_metrics.auc
 
-        # Get current learning rate
         current_lr = optimizer.param_groups[0]["lr"]
 
-        # Update training history
         history.update(
             epoch=epoch + 1,
             train_loss=train_loss,
@@ -179,7 +161,6 @@ def main():
             learning_rate=current_lr,
         )
 
-        # Log validation results
         logger.info(
             f"Epoch [{epoch + 1}] Motion Validation - "
             f"Loss: {val_loss:.4f} | Acc: {val_acc:.2f}% | AUC: {val_auc:.4f}"
@@ -216,7 +197,7 @@ def main():
             logger.warning("Early stopping triggered. Training halted.")
             break
 
-    # Final summary
+    # Training Complete
     best_epoch_info = history.get_best_epoch("val_auc")
     logger.info(
         f"Motion Training complete. Best AUC: {best_auc:.4f} at epoch {best_epoch_info['epoch']}"
